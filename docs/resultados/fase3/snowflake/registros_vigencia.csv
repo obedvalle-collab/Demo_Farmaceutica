@@ -1,5 +1,5 @@
 producto_id,producto,registro_sanitario,fecha_registro,fecha_vencimiento_registro,fecha_limite_solicitar_prorroga,dias_para_vencimiento,dias_para_limite_prorroga,prorroga_en_tramite,estatus_vigencia,semaforo
-P01,Metformina 850 mg,214M2017 SSA,2017-03-14,2027-03-14,2026-10-15,159,9,,Preparar prórroga,Amarillo
+P01,Metformina 850 mg,214M2017 SSA,2017-03-14,2027-03-14,2026-10-15,159,9,,Solicitar prórroga urgente,Rojo
 P02,Atorvastatina 20 mg,087M2019 SSA,2019-06-21,2029-06-21,2029-01-22,989,839,,Vigente,Verde
 P03,Losartán potásico 50 mg,352M2021 SSA,2021-11-26,2026-11-26,2026-06-29,51,-99,TR-2026-022,Prórroga en trámite,En trámite
 P04,Omeprazol 20 mg,129M2018 SSA,2018-01-30,2028-01-30,2027-09-02,481,331,,Vigente,Verde

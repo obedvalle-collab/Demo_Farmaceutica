@@ -97,10 +97,11 @@ WITH base AS (
 SELECT b.*,
        CASE WHEN b.prorroga_en_tramite IS NOT NULL THEN 'Prórroga en trámite'
             WHEN b.dias_para_limite_prorroga < 0 THEN 'Fuera de plazo para solicitar prórroga'
+            WHEN b.dias_para_limite_prorroga <= 30 THEN 'Solicitar prórroga urgente'
             WHEN b.dias_para_limite_prorroga <= 90 THEN 'Preparar prórroga'
             ELSE 'Vigente' END AS estatus_vigencia,
        CASE WHEN b.prorroga_en_tramite IS NOT NULL THEN 'En trámite'
-            WHEN b.dias_para_limite_prorroga < 0 THEN 'Rojo'
+            WHEN b.dias_para_limite_prorroga <= 30 THEN 'Rojo'
             WHEN b.dias_para_limite_prorroga <= 90 THEN 'Amarillo'
             ELSE 'Verde' END AS semaforo
 FROM base b;

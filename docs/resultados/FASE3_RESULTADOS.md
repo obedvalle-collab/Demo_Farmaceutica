@@ -39,7 +39,7 @@ Parámetros en `negocio.parametros`: fecha de la demo **06/10/2026** y umbrales 
 | Losartán – abrir oficio (límite 12/10) | Amarillo (4 días) | **Vencido** (se notifica por estrados) |
 | Rosuvastatina – responder (límite 15/10) | Verde (7 días) | **Rojo** (2 días) |
 | Adalimumab – responder (límite 20/10) | Verde (10 días) | Amarillo (5 días) |
-| Metformina – pedir prórroga (límite 15/10) | Amarillo (9 días) | Amarillo (2 días) |
+| Metformina – pedir prórroga (límite 15/10) | **Rojo** (9 días; regla: ≤ 30 días = rojo) | Rojo (2 días) |
 
 ## Hallazgos
 
