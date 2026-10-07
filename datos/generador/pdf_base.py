@@ -1,11 +1,14 @@
 """Piezas visuales compartidas por los PDF: membretes, logotipo, firmas, sellos, QR y efecto de escaneo."""
 import io
+import time
 import math
+from datetime import datetime
 import random
 
 import pymupdf
 import qrcode
 from PIL import Image, ImageFilter, ImageEnhance, ImageOps
+from reportlab import rl_config
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_RIGHT
 from reportlab.lib.pagesizes import letter
@@ -17,6 +20,8 @@ from reportlab.platypus import (Flowable, KeepTogether, Paragraph, SimpleDocTemp
                                 TableStyle)
 
 from config import AVISO_FICTICIO, AVISO_SIMULADO_AUTORIDAD, EMPRESA
+
+rl_config.invariant = 1   # PDF idénticos byte a byte en cada corrida (sin fecha de creación aleatoria)
 
 AZUL = colors.HexColor("#12355B")
 TURQUESA = colors.HexColor("#1F8A8A")
@@ -317,8 +322,8 @@ def escanear(ruta, semilla=1, ilegible=False, dpi=110):
             img = ImageEnhance.Contrast(img).enhance(0.45)
         else:
             img = img.filter(ImageFilter.GaussianBlur(0.55))
-        ruido = Image.effect_noise(img.size, 18 if not ilegible else 30)
-        img = Image.blend(img, ruido, 0.07)
+        ruido = Image.frombytes("L", img.size, r.randbytes(img.width * img.height))   # ruido con semilla fija
+        img = Image.blend(img, ruido, 0.05 if not ilegible else 0.09)
         img = ImageEnhance.Brightness(img).enhance(0.97)
         img = ImageOps.autocontrast(img, cutoff=1) if not ilegible else img
         # sombra en el borde izquierdo, como en un escáner de cama plana
@@ -326,4 +331,6 @@ def escanear(ruta, semilla=1, ilegible=False, dpi=110):
         img.paste(Image.eval(borde, lambda v: 150 + v // 3), (0, 0))
         paginas.append(img.convert("RGB"))
     origen.close()
-    paginas[0].save(str(ruta), "PDF", resolution=dpi, save_all=True, append_images=paginas[1:])
+    fija = time.gmtime(datetime(2026, 10, 6, 12, 0).timestamp())   # fecha fija: PDF idéntico en cada corrida
+    paginas[0].save(str(ruta), "PDF", resolution=dpi, save_all=True, append_images=paginas[1:],
+                    title=ruta.stem, creationDate=fija, modDate=fija)

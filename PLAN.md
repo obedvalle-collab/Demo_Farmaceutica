@@ -1,6 +1,6 @@
 # Obed Farmacéutica — Plan del proyecto
 
-> Estado: **Fase 2 terminada** (2026-10-07). Buscador de normas en ambas plataformas (ver `docs/resultados/FASE2_RESULTADOS.md`). Siguiente: Fase 3 (capas de datos).
+> Estado: **Fase 3 terminada** (2026-10-07). Capas cruda, limpia y de negocio en ambas plataformas (ver `docs/resultados/`). Siguiente: Fase 4 (IA documental: bandeja de carga inteligente).
 
 ## 1. Objetivo
 

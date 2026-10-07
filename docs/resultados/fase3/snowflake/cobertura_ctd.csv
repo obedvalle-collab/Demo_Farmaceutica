@@ -1,0 +1,161 @@
+tramite_id,producto,tipo_tramite,etapa,estatus_tramite,es_activo,requisitos,completos,en_revision,borradores,observados,faltantes,cobertura_pct,candado_envio
+TR-2023-001,Sertralina 50 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2023-002,Metformina 850 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2023-003,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2023-004,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2023-005,Trastuzumab 440 mg,Registro sanitario de medicamento biotecnológico biocomparable (fabricación nacional),Resuelto,Concluido,false,30,30,0,0,0,0,100,Ya enviado
+TR-2023-006,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2023-007,Atorvastatina 20 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2023-008,Amlodipino 5 mg,Modificación por cambio de sitio de fabricación,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2023-009,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2023-010,Amlodipino 5 mg,Modificación por cambio de sitio de fabricación,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2023-011,Atorvastatina 20 mg,Prórroga del registro sanitario de medicamento alopático o biotecnológico,Resuelto,Concluido,false,11,11,0,0,0,0,100,Ya enviado
+TR-2024-001,Metformina 850 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2024-002,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2024-003,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2024-004,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2024-005,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2024-006,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2024-007,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2024-008,Losartán potásico 50 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2024-009,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2024-010,Amlodipino 5 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2024-011,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2024-012,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2024-013,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2024-014,Sertralina 50 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2024-015,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2024-016,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2024-017,Amlodipino 5 mg,Modificación por cambio de sitio de fabricación,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2024-018,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2024-019,Clopidogrel 75 mg,Modificación por cambio de sitio de fabricación,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2024-020,Omeprazol 20 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2024-021,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2024-022,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2024-023,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2024-024,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2024-025,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2024-026,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2024-027,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2024-028,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2024-029,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2024-030,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2024-031,Clopidogrel 75 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2024-032,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2024-033,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2024-034,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2024-035,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2024-036,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2024-037,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2024-038,Metformina 850 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2024-039,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2024-040,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2024-041,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2024-042,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2024-043,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-001,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2025-002,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-003,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2025-004,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-005,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2025-006,Rosuvastatina 10 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2025-007,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2025-008,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-009,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2025-010,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-011,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2025-012,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-013,Losartán potásico 50 mg,Modificación por cambio de sitio de fabricación,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-014,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-015,Atorvastatina 20 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2025-016,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-017,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-018,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-019,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-020,Amlodipino 5 mg,Prórroga del registro sanitario de medicamento alopático o biotecnológico,Resuelto,Concluido,false,11,11,0,0,0,0,100,Ya enviado
+TR-2025-021,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2025-022,Omeprazol 20 mg,Modificación por cambio de sitio de fabricación,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-023,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-024,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-025,Amlodipino 5 mg,Modificación por cambio de sitio de fabricación,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-026,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-027,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2025-028,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2025-029,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-030,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2025-031,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2025-032,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2025-033,Amlodipino 5 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2025-034,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-035,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-036,Metformina 850 mg,Modificación por cambio de sitio de fabricación,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-037,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-038,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2025-039,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2025-040,Losartán potásico 50 mg,Modificación por cambio de sitio de fabricación,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-041,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-042,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-043,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2025-044,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-045,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-046,Sertralina 50 mg,Modificación por cambio de sitio de fabricación,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2025-047,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-048,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-049,Omeprazol 20 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Resuelto,Concluido,false,27,27,0,0,0,0,100,Ya enviado
+TR-2025-050,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-051,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2025-052,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-053,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2025-054,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-055,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-056,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-057,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-058,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-059,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-060,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-061,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2025-062,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2025-063,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-064,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2025-065,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2025-066,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2025-067,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2026-001,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2026-002,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2026-003,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2026-004,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2026-005,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2026-006,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2026-007,Losartán potásico 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2026-008,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2026-009,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2026-010,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2026-011,"Tefazurán (ALT-417, ficticio) 40 mg",Registro sanitario de medicamento alopático molécula nueva (fabricación nacional),Reunión técnica con el CMN programada (12/11/2026),Borrador,true,29,14,5,4,0,6,48.3,Bloqueado
+TR-2026-012,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2026-013,Omeprazol 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2026-014,Trastuzumab 440 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2026-015,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2026-016,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2026-017,Rosuvastatina 10 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Prevención – respuesta en preparación,Prevenido,true,7,4,0,0,3,0,57.1,Ya enviado
+TR-2026-018,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2026-019,Amlodipino 5 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2026-020,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2026-021,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2026-022,Losartán potásico 50 mg,Prórroga del registro sanitario de medicamento alopático o biotecnológico,Aviso de prevención sin abrir,Aviso recibido,true,7,6,0,0,0,1,85.7,Ya enviado
+TR-2026-023,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2026-024,Trastuzumab 440 mg,Modificación por cambio de sitio de fabricación,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2026-025,Adalimumab 40 mg/0.4 mL,Registro sanitario de medicamento biotecnológico biocomparable (fabricación nacional),Prevención – respuesta en preparación,Prevenido,true,10,8,0,0,2,0,80,Ya enviado
+TR-2026-026,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,9,9,0,0,0,0,100,Ya enviado
+TR-2026-027,Sertralina 50 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,7,7,0,0,0,0,100,Ya enviado
+TR-2026-028,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,5,5,0,0,0,0,100,Ya enviado
+TR-2026-029,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Respuesta a prevención enviada – en evaluación,En evaluación,true,8,8,0,0,0,0,100,Ya enviado
+TR-2026-030,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2026-031,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2026-032,Sitagliptina 100 mg,Registro sanitario de medicamento alopático genérico (fabricación nacional),Integración del expediente,Borrador,true,27,18,8,0,0,1,66.7,Bloqueado
+TR-2026-033,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario con cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2026-034,Trastuzumab 440 mg,Modificación por cambio de sitio de fabricación,En evaluación COFEPRIS,En evaluación,true,8,8,0,0,0,0,100,Ya enviado
+TR-2026-035,Clopidogrel 75 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,8,8,0,0,0,0,100,Ya enviado
+TR-2026-036,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Resuelto,Concluido,false,6,6,0,0,0,0,100,Ya enviado
+TR-2026-037,Metformina 850 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,En evaluación COFEPRIS,En evaluación,true,6,6,0,0,0,0,100,Ya enviado
+TR-2026-038,Sertralina 50 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,En evaluación COFEPRIS,En evaluación,true,7,7,0,0,0,0,100,Ya enviado
+TR-2026-039,Atorvastatina 20 mg,Modificación a las condiciones del registro sanitario sin cambio de proceso,Integración del expediente,Borrador,true,7,4,1,1,0,1,57.1,Bloqueado

@@ -1,0 +1,9 @@
+producto_id,producto,registro_sanitario,fecha_registro,fecha_vencimiento_registro,fecha_limite_solicitar_prorroga,dias_para_vencimiento,dias_para_limite_prorroga,prorroga_en_tramite,estatus_vigencia,semaforo
+P01,Metformina 850 mg,214M2017 SSA,2017-03-14,2027-03-14,2026-10-15,159,9,,Preparar prórroga,Amarillo
+P02,Atorvastatina 20 mg,087M2019 SSA,2019-06-21,2029-06-21,2029-01-22,989,839,,Vigente,Verde
+P03,Losartán potásico 50 mg,352M2021 SSA,2021-11-26,2026-11-26,2026-06-29,51,-99,TR-2026-022,Prórroga en trámite,En trámite
+P04,Omeprazol 20 mg,129M2018 SSA,2018-01-30,2028-01-30,2027-09-02,481,331,,Vigente,Verde
+P05,Amlodipino 5 mg,403M2020 SSA,2020-09-08,2030-09-08,2030-04-11,1433,1283,,Vigente,Verde
+P06,Clopidogrel 75 mg,061M2022 SSA,2022-04-19,2027-04-19,2026-11-20,195,45,,Preparar prórroga,Amarillo
+P07,Sertralina 50 mg,298M2023 SSA,2023-12-05,2028-12-05,2028-07-08,791,641,,Vigente,Verde
+P11,Trastuzumab 440 mg,045M2024 SSA,2024-08-13,2029-08-13,2029-03-16,1042,892,,Vigente,Verde

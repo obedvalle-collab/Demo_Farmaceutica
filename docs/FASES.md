@@ -51,6 +51,7 @@ Las decisiones importantes se anotan en `docs/DECISIONES.md`.
 ### Fase 3 — Capas de datos
 - Capa cruda → limpia → negocio (cobertura CTD, plazos en días hábiles, KPIs).
 - **Listo cuando:** las tablas de negocio cuadran con los datos ficticios.
+- ✅ **Terminada (2026-10-07):** 98/98 controles de calidad y 8 vistas de negocio idénticas en ambas plataformas. Ver `docs/resultados/FASE3_RESULTADOS.md`.
 
 ### Fase 4 — IA documental · Vista 3
 - Subir PDF → clasificar → asignar espacio CTD → extraer metadatos → validar contra la NOM.

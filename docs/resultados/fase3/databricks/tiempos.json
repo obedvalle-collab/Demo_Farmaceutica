@@ -1,0 +1,15 @@
+{
+  "1. Capa cruda (14 tablas)": 89.26,
+  "2. PDF de expedientes al volume": 25.2,
+  "3. Capa limpia + controles de calidad": 67.04,
+  "4. Capa de negocio (SQL compartido)": 12.88,
+  "consulta cobertura_ctd (ms)": 1412,
+  "consulta cobertura_ctd_modulo (ms)": 1075,
+  "consulta plazos_prevenciones (ms)": 2641,
+  "consulta registros_vigencia (ms)": 1719,
+  "consulta portafolio (ms)": 5143,
+  "consulta kpi_observaciones_norma (ms)": 1104,
+  "consulta kpi_desempeno (ms)": 1130,
+  "consulta kpi_areas (ms)": 1640,
+  "5. Consultar y exportar vistas": 15.91
+}

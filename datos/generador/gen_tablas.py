@@ -10,7 +10,7 @@ from faker import Faker
 import catalogos as C
 from activos import ACTIVOS
 from calendario import Calendario
-from config import SEMILLA, HOY, EMPRESA, SALIDA_TABLAS
+from config import SEMILLA, HOY, EMPRESA, SALIDA_TABLAS, INICIO_HISTORIA
 
 rnd = random.Random(SEMILLA)
 fake = Faker("es_MX")
@@ -449,6 +449,11 @@ def fila_producto(p, tramites):
     if p["fecha_registro"]:
         reg = date.fromisoformat(p["fecha_registro"])
         venc = date(reg.year + 5, reg.month, reg.day)
+        prorrogas_previas = 0
+        while venc < INICIO_HISTORIA:   # prórrogas anteriores a la historia generada (aprobadas, 5 años c/u)
+            venc = date(venc.year + 5, venc.month, venc.day)
+            prorrogas_previas += 1
+        fila["prorrogas_previas_a_2023"] = prorrogas_previas
         for t in tramites:   # prórrogas aprobadas extienden la vigencia
             if t["producto_id"] == p["producto_id"] and t["tipo"] == "PRORROGA" and t.get("resultado") == "Aprobado":
                 anios = 10 if t["fecha_resolucion"] >= date(2026, 1, 15) else 5
@@ -458,7 +463,7 @@ def fila_producto(p, tramites):
         fila["dias_para_vencimiento"] = (venc - HOY).days
         fila["estatus_registro"] = "Vigente"
     else:
-        fila.update(fecha_vencimiento_registro="", fecha_limite_solicitar_prorroga="",
+        fila.update(fecha_vencimiento_registro="", fecha_limite_solicitar_prorroga="", prorrogas_previas_a_2023="",
                     dias_para_vencimiento="", estatus_registro="En trámite" if p["producto_id"] in ("P08", "P10") else "En desarrollo")
     return fila
 

@@ -24,6 +24,11 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-06 | 2 | **Total Fase 2** | Snowflake | | – | **~4.6 créditos ≈ $13.7** (a ~$3/crédito) | El monitor de gasto solo cuenta el warehouse (0.59/20), **no la IA** |
 | 2026-10-06 | 2 | **Total Fase 2** | Databricks | | – | **≈ $5.5** (precio de lista) | Leer PDF ~4× más barato que Snowflake, pero ~2× más lento |
 | 2026-10-07 | 2 | Experimento: vectores precalculados con `ai_query` | Databricks | | vectores 18.6 s; índice 17.6 min (≈14 min de espera de aprovisionamiento) | mínimo | Mucho más rápido de calcular, pero calidad 9/12 vs 11/12 de la sincronización administrada |
+| 2026-10-07 | 3 | Capa cruda (14 CSV) + 54 PDF | Snowflake | | 44 s + 34 s | mínimo | PUT + COPY INTO con formato de archivo |
+| 2026-10-07 | 3 | Capa cruda (14 CSV) + 54 PDF | Databricks | | 89 s + 25 s | mínimo | Volume + `read_files` |
+| 2026-10-07 | 3 | Capa limpia + 98 controles de calidad | Snowflake | | 31 s | mínimo | 98/98 OK |
+| 2026-10-07 | 3 | Capa limpia + 98 controles de calidad | Databricks | | 67 s | mínimo | 98/98 OK |
+| 2026-10-07 | 3 | Capa de negocio (SQL compartido sin cambios) | Ambas | | 7.6 s / 12.9 s | mínimo | Las 8 vistas idénticas renglón por renglón. Consultas: SF 0.3–3.5 s, DB 1.1–5.1 s |
 
 ## Notas por fase
 

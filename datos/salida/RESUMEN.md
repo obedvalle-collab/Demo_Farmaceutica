@@ -49,4 +49,4 @@ Generado con semilla fija; fecha de referencia de la demo: 2026-10-06.
 | Resultado fuera de especificación | 1 |
 | Requisito técnico incumplido | 1 |
 
-Tiempo de generación: tablas 0.2 s, PDF 1.8 s.
+Tiempo de generación: tablas 0.1 s, PDF 0.8 s.
