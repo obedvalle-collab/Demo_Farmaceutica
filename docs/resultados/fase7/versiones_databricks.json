@@ -1,0 +1,185 @@
+[
+ {
+  "requisito": "1.3.2 Instrumento que acredita la representación legal",
+  "segundos": 11.9,
+  "hallazgos_v1": 1,
+  "obs_cofepris": 0,
+  "riesgos_nuevos": [
+   "Error tipográfico en el nombre de la empresa (Laboratorios Albamira)"
+  ],
+  "observaciones": [
+   {
+    "observacion": "Documento sin firma de: Otorgante",
+    "atendida": "Si",
+    "evidencia": "Se incluye '[Firma manuscrita detectada]' antes de la línea 'Otorgante' y la fecha se completa (02/03/2026)"
+   }
+  ],
+  "veredicto": "Atiende",
+  "cambios": [
+   "Número de instrumento actualizado de 45,132 a 45,156",
+   "Fecha modificada del 26/02/2026 al 02/03/2026",
+   "Se añadió firma manuscrita del otorgante y se completó su fecha",
+   "Orden de firmas reorganizado: Otorgante, Apoderado, Notario"
+  ],
+  "resumen": "Se añadió la firma del otorgante y se completó la fecha; sin embargo, se detectó un error tipográfico en el nombre de la empresa que debe corregirse."
+ },
+ {
+  "requisito": "1.4.1 Proyecto de etiqueta del envase secundario",
+  "segundos": 7.0,
+  "hallazgos_v1": 2,
+  "obs_cofepris": 0,
+  "riesgos_nuevos": [],
+  "observaciones": [
+   {
+    "observacion": "Falta la leyenda \"Su venta requiere receta médica\"",
+    "atendida": "Si",
+    "evidencia": "Leyenda añadida: \"• Su venta requiere receta médica.\" en la sección Leyendas del documento corregido."
+   },
+   {
+    "observacion": "Producto para enfermedad crónica sin la leyenda \"prohibida la venta fraccionada\"",
+    "atendida": "Si",
+    "evidencia": "Leyenda añadida: \"• Prohibida la venta fraccionada del producto.\" en la sección Leyendas del documento corregido."
+   }
+  ],
+  "veredicto": "Atiende",
+  "cambios": [
+   "Fecha de versión actualizada de 15/08/2026 a 28/09/2026.",
+   "Código interno actualizado de 2000000000134 a 2000000000157.",
+   "Incorporación de la leyenda \"Su venta requiere receta médica\".",
+   "Incorporación de la leyenda \"Prohibida la venta fraccionada del producto\"."
+  ],
+  "resumen": "Se añadieron las leyendas exigidas por la NOM-072-SSA1-2012 y se actualizaron datos de versión; el proyecto de etiqueta ahora cumple con el requisito 1.4.1."
+ },
+ {
+  "requisito": "1.6 Plan de manejo de riesgos (PMR)",
+  "segundos": 6.3,
+  "hallazgos_v1": 1,
+  "obs_cofepris": 0,
+  "riesgos_nuevos": [],
+  "observaciones": [
+   {
+    "observacion": "El plan de manejo de riesgos no incluye el plan de minimización de riesgos",
+    "atendida": "Si",
+    "evidencia": "Se añadió la sección '4. Plan de minimización de riesgos' con actividades de información para prescribir, etiquetado y capacitación de la fuerza de ventas."
+   }
+  ],
+  "veredicto": "Atiende",
+  "cambios": [
+   "Fecha de emisión actualizada de 7 de septiembre de 2026 a 28 de septiembre de 2026",
+   "Se incorporó la sección 4. Plan de minimización de riesgos con actividades específicas",
+   "Fechas de firma de elaboración y aprobación actualizadas al 28/09/2026"
+  ],
+  "resumen": "Se incluyó el plan de minimización de riesgos y se actualizaron las fechas de emisión y firmas; la observación quedó completamente atendida."
+ },
+ {
+  "requisito": "1.7.2 Certificado de BPF del fármaco",
+  "segundos": 6.0,
+  "hallazgos_v1": 1,
+  "obs_cofepris": 0,
+  "riesgos_nuevos": [],
+  "observaciones": [
+   {
+    "observacion": "Certificado de BPF emitido el 2023-11-15: excede la vigencia de 30 meses",
+    "atendida": "Si",
+    "evidencia": "Fecha de emisión: 20 de agosto de 2026"
+   }
+  ],
+  "veredicto": "Atiende",
+  "cambios": [
+   "Se actualizó el folio a CBPF-F-2026-1160",
+   "Se cambió la fecha de emisión a 20 de agosto de 2026",
+   "Se actualizó la fecha de verificación a 10 de julio de 2026",
+   "Se modificó la fecha del encabezado a Ciudad de México, 20/08/2026"
+  ],
+  "resumen": "El certificado corregido cuenta con una fecha de emisión reciente (20/08/2026) que cumple con la vigencia de 30 meses requerida; la observación quedó totalmente atendida."
+ },
+ {
+  "requisito": "3.2.P.5 Certificado de análisis del lote del medicamento",
+  "segundos": 6.8,
+  "hallazgos_v1": 0,
+  "obs_cofepris": 0,
+  "riesgos_nuevos": [],
+  "observaciones": [],
+  "veredicto": "Atiende",
+  "cambios": [
+   "Código del documento actualizado de CC-CA-0926243 a CC-CA-0926334.",
+   "Fecha de emisión modificada de 3 de septiembre de 2026 a 28 de septiembre de 2026.",
+   "Número de lote cambiado de 0926243 a 0926334.",
+   "Fecha de fabricación ajustada de 05/07/2026 a 30/07/2026.",
+   "Resultado de disolución actualizado de 76% (mín. 72%, máx. 81%) a 91% (mín. 87%, máx. 95%).",
+   "Fecha del sello de aseguramiento de calidad cambiada de 03/09/2026 a 28/09/2026."
+  ],
+  "resumen": "El certificado corregido incorpora los cambios de identificación del lote, fechas y mejora el resultado de disolución, cumpliendo con el requisito 3.2.P.5 sin introducir nuevos riesgos."
+ },
+ {
+  "requisito": "3.2.P.8 Estudio de estabilidad del medicamento",
+  "segundos": 8.5,
+  "hallazgos_v1": 2,
+  "obs_cofepris": 0,
+  "riesgos_nuevos": [],
+  "observaciones": [
+   {
+    "observacion": "El estudio de estabilidad incluye 2 lotes; se requieren al menos 3",
+    "atendida": "Si",
+    "evidencia": "En la versión corregida se listan tres lotes (0926341, 0926354 y 0926367) en la tabla \"Lotes del estudio\"."
+   },
+   {
+    "observacion": "Informe de estabilidad sin aval (firma) de: Responsable Sanitario",
+    "atendida": "Si",
+    "evidencia": "Se incluye la firma manuscrita y la fecha \"01/10/2026\" en la sección \"Aprobó (Responsable Sanitario)\"."
+   }
+  ],
+  "veredicto": "Atiende",
+  "cambios": [
+   "Se añadieron dos lotes adicionales, pasando de 2 a 3 lotes en el estudio de estabilidad.",
+   "Se actualizaron las fechas de emisión y de las firmas de elaboración, revisión y aprobación.",
+   "Se incorporó la firma y fecha del Responsable Sanitario en la sección de aprobaciones.",
+   "Se ampliaron las tablas de resultados (acelerada y largo plazo) para incluir los datos del nuevo lote 0926367."
+  ],
+  "resumen": "Se corrigieron las observaciones: ahora el estudio incluye los tres lotes exigidos y cuenta con la firma y fecha del Responsable Sanitario. El documento cumple con la NOM-073-SSA1-2015."
+ },
+ {
+  "requisito": "3.2.S.4 Certificado de análisis del fármaco",
+  "segundos": 7.3,
+  "hallazgos_v1": 1,
+  "obs_cofepris": 0,
+  "riesgos_nuevos": [],
+  "observaciones": [
+   {
+    "observacion": "El certificado de análisis del fármaco lo emite Shreya Organics Pvt. Ltd., India, distinto del fabricante declarado (Kavya Lifesciences Pvt. Ltd.)",
+    "atendida": "Si",
+    "evidencia": "En la versión corregida el campo Manufacturer/Fabricante muestra: <td>Kavya Lifesciences Pvt. Ltd., India</td>"
+   }
+  ],
+  "veredicto": "Atiende",
+  "cambios": [
+   "Nombre del fabricante cambiado de Shreya Organics Pvt. Ltd. a Kavya Lifesciences Pvt. Ltd.",
+   "Número de lote actualizado de API260864 a API260981",
+   "Fechas de fabricación y retest modificadas (01/05/2026 y 30/04/2028)",
+   "Fechas de revisión y aprobación actualizadas (11/05/2026 y 12/05/2026)"
+  ],
+  "resumen": "El certificado corregido ahora indica a Kavya Lifesciences como fabricante, cumpliendo con la norma; los demás datos permanecen consistentes con la versión anterior."
+ },
+ {
+  "requisito": "5.3.1.2 Informe del estudio de bioequivalencia",
+  "segundos": 8.0,
+  "hallazgos_v1": 1,
+  "obs_cofepris": 0,
+  "riesgos_nuevos": [],
+  "observaciones": [
+   {
+    "observacion": "IC 90% de Cmáx 91.24–127.63% fuera de 80–125% y aun así concluye bioequivalencia",
+    "atendida": "Si",
+    "evidencia": "En la versión corregida el IC 90% de Cmáx se reporta como 92.36 – 113.08%, dentro del rango 80‑125% (tabla de parámetros farmacocinéticos)."
+   }
+  ],
+  "veredicto": "Atiende",
+  "cambios": [
+   "Fecha de emisión modificada de 30 de julio a 28 de septiembre de 2026.",
+   "Lote del medicamento de prueba actualizado (0926271 → 0926348).",
+   "Cociente P/R de Cmáx ajustado de 107.91% a 102.20%.",
+   "IC 90% de Cmáx corregido a 92.36 – 113.08%, cumpliendo el criterio 80‑125%."
+  ],
+  "resumen": "La corrección ajustó el intervalo de confianza del Cmáx a 92.36‑113.08%, cumpliendo el criterio de bioequivalencia y justificando la conclusión. No se detectaron nuevos problemas."
+ }
+]

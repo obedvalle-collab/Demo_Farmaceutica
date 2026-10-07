@@ -12,6 +12,8 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+for _p in ("app/comun", "compartido"):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / _p))
 import fase2_normas as F  # noqa: E402
 from databricks.sdk.service.apps import App, AppDeployment, AppResource, AppResourceSqlWarehouse, \
     AppResourceSqlWarehouseSqlWarehousePermission  # noqa: E402
@@ -38,7 +40,8 @@ def permisos(sp):
     sentencias = [f"GRANT USE CATALOG ON CATALOG {cat} TO {q}"]
     for esquema in ["crudo", "limpio", "negocio", "app"]:
         sentencias += [f"GRANT USE SCHEMA, SELECT ON SCHEMA {cat}.{esquema} TO {q}"]
-    sentencias += [f"GRANT MODIFY ON SCHEMA {cat}.app TO {q}",
+    sentencias += [f"GRANT USE SCHEMA, SELECT ON SCHEMA {cat}.ia TO {q}",   # índice de Vector Search (Vista 7)
+                   f"GRANT MODIFY ON SCHEMA {cat}.app TO {q}",
                    f"GRANT MODIFY ON TABLE {cat}.crudo.expedientes_parseados TO {q}",
                    f"GRANT MODIFY ON TABLE {cat}.limpio.documentos_extraidos_json TO {q}",
                    f"GRANT MODIFY ON TABLE {cat}.limpio.documentos_extraidos TO {q}",
@@ -54,14 +57,26 @@ def permisos(sp):
             service_principal_name=sp, permission_level=JobPermissionLevel.CAN_MANAGE_RUN)])
 
 
+def recursos():
+    """Warehouse SQL y espacio Genie (Vista 8); la app recibe sus IDs como variables de entorno (app.yaml)."""
+    from datos_databricks import TITULO_GENIE
+    r = [AppResource(name="sql-warehouse", sql_warehouse=AppResourceSqlWarehouse(
+        id=F.WAREHOUSE, permission=AppResourceSqlWarehouseSqlWarehousePermission.CAN_USE))]
+    genie = next((s for s in (w.genie.list_spaces().spaces or []) if s.title == TITULO_GENIE), None)
+    if genie:
+        r.append(AppResource(name="genie-space", genie_space=AppResourceGenieSpace(
+            name=TITULO_GENIE, space_id=genie.space_id, permission=AppResourceGenieSpaceGenieSpacePermission.CAN_RUN)))
+    return r
+
+
 def desplegar():
     t = time.time()
     existentes = [a.name for a in w.apps.list()]
     if NOMBRE not in existentes:
         print("Creando la app (la primera vez prepara el entorno de cómputo)…")
-        w.apps.create_and_wait(App(name=NOMBRE, description="Obed Farmacéutica · Expediente CTD (Vista 2)",
-                                   resources=[AppResource(name="sql-warehouse", sql_warehouse=AppResourceSqlWarehouse(
-                                       id=F.WAREHOUSE, permission=AppResourceSqlWarehouseSqlWarehousePermission.CAN_USE))]))
+        w.apps.create_and_wait(App(name=NOMBRE, description="Obed Farmacéutica · gestor regulatorio", resources=recursos()))
+    else:
+        w.apps.update(NOMBRE, App(name=NOMBRE, description="Obed Farmacéutica · gestor regulatorio", resources=recursos()))
     app = w.apps.get(NOMBRE)
     if app.compute_status and app.compute_status.state.value != "ACTIVE":
         print("Encendiendo la app…")

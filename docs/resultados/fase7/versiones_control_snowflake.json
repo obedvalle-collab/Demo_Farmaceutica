@@ -1,0 +1,132 @@
+[
+ {
+  "requisito": "1.3.2 Instrumento que acredita la representación legal",
+  "segundos": 7.2,
+  "cambios": [],
+  "observaciones": [
+   {
+    "atendida": "No",
+    "evidencia": "La versión corregida es idéntica a la anterior. Aunque el texto OCR indica 'Otorgante Isabela Bonilla Llamas' con campo de fecha vacío, no se presenta evidencia visible de firma autógrafa o digital en las imágenes (img-0 a img-3) ni en el texto transcrito del documento.",
+    "observacion": "Documento sin firma de: Otorgante Isabela Bonilla Llamas"
+   }
+  ],
+  "resumen": "La observación sobre la falta de firma de Isabela Bonilla Llamas no se atiende. Ambas versiones (anterior y corregida) son idénticas y continúan careciendo de evidencia de firma autógrafa o digital del otorgante en las imágenes o texto OCR presentados.",
+  "riesgos_nuevos": [],
+  "veredicto": "No atiende"
+ },
+ {
+  "requisito": "1.4.1 Proyecto de etiqueta del envase secundario",
+  "segundos": 6.8,
+  "cambios": [],
+  "observaciones": [
+   {
+    "atendida": "No",
+    "evidencia": "No se identifica la leyenda \"prohibida la venta fraccionada del producto\" en ninguna parte del texto de la etiqueta corregida. La sitagliptina es para tratamiento de diabetes tipo 2 (enfermedad crónico-degenerativa).",
+    "observacion": "Producto para enfermedad crónica sin la leyenda \"prohibida la venta fraccionada\""
+   },
+   {
+    "atendida": "No",
+    "evidencia": "No aparece la leyenda \"Su venta requiere receta médica\" ni \"Su dispensación requiere receta médica\" en la sección de leyendas ni en ninguna otra parte de la etiqueta corregida.",
+    "observacion": "Falta la leyenda \"Su venta requiere receta médica\""
+   }
+  ],
+  "resumen": "La versión corregida no presenta ningún cambio respecto a la versión anterior. Ambas observaciones permanecen sin atender: falta la leyenda \"Su venta requiere receta médica\" (NOM-072 cláusula 6.1.4) y falta la leyenda \"prohibida la venta fraccionada del producto\" para tratamiento crónico (NOM-072 cláusula 5.19).",
+  "riesgos_nuevos": [],
+  "veredicto": "No atiende"
+ },
+ {
+  "requisito": "1.6 Plan de manejo de riesgos (PMR)",
+  "segundos": 6.6,
+  "cambios": [],
+  "observaciones": [
+   {
+    "atendida": "No",
+    "evidencia": "La versión corregida es idéntica a la anterior y no incluye ninguna sección o apartado denominado 'Plan de minimización de riesgos' o contenido equivalente. Solo contiene especificaciones de seguridad y plan de farmacovigilancia con actividades de rutina.",
+    "observacion": "El plan de manejo de riesgos no incluye el plan de minimización de riesgos"
+   }
+  ],
+  "resumen": "La versión corregida es idéntica a la anterior y no atiende la observación regulatoria. El documento carece del plan de minimización de riesgos requerido por la cláusula 8.4.3.1.4 de la NOM-220-SSA1-2016.",
+  "riesgos_nuevos": [],
+  "veredicto": "No atiende"
+ },
+ {
+  "requisito": "1.7.2 Certificado de BPF del fármaco",
+  "segundos": 6.1,
+  "cambios": [],
+  "observaciones": [
+   {
+    "atendida": "No",
+    "evidencia": "El certificado mantiene la misma fecha de emisión: '15 de noviembre de 2023'. No se ha reemplazado por un certificado vigente dentro de los 30 meses.",
+    "observacion": "Certificado de BPF emitido el 2023-11-15: excede la vigencia de 30 meses"
+   }
+  ],
+  "resumen": "La versión corregida es idéntica a la anterior y no atiende la observación sobre vigencia. El certificado sigue indicando fecha de emisión 15/11/2023, que excede los 30 meses de antigüedad permitidos por la NOM-164-SSA1-2015. Se requiere presentar un certificado de BPF más reciente.",
+  "riesgos_nuevos": [],
+  "veredicto": "No atiende"
+ },
+ {
+  "requisito": "3.2.P.5 Certificado de análisis del lote del medicamento",
+  "segundos": 8.3,
+  "cambios": [],
+  "observaciones": [
+   {
+    "atendida": "No",
+    "evidencia": "La prueba de Disolución mantiene especificación 'Q = 80% a los 30 min', resultado '76% (mín. 72%, máx. 81%)', dictamen 'Cumple' y dictamen final 'APROBADO'. El resultado 76% sigue por debajo del límite Q=80% y es dictaminado conforme sin evidencia de investigación o justificación.",
+    "observacion": "Resultado fuera de especificación dictaminado como conforme: Disolución"
+   }
+  ],
+  "resumen": "La observación sobre el resultado fuera de especificación en disolución NO fue atendida. La versión corregida es idéntica a la anterior: mantiene el resultado de disolución 76% (por debajo de Q=80%) dictaminado como \"Cumple\" y el lote aprobado, incumpliendo la NOM-059-SSA1-2015 que exige retención de productos fuera de especificación.",
+  "riesgos_nuevos": [],
+  "veredicto": "No atiende"
+ },
+ {
+  "requisito": "3.2.P.8 Estudio de estabilidad del medicamento",
+  "segundos": 10.0,
+  "cambios": [],
+  "observaciones": [
+   {
+    "atendida": "No",
+    "evidencia": "La sección 2 (Lotes del estudio) en la versión corregida sigue presentando únicamente 2 lotes: 0926264 y 0926277. No se agregó un tercer lote como requiere la NOM-073-SSA1-2015, cláusula 8.1.",
+    "observacion": "El estudio de estabilidad incluye 2 lotes; se requieren al menos 3"
+   },
+   {
+    "atendida": "No",
+    "evidencia": "En la sección de Aprobaciones, el campo de fecha para Ricardo Castañeda Ontiveros (Responsable Sanitario) continúa vacío: 'Fecha: __________' (o 'Fecha: ____________' en el texto OCR), por lo que no se evidencia el aval requerido por la cláusula 10.19 de la NOM-073-SSA1-2015.",
+    "observacion": "Informe de estabilidad sin aval (firma) de: Aprobó (Responsable Sanitario) - Ricardo Castañeda Ontiveros"
+   }
+  ],
+  "resumen": "La versión corregida no muestra cambios respecto a la versión anterior. Ninguna de las dos observaciones ha sido atendida: persiste el déficit de un tercer lote de estabilidad y falta la fecha/firma del Responsable Sanitario.",
+  "riesgos_nuevos": [],
+  "veredicto": "No atiende"
+ },
+ {
+  "requisito": "3.2.S.4 Certificado de análisis del fármaco",
+  "segundos": 6.3,
+  "cambios": [],
+  "observaciones": [
+   {
+    "atendida": "No",
+    "evidencia": "El certificado corregido sigue mostrando 'Manufacturer / Fabricante Shreya Organics Pvt. Ltd., India' y es emitido por 'SHREYA ORGANICS PVT. LTD. Quality Control Department'. No se observa ningún cambio que corrija la discrepancia con Kavya Lifesciences Pvt. Ltd.",
+    "observacion": "El certificado de análisis del fármaco lo emite Shreya Organics Pvt. Ltd., India, distinto del fabricante declarado (Kavya Lifesciences Pvt. Ltd.)"
+   }
+  ],
+  "resumen": "La observación sobre la discrepancia entre el emisor del certificado (Shreya Organics Pvt. Ltd.) y el fabricante declarado (Kavya Lifesciences Pvt. Ltd.) no fue atendida. La versión corregida es idéntica a la anterior, sin ningún cambio para resolver la inconsistencia identificada.",
+  "riesgos_nuevos": [],
+  "veredicto": "No atiende"
+ },
+ {
+  "requisito": "5.3.1.2 Informe del estudio de bioequivalencia",
+  "segundos": 14.1,
+  "cambios": [],
+  "observaciones": [
+   {
+    "atendida": "No",
+    "evidencia": "La tabla de parámetros farmacocinéticos sigue mostrando IC 90% de Cmáx: 91.24–127.63% (límite superior 127.63% excede 125%) y la sección 5 Conclusión mantiene que \"Los medicamentos de prueba y de referencia son bioequivalentes\". No se corrigieron los datos ni se modificó la conclusión para reflejar el incumplimiento del criterio NOM-177.",
+    "observacion": "IC 90% de Cmáx 91.24–127.63% fuera de 80–125% y aun así concluye bioequivalencia"
+   }
+  ],
+  "resumen": "La versión corregida es idéntica a la anterior y no atiende la observación crítica: el IC 90% de Cmáx (91.24–127.63%) excede el límite superior de 125% establecido en NOM-177-SSA1-2013 numeral 9.6.4, pero el informe continúa concluyendo bioequivalencia. Se requiere corregir los datos o cambiar la conclusión para cumplir con la norma.",
+  "riesgos_nuevos": [],
+  "veredicto": "No atiende"
+ }
+]

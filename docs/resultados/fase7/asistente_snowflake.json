@@ -1,0 +1,157 @@
+[
+ {
+  "pregunta": "¿Qué registros sanitarios hay que renovar con urgencia?",
+  "esperado": [
+   "Metformina"
+  ],
+  "correcta": true,
+  "segundos": 24.5,
+  "pasos": [
+   "Consultó los datos (Cortex Analyst → SQL)"
+  ],
+  "fuentes": [
+   "Vista semántica SV_REGULATORIO"
+  ],
+  "sql": [
+   "SELECT \n    producto,\n    registro_sanitario,\n    fecha_vencimiento_registro,\n    fecha_limite_solicitar_prorroga,\n    dias_para_limite_prorroga,\n    estatus_vigencia,\n    semaforo\nFROM __registros_vigencia\nWHERE semaforo IN ('Rojo', 'Amarillo') \n   OR estatus_vigencia = 'Solicitar prórroga urgente'\nORDER BY dias_para_limite_prorroga ASC NULLS LAST"
+  ],
+  "tokens": 88439,
+  "respuesta": "Hay **2 registros sanitarios que requieren atención urgente**:\n\n\n\n**Urgente (semáforo rojo):**\n- **Metformina 850 mg** (RS 214M2017 SSA): quedan solo **9 días** para solicitar la prórroga. Límite: 15-oct-2026. Vence: 14-mar-2027.\n\n**Requiere atención próxima (amarillo):**\n- **Clopidogrel 75 mg** (RS 061M2022 SSA): quedan **45 días** para solicitar la prórroga. Límite: 20-nov-2026. Vence: 19-abr-2027.\n\nFuente: tabla `registros_vigencia`.",
+  "error": null
+ },
+ {
+  "pregunta": "¿Cuántas observaciones de COFEPRIS hay en el historial?",
+  "esperado": [
+   "349"
+  ],
+  "correcta": true,
+  "segundos": 18.4,
+  "pasos": [
+   "Consultó los datos (Cortex Analyst → SQL)"
+  ],
+  "fuentes": [
+   "Vista semántica SV_REGULATORIO"
+  ],
+  "sql": [
+   "SELECT COUNT(observacion_id) AS total_observaciones\nFROM __observaciones"
+  ],
+  "tokens": 86021,
+  "respuesta": "En el historial hay **349 observaciones** de COFEPRIS.\n\nFuente: tabla OBSERVACIONES.",
+  "error": null
+ },
+ {
+  "pregunta": "¿Qué norma genera más observaciones de COFEPRIS?",
+  "esperado": [
+   "NOM-072-SSA1-2012"
+  ],
+  "correcta": true,
+  "segundos": 19.6,
+  "pasos": [
+   "Consultó los datos (Cortex Analyst → SQL)"
+  ],
+  "fuentes": [
+   "Vista semántica SV_REGULATORIO"
+  ],
+  "sql": [
+   "SELECT \n  norma,\n  COUNT(observacion_id) AS total_observaciones\nFROM __observaciones\nWHERE norma IS NOT NULL\nGROUP BY norma\nORDER BY total_observaciones DESC NULLS LAST"
+  ],
+  "tokens": 87093,
+  "respuesta": "La **NOM-072-SSA1-2012** genera más observaciones, con 119 en total, seguida por la NOM-073-SSA1-2015 (87 observaciones).\n\n\n\n**Fuente:** tabla `observaciones`",
+  "error": null
+ },
+ {
+  "pregunta": "¿Cuántos días hábiles le quedan a la prevención del losartán?",
+  "esperado": [
+   "4"
+  ],
+  "correcta": true,
+  "segundos": 20.4,
+  "pasos": [
+   "Consultó los datos (Cortex Analyst → SQL)"
+  ],
+  "fuentes": [
+   "Vista semántica SV_REGULATORIO"
+  ],
+  "sql": [
+   "SELECT \n  tramite_id,\n  producto,\n  dias_habiles_restantes,\n  accion_pendiente,\n  fecha_limite_accion\nFROM __portafolio\nWHERE LOWER(producto) LIKE '%losartán%' \n  AND accion_pendiente IS NOT NULL\nORDER BY fecha_limite_accion"
+  ],
+  "tokens": 87118,
+  "respuesta": "A la prevención del losartán (Losartán potásico 50 mg, trámite TR-2026-022) le quedan **4 días hábiles** para abrir el oficio, con fecha límite el 12 de octubre de 2026.\n\n\n\nFuente: tabla `portafolio`.",
+  "error": null
+ },
+ {
+  "pregunta": "¿Qué documento le falta al expediente del losartán (TR-2026-022)?",
+  "esperado": [
+   "Plan"
+  ],
+  "correcta": true,
+  "segundos": 28.3,
+  "pasos": [
+   "Consultó los datos (Cortex Analyst → SQL)"
+  ],
+  "fuentes": [
+   "Vista semántica SV_REGULATORIO"
+  ],
+  "sql": [
+   "SELECT \n    nombre_requisito,\n    seccion_ctd,\n    area_responsable\nFROM __expediente_estado\nWHERE tramite_id = 'TR-2026-022'\n  AND estatus_efectivo = 'Faltante'"
+  ],
+  "tokens": 87740,
+  "respuesta": "Al expediente del losartán (TR-2026-022) le falta el **Plan de manejo de riesgos (PMR)**, sección CTD 1.6, a cargo del área de Farmacovigilancia.\n\n\n\n*Fuente: tabla expediente_estado*",
+  "error": null
+ },
+ {
+  "pregunta": "¿Qué dice la NOM-073 sobre los estudios de estabilidad acelerada?",
+  "esperado": [
+   "NOM-073",
+   "acelerada"
+  ],
+  "correcta": true,
+  "segundos": 18.7,
+  "pasos": [
+   "Buscó en las normas: «NOM-073 estudios de estabilidad acelerada»"
+  ],
+  "fuentes": [
+   "NOM-073-SSA1-2015 4.1.10",
+   "NOM-073-SSA1-2015 5.4.1",
+   "NOM-073-SSA1-2015 7.4",
+   "NOM-073-SSA1-2015 8.4"
+  ],
+  "sql": [],
+  "tokens": 49416,
+  "respuesta": "La NOM-073-SSA1-2015 establece que los **estudios de estabilidad acelerada** son aquellos diseñados bajo condiciones extremas de almacenamiento para incrementar la velocidad de degradación química, biológica o los cambios físicos de un fármaco, medicamento o remedio herbolario.\n\n**Condiciones del estudio acelerado:**\n- Temperatura: 40°C ± 2°C\n- Humedad relativa: 75% ± 5% HR\n- Periodo mínimo: 6 meses\n- Frecuencia de análisis: 0, 3 y 6 meses\n\n**Requisitos según tipo de medicamento:**\n- **Medicamento nuevo:** se deben someter los datos del estudio acelerado según el punto 7.5, y los datos de estabilidad a largo plazo disponibles (mínimo 6 meses) al momento de la solicitud de registro.\n- **Medicamento conocido o genérico:** se requieren los datos del estudio acelerado según el punto 8.5, y los datos de estabilidad a largo plazo disponibles (mínimo 3 meses) al momento de la solicitud.\n\n**Fuente:** NOM-073-SSA1-2015, numerales 4.1.10, 5.4.1, 7.4 y 8.4.",
+  "error": null
+ },
+ {
+  "pregunta": "¿Qué leyenda de farmacovigilancia debe llevar la etiqueta según la NOM-072?",
+  "esperado": [
+   "NOM-072",
+   "6.1.6"
+  ],
+  "correcta": true,
+  "segundos": 16.0,
+  "pasos": [
+   "Buscó en las normas: «NOM-072 leyenda farmacovigilancia etiqueta»"
+  ],
+  "fuentes": [
+   "NOM-072-SSA1-2012 6.1.6.2"
+  ],
+  "sql": [],
+  "tokens": 46344,
+  "respuesta": "Según la NOM-072-SSA1-2012, la etiqueta debe incluir la siguiente leyenda de farmacovigilancia:\n\n**\"Reporte las sospechas de reacción adversa al correo: farmacovigilancia@cofepris.gob.mx\"**\n\nEsta leyenda aplica para todos los medicamentos y se encuentra en el numeral 6.1.6.2 de la norma.",
+  "error": null
+ },
+ {
+  "pregunta": "¿Cuál es el precio de venta al público de la metformina?",
+  "esperado": [
+   "NO_INVENTA"
+  ],
+  "correcta": true,
+  "segundos": 13.2,
+  "pasos": [],
+  "fuentes": [],
+  "sql": [],
+  "tokens": 30378,
+  "respuesta": "Lo siento, pero no tengo acceso a información sobre precios de venta al público de medicamentos como la metformina. Las herramientas disponibles contienen datos regulatorios (trámites, registros sanitarios, expedientes) y textos normativos (NOM, leyes, reglamentos), pero no incluyen información comercial de precios.\n\nPara consultar precios de medicamentos, te recomendaría:\n- Verificar en farmacias o sus sitios web\n- Consultar el catálogo de medicamentos de la COFEPRIS (que a veces incluye precios de referencia)\n- Revisar listas de precios publicadas por la Comisión Federal de Competencia Económica (COFECE)",
+  "error": null
+ }
+]

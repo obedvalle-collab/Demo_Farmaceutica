@@ -1,0 +1,401 @@
+{
+ "total": {
+  "reales": 10,
+  "anticipadas_seccion": 10,
+  "anticipadas_clausula": 7,
+  "predichas": 27
+ },
+ "tramites": [
+  {
+   "tramite": "TR-2026-017",
+   "segundos": 95.7,
+   "riesgo": "Alto",
+   "predichas": 10,
+   "reales": 3,
+   "anticipadas_seccion": 3,
+   "anticipadas_clausula": 3,
+   "detalle": [
+    {
+     "real": "1.4.1 NOM-072-SSA1-2012 6.1.6.2",
+     "texto": "El proyecto de etiqueta no incluye la leyenda para el reporte de sospechas de reacción adversa.",
+     "anticipada_seccion": true,
+     "anticipada_clausula": true,
+     "probabilidad": "Alta"
+    },
+    {
+     "real": "3.2.P.8 NOM-073-SSA1-2015 8.4",
+     "texto": "Los datos de estabilidad a largo plazo presentados no alcanzan el mínimo de 3 meses al momento de la solicitud.",
+     "anticipada_seccion": true,
+     "anticipada_clausula": true,
+     "probabilidad": "Alta"
+    },
+    {
+     "real": "5.3.1.3 NOM-177-SSA1-2013 7.5.5",
+     "texto": "El factor de similitud f2 calculado es menor a 50 en al menos un medio de disolución; los perfiles no pueden considerarse similares.",
+     "anticipada_seccion": true,
+     "anticipada_clausula": true,
+     "probabilidad": "Alta"
+    }
+   ],
+   "prediccion": {
+    "riesgo": "Alto",
+    "resumen": "El expediente presenta tres prevenciones de severidad mayor con probabilidad alta que impedirán la autorización: estabilidad a largo plazo insuficiente (1 mes vs. 3 meses requeridos), factor f2 por debajo del límite de aceptación en un medio de disolución, y falta de leyenda de farmacovigilancia en etiqueta. Se recomienda no enviar la solicitud hasta completar al menos 3 meses de estabilidad y repetir los perfiles de disolución.",
+    "prevenciones": [
+     {
+      "seccion_ctd": "3.2.P.8",
+      "requisito": "Estudio de estabilidad del medicamento",
+      "observacion": "Los datos de estabilidad a largo plazo presentados no alcanzan el mínimo de 3 meses al momento de la solicitud (se presenta 1 mes).",
+      "norma": "NOM-073-SSA1-2015",
+      "clausula": "8.4",
+      "probabilidad": "Alta",
+      "motivo": "Hallazgo automático detectado: el expediente reporta meses_largo_plazo = 1, cuando el mínimo requerido son 3 meses al momento de solicitar el registro sanitario.",
+      "recomendacion": "Completar el estudio de estabilidad a largo plazo hasta alcanzar al menos 3 meses de datos antes de enviar la solicitud de registro sanitario."
+     },
+     {
+      "seccion_ctd": "5.3.1.3",
+      "requisito": "Perfiles de disolución comparativos",
+      "observacion": "El factor de similitud f2 calculado es menor a 50 en al menos un medio de disolución (f2 = 46.8 en pH 4.5); los perfiles no pueden considerarse similares.",
+      "norma": "NOM-177-SSA1-2013",
+      "clausula": "7.5.5",
+      "probabilidad": "Alta",
+      "motivo": "Hallazgo automático detectado: f2_minimo = 46.8 (< 50) en pH 4.5, aunque el documento concluye que los perfiles son similares. Esto incumple el criterio de que f2 debe ser ≥ 50 para demostrar similaridad.",
+      "recomendacion": "Repetir el estudio de perfiles de disolución comparativos optimizando la formulación para lograr f2 ≥ 50 en los tres medios de disolución, o justificar técnicamente mediante otro método estadístico la similaridad de los perfiles."
+     },
+     {
+      "seccion_ctd": "1.4.1",
+      "requisito": "Proyecto de etiqueta del envase secundario",
+      "observacion": "El proyecto de etiqueta no incluye la leyenda para el reporte de sospechas de reacción adversa.",
+      "norma": "NOM-072-SSA1-2012",
+      "clausula": "6.1.6.2",
+      "probabilidad": "Alta",
+      "motivo": "Hallazgo automático detectado: leyenda_farmacovigilancia = false. El dato extraído confirma que falta la leyenda obligatoria de farmacovigilancia.",
+      "recomendacion": "Incluir en el proyecto de etiqueta del envase secundario la leyenda: \"Reporte las sospechas de reacción adversa al correo: farmacovigilancia@cofepris.gob.mx\"."
+     },
+     {
+      "seccion_ctd": "1.7.2",
+      "requisito": "Certificado de BPF del fármaco",
+      "observacion": "El certificado de buenas prácticas de fabricación del fármaco presentado excede la vigencia de treinta meses.",
+      "norma": "NOM-164-SSA1-2015",
+      "clausula": "null",
+      "probabilidad": "Media",
+      "motivo": "Patrón histórico frecuente (3 de 13 trámites). El certificado de BPF del fármaco tiene fecha de emisión 10/02/2025 y la solicitud es del 31/03/2026 (13 meses). Si bien está dentro del límite de 30 meses, es un patrón observado en trámites similares y debe verificarse.",
+      "recomendacion": "Verificar que el certificado de BPF del fármaco se encuentre vigente (menos de 30 meses desde su emisión al momento de la solicitud) y de ser necesario solicitar uno actualizado al fabricante Zhejiang Hengli Pharmaceutical Co., Ltd."
+     },
+     {
+      "seccion_ctd": "3.2.P.8",
+      "requisito": "Estudio de estabilidad del medicamento",
+      "observacion": "Se observa cambio significativo en la valoración durante la estabilidad acelerada; deberá presentar el estudio a condición intermedia.",
+      "norma": "NOM-073-SSA1-2015",
+      "clausula": "8.5.1.1",
+      "probabilidad": "Media",
+      "motivo": "Patrón histórico (3 de 13 trámites). El expediente reporta evalua_excursiones_temperatura = false, lo que podría indicar que no se evaluó condición intermedia si hubo cambios significativos en acelerada.",
+      "recomendacion": "Revisar los resultados del estudio acelerado y, de haber cambios significativos en cualquier parámetro, completar el estudio a condición intermedia (30°C ± 2°C/65% ± 5% HR) presentando al menos datos de 0, 3 y 6 meses."
+     },
+     {
+      "seccion_ctd": "1.5.1",
+      "requisito": "Documento de patentes del IMPI",
+      "observacion": "No se presenta el documento emitido por el IMPI que acredite la titularidad de patentes vigentes o la licencia de explotación correspondiente.",
+      "norma": "null",
+      "clausula": "null",
+      "probabilidad": "Media",
+      "motivo": "Patrón histórico frecuente (3 de 13 trámites). El expediente no incluye la sección 1.5.1, lo que sugiere que podría faltar este documento requerido por el artículo 167 fracción I Bis del Reglamento de Insumos para la Salud.",
+      "recomendacion": "Incluir el certificado o constancia emitida por el Instituto Mexicano de la Propiedad Industrial (IMPI) que acredite que no existen patentes vigentes sobre el medicamento, o en su caso, la licencia de explotación correspondiente."
+     },
+     {
+      "seccion_ctd": "1.4.1",
+      "requisito": "Proyecto de etiqueta del envase secundario",
+      "observacion": "El proyecto de etiqueta del envase primario no indica el espacio para el número de lote.",
+      "norma": "NOM-072-SSA1-2012",
+      "clausula": "5.24.8",
+      "probabilidad": "Media",
+      "motivo": "Patrón histórico frecuente (5 de 13 trámites). Solo se presenta etiqueta del envase secundario; el expediente no incluye proyecto de etiqueta del envase primario, que también es requerido.",
+      "recomendacion": "Incluir el proyecto de etiqueta del envase primario con todos los elementos requeridos, incluyendo el espacio claramente indicado para el número de lote."
+     },
+     {
+      "seccion_ctd": "3.2.P.8",
+      "requisito": "Estudio de estabilidad del medicamento",
+      "observacion": "El informe de estabilidad no se encuentra avalado por el responsable sanitario del establecimiento.",
+      "norma": "NOM-073-SSA1-2015",
+      "clausula": "10.19",
+      "probabilidad": "Baja",
+      "motivo": "Patrón histórico (2 de 13 trámites). No se puede confirmar del expediente si el documento cuenta con la firma del responsable sanitario, pero es una observación recurrente en trámites similares.",
+      "recomendacion": "Verificar que el informe de estabilidad esté firmado y avalado por el responsable sanitario de Laboratorios Altamira, S.A. de C.V., incluyendo nombre completo, cédula profesional y firma."
+     },
+     {
+      "seccion_ctd": "1.4.1",
+      "requisito": "Proyecto de etiqueta del envase secundario",
+      "observacion": "La expresión de la fecha de caducidad no se ajusta al formato establecido (mes con al menos tres letras y año con dos dígitos).",
+      "norma": "NOM-072-SSA1-2012",
+      "clausula": "5.15.1",
+      "probabilidad": "Baja",
+      "motivo": "Patrón histórico (2 de 13 trámites). El expediente no proporciona información sobre el formato de la fecha de caducidad en la etiqueta, pero es una observación recurrente.",
+      "recomendacion": "Verificar que la fecha de caducidad en el proyecto de etiqueta se exprese como 'Caducidad' o 'Cad.' seguido del mes con mínimo tres letras (ej. ENE, FEB) y el año con dos dígitos (ej. 28)."
+     },
+     {
+      "seccion_ctd": "5.3.1.4",
+      "requisito": "Autorización del Tercero Autorizado",
+      "observacion": "No se presenta evidencia de la autorización vigente del Tercero Autorizado que realizó la fase clínica.",
+      "norma": "NOM-177-SSA1-2013",
+      "clausula": "8.11.8",
+      "probabilidad": "Baja",
+      "motivo": "Patrón histórico (2 de 13 trámites). El expediente no incluye la sección 5.3.1.4, que debería contener la autorización del tercero autorizado (Unidad de Farmacología Clínica del Centro, S.C.) que realizó el estudio de bioequivalencia.",
+      "recomendacion": "Incluir copia de la autorización vigente como Tercero Autorizado emitida por COFEPRIS a la Unidad de Farmacología Clínica del Centro, S.C. que realizó el estudio de bioequivalencia."
+     }
+    ]
+   }
+  },
+  {
+   "tramite": "TR-2026-022",
+   "segundos": 33.2,
+   "riesgo": "Alto",
+   "predichas": 7,
+   "reales": 2,
+   "anticipadas_seccion": 2,
+   "anticipadas_clausula": 1,
+   "detalle": [
+    {
+     "real": "1.4.1 NOM-072-SSA1-2012 5.17.2.5",
+     "texto": "El domicilio del fabricante declarado en la etiqueta no coincide con el autorizado en el registro sanitario.",
+     "anticipada_seccion": true,
+     "anticipada_clausula": true,
+     "probabilidad": "Alta"
+    },
+    {
+     "real": "1.6 NOM-220-SSA1-2016 8.4.1.2",
+     "texto": "Para la solicitud de prórroga deberá presentar el plan de manejo de riesgos del medicamento.",
+     "anticipada_seccion": true,
+     "anticipada_clausula": false,
+     "probabilidad": "Alta"
+    }
+   ],
+   "prediccion": {
+    "prevenciones": [
+     {
+      "clausula": "5.17.2.5",
+      "motivo": "Hallazgo automático detectó que el código postal 02300 en etiqueta difiere del código postal 50071 autorizado en el registro sanitario y certificado de BPF del medicamento.",
+      "norma": "NOM-072-SSA1-2012",
+      "observacion": "El domicilio del fabricante declarado en la etiqueta del envase secundario (código postal 02300) no coincide con el domicilio autorizado en el Registro Sanitario vigente (código postal 50071). Los datos del domicilio deben coincidir con lo autorizado en el Registro Sanitario para productos de fabricación nacional.",
+      "probabilidad": "Alta",
+      "recomendacion": "Corregir el proyecto de etiqueta del envase secundario para que el domicilio del fabricante corresponda exactamente al código postal 50071 autorizado en el Registro Sanitario 352M2021 SSA IV.",
+      "requisito": "Proyecto de etiqueta del envase secundario",
+      "seccion_ctd": "1.4.1"
+     },
+     {
+      "clausula": "8.4.3.1.4",
+      "motivo": "El expediente muestra estatus 'Faltante' para la sección 1.6 Plan de manejo de riesgos. Además, el historial indica que en 1 de 2 trámites parecidos se observó falta del plan de minimización de riesgos.",
+      "norma": "NOM-220-SSA1-2016",
+      "observacion": "No se presenta el Plan de Manejo de Riesgos requerido para el trámite de prórroga. El PMR debe incluir el plan de minimización de riesgos conforme a la normatividad aplicable para productos destinados a tratamiento de condiciones crónicas.",
+      "probabilidad": "Alta",
+      "recomendacion": "Incluir el Plan de Manejo de Riesgos completo que contenga el plan de minimización de riesgos según NOM-220-SSA1-2016, considerando que Losartán potásico es un medicamento para tratamiento crónico de hipertensión.",
+      "requisito": "Plan de manejo de riesgos (PMR)",
+      "seccion_ctd": "1.6"
+     },
+     {
+      "clausula": "5.17.2.5",
+      "motivo": "Los datos extraídos muestran código_postal_fabricante: 50071 en formato de solicitud referido a fabricante de fármaco (China), pero el proyecto de etiqueta muestra código_postal_fabricante: 02300, generando confusión sobre qué domicilio corresponde a qué fabricante.",
+      "norma": "NOM-072-SSA1-2012",
+      "observacion": "Existe inconsistencia en los códigos postales declarados en el expediente. El formato de solicitud declara código postal 50071 para el fabricante del fármaco (Zhejiang Hengli Pharmaceutical Co., Ltd., China), mientras que el proyecto de etiqueta declara código postal 02300 para el fabricante del medicamento (Laboratorios Altamira).",
+      "probabilidad": "Alta",
+      "recomendacion": "Aclarar y corregir la declaración de domicilios distinguiendo claramente entre el fabricante del fármaco (Zhejiang Hengli, China) y el fabricante del medicamento (Laboratorios Altamira, México), asegurando que cada uno tenga su código postal correcto y coincida con el Registro Sanitario.",
+      "requisito": "Formato de solicitud firmado",
+      "seccion_ctd": "1.1"
+     },
+     {
+      "clausula": "5.5.1",
+      "motivo": "El historial muestra que en 1 de 2 trámites parecidos se observó esta deficiencia crítica. Aunque no se cuenta con los certificados de análisis en el expediente presentado, el patrón histórico sugiere revisar este aspecto.",
+      "norma": "NOM-059-SSA1-2015",
+      "observacion": "Con base en el historial de trámites similares, es probable que los certificados de análisis presenten resultados fuera de especificación dictaminados como conformes sin el debido reporte de desviación. Los productos que no cumplan las especificaciones deben ser identificados y manejados conforme al procedimiento establecido.",
+      "probabilidad": "Media",
+      "recomendacion": "Si se incluyen certificados de análisis en el expediente, verificar que cualquier resultado fuera de especificación esté debidamente documentado con su correspondiente reporte de desviación y justificación técnica antes de dictaminarlo como conforme.",
+      "requisito": "Certificados de análisis de lotes",
+      "seccion_ctd": "3.2.P.5"
+     },
+     {
+      "clausula": "5.5.1",
+      "motivo": "El certificado de BPF tiene más de un año de antigüedad (marzo 2025 vs. junio 2026). Aunque está marcado como favorable, la antigüedad podría requerir verificación de vigencia según política interna de COFEPRIS.",
+      "norma": "NOM-059-SSA1-2015",
+      "observacion": "El Certificado de BPF del medicamento emitido el 3 de marzo de 2025 podría estar próximo a su vigencia. Verificar que el certificado tenga vigencia suficiente para cubrir el periodo de evaluación del trámite de prórroga.",
+      "probabilidad": "Baja",
+      "recomendacion": "Confirmar que el Certificado de BPF del medicamento emitido en marzo de 2025 mantenga vigencia durante todo el proceso de evaluación de la prórroga, o en su caso, presentar certificado actualizado.",
+      "requisito": "Certificado de BPF del medicamento",
+      "seccion_ctd": "1.7.1"
+     },
+     {
+      "clausula": "5.17.2.5",
+      "motivo": "Los datos extraídos muestran siglas_mbb: false. Aunque Losartán es un medicamento de prescripción y probablemente no requiera esta leyenda, se detectó la ausencia.",
+      "norma": "NOM-072-SSA1-2012",
+      "observacion": "El proyecto de etiqueta no incluye las siglas MBB (Medicamento de Bajo Riesgo) que podrían ser aplicables según la clasificación del producto. Verificar si el producto requiere esta identificación adicional.",
+      "probabilidad": "Baja",
+      "recomendacion": "Confirmar que la ausencia de siglas MBB es correcta para este medicamento de prescripción, o en su caso, incluir la leyenda si la clasificación del producto así lo requiere.",
+      "requisito": "Proyecto de etiqueta del envase secundario",
+      "seccion_ctd": "1.4.1"
+     },
+     {
+      "clausula": "5.5.1",
+      "motivo": "La fecha de emisión de la solicitud es junio 2026 y el registro vence en noviembre 2026, dejando aproximadamente 5 meses para la evaluación. Esto podría ser ajustado según tiempos de respuesta de COFEPRIS.",
+      "norma": "NOM-059-SSA1-2015",
+      "observacion": "El Registro Sanitario 352M2021 SSA IV tiene vigencia hasta el 26 de noviembre de 2026. Verificar que la solicitud de prórroga se presente con la anticipación reglamentaria suficiente para evitar vencimiento durante la evaluación.",
+      "probabilidad": "Baja",
+      "recomendacion": "Asegurar que el trámite se presente y complete antes del vencimiento del registro sanitario en noviembre 2026, considerando los plazos de evaluación y posibles prevenciones.",
+      "requisito": "Registro sanitario vigente y modificaciones autorizadas",
+      "seccion_ctd": "1.8"
+     }
+    ],
+    "resumen": "El expediente presenta 3 prevenciones de probabilidad Alta que requieren corrección inmediata: discrepancia en domicilio del fabricante en etiqueta, falta del Plan de Manejo de Riesgos completo, e inconsistencias entre códigos postales declarados en diferentes documentos. Se recomienda corregir estos hallazgos antes de presentar la solicitud de prórroga para evitar demoras en el trámite.",
+    "riesgo": "Alto"
+   }
+  },
+  {
+   "tramite": "TR-2026-025",
+   "segundos": 41.3,
+   "riesgo": "Alto",
+   "predichas": 10,
+   "reales": 5,
+   "anticipadas_seccion": 5,
+   "anticipadas_clausula": 3,
+   "detalle": [
+    {
+     "real": "1.4.1 NOM-072-SSA1-2012 5.31.7",
+     "texto": "La etiqueta del medicamento biotecnológico biocomparable no presenta las siglas M.B.B. en la superficie principal de exhibición del envase secundario.",
+     "anticipada_seccion": true,
+     "anticipada_clausula": true,
+     "probabilidad": "Alta"
+    },
+    {
+     "real": "3.2.P.8 NOM-073-SSA1-2015 7.5.6",
+     "texto": "No se presenta la evaluación del impacto de excursiones de temperatura fuera de las condiciones de almacenamiento.",
+     "anticipada_seccion": true,
+     "anticipada_clausula": true,
+     "probabilidad": "Alta"
+    },
+    {
+     "real": "3.2.R.1 NOM-257-SSA1-2014 6.1.3",
+     "texto": "El programa de aseguramiento de calidad no incluye el programa de auditorías internas del producto y del proceso.",
+     "anticipada_seccion": true,
+     "anticipada_clausula": true,
+     "probabilidad": "Alta"
+    },
+    {
+     "real": "1.2 Administrativa",
+     "texto": "El comprobante de pago de derechos es ilegible; deberá presentarlo en forma legible.",
+     "anticipada_seccion": true,
+     "anticipada_clausula": false,
+     "probabilidad": "Media"
+    },
+    {
+     "real": "1.4.2 Administrativa",
+     "texto": "La información para prescribir amplia no es congruente con la del medicamento de referencia en las secciones de contraindicaciones.",
+     "anticipada_seccion": true,
+     "anticipada_clausula": false,
+     "probabilidad": "Baja"
+    }
+   ],
+   "prediccion": {
+    "prevenciones": [
+     {
+      "clausula": "5.31.7",
+      "motivo": "Hallazgo automático detectado: el campo 'siglas_mbb' del envase secundario es 'false'. La NOM-072-SSA1-2012, numeral 5.31.7, establece que los medicamentos biotecnológicos biocomparables deben incluir las siglas M.B.B.",
+      "norma": "NOM-072-SSA1-2012",
+      "observacion": "El proyecto de etiqueta del envase secundario no incluye las siglas M.B.B. (Medicamento Biotecnológico Biocomparable), cuando se trata de un producto biocomparable.",
+      "probabilidad": "Alta",
+      "recomendacion": "Incorporar las siglas M.B.B. en el proyecto de etiqueta del envase secundario conforme al numeral 5.31.7 de la NOM-072-SSA1-2012.",
+      "requisito": "Proyecto de etiqueta del envase secundario",
+      "seccion_ctd": "1.4.1"
+     },
+     {
+      "clausula": "6.1.3",
+      "motivo": "Hallazgo automático detectado: el programa de aseguramiento de calidad no incluye el programa de auditorías internas, requisito establecido en el numeral 6.1.3 de la NOM-257-SSA1-2014.",
+      "norma": "NOM-257-SSA1-2014",
+      "observacion": "El programa de aseguramiento de calidad del producto biotecnológico no incluye el programa de auditorías internas del producto y del proceso.",
+      "probabilidad": "Alta",
+      "recomendacion": "Incluir en el programa de aseguramiento de calidad el programa de auditorías internas del producto y del proceso, conforme al numeral 6.1.3 de la NOM-257-SSA1-2014.",
+      "requisito": "Programa de aseguramiento de calidad del producto biotecnológico",
+      "seccion_ctd": "3.2.R.1"
+     },
+     {
+      "clausula": "7.5.6",
+      "motivo": "Hallazgo automático detectado: el campo 'evalua_excursiones_temperatura' es 'false'. La NOM-073-SSA1-2015, numeral 7.5.6, requiere evaluar el impacto de las excursiones de temperatura para productos refrigerados.",
+      "norma": "NOM-073-SSA1-2015",
+      "observacion": "El estudio de estabilidad del medicamento no incluye evaluación de excursiones de temperatura, siendo un producto que requiere refrigeración.",
+      "probabilidad": "Alta",
+      "recomendacion": "Incorporar al estudio de estabilidad la evaluación de excursiones de temperatura a 25°C ± 2°C / 60% ± 5% HR durante un periodo probado, conforme al numeral 7.5.6 de la NOM-073-SSA1-2015.",
+      "requisito": "Estudio de estabilidad del medicamento",
+      "seccion_ctd": "3.2.P.8"
+     },
+     {
+      "clausula": "6.1.6.2",
+      "motivo": "El historial muestra que en 1 de 1 trámites parecidos se ha observado la ausencia de la leyenda de reporte de sospechas de reacción adversa en proyectos de etiqueta. Aunque el campo 'leyenda_farmacovigilancia' es 'true', esto no confirma que incluya específicamente el correo electrónico requerido.",
+      "norma": "NOM-072-SSA1-2012",
+      "observacion": "El proyecto de etiqueta del envase secundario no incluye la leyenda para el reporte de sospechas de reacción adversa al correo de farmacovigilancia de COFEPRIS.",
+      "probabilidad": "Media",
+      "recomendacion": "Verificar que el proyecto de etiqueta del envase secundario incluya textualmente la leyenda: \"Reporte las sospechas de reacción adversa al correo: farmacovigilancia@cofepris.gob.mx\", conforme al numeral 6.1.6.2 de la NOM-072-SSA1-2012.",
+      "requisito": "Proyecto de etiqueta del envase secundario",
+      "seccion_ctd": "1.4.1"
+     },
+     {
+      "clausula": "5.9",
+      "motivo": "El historial muestra que en 1 de 1 trámites parecidos se ha observado que no se expresa la dosis conforme al numeral 5.9. El expediente no permite verificar si se incluyó la expresión exacta requerida en el proyecto de etiqueta del envase secundario.",
+      "norma": "NOM-072-SSA1-2012",
+      "observacion": "No se expresa la dosis conforme a lo establecido en la norma oficial mexicana. Debe incluirse la expresión \"Dosis: la que el médico señale\" o equivalente.",
+      "probabilidad": "Media",
+      "recomendacion": "Incluir en el proyecto de etiqueta del envase secundario la expresión: \"Dosis: la que el médico señale\" o \"Dosis: a juicio del facultativo\", conforme al numeral 5.9 de la NOM-072-SSA1-2012.",
+      "requisito": "Proyecto de etiqueta del envase secundario",
+      "seccion_ctd": "1.4.1"
+     },
+     {
+      "clausula": "6.1.6.2",
+      "motivo": "Los datos extraídos del proyecto de etiqueta del envase primario muestran que 'leyenda_receta_medica', 'leyenda_no_alcance_ninos' y 'leyenda_farmacovigilancia' son 'false', indicando ausencia de estas leyendas obligatorias para medicamentos de prescripción.",
+      "norma": "NOM-072-SSA1-2012",
+      "observacion": "El proyecto de etiqueta del envase primario no incluye las leyendas obligatorias de medicamentos biotecnológicos: \"Su venta requiere receta médica\", \"No se deje al alcance de los niños\", y la leyenda de farmacovigilancia.",
+      "probabilidad": "Alta",
+      "recomendacion": "Incorporar en el proyecto de etiqueta del envase primario todas las leyendas obligatorias: \"Su venta requiere receta médica\", \"No se deje al alcance de los niños\", \"Reporte las sospechas de reacción adversa al correo: farmacovigilancia@cofepris.gob.mx\" y \"No se venda por separado\", conforme a la NOM-072-SSA1-2012.",
+      "requisito": "Proyecto de etiqueta del envase primario",
+      "seccion_ctd": "1.4.1"
+     },
+     {
+      "clausula": "6.1.3",
+      "motivo": "El resumen del certificado de BPF indica que ampara 'fabricación de sólidos orales no estériles y acondicionamiento de inyectables', cuando el producto es un biológico estéril (solución inyectable) que requiere fabricación completa, no solo acondicionamiento.",
+      "norma": "NOM-059-SSA1-2015",
+      "observacion": "El Certificado de Buenas Prácticas de Fabricación presentado ampara fabricación de sólidos orales no estériles y acondicionamiento de inyectables, pero no específicamente la fabricación de productos biotecnológicos estériles.",
+      "probabilidad": "Alta",
+      "recomendacion": "Presentar un Certificado de Buenas Prácticas de Fabricación que ampare específicamente la fabricación de productos biotecnológicos estériles (inyectables), no solo su acondicionamiento.",
+      "requisito": "Certificado de BPF del medicamento",
+      "seccion_ctd": "1.7.1"
+     },
+     {
+      "clausula": "5.9",
+      "motivo": "El campo 'fecha_emision' del comprobante de pago muestra '2020-09-11', aproximadamente 6 años antes de la fecha de emisión de los demás documentos del expediente (2026). El historial muestra que en 1 de 1 trámites parecidos se ha observado ilegibilidad del comprobante.",
+      "norma": "NOM-072-SSA1-2012",
+      "observacion": "El comprobante de pago de derechos presenta fecha de emisión del 11 de septiembre de 2020, que no corresponde con la fecha del trámite (2026), pudiendo tratarse de un comprobante no vigente o de otro trámite.",
+      "probabilidad": "Media",
+      "recomendacion": "Verificar que el comprobante de pago de derechos corresponda efectivamente al presente trámite y que sea vigente. Si corresponde a otro trámite, presentar el comprobante correcto.",
+      "requisito": "Comprobante de pago de derechos",
+      "seccion_ctd": "1.2"
+     },
+     {
+      "clausula": "6.1.3",
+      "motivo": "El campo 'datos' de la sección 5.3.5.3 está vacío ({}), lo que sugiere que el documento puede estar ilegible, incompleto o no corresponder al requisito solicitado.",
+      "norma": "NOM-257-SSA1-2014",
+      "observacion": "El documento de autorización del protocolo y dictamen del comité de ética fue cargado pero no contiene datos extraídos, lo que impide verificar su contenido y cumplimiento normativo.",
+      "probabilidad": "Media",
+      "recomendacion": "Verificar que el documento de autorización del protocolo y dictamen del comité de ética sea legible, completo y contenga la información requerida: número de registro, fecha de aprobación, identificación del comité de ética y del protocolo autorizado.",
+      "requisito": "Autorización del protocolo y dictamen del comité de ética",
+      "seccion_ctd": "5.3.5.3"
+     },
+     {
+      "clausula": "6.1.6.2",
+      "motivo": "El historial muestra que en 1 de 1 trámites parecidos de biocomparables se ha observado incongruencia en las contraindicaciones entre la información para prescribir y el producto de referencia. El documento no está presente en el expediente proporcionado.",
+      "norma": "NOM-072-SSA1-2012",
+      "observacion": "La información para prescribir amplia debe ser congruente con la del medicamento de referencia en todas las secciones, particularmente en contraindicaciones, advertencias y precauciones.",
+      "probabilidad": "Baja",
+      "recomendacion": "Verificar que la información para prescribir amplia sea congruente con la del producto de referencia Humira® en todas sus secciones, particularmente contraindicaciones, advertencias, precauciones e interacciones medicamentosas.",
+      "requisito": "Información para prescribir amplia",
+      "seccion_ctd": "1.4.2"
+     }
+    ],
+    "resumen": "El expediente presenta 3 hallazgos automáticos de severidad mayor que generan prevenciones de alta probabilidad: ausencia de las siglas M.B.B. en el envase secundario, falta del programa de auditorías internas en el aseguramiento de calidad, y ausencia de evaluación de excursiones de temperatura en el estudio de estabilidad. Adicionalmente, el historial de trámites similares señala observaciones recurrentes en proyectos de etiqueta relacionadas con leyendas de farmacovigilancia y expresión de dosis, que deben verificarse antes del envío.",
+    "riesgo": "Alto"
+   }
+  }
+ ]
+}

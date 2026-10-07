@@ -1,0 +1,193 @@
+[
+ {
+  "requisito": "1.3.2 Instrumento que acredita la representación legal",
+  "segundos": 8.5,
+  "hallazgos_v1": 1,
+  "obs_cofepris": 0,
+  "cambios": [
+   "Número de instrumento cambió de 45,132 a 45,156",
+   "Fecha del instrumento cambió de 26 de febrero de 2026 a 2 de marzo de 2026",
+   "Se añadió identificación explícita de firma del otorgante Isabela Bonilla Llamas con fecha 02/03/2026",
+   "Las firmas ahora aparecen con identificación individual debajo de cada imagen (img-0, img-1, img-2) mostrando claramente Otorgante, Apoderado y Notario con sus respectivas fechas"
+  ],
+  "observaciones": [
+   {
+    "atendida": "Si",
+    "evidencia": "En la versión corregida aparece explícitamente: 'Otorgante Isabela Bonilla Llamas Apoderado de Laboratorios Altamira Fecha: 02/03/2026' con el apartado de firma claramente identificado bajo img-0.jpeg",
+    "observacion": "Documento sin firma de: Otorgante Isabela Bonilla Llamas"
+   }
+  ],
+  "resumen": "La versión corregida atiende satisfactoriamente la observación sobre la falta de firma del otorgante Isabela Bonilla Llamas. El nuevo instrumento (45,156 del 02/03/2026) ahora incluye explícitamente la firma y fecha de la otorgante en el apartado correspondiente.",
+  "riesgos_nuevos": [],
+  "veredicto": "Atiende"
+ },
+ {
+  "requisito": "1.4.1 Proyecto de etiqueta del envase secundario",
+  "segundos": 7.8,
+  "hallazgos_v1": 2,
+  "obs_cofepris": 0,
+  "cambios": [
+   "Se agregó la leyenda \"Su venta requiere receta médica\" en la sección de leyendas",
+   "Se agregó la leyenda \"Prohibida la venta fraccionada del producto\" en la sección de leyendas",
+   "Se actualizó la fecha del arte de 15/08/2026 a 28/09/2026",
+   "Se modificó el código interno de 2000000000134 a 2000000000157"
+  ],
+  "observaciones": [
+   {
+    "atendida": "Si",
+    "evidencia": "La versión corregida incluye la leyenda \"Prohibida la venta fraccionada del producto\" en la sección de leyendas.",
+    "observacion": "Producto para enfermedad crónica sin la leyenda \"prohibida la venta fraccionada\""
+   },
+   {
+    "atendida": "Si",
+    "evidencia": "La versión corregida incluye la leyenda \"Su venta requiere receta médica\" como primer punto en la sección de leyendas.",
+    "observacion": "Falta la leyenda \"Su venta requiere receta médica\""
+   }
+  ],
+  "resumen": "La versión corregida atiende satisfactoriamente ambas observaciones normativas. Se incorporaron las leyendas obligatorias \\\"Su venta requiere receta médica\\\" y \\\"Prohibida la venta fraccionada del producto\\\" conforme a los numerales 6.1.4 y 5.19 de la NOM-072-SSA1-2012.",
+  "riesgos_nuevos": [],
+  "veredicto": "Atiende"
+ },
+ {
+  "requisito": "1.6 Plan de manejo de riesgos (PMR)",
+  "segundos": 8.4,
+  "hallazgos_v1": 1,
+  "obs_cofepris": 0,
+  "cambios": [
+   "Se agregó la sección '4. Plan de minimización de riesgos' describiendo actividades de rutina (información para prescribir, etiquetado y capacitación)",
+   "Se actualizó la fecha de emisión de '7 de septiembre de 2026' a '28 de septiembre de 2026'",
+   "Se actualizaron las fechas en las firmas de aprobación del 07/09/2026 al 28/09/2026"
+  ],
+  "observaciones": [
+   {
+    "atendida": "Si",
+    "evidencia": "Se agregó la sección '4. Plan de minimización de riesgos' con el texto: 'Actividades de rutina: información para prescribir y etiquetado con leyendas de seguridad; capacitación a la fuerza de ventas sobre el reporte de eventos adversos.'",
+    "observacion": "El plan de manejo de riesgos no incluye el plan de minimización de riesgos"
+   }
+  ],
+  "resumen": "La versión corregida atiende satisfactoriamente la observación al incluir la sección \"4. Plan de minimización de riesgos\" que estaba ausente en la versión anterior, cumpliendo así con el requisito de la cláusula 8.4.3.1.4 de la NOM-220-SSA1-2016. Se actualizó la fecha de emisión y firmas de aprobación.",
+  "riesgos_nuevos": [],
+  "veredicto": "Atiende"
+ },
+ {
+  "requisito": "1.7.2 Certificado de BPF del fármaco",
+  "segundos": 6.9,
+  "hallazgos_v1": 1,
+  "obs_cofepris": 0,
+  "cambios": [
+   "Folio actualizado de CBPF-F-2023-1140 a CBPF-F-2026-1160",
+   "Fecha de emisión actualizada del 15/11/2023 al 20/08/2026",
+   "Fecha de verificación actualizada del 5/10/2023 al 10/07/2026",
+   "Cadena de verificación modificada de 71f270b413f240426c1ee83f3823a46b a 22eed6054d756afea4e731edabba09f2"
+  ],
+  "observaciones": [
+   {
+    "atendida": "Si",
+    "evidencia": "Se presenta certificado nuevo con folio CBPF-F-2026-1160, fecha de emisión 20 de agosto de 2026, que está vigente dentro del periodo de 30 meses requerido.",
+    "observacion": "Certificado de BPF emitido el 2023-11-15: excede la vigencia de 30 meses"
+   }
+  ],
+  "resumen": "La observación sobre vigencia del certificado de BPF ha sido atendida completamente. Se reemplazó el certificado con fecha de emisión 15/11/2023 por uno actualizado con fecha de emisión 20/08/2026, que se encuentra dentro de la vigencia de 30 meses establecida en la norma.",
+  "riesgos_nuevos": [],
+  "veredicto": "Atiende"
+ },
+ {
+  "requisito": "3.2.P.5 Certificado de análisis del lote del medicamento",
+  "segundos": 8.8,
+  "hallazgos_v1": 1,
+  "obs_cofepris": 0,
+  "cambios": [
+   "Sustitución del lote analizado: de 0926243 a 0926334",
+   "Cambio de fecha de emisión: de 3 de septiembre de 2026 a 28 de septiembre de 2026",
+   "Cambio de fecha de fabricación: de 05/07/2026 a 30/07/2026",
+   "Corrección del resultado de Disolución: de 76% (mín. 72%, máx. 81%) a 91% (mín. 87%, máx. 95%)",
+   "Actualización de fechas de aprobación y sellos del 03/09/2026 al 28/09/2026"
+  ],
+  "observaciones": [
+   {
+    "atendida": "Si",
+    "evidencia": "La versión corregida presenta resultado de Disolución: '91% (mín. 87%, máx. 95%)' que cumple la especificación 'Q = 80% a los 30 min', a diferencia de la versión anterior que mostraba '76% (mín. 72%, máx. 81%)' fuera de especificación pero dictaminado como Cumple.",
+    "observacion": "Resultado fuera de especificación dictaminado como conforme: Disolución"
+   }
+  ],
+  "resumen": "La observación sobre resultado fuera de especificación en Disolución ha sido atendida satisfactoriamente. La versión corregida presenta un certificado de lote diferente (0926334) con resultado de disolución 91% (mín. 87%, máx. 95%), que cumple la especificación Q = 80%, eliminando el incumplimiento detectado en la versión anterior donde el resultado era 76%.",
+  "riesgos_nuevos": [],
+  "veredicto": "Atiende"
+ },
+ {
+  "requisito": "3.2.P.8 Estudio de estabilidad del medicamento",
+  "segundos": 13.7,
+  "hallazgos_v1": 2,
+  "obs_cofepris": 0,
+  "cambios": [
+   "Se agregó un tercer lote de estabilidad (0926367, Producción, fabricado el 03/09/2025 con fármaco API240568)",
+   "Se actualizaron los números de lote: de 0926264/0926277 a 0926341/0926354/0926367 con nuevas fechas de fabricación y lotes de fármaco",
+   "Se completó la fecha de aprobación del Responsable Sanitario (01/10/2026)",
+   "Se actualizó la fecha de emisión del informe de 18/09/2026 a 28/09/2026",
+   "Se actualizaron las fechas de elaboración (28/09/2026) y revisión (30/09/2026)",
+   "Se incorporaron datos de estabilidad acelerada y de largo plazo para el tercer lote en las tablas de resultados"
+  ],
+  "observaciones": [
+   {
+    "atendida": "Si",
+    "evidencia": "La sección 2 ahora lista 3 lotes: 0926341 (Piloto), 0926354 (Producción) y 0926367 (Producción). Las tablas de resultados (secciones 5 y 6) incluyen datos completos de los 3 lotes.",
+    "observacion": "El estudio de estabilidad incluye 2 lotes; se requieren al menos 3"
+   },
+   {
+    "atendida": "Si",
+    "evidencia": "En la sección Aprobaciones, el campo 'Aprobó (Responsable Sanitario)' ahora muestra 'Fecha: 01/10/2026' en lugar del espacio en blanco anterior, evidenciando el aval del Responsable Sanitario.",
+    "observacion": "Informe de estabilidad sin aval (firma) de: Aprobó (Responsable Sanitario) - Ricardo Castañeda Ontiveros"
+   }
+  ],
+  "resumen": "La versión corregida atiende satisfactoriamente ambas observaciones: se incorporó un tercer lote de estabilidad (0926367) cumpliendo con el requisito de al menos 3 lotes de la NOM-073-SSA1-2015, y el Responsable Sanitario Ricardo Castañeda Ontiveros firmó el informe con fecha 01/10/2026, avalando el estudio conforme a la cláusula 10.19.",
+  "riesgos_nuevos": [],
+  "veredicto": "Atiende"
+ },
+ {
+  "requisito": "3.2.S.4 Certificado de análisis del fármaco",
+  "segundos": 8.4,
+  "hallazgos_v1": 1,
+  "obs_cofepris": 0,
+  "cambios": [
+   "Cambio del emisor del certificado de Shreya Organics Pvt. Ltd. a Kavya Lifesciences Pvt. Ltd.",
+   "Cambio del fabricante declarado en el certificado de Shreya Organics Pvt. Ltd. a Kavya Lifesciences Pvt. Ltd.",
+   "Cambio del número de lote de API260864 a API260981",
+   "Cambio de fecha de fabricación de 08/03/2026 a 01/05/2026",
+   "Cambio de fecha de retest de 07/03/2028 a 30/04/2028",
+   "Actualización de fechas de revisión y aprobación (18-19/03/2026 a 11-12/05/2026)"
+  ],
+  "observaciones": [
+   {
+    "atendida": "Si",
+    "evidencia": "El encabezado ahora indica 'KAVYA LIFESCIENCES PVT. LTD. Quality Control Department - India' y el campo Manufacturer/Fabricante especifica 'Kavya Lifesciences Pvt. Ltd., India', concordando emisor y fabricante.",
+    "observacion": "El certificado de análisis del fármaco lo emite Shreya Organics Pvt. Ltd., India, distinto del fabricante declarado (Kavya Lifesciences Pvt. Ltd.)"
+   }
+  ],
+  "resumen": "La versión corregida atiende completamente la observación. El certificado de análisis ahora es emitido por Kavya Lifesciences Pvt. Ltd., que corresponde al fabricante declarado, corrigiendo la discrepancia identificada entre emisor y fabricante.",
+  "riesgos_nuevos": [],
+  "veredicto": "Atiende"
+ },
+ {
+  "requisito": "5.3.1.2 Informe del estudio de bioequivalencia",
+  "segundos": 9.6,
+  "hallazgos_v1": 1,
+  "obs_cofepris": 0,
+  "cambios": [
+   "Fecha de emisión actualizada de 30 de julio de 2026 a 28 de septiembre de 2026",
+   "Lote del medicamento de prueba cambiado de 0926271 a 0926348",
+   "IC 90% de Cmáx corregido de 91.24–127.63% a 92.36–113.08% (ahora dentro de 80–125%)",
+   "Cociente P/R de Cmáx modificado de 107.91% a 102.20%",
+   "Fechas de firmas actualizadas a 28/09/2026"
+  ],
+  "observaciones": [
+   {
+    "atendida": "Si",
+    "evidencia": "IC 90% de Cmáx corregido a 92.36–113.08%, que sí cumple el criterio 80–125% de la NOM-177-SSA1-2013 numeral 9.6.4",
+    "observacion": "IC 90% de Cmáx 91.24–127.63% fuera de 80–125% y aun así concluye bioequivalencia"
+   }
+  ],
+  "resumen": "La observación ha sido completamente atendida. El intervalo de confianza al 90% de Cmáx se corrigió de 91.24–127.63% a 92.36–113.08%, cumpliendo ahora el criterio normativo de 80–125% establecido en NOM-177-SSA1-2013, y la conclusión de bioequivalencia es procedente.",
+  "riesgos_nuevos": [],
+  "veredicto": "Atiende"
+ }
+]

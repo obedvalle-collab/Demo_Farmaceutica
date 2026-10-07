@@ -1,18 +1,22 @@
 """Acceso a datos de la app en Snowflake (Streamlit in Snowflake o local con Snowpark)."""
 import io
 import json
+import time
 import uuid
 
 import re
 
 from ciclo_prevencion import CicloPrevencion
+from consultas import Consultas
+from preauditoria import PreAuditoria
+from versiones import Versiones
 from extraccion import INSTRUCCION, MAX_CARACTERES, esquema_json
 
 BD = "OBED_FARMACEUTICA"
 MODELO = "claude-sonnet-4-5"
 
 
-class DatosSnowflake(CicloPrevencion):
+class DatosSnowflake(CicloPrevencion, Consultas, Versiones, PreAuditoria):
     L, N, A = f"{BD}.LIMPIO", f"{BD}.NEGOCIO", f"{BD}.APP"
     MODELO = MODELO
 
@@ -45,6 +49,12 @@ class DatosSnowflake(CicloPrevencion):
     def ia_json(self, prompt, esquema_dict):
         r = self.s.sql("SELECT AI_COMPLETE(model => ?, prompt => ?, response_format => {'type': 'json', 'schema': PARSE_JSON(?)}) AS r",
                        params=[MODELO, prompt, json.dumps(esquema_dict, ensure_ascii=False)]).collect()[0]["R"]
+        if r is None:
+            # con instrucciones largas y salida grande, el modo JSON con esquema a veces devuelve NULL:
+            # se repite en texto libre pidiendo el mismo esquema y se lee el JSON de la respuesta
+            r = self.ia_texto(prompt + "\n\nResponde SOLO con un objeto JSON válido que cumpla este esquema:\n"
+                              + json.dumps(esquema_dict, ensure_ascii=False))
+            r = r[r.find("{"): r.rfind("}") + 1]
         d = json.loads(r) if isinstance(r, str) else r
         return json.loads(d) if isinstance(d, str) else d
 
@@ -65,6 +75,73 @@ class DatosSnowflake(CicloPrevencion):
             except Exception as e:
                 self.q(f"UPDATE {self.A}.alertas SET error = :e WHERE alerta_id = :i", {"e": str(e)[:1000], "i": a["alerta_id"]})
         return n
+
+    def buscar_normas(self, texto, solo_vigentes=True, norma=None, n=8):
+        """Cortex Search (arctic-embed-l-v2.0, búsqueda híbrida + reordenamiento)."""
+        filtros = ([{"@eq": {"estatus": "Vigente"}}] if solo_vigentes else []) + ([{"@eq": {"norma": norma}}] if norma else [])
+        q = {"query": texto, "limit": n * 2,
+             "columns": ["clausula_id", "norma", "tipo", "estatus", "numeral", "titulo", "texto_busqueda"]}
+        if filtros:
+            q["filter"] = filtros[0] if len(filtros) == 1 else {"@and": filtros}
+        r = self.s.sql(f"SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('{BD}.IA.BUSCADOR_NORMAS', ?) AS r",
+                       params=[json.dumps(q, ensure_ascii=False)]).collect()[0]["R"]
+        return _sin_repetir(json.loads(r)["results"], n)
+
+    def auditoria_plataforma(self):
+        """Auditoría nativa de Snowflake, filtrada a la base de esta demo: permisos, consultas recientes (QUERY_HISTORY)
+        y tablas más leídas (ACCESS_HISTORY). ACCOUNT_USAGE tiene retraso de hasta ~45 min a 3 h."""
+        permisos = [{"privilegio": r["privilege"], "objeto": r["name"], "tipo": r["granted_on"], "otorgado_a": r["grantee_name"]}
+                    for r in self.s.sql(f"SHOW GRANTS ON DATABASE {BD}").collect()]
+        actividad = self.q(f"""SELECT start_time AS fecha_hora, user_name AS usuario, role_name AS rol, query_type AS tipo,
+                                      LEFT(query_text, 200) AS sentencia,
+                                      ROUND(total_elapsed_time / 1000, 2) AS segundos
+                               FROM SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY
+                               WHERE database_name = '{BD}' AND start_time > DATEADD(day, -2, CURRENT_TIMESTAMP())
+                               ORDER BY start_time DESC LIMIT 40""")
+        accesos = self.q(f"""SELECT f.value:"objectName"::STRING AS objeto, COUNT(*) AS lecturas, MAX(a.query_start_time) AS ultima
+                             FROM SNOWFLAKE.ACCOUNT_USAGE.ACCESS_HISTORY a, LATERAL FLATTEN(a.base_objects_accessed) f
+                             WHERE a.query_start_time > DATEADD(day, -3, CURRENT_TIMESTAMP())
+                               AND f.value:"objectName"::STRING LIKE '{BD}.%'
+                             GROUP BY 1 ORDER BY 2 DESC LIMIT 15""")
+        return {"permisos": permisos, "actividad": actividad, "accesos": accesos,
+                "fuente": "SHOW GRANTS · SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY · ACCESS_HISTORY"}
+
+    def preguntar(self, pregunta, historial):
+        """Cortex Agent (objeto ASISTENTE_REGULATORIO) por SQL: DATA_AGENT_RUN. La API REST de agentes no está
+        disponible desde Streamlit in Snowflake con runtime de warehouse; la función SQL sí, y es la misma en local."""
+        mensajes = [{"role": m["rol"], "content": [{"type": "text", "text": m["texto"]}]} for m in historial[-6:]]
+        mensajes.append({"role": "user", "content": [{"type": "text", "text": pregunta}]})
+        t = time.time()
+        r = self.s.sql(f"SELECT SNOWFLAKE.CORTEX.DATA_AGENT_RUN('{BD}.IA.ASISTENTE_REGULATORIO', ?) AS r",
+                       params=[json.dumps({"messages": mensajes, "stream": False}, ensure_ascii=False)]).collect()[0]["R"]
+        d = json.loads(r)
+        salida = {"texto": "", "fuentes": [], "sql": [], "tablas": [], "pasos": [], "segundos": round(time.time() - t, 1),
+                  "tokens": sum(x["input_tokens"]["total"] + x["output_tokens"]["total"]
+                                for x in d.get("metadata", {}).get("usage", {}).get("tokens_consumed", []))}
+        vistas = set()
+        for c in d.get("content", []):
+            if c["type"] == "text":
+                salida["texto"] += c["text"]
+                for a in c.get("annotations") or []:
+                    if a.get("doc_id") and a["doc_id"] not in vistas:
+                        vistas.add(a["doc_id"])
+                        salida["fuentes"].append({"tipo": "norma", "etiqueta": a["doc_id"], "detalle": a.get("doc_title", "")})
+            elif c["type"] == "tool_use":
+                u = c["tool_use"]
+                if u.get("type") == "system_execute_sql":
+                    salida["sql"].append(u["input"]["sql"].strip())
+                    salida["pasos"].append("Consultó los datos (Cortex Analyst → SQL)")
+                elif u.get("type") == "cortex_search":
+                    salida["pasos"].append(f"Buscó en las normas: «{u['input'].get('query', '')}»")
+            elif c["type"] == "table":
+                rs = c["table"]["result_set"]
+                salida["tablas"].append({"columnas": [x["name"].lower() for x in rs["resultSetMetaData"]["rowType"]],
+                                         "filas": rs["data"]})
+        if salida["sql"]:
+            salida["fuentes"].append({"tipo": "datos", "etiqueta": "Vista semántica SV_REGULATORIO",
+                                      "detalle": f"{len(salida['sql'])} consulta(s) SQL"})
+        salida["texto"] = salida["texto"].strip()
+        return salida
 
     def _q(self, sql, params=None):
         return [r.as_dict() for r in self.s.sql(sql, params=params or []).collect()]
@@ -177,3 +254,12 @@ class DatosSnowflake(CicloPrevencion):
         FROM (SELECT *, respuesta AS r FROM {BD}.LIMPIO.DOCUMENTOS_EXTRAIDOS_JSON) j
         JOIN {BD}.CRUDO.EXPEDIENTES_PARSEADOS p ON p.archivo = j.archivo
         WHERE j.archivo = ?"""
+
+
+def _sin_repetir(resultados, n):
+    """Varios fragmentos pueden venir de la misma cláusula: se deja el mejor de cada una."""
+    vistos, salida = set(), []
+    for x in resultados:
+        if x["clausula_id"] not in vistos:
+            vistos.add(x["clausula_id"]); salida.append({k: x[k] for k in x if not k.startswith("@")})
+    return salida[:n]

@@ -6,6 +6,9 @@ import time
 import uuid
 
 from ciclo_prevencion import CicloPrevencion
+from consultas import Consultas
+from preauditoria import PreAuditoria
+from versiones import Versiones
 from extraccion import INSTRUCCION, MAX_CARACTERES, esquema
 
 CAT = "obed_farmaceutica"
@@ -21,9 +24,10 @@ DDL = ("STRUCT<tipo_documento: STRING, producto: STRING, emisor: STRING, fabrica
 
 
 NOMBRE_JOB_ALERTAS = "obed_farma_alertas_correo"
+TITULO_GENIE = "obed_farma · datos regulatorios"
 
 
-class DatosDatabricks(CicloPrevencion):
+class DatosDatabricks(CicloPrevencion, Consultas, Versiones, PreAuditoria):
     L, N, A = f"{CAT}.limpio", f"{CAT}.negocio", f"{CAT}.app"
     MODELO = MODELO
 
@@ -66,6 +70,112 @@ class DatosDatabricks(CicloPrevencion):
         canal = f"Databricks SQL Alert (job {job.job_id}, {estado})"
         self._q(f"UPDATE {self.A}.alertas SET enviada_en = current_timestamp(), canal = :c WHERE enviada_en IS NULL", {"c": canal})
         return pendientes
+
+    def buscar_normas(self, texto, solo_vigentes=True, norma=None, n=8):
+        """Vector Search (qwen3-embedding, búsqueda híbrida). El endpoint cobra mientras existe."""
+        filtro = {**({"estatus": "Vigente"} if solo_vigentes else {}), **({"norma": norma} if norma else {})}
+        cols = ["clausula_id", "norma", "tipo", "estatus", "numeral", "titulo", "texto_busqueda"]
+        r = self.w.vector_search_indexes.query_index(index_name=f"{CAT}.ia.buscador_normas", columns=cols, query_text=texto,
+                                                     num_results=n * 2, query_type="HYBRID",
+                                                     filters_json=json.dumps(filtro, ensure_ascii=False) if filtro else None)
+        return _sin_repetir([dict(zip(cols, f)) for f in (r.result.data_array or [])], n)
+
+    def auditoria_plataforma(self):
+        """Auditoría nativa de Databricks (Unity Catalog y tablas de sistema), filtrada al catálogo de esta demo:
+        permisos, consultas recientes (system.query.history) y linaje (system.access.table_lineage)."""
+        permisos = []
+        for objeto in [f"CATALOG {CAT}"] + [f"SCHEMA {CAT}.{e}" for e in ("crudo", "limpio", "negocio", "ia", "app")]:
+            for r in self._q(f"SHOW GRANTS ON {objeto}"):
+                permisos.append({"privilegio": r.get("ActionType"), "objeto": r.get("ObjectKey") or objeto.split()[1],
+                                 "tipo": r.get("ObjectType"), "otorgado_a": r.get("Principal")})
+        actividad = self._q(f"""SELECT start_time AS fecha_hora, executed_by AS usuario, statement_type AS tipo,
+                                       left(statement_text, 200) AS sentencia,
+                                       round(total_duration_ms / 1000, 2) AS segundos
+                                FROM system.query.history
+                                WHERE start_time > current_timestamp() - INTERVAL 2 DAYS
+                                  AND lower(statement_text) LIKE '%{CAT}%'
+                                ORDER BY start_time DESC LIMIT 40""")
+        accesos = self._q(f"""SELECT source_table_full_name AS objeto, COUNT(*) AS lecturas, MAX(event_time) AS ultima
+                              FROM system.access.table_lineage
+                              WHERE event_date >= current_date() - 3 AND source_table_catalog = '{CAT}'
+                              GROUP BY 1 ORDER BY 2 DESC LIMIT 15""")
+        return {"permisos": permisos, "actividad": actividad, "accesos": accesos,
+                "fuente": "SHOW GRANTS (Unity Catalog) · system.query.history · system.access.table_lineage"}
+
+    # --------------------------------------------------------------------------------- asistente (Vista 8)
+    def _genie_id(self):
+        if os.environ.get("GENIE_SPACE_ID"):
+            return os.environ["GENIE_SPACE_ID"]
+        if not getattr(self, "_genie", None):
+            self._genie = next(s.space_id for s in (self.w.genie.list_spaces().spaces or []) if s.title == TITULO_GENIE)
+        return self._genie
+
+    def _consultar_genie(self, pregunta, salida):
+        m = self.w.genie.start_conversation_and_wait(self._genie_id(), pregunta)
+        resultado = {"respuesta": "", "sql": None, "columnas": [], "filas": []}
+        for a in m.attachments or []:
+            if a.text and a.text.content:
+                resultado["respuesta"] += a.text.content
+            if a.query and a.query.query:
+                resultado["sql"] = a.query.query
+                salida["sql"].append(a.query.query.strip())
+                r = self.w.genie.get_message_attachment_query_result(self._genie_id(), m.conversation_id, m.id, a.attachment_id)
+                sr = r.statement_response
+                if sr and sr.manifest and sr.manifest.schema:
+                    resultado["columnas"] = [c.name for c in sr.manifest.schema.columns]
+                    resultado["filas"] = (sr.result.data_array or [])[:50] if sr.result else []
+                    salida["tablas"].append({"columnas": resultado["columnas"], "filas": resultado["filas"]})
+        return resultado
+
+    def preguntar(self, pregunta, historial):
+        """Agente en código con piezas nativas: gpt-oss-120b (Foundation Model API, llamadas a herramientas) decide
+        entre Genie (datos) y Vector Search (normas). Databricks no ofrece un objeto de agente equivalente fuera de
+        Agent Bricks (marcado como legado)."""
+        import modelo_semantico as M
+        herramientas = [
+            {"type": "function", "function": {"name": "consultar_datos", "description":
+                "Pregunta en lenguaje natural sobre trámites, plazos, prevenciones, registros sanitarios, expedientes CTD e indicadores. Devuelve SQL y filas.",
+                "parameters": {"type": "object", "properties": {"pregunta": {"type": "string"}}, "required": ["pregunta"]}}},
+            {"type": "function", "function": {"name": "buscar_normas", "description":
+                "Busca en el texto de las NOM, leyes, reglamentos y guías ICH partidos por cláusula. Devuelve norma, numeral y texto.",
+                "parameters": {"type": "object", "properties": {"consulta": {"type": "string"}}, "required": ["consulta"]}}}]
+        mensajes = [{"role": "system", "content": M.INSTRUCCIONES_AGENTE + " " + M.INSTRUCCIONES_DATOS}]
+        mensajes += [{"role": "user" if m["rol"] == "user" else "assistant", "content": m["texto"]} for m in historial[-6:]]
+        mensajes.append({"role": "user", "content": pregunta})
+        salida = {"texto": "", "fuentes": [], "sql": [], "tablas": [], "pasos": [], "segundos": 0.0, "tokens": 0}
+        t, vistas = time.time(), set()
+        for _ in range(5):
+            r = self.w.api_client.do("POST", f"/serving-endpoints/{MODELO}/invocations",
+                                     body={"messages": mensajes, "tools": herramientas, "max_tokens": 2500})
+            salida["tokens"] += (r.get("usage") or {}).get("total_tokens", 0)
+            msg = r["choices"][0]["message"]
+            llamadas = msg.get("tool_calls") or []
+            if not llamadas:
+                c = msg.get("content")
+                salida["texto"] = c if isinstance(c, str) else "".join(x.get("text", "") for x in (c or []) if x.get("type") == "text")
+                break
+            mensajes.append({"role": "assistant", "content": msg.get("content") if isinstance(msg.get("content"), str) else "",
+                             "tool_calls": llamadas})
+            for ll in llamadas:
+                args = json.loads(ll["function"].get("arguments") or "{}")
+                if ll["function"]["name"] == "consultar_datos":
+                    salida["pasos"].append(f"Consultó los datos (Genie): «{args.get('pregunta', '')}»")
+                    res = self._consultar_genie(args.get("pregunta", pregunta), salida)
+                    if "Espacio Genie" not in vistas:
+                        vistas.add("Espacio Genie")
+                        salida["fuentes"].append({"tipo": "datos", "etiqueta": "Espacio Genie (tablas de negocio)", "detalle": res["sql"] or ""})
+                else:
+                    salida["pasos"].append(f"Buscó en las normas: «{args.get('consulta', '')}»")
+                    res = self.buscar_normas(args.get("consulta", pregunta), solo_vigentes=False, n=6)
+                    for x in res:
+                        if x["clausula_id"] not in vistas:
+                            vistas.add(x["clausula_id"])
+                            salida["fuentes"].append({"tipo": "norma", "etiqueta": x["clausula_id"], "detalle": x["titulo"] or ""})
+                mensajes.append({"role": "tool", "tool_call_id": ll["id"],
+                                 "content": json.dumps(res, ensure_ascii=False, default=str)[:12000]})
+        salida["segundos"] = round(time.time() - t, 1)
+        salida["texto"] = (salida["texto"] or "").strip()
+        return salida
 
     def _q(self, sql, params=None):
         from databricks.sdk.service.sql import StatementParameterListItem as P, StatementState
@@ -177,3 +287,12 @@ class DatosDatabricks(CicloPrevencion):
         FROM (SELECT *, from_json(respuesta, '{DDL}') AS r FROM {CAT}.limpio.documentos_extraidos_json) j
         JOIN {CAT}.crudo.expedientes_parseados p ON p.archivo = j.archivo
         WHERE j.archivo = :a"""
+
+
+def _sin_repetir(resultados, n):
+    """Varios fragmentos pueden venir de la misma cláusula: se deja el mejor de cada una."""
+    vistos, salida = set(), []
+    for x in resultados:
+        if x["clausula_id"] not in vistos:
+            vistos.add(x["clausula_id"]); salida.append({k: x[k] for k in x if not k.startswith("@")})
+    return salida[:n]
