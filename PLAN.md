@@ -1,6 +1,6 @@
 # Obed Farmacéutica — Plan del proyecto
 
-> Estado: **Fase 2 casi terminada** (2026-10-06). Buscador de normas funcionando en ambas plataformas (ver `docs/resultados/FASE2_RESULTADOS.md`). Pendiente: costo real y experimento de vectores en Databricks. Siguiente: Fase 3 (capas de datos).
+> Estado: **Fase 2 terminada** (2026-10-07). Buscador de normas en ambas plataformas (ver `docs/resultados/FASE2_RESULTADOS.md`). Siguiente: Fase 3 (capas de datos).
 
 ## 1. Objetivo
 

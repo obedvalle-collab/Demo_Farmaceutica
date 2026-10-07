@@ -43,7 +43,31 @@ Fallos:
 - **Tropiezos:** Snowflake no acepta parámetros opcionales en funciones Python (se agregó un envoltorio); en Databricks
   una lectura de PDF superó los 5 minutos de espera del cliente.
 
-## Pendiente
+## Costo real (leído de las vistas de consumo el 2026-10-07)
 
-- Costo real en créditos/DBU (las vistas de consumo tardan horas en actualizarse).
-- Experimento: precalcular vectores por lotes con `ai_query` en Databricks y medir si reduce los 56 minutos.
+| Concepto | Snowflake | Databricks (precio de lista) |
+|---|---|---|
+| Leer 1,052 páginas con IA | 3.85 créditos (~$11.5) | 37 DBU ($2.59) |
+| Buscador | 0.12 créditos (~$0.36) | ~$1.20 |
+| Warehouse SQL | 0.59 créditos (~$1.75) | 2.5 DBU ($1.75) |
+| **Total** | **~4.6 créditos ≈ $13.7** | **≈ $5.5** |
+
+Snowflake a ~$3 USD/crédito (tarifa pública estándar; la tarifa real de la cuenta puede variar). En Databricks se
+excluyeron consumos del workspace que no son del proyecto (jobs, Genie, optimización predictiva ≈ $0.4).
+Nota: el monitor de gasto de Snowflake (`FARMA_MONITOR`) solo vigila el warehouse; el consumo de IA no cuenta para el tope.
+
+## Experimento: vectores precalculados con `ai_query` (Databricks, 2026-10-07)
+
+| | Sincronización administrada (06/10) | Vectores precalculados (07/10) |
+|---|---|---|
+| Calcular 10,484 vectores | dentro de la sincronización | **18.6 s** (`ai_query` por lotes) |
+| Encender endpoint | 25 min | 23 s (esta vez estuvo listo de inmediato) |
+| Índice listo | 56 min | 17.6 min, de los cuales ~14 min fueron espera de aprovisionamiento y ~2.5 min de carga real |
+| Examen, solo vigentes | 11/12 | **9/12** |
+| Latencia mediana | ~0.4 s | ~0.7 s (incluye vectorizar la pregunta aparte) |
+
+Conclusión: precalcular los vectores elimina el cuello de botella de cómputo (de 56 min a segundos), pero el índice
+sigue teniendo una espera fija de aprovisionamiento de ~14–25 min por cada endpoint/índice nuevo, y la calidad bajó
+(fallaron NOM-073 8.5.1, NOM-177 7.5.5 y LGS art. 376). Causa probable: el vector de la pregunta se calcula fuera del
+índice y la combinación híbrida pondera distinto; no se investigó más. **Recomendación para la demo:** en Databricks,
+crear el endpoint al inicio de la sesión (o mantenerlo durante las demostraciones) y usar la sincronización administrada.
