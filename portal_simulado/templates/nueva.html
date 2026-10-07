@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="pasos"><div class="activo">1. Datos de la solicitud</div><div>2. Documentos CTD</div><div>3. Firma y envío</div><div>4. Acuse</div></div>
+<div class="tarjeta">
+  <h1>Nueva solicitud</h1>
+  <form method="post" action="/solicitud/nueva">
+    <label for="homoclave">Trámite (homoclave)</label>
+    <select id="homoclave" name="homoclave" required>
+      <option value="">Seleccione…</option>
+      {% for h, n in homoclaves %}<option value="{{ h }}">{{ h }} · {{ n }}</option>{% endfor %}
+    </select>
+    <label for="denominacion">Denominación genérica, forma farmacéutica y concentración</label>
+    <input type="text" id="denominacion" name="denominacion" required>
+    <label for="tipo_producto">Tipo de medicamento</label>
+    <select id="tipo_producto" name="tipo_producto" required>
+      <option value="">Seleccione…</option><option>Genérico</option><option>Biocomparable</option><option>Molécula nueva</option>
+    </select>
+    <label for="referencia">Referencia interna (opcional)</label>
+    <input type="text" id="referencia" name="referencia">
+    <p style="margin-top:18px"><button type="submit" id="btn-continuar">Continuar</button></p>
+  </form>
+</div>
+{% endblock %}

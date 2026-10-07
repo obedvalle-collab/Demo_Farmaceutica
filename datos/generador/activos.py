@@ -176,3 +176,22 @@ ACTIVOS = [
                          observaciones=["R061:7.5.5", "R035:9.9.2.2.3"]),
          documentos=[]),
 ]
+
+
+# ------------------------------------------------------------------------------------------------
+# Versiones corregidas (v2) del expediente de sitagliptina (A1), para la demo del candado de envío:
+# requisito -> (plantilla, ajustes del documento corregido)
+# ------------------------------------------------------------------------------------------------
+from datetime import date as _date  # noqa: E402
+
+CORRECCIONES_A1 = {
+    "R004": ("carta_poder", dict(firma_otorgante=True)),
+    "R006": ("etiqueta_secundaria", dict(omitir=[])),
+    "R009": ("documento_impi", dict()),
+    "R010": ("pmr", dict(omitir_minimizacion=False)),
+    "R012": ("certificado_bpf_farmaco", dict(fecha_emision=_date(2026, 8, 20))),
+    "R032": ("coa_farmaco", dict(fabricante_distinto=False)),
+    "R037": ("coa_lote", dict(disolucion_fuera=False)),
+    "R040": ("estabilidad", dict(lotes=3, firma_rs=True)),
+    "R060": ("bioequivalencia", dict(ic_cmax=(92.36, 113.08))),
+}

@@ -31,6 +31,12 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-07 | 3 | Capa de negocio (SQL compartido sin cambios) | Ambas | | 7.6 s / 12.9 s | mínimo | Las 8 vistas idénticas renglón por renglón. Consultas: SF 0.3–3.5 s, DB 1.1–5.1 s |
 | 2026-10-07 | 4 | Bandeja: leer + clasificar + extraer 54 PDF | Snowflake | | 15.5 min (24 s lectura + 11 s extracción por doc) | pendiente | Claude Sonnet 4.5. Clasificación 52/54, defectos 19/20, 0 falsas alarmas. Validador JSON rechazó 2 respuestas por acentos |
 | 2026-10-07 | 4 | Bandeja: leer + clasificar + extraer 54 PDF | Databricks | | 8.7 min (10 s lectura + 18 s extracción por doc) | pendiente | gpt-oss-120b. Clasificación 42/54, defectos 16/20, 0 falsas alarmas. Detecta firmas en escaneados. 1.ª corrida con encabezados filtrados: 9/20 |
+| 2026-10-07 | 5 | Portal COFEPRIS simulado (FastAPI, local) | Local | | – | 0 | Login, solicitud, carga por módulo, firma simulada, acuse, notificaciones y panel del dictaminador |
+| 2026-10-07 | 5 | Estado operativo (cargas, cola de envíos, candado) con SQL compartido | Ambas | | – | mínimo | Mismo `app.sql`; candado inicial: SF 8 docs con hallazgos + 1 faltante; DB 7 + 1 (no detectó la disolución fuera de especificación) |
+| 2026-10-07 | 5 | Procesar 9 correcciones por la bandeja | Snowflake | | 10.2 min (lectura de 11 a 123 s por doc) | pendiente | El candado se abre: 27/27, 0 hallazgos |
+| 2026-10-07 | 5 | Publicar la app (mismo código Streamlit) | Snowflake | | 6 s | por uso (warehouse) | Streamlit in Snowflake, runtime de warehouse (el de contenedor pide compute pool) |
+| 2026-10-07 | 5 | Publicar la app (mismo código Streamlit) | Databricks | | 3.2 min | por hora encendida | Databricks Apps; requiere permisos explícitos para la identidad de servicio de la app; consultas más lentas (~40 s primera carga) |
+| 2026-10-07 | 5 | Envío de punta a punta con robot en modo guion | Snowflake | | 40 s (folio DGP-2026-48810) | 0 (sin IA) | Botón → paquete 27 docs/5 módulos → portal → captura en la app → confirmación → folio. El robot mantiene encendido el warehouse mientras escucha la cola |
 
 ## Notas por fase
 

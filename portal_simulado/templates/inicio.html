@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="tarjeta">
+  <h1>Mis solicitudes</h1>
+  <p class="nota">Laboratorios Altamira, S.A. de C.V. (ficticio)</p>
+  {% if pendientes %}<div class="aviso">Tiene {{ pendientes }} notificación(es) sin abrir. <a href="/notificaciones">Ver notificaciones</a></div>{% endif %}
+  <p><a class="boton" href="/solicitud/nueva" id="btn-nueva">+ Nueva solicitud</a></p>
+  <table>
+    <tr><th>Referencia</th><th>Homoclave</th><th>Producto</th><th>Estatus</th><th>Folio</th><th></th></tr>
+    {% for s in solicitudes %}
+    <tr>
+      <td>{{ s.referencia }}</td><td>{{ s.homoclave }}</td><td>{{ s.denominacion }}</td><td>{{ s.estatus }}</td>
+      <td>{{ s.folio or '—' }}</td>
+      <td>{% if s.folio %}<a href="/solicitud/{{ s.id }}/acuse">Acuse</a>{% else %}<a href="/solicitud/{{ s.id }}/documentos">Continuar</a>{% endif %}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6" class="nota">Aún no hay solicitudes.</td></tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

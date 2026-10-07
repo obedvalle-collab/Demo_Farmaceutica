@@ -21,7 +21,7 @@ Generado con semilla fija; fecha de referencia de la demo: 2026-10-06.
 | calendario_habil | 1,826 |
 | bitacora | 3,849 |
 
-## PDF (`pdf/`): 54 archivos
+## PDF (`pdf/`): 63 archivos
 
 | Trámite | Producto | PDF | Escaneados | Defectos |
 |---|---|---|---|---|
@@ -29,7 +29,7 @@ Generado con semilla fija; fecha de referencia de la demo: 2026-10-06.
 | TR-2026-022 | Losartán potásico 50 mg | 7 | 1 | 1 |
 | TR-2026-025 | Adalimumab 40 mg/0.4 mL | 11 | 2 | 4 |
 | TR-2026-029 | Clopidogrel 75 mg | 2 | 0 | 0 |
-| TR-2026-032 | Sitagliptina 100 mg | 26 | 4 | 10 |
+| TR-2026-032 | Sitagliptina 100 mg | 35 | 5 | 10 |
 
 ## Hoja de respuestas (`defectos_sembrados.csv`): 20 defectos
 
@@ -49,4 +49,4 @@ Generado con semilla fija; fecha de referencia de la demo: 2026-10-06.
 | Resultado fuera de especificación | 1 |
 | Requisito técnico incumplido | 1 |
 
-Tiempo de generación: tablas 0.1 s, PDF 0.8 s.
+Tiempo de generación: tablas 0.1 s, PDF 0.9 s.

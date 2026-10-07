@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Portal de Trámites Sanitarios (simulado){% endblock %}</title>
+  <link rel="stylesheet" href="/static/estilo.css">
+</head>
+<body>
+  <div class="simulado">PORTAL SIMULADO PARA DEMOSTRACIÓN · NO ES UN SITIO OFICIAL NI ESTÁ CONECTADO A COFEPRIS</div>
+  <header>
+    <div class="marca">Portal de Trámites Sanitarios<small>Entorno de demostración</small></div>
+    <nav>
+      {% if rol == 'empresa' %}
+        <a href="/inicio">Mis solicitudes</a>
+        <a href="/solicitud/nueva">Nueva solicitud</a>
+        <a href="/notificaciones">Notificaciones{% if pendientes %}<span class="insignia">{{ pendientes }}</span>{% endif %}</a>
+        <a href="/salir">Salir</a>
+      {% elif rol == 'dictaminador' %}
+        <a href="/dictaminador">Panel del dictaminador</a>
+        <a href="/salir">Salir</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>{% block contenido %}{% endblock %}</main>
+  <footer>Entorno simulado de la demo "Obed Farmacéutica". Laboratorios Altamira y todos los datos son ficticios.</footer>
+</body>
+</html>

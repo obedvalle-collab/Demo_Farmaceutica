@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="pasos"><div class="hecho">1. Datos de la solicitud</div><div class="hecho">2. Documentos CTD</div><div class="activo">3. Firma y envío</div><div>4. Acuse</div></div>
+<div class="tarjeta">
+  <h1>Revisión, firma y envío</h1>
+  <h2>Datos de la solicitud</h2>
+  <table>
+    <tr><th>Trámite</th><td>{{ s.homoclave }}</td></tr>
+    <tr><th>Producto</th><td>{{ s.denominacion }} ({{ s.tipo_producto }})</td></tr>
+    <tr><th>Referencia</th><td>{{ s.referencia or '—' }}</td></tr>
+  </table>
+  <h2>Documentos</h2>
+  <table>
+    <tr><th>Módulo</th><th>Archivo</th><th>Tamaño</th><th>Huella SHA-256</th></tr>
+    {% for a in archivos %}<tr><td>{{ a.modulo | upper }}</td><td>{{ a.nombre }}</td><td>{{ (a.bytes / 1024) | round(1) }} KB</td><td class="cadena">{{ a.sha256[:16] }}…</td></tr>{% endfor %}
+  </table>
+  {% if faltan %}<div class="error" style="margin-top:12px">Faltan documentos: {{ faltan | join(', ') }}. <a href="/solicitud/{{ s.id }}/documentos">Regresar</a></div>
+  {% else %}
+  <h2>Firma electrónica (simulada)</h2>
+  <p class="nota">En el portal real se firma con la e.firma (certificado .cer y llave .key) del representante. Aquí se simula con una contraseña de demostración.</p>
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  <form method="post" action="/solicitud/{{ s.id }}/firmar">
+    <label for="contrasena_efirma">Contraseña de la llave privada (e.firma simulada)</label>
+    <input type="password" id="contrasena_efirma" name="contrasena_efirma" required>
+    <div class="declaracion"><input type="checkbox" id="acepto" name="acepto" value="si" required>
+      <label for="acepto" style="margin:0;font-weight:400">Declaro bajo protesta de decir verdad que la información y los documentos son verídicos.</label></div>
+    <button type="submit" class="enviar" id="btn-firmar-enviar">Firmar y enviar solicitud</button>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

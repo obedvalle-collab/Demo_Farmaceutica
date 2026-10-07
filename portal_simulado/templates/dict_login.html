@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="tarjeta" style="max-width:420px;margin:40px auto;">
+  <h1>Panel del dictaminador</h1>
+  <p class="nota">Solo para quien presenta la demo.</p>
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  <form method="post" action="/dictaminador/entrar">
+    <label for="contrasena">Contraseña</label>
+    <input type="password" id="contrasena" name="contrasena" required>
+    <p style="margin-top:18px"><button type="submit">Entrar</button></p>
+  </form>
+</div>
+{% endblock %}

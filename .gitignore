@@ -3,3 +3,5 @@
 *.cer
 __pycache__/
 .venv/
+app/_paquete/
+portal_simulado/datos/

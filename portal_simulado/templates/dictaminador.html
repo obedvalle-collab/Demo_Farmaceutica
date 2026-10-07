@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="tarjeta">
+  <h1>Solicitudes recibidas</h1>
+  <table>
+    <tr><th>Folio</th><th>Trámite</th><th>Producto</th><th>Enviada</th><th>Estatus</th></tr>
+    {% for s in solicitudes %}<tr><td>{{ s.folio }}</td><td>{{ s.homoclave }}</td><td>{{ s.denominacion }}</td><td>{{ s.enviada }}</td><td>{{ s.estatus }}</td></tr>
+    {% else %}<tr><td colspan="5" class="nota">Sin solicitudes.</td></tr>{% endfor %}
+  </table>
+</div>
+{% for s in solicitudes %}
+<div class="tarjeta">
+  <h2>Emitir prevención · {{ s.folio }}</h2>
+  <form method="post" action="/dictaminador/prevenir/{{ s.id }}" enctype="multipart/form-data">
+    <label>Número de oficio</label><input type="text" name="numero_oficio" required>
+    <label>Plazo para desahogar (días hábiles)</label><input type="text" name="plazo" value="10">
+    <label>Oficio en PDF</label><input type="file" name="oficio" accept=".pdf">
+    <label>Resumen (opcional)</label><textarea name="texto" rows="2"></textarea>
+    <p><button type="submit">Emitir y enviar aviso por correo</button></p>
+  </form>
+</div>
+{% endfor %}
+<div class="tarjeta">
+  <h1>Notificaciones emitidas</h1>
+  <table>
+    <tr><th>Folio</th><th>Oficio</th><th>Emitida</th><th>Abierta por la empresa</th></tr>
+    {% for n in notificaciones %}<tr><td>{{ n.folio }}</td><td>{{ n.numero_oficio }}</td><td>{{ n.emitida }}</td><td>{{ n.abierta or 'No' }}</td></tr>
+    {% else %}<tr><td colspan="4" class="nota">Ninguna.</td></tr>{% endfor %}
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="pasos"><div class="hecho">1. Datos de la solicitud</div><div class="hecho">2. Documentos CTD</div><div class="hecho">3. Firma y envío</div><div class="activo">4. Acuse</div></div>
+<div class="tarjeta">
+  <h1>Acuse de recibo</h1>
+  <p class="nota">Su solicitud fue recibida en el entorno simulado.</p>
+  <p>Folio de la solicitud:</p>
+  <p class="folio" id="folio">{{ s.folio }}</p>
+  <table>
+    <tr><th>Trámite</th><td>{{ s.homoclave }}</td></tr>
+    <tr><th>Producto</th><td>{{ s.denominacion }}</td></tr>
+    <tr><th>Fecha y hora de envío</th><td id="fecha-envio">{{ s.enviada }}</td></tr>
+    <tr><th>Documentos</th><td>{{ archivos | length }} archivo(s)</td></tr>
+    <tr><th>Cadena de verificación</th><td class="cadena" id="cadena">{{ s.cadena }}</td></tr>
+  </table>
+  <p style="margin-top:18px"><a class="boton secundario" href="/inicio">Volver a mis solicitudes</a></p>
+</div>
+{% endblock %}

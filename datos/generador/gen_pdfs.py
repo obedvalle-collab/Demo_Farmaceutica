@@ -6,6 +6,8 @@ from types import SimpleNamespace
 
 import catalogos as C
 import plantillas as PL
+from activos import CORRECCIONES_A1
+from gen_tablas import nombre_archivo
 from config import SALIDA, SALIDA_PDF
 from pdf_base import escanear
 from perfiles import perfil
@@ -103,6 +105,25 @@ def generar(tablas, tramites, usuarios):
                                    producto=fila["producto"], documento_id="", requisito_id="", seccion_ctd="",
                                    tipo_documento="Escrito de respuesta a prevención", escaneado=False,
                                    defectos_sembrados=0, origen="Expediente de la empresa"))
+        # versiones corregidas (v2) del expediente de sitagliptina
+        if activo["clave"] == "A1":
+            for req_id, (plantilla, ajustes) in CORRECCIONES_A1.items():
+                semilla += 1
+                req = REQ[req_id]
+                d = docs_por_tramite[t["tramite_id"]][req_id]
+                spec = next(x for x in activo["documentos"] if x["requisito_id"] == req_id)
+                ruta = carpeta(fila) / "correcciones" / nombre_archivo(t["tramite_id"], req_id, 2)
+                fecha = date(2026, 9, 28)
+                x = contexto(fila, t, usuarios, semilla, req=req, extra={**spec["extra"], **ajustes}, ruta=ruta,
+                             fecha=fecha, autor=usuarios_id.get(d["cargado_por"]) or usuarios[0],
+                             revisor=next(u for u in usuarios if u["rol"] == gerente[req["area_responsable"]]))
+                PL.PLANTILLAS[plantilla](x)
+                if spec["escaneado"]:
+                    escanear(ruta, semilla=semilla)
+                indice.append(dict(archivo=str(ruta.relative_to(SALIDA)).replace("\\", "/"), tramite_id=t["tramite_id"],
+                                   producto=fila["producto"], documento_id=d["documento_id"], requisito_id=req_id,
+                                   seccion_ctd=req["seccion_ctd"], tipo_documento=req["nombre"], escaneado=spec["escaneado"],
+                                   defectos_sembrados=0, origen="Corrección (v2)"))
     for i, df in enumerate(defectos, 1):
         df["defecto_id"] = f"DEF-{i:02d}"
     _escribir(SALIDA / "defectos_sembrados.csv", [{"defecto_id": d.pop("defecto_id"), **d} for d in defectos])

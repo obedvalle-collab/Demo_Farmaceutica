@@ -1,0 +1,53 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portal-simulado",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "uvicorn",
+        "portal_simulado.app:app",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8765"
+      ],
+      "port": 8765
+    },
+    {
+      "name": "app-snowflake-local",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "streamlit",
+        "run",
+        "app/snowflake/streamlit_app.py",
+        "--server.port",
+        "8501",
+        "--server.headless",
+        "true",
+        "--server.address",
+        "127.0.0.1"
+      ],
+      "port": 8501
+    },
+    {
+      "name": "app-databricks-local",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "streamlit",
+        "run",
+        "app/databricks/app.py",
+        "--server.port",
+        "8502",
+        "--server.headless",
+        "true",
+        "--server.address",
+        "127.0.0.1"
+      ],
+      "port": 8502
+    }
+  ]
+}

@@ -261,16 +261,18 @@ def documento_altamira(ruta, titulo, codigo, flowables, revision="01", subtitulo
                margen_sup=30 * mm)
 
 
-def documento_autoridad(ruta, flowables, dependencia="Comisión de Autorización Sanitaria", encabezado_extra=None):
+def documento_autoridad(ruta, flowables, dependencia="Comisión de Autorización Sanitaria", encabezado_extra=None,
+                        institucion=("SECRETARÍA DE SALUD", "Comisión Federal para la Protección contra Riesgos Sanitarios"),
+                        emisor_pie="COFEPRIS"):
     """PDF con encabezado de autoridad SIMULADA (sin escudos ni logotipos oficiales) y marca de agua."""
 
     def decorar(c):
         w, h = letter
         c.saveState()
         c.setFillColor(VINO); c.rect(20 * mm, h - 27 * mm, 2.2 * mm, 15 * mm, stroke=0, fill=1)
-        c.setFont("Helvetica-Bold", 10.5); c.drawString(25 * mm, h - 15.5 * mm, "SECRETARÍA DE SALUD")
+        c.setFont("Helvetica-Bold", 10.5); c.drawString(25 * mm, h - 15.5 * mm, institucion[0])
         c.setFont("Helvetica", 8.4); c.setFillColor(colors.HexColor("#3B3B3B"))
-        c.drawString(25 * mm, h - 20 * mm, "Comisión Federal para la Protección contra Riesgos Sanitarios")
+        c.drawString(25 * mm, h - 20 * mm, institucion[1])
         c.drawString(25 * mm, h - 24 * mm, dependencia)
         if encabezado_extra:
             c.setFont("Helvetica", 7.6)
@@ -283,7 +285,7 @@ def documento_autoridad(ruta, flowables, dependencia="Comisión de Autorización
         c.setFont("Helvetica-Bold", 30); c.drawCentredString(0, 0, AVISO_SIMULADO_AUTORIDAD)
         c.restoreState()
         c.setFont("Helvetica-Oblique", 6.4); c.setFillColor(GRIS)
-        c.drawString(20 * mm, 8 * mm, "Documento simulado para una demostración de software. No tiene validez oficial ni proviene de COFEPRIS.")
+        c.drawString(20 * mm, 8 * mm, f"Documento simulado para una demostración de software. No tiene validez oficial ni proviene de {emisor_pie}.")
         c.drawRightString(w - 20 * mm, 8 * mm, f"Hoja {c.getPageNumber()} de {c._total_paginas}")
 
     _construir(ruta, flowables, decorar, [], margen_sup=34 * mm)

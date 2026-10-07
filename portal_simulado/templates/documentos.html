@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="pasos"><div class="hecho">1. Datos de la solicitud</div><div class="activo">2. Documentos CTD</div><div>3. Firma y envío</div><div>4. Acuse</div></div>
+<div class="tarjeta">
+  <h1>Documentos del expediente (formato CTD)</h1>
+  <p class="nota">{{ s.homoclave }} · {{ s.denominacion }} · Referencia {{ s.referencia or '—' }}. Un archivo por módulo (PDF o ZIP, máximo 100 MB).</p>
+  {% if aviso %}<div class="error">{{ aviso }}</div>{% endif %}
+  {% for m, nombre in modulos %}
+  <div class="modulo">
+    <div>
+      <strong>{{ nombre }}</strong><br>
+      {% if cargados.get(m) %}<span class="ok">✓ {{ cargados[m].nombre }} ({{ (cargados[m].bytes / 1024) | round(1) }} KB)</span>
+      {% else %}<span class="pendiente">Sin archivo</span>{% endif %}
+    </div>
+    <form method="post" action="/solicitud/{{ s.id }}/documentos/{{ m }}" enctype="multipart/form-data">
+      <input type="file" name="archivo" id="archivo-{{ m }}" accept=".pdf,.zip" required>
+      <button type="submit" class="secundario" id="btn-cargar-{{ m }}">Cargar</button>
+    </form>
+  </div>
+  {% endfor %}
+  <p style="margin-top:18px"><a class="boton" href="/solicitud/{{ s.id }}/firma" id="btn-revisar">Continuar a firma y envío</a></p>
+</div>
+{% endblock %}

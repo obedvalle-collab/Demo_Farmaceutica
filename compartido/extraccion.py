@@ -12,6 +12,9 @@ MAX_CARACTERES = 24000     # los documentos de la demo caben completos; se recor
 
 
 def tipos_documento():
+    empaquetado = AQUI / "tipos_documento.json"   # dentro de las apps publicadas no está el CSV del generador
+    if empaquetado.exists():
+        return json.loads(empaquetado.read_text(encoding="utf-8"))
     nombres = []
     with open(AQUI.parent / "datos" / "salida" / "tablas" / "requisitos_ctd.csv", encoding="utf-8") as fh:
         for r in csv.DictReader(fh):

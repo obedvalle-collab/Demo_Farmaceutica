@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="tarjeta">
+  <h1>Notificaciones</h1>
+  <p class="nota">Al abrir un acto se genera el acuse de notificación. En el trámite real, la notificación surte efectos el día hábil siguiente a la apertura y desde ahí corre el plazo.</p>
+  <table>
+    <tr><th>Folio</th><th>Tipo</th><th>Oficio</th><th>Disponible desde</th><th>Estado</th><th></th></tr>
+    {% for n in notificaciones %}
+    <tr>
+      <td>{{ n.folio }}</td><td>{{ n.tipo }}</td><td>{{ n.numero_oficio }}</td><td>{{ n.emitida }}</td>
+      <td>{% if n.abierta %}Abierta {{ n.abierta }}<br><span class="cadena">Acuse {{ n.acuse_apertura }}</span>{% else %}<span class="pendiente">Sin abrir</span>{% endif %}</td>
+      <td>{% if n.abierta %}{% if n.ruta_oficio %}<a href="/notificaciones/{{ n.id }}/oficio">Descargar oficio</a>{% endif %}
+          {% else %}<form method="post" action="/notificaciones/{{ n.id }}/abrir"><button class="secundario">Abrir</button></form>{% endif %}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6" class="nota">No hay notificaciones.</td></tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

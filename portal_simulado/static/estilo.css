@@ -1,0 +1,36 @@
+:root { --vino: #5e2a35; --vino-claro: #f4e9eb; --gris: #5f6b76; --linea: #d9dee3; --ok: #2e7d4f; --alerta: #b5541c; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; color: #222; background: #f6f7f9; }
+.simulado { background: #c0392b; color: #fff; text-align: center; font-size: 12px; font-weight: 600; padding: 4px; letter-spacing: .5px; }
+header { background: var(--vino); color: #fff; padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; }
+header .marca { font-size: 18px; font-weight: 600; }
+header .marca small { display: block; font-size: 12px; font-weight: 400; opacity: .85; }
+header nav a { color: #fff; margin-left: 18px; text-decoration: none; font-size: 14px; }
+header nav a .insignia { background: #fff; color: var(--vino); border-radius: 10px; padding: 1px 7px; font-size: 12px; margin-left: 4px; }
+main { max-width: 980px; margin: 28px auto; padding: 0 16px; }
+.tarjeta { background: #fff; border: 1px solid var(--linea); border-radius: 8px; padding: 22px 26px; margin-bottom: 18px; }
+h1 { font-size: 22px; color: var(--vino); margin: 0 0 6px; }
+h2 { font-size: 16px; color: var(--vino); margin: 18px 0 8px; }
+p.nota { color: var(--gris); font-size: 13px; margin-top: 0; }
+label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 4px; }
+input[type=text], input[type=password], select, textarea { width: 100%; padding: 9px 10px; border: 1px solid #b8c1ca; border-radius: 5px; font-size: 14px; }
+button, .boton { background: var(--vino); color: #fff; border: 0; border-radius: 5px; padding: 10px 18px; font-size: 14px; cursor: pointer; text-decoration: none; display: inline-block; }
+button.secundario, .boton.secundario { background: #fff; color: var(--vino); border: 1px solid var(--vino); }
+button.enviar { background: var(--ok); font-weight: 600; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--linea); }
+th { background: var(--vino-claro); font-size: 13px; }
+.pasos { display: flex; gap: 8px; margin-bottom: 18px; }
+.pasos div { flex: 1; text-align: center; padding: 8px; border-radius: 5px; background: #e9edf1; font-size: 13px; color: var(--gris); }
+.pasos div.activo { background: var(--vino); color: #fff; font-weight: 600; }
+.pasos div.hecho { background: var(--vino-claro); color: var(--vino); }
+.modulo { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--linea); gap: 12px; }
+.modulo form { display: flex; gap: 8px; align-items: center; }
+.ok { color: var(--ok); font-weight: 600; }
+.pendiente { color: var(--alerta); font-weight: 600; }
+.error { background: #fdecea; color: #a12622; padding: 10px 12px; border-radius: 5px; font-size: 14px; }
+.aviso { background: #fff4e5; color: #8a4b12; padding: 10px 12px; border-radius: 5px; font-size: 14px; }
+.folio { font-size: 26px; font-weight: 700; color: var(--ok); letter-spacing: 1px; }
+.cadena { font-family: Consolas, monospace; font-size: 12px; word-break: break-all; color: var(--gris); }
+.declaracion { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; margin: 14px 0; }
+footer { text-align: center; font-size: 12px; color: var(--gris); padding: 24px; }

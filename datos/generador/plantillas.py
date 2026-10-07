@@ -492,6 +492,24 @@ def certificado_bpf_medicamento(x):
     _certificado_bpf(x, False)
 
 
+def documento_impi(x):
+    folio = f"LIC-{x.fecha.year}-{x.semilla % 9000 + 1000}"
+    flow = [P("CONSTANCIA DE INSCRIPCIÓN DE LICENCIA DE EXPLOTACIÓN", "titulo"),
+            P("Patente relacionada con el principio activo (datos ficticios)", "subtitulo"),
+            tabla_datos([("Folio de la constancia", folio), ("Patente", "MX 000000 B (ficticia)"),
+                         ("Titular de la patente", "Innovaciones Terapéuticas del Norte, S.A. (ficticia)"),
+                         ("Licenciatario", EMPRESA["razon_social"]),
+                         ("Objeto", f"Licencia no exclusiva para fabricar y comercializar {prod(x, False)} en México"),
+                         ("Fecha de inscripción", fl(x.fecha)), ("Vigencia de la licencia", "Hasta el vencimiento de la patente")]),
+            Spacer(1, 12),
+            P("Se presenta en cumplimiento del artículo 167, fracción I Bis, del Reglamento de Insumos para la Salud "
+              "(reforma DOF 24/04/2026).", "oficio"),
+            Spacer(1, 20), qr_imagen(f"SIMULADO|{folio}", 22 * mm)]
+    documento_autoridad(x.ruta, flow, "Dirección Divisional de Patentes (simulada)", [f"Folio: {folio}", fc(x.fecha)],
+                        institucion=("INSTITUTO MEXICANO DE LA PROPIEDAD INDUSTRIAL", "Entorno simulado de demostración"),
+                        emisor_pie="el IMPI")
+
+
 def registro_sanitario(x):
     p = x.producto
     otorg = date.fromisoformat(p["fecha_registro"])
