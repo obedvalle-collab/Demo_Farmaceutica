@@ -1,6 +1,6 @@
 # Obed Farmacéutica — Plan del proyecto
 
-> Estado: **Fase 6 terminada** (2026-10-07). Envío con un botón (Vista 2) y ciclo de prevenciones con alertas por correo (Vista 5) en ambas plataformas (ver `docs/resultados/`). Pendiente al final: prueba con computer use. Siguiente: Fase 7 (vistas restantes).
+> Estado: **Fase 7 terminada** (2026-10-07). Las 10 vistas en ambas plataformas (ver `docs/resultados/FASE7_RESULTADOS.md`). Pendiente al final: computer use, horas trabajadas y costos. Siguiente: Fase 8 (cierre comparativo).
 
 ## 1. Objetivo
 

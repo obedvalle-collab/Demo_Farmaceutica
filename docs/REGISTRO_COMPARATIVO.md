@@ -42,6 +42,15 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-07 | 6 | Ciclo de prevención completo (aviso → apertura → análisis IA → tareas → borrador → correos) | Snowflake | | 135 s (vigía detecta el aviso en 8 s) | pendiente | Claude Sonnet 4.5: 3/3 observaciones, borrador 4,701 caracteres. Correo con `SYSTEM$SEND_EMAIL` en una línea. `AI_COMPLETE` devuelve el texto entrecomillado (se decodifica) |
 | 2026-10-07 | 6 | Ciclo de prevención completo (aviso → apertura → análisis IA → tareas → borrador → correos) | Databricks | | 183 s | pendiente | gpt-oss-120b: 3/3 observaciones, borrador 2,804 caracteres. Sin correo en SQL: alerta SQL + job; el job no admite alertas v2 (se usó la API anterior) y la app necesita permiso sobre el job |
 | 2026-10-07 | 6 | Vista 5 publicada (mismo código) | Ambas | | SF 9.3 s · DB 18.8 s | – | Primera versión del borrador afirmaba correcciones inexistentes → instrucción endurecida con marcadores [PENDIENTE] |
+| 2026-10-07 | 7 | Portafolio y Analítica (SQL compartido) | Ambas | | SF 0.3–4.0 s · DB 0.9–5.3 s | mínimo | Resultados idénticos. Databricks devuelve todo como texto → función común de tipado en la app |
+| 2026-10-07 | 7 | Recrear buscador de normas (decisión: encendido durante la Fase 7) | Databricks | | endpoint en minutos; índice > 1 h | ≈ $0.28/h el endpoint (≈ $6.7/día) | La sincronización inicial vuelve a ser el cuello de botella. En Snowflake basta `RESUME SERVING` |
+| 2026-10-07 | 7 | Versiones: ¿la corrección atiende? (8 pares + 8 de control) | Snowflake | | 8.5 s por evaluación | pendiente | 8/8 y control 8/8 |
+| 2026-10-07 | 7 | Versiones: ¿la corrección atiende? (8 pares + 8 de control) | Databricks | | 7.3 s por evaluación | pendiente | 8/8 y control 7/8; un "riesgo nuevo" falso causado por su lector de PDF ("Albamira") |
+| 2026-10-07 | 7 | Pre-auditoría (examen con 10 observaciones reales) | Snowflake | | 33–96 s por trámite | pendiente | 10/10 sección, 7/10 numeral, 27 predicciones. `AI_COMPLETE` con esquema JSON devolvió NULL con instrucciones largas → respaldo en texto libre |
+| 2026-10-07 | 7 | Pre-auditoría (examen con 10 observaciones reales) | Databricks | | 22–30 s por trámite | pendiente | 7/10 sección, 6/10 numeral, 14 predicciones |
+| 2026-10-07 | 7 | Asistente: vista semántica + Cortex Agent | Snowflake | | crear 5 s; mediana 19.6 s por pregunta | pendiente (47–88 mil tokens/pregunta) | 8/8 al primer intento. Desde SiS (warehouse) no se puede usar la API REST de agentes → función SQL `DATA_AGENT_RUN` |
+| 2026-10-07 | 7 | Asistente: espacio Genie + agente en código | Databricks | | crear 4 s; 6/8, mediana 20.4 s por pregunta | pendiente | Agent Bricks Supervisor marcado como legado → agente propio (~80 líneas) con gpt-oss + Genie + Vector Search. Genie con identidad de servicio se cobra desde la 1.ª consulta |
+| 2026-10-07 | 7 | Gobierno: bitácora única, ALCOA+ y auditoría nativa | Ambas | | SF 11–13 s · DB ≈ 15 s (auditoría) | mínimo | ALCOA+ idéntico (331 aprobaciones sin segregación de funciones). Auditoría: ACCOUNT_USAGE vs tablas de sistema de Unity Catalog |
 
 ## Notas por fase
 

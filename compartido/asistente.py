@@ -15,6 +15,9 @@ def respuesta_vacia():
 
 
 def _norm(s):
+    s = str(s)
+    for raro, normal in {"‑": "-", "‐": "-", "–": "-", "‒": "-", " ": " ", " ": " "}.items():
+        s = s.replace(raro, normal)   # gpt-oss escribe guiones y espacios no separables
     return "".join(c for c in unicodedata.normalize("NFD", str(s).lower()) if unicodedata.category(c) != "Mn")
 
 
@@ -63,9 +66,22 @@ def examen_asistente(d, plataforma):
                       "pasos": r["pasos"], "fuentes": [f["etiqueta"] for f in r["fuentes"]], "sql": r["sql"],
                       "tokens": r.get("tokens"), "respuesta": r["texto"], "error": error})
         print(f"  {'✓' if ok else '✗'} [{r['segundos']} s] {pregunta} → {r['texto'][:110]!r}")
+    return guardar_examen(filas, plataforma)
+
+
+def guardar_examen(filas, plataforma):
     print(f"  Correctas: {sum(f['correcta'] for f in filas)}/{len(filas)} · mediana "
           f"{sorted(f['segundos'] for f in filas)[len(filas) // 2]} s")
     destino = Path(__file__).resolve().parents[1] / "docs" / "resultados" / "fase7" / f"asistente_{plataforma}.json"
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(json.dumps(filas, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
     return filas
+
+
+def recalificar(plataforma):
+    """Vuelve a calificar las respuestas guardadas (sin consultar de nuevo a la IA)."""
+    destino = Path(__file__).resolve().parents[1] / "docs" / "resultados" / "fase7" / f"asistente_{plataforma}.json"
+    filas = json.loads(destino.read_text(encoding="utf-8"))
+    for f in filas:
+        f["correcta"] = calificar(f["respuesta"], f["esperado"]) if not f["error"] else False
+    return guardar_examen(filas, plataforma)

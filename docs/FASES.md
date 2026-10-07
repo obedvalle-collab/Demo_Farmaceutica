@@ -74,6 +74,7 @@ Las decisiones importantes se anotan en `docs/DECISIONES.md`.
 
 ### Fase 7 — Vistas restantes · Vistas 1, 4, 6, 8, 9, 10
 - Portafolio, pre-auditoría, versiones, asistente, analítica, gobierno y bitácora.
+- ✅ **Terminada (2026-10-07):** las 10 vistas en ambas plataformas, más la pantalla de la Biblioteca normativa (Vista 7). Ver `docs/resultados/FASE7_RESULTADOS.md`.
 
 ### Fase 8 — Cierre comparativo
 - Consolidar horas, costos, latencias y tropiezos; fortalezas de cada plataforma y a qué perfil de cliente ofrecerla.

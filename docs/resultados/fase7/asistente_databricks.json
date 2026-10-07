@@ -1,0 +1,164 @@
+[
+ {
+  "pregunta": "¿Qué registros sanitarios hay que renovar con urgencia?",
+  "esperado": [
+   "Metformina"
+  ],
+  "correcta": false,
+  "segundos": 25.1,
+  "pasos": [
+   "Consultó los datos (Genie): «registros sanitarios que tengan menos de 5 días hábiles restantes para renovación, mostrar registro, fecha_vencimiento, dias_habiles_restantes, ordenar por dias_habiles_restantes asc»"
+  ],
+  "fuentes": [
+   "Espacio Genie (tablas de negocio)"
+  ],
+  "sql": [
+   "SELECT\n  `registro_sanitario` AS `registro`,\n  `fecha_vencimiento_registro` AS `fecha_vencimiento`,\n  `dias_para_limite_prorroga` AS `dias_habiles_restantes`\nFROM `obed_farmaceutica`.`negocio`.`registros_vigencia`\nWHERE `dias_para_limite_prorroga` IS NOT NULL\n  AND `dias_para_limite_prorroga` < 5\nORDER BY `dias_para_limite_prorroga` ASC"
+  ],
+  "tokens": 1720,
+  "respuesta": "Los registros sanitarios que deben renovarse con urgencia son aquellos con menos de 5 días hábiles restantes. En la base de datos de Laboratorios Altamira hay **un solo registro** en esta situación:\n\n| Registro | Fecha de vencimiento | Días hábiles restantes |\n|----------|----------------------|------------------------|\n| **352M2021 SSA** | 2026‑11‑26 | **‑99** |\n\n**Fuente:** tabla `registros_vigencia` (consulta SQL realizada).  \n\nEste registro está vencido (días hábiles negativos) y, por tanto, requiere atención inmediata para su renovación o prórroga.",
+  "error": null
+ },
+ {
+  "pregunta": "¿Cuántas observaciones de COFEPRIS hay en el historial?",
+  "esperado": [
+   "349"
+  ],
+  "correcta": true,
+  "segundos": 15.5,
+  "pasos": [
+   "Consultó los datos (Genie): «¿Cuántas observaciones de COFEPRIS hay en el historial?»"
+  ],
+  "fuentes": [
+   "Espacio Genie (tablas de negocio)"
+  ],
+  "sql": [
+   "SELECT COUNT(`observacion_id`) AS `total_observaciones`\nFROM `obed_farmaceutica`.`limpio`.`observaciones`"
+  ],
+  "tokens": 1132,
+  "respuesta": "En el historial de Laboratorios Altamira se registran **349 observaciones de COFEPRIS**【consulta a datos】.",
+  "error": null
+ },
+ {
+  "pregunta": "¿Qué norma genera más observaciones de COFEPRIS?",
+  "esperado": [
+   "NOM-072-SSA1-2012"
+  ],
+  "correcta": true,
+  "segundos": 20.4,
+  "pasos": [
+   "Consultó los datos (Genie): «¿Qué norma genera más observaciones de COFEPRIS?»"
+  ],
+  "fuentes": [
+   "Espacio Genie (tablas de negocio)"
+  ],
+  "sql": [
+   "WITH `conteos` AS (\n  SELECT\n    `norma`,\n    COUNT(`observacion_id`) AS `total_observaciones`\n  FROM `obed_farmaceutica`.`limpio`.`observaciones`\n  WHERE `norma` IS NOT NULL\n  GROUP BY `norma`\n), `rankeadas` AS (\n  SELECT\n    `norma`,\n    `total_observaciones`,\n    RANK() OVER (ORDER BY `total_observaciones` DESC) AS `rnk`\n  FROM `conteos`\n)\nSELECT\n  `norma`,\n  `total_observaciones`\nFROM `rankeadas`\nWHERE `rnk` = 1\nORDER BY `norma`"
+  ],
+  "tokens": 1381,
+  "respuesta": "La norma que genera más observaciones de COFEPRIS es **NOM‑072‑SSA1‑2012**, con **119 observaciones**【consulta a la base de datos】.",
+  "error": null
+ },
+ {
+  "pregunta": "¿Cuántos días hábiles le quedan a la prevención del losartán?",
+  "esperado": [
+   "4"
+  ],
+  "correcta": false,
+  "segundos": 35.0,
+  "pasos": [
+   "Consultó los datos (Genie): «días_habiles_restantes prevención losartán»"
+  ],
+  "fuentes": [
+   "Espacio Genie (tablas de negocio)"
+  ],
+  "sql": [
+   "SELECT `pec`.`tramite_id`, `pec`.`producto`, `p`.`denominacion_generica`, `pec`.`accion_pendiente`, `pec`.`fecha_limite_accion`, `pec`.`dias_habiles_restantes`, `pec`.`semaforo` FROM `obed_farmaceutica`.`negocio`.`prevenciones_en_curso` AS `pec` INNER JOIN `obed_farmaceutica`.`limpio`.`tramites` AS `t` ON `pec`.`tramite_id` = `t`.`tramite_id` INNER JOIN `obed_farmaceutica`.`limpio`.`productos` AS `p` ON `t`.`producto_id` = `p`.`producto_id` WHERE lower(translate(coalesce(`p`.`denominacion_generica`, ''), 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) LIKE '%losartan%' OR lower(translate(coalesce(`pec`.`producto`, ''), 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) LIKE '%losartan%' OR lower(translate(coalesce(`p`.`denominacion_distintiva`, ''), 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) LIKE '%losartan%' ORDER BY `pec`.`dias_habiles_restantes` ASC, `pec`.`tramite_id` ASC"
+  ],
+  "tokens": 1495,
+  "respuesta": "No hay ninguna prevención activa registrada para el losartán, por lo que no existen días hábiles restantes que mostrar. (Consulta a la tabla **prevenciones_en_curso** – sin resultados).",
+  "error": null
+ },
+ {
+  "pregunta": "¿Qué documento le falta al expediente del losartán (TR-2026-022)?",
+  "esperado": [
+   "Plan"
+  ],
+  "correcta": true,
+  "segundos": 38.1,
+  "pasos": [
+   "Consultó los datos (Genie): «documento falta expediente losartán TR-2026-022»"
+  ],
+  "fuentes": [
+   "Espacio Genie (tablas de negocio)"
+  ],
+  "sql": [
+   "SELECT\n  `e`.`tramite_id`,\n  `t`.`producto`,\n  `e`.`modulo`,\n  `e`.`seccion_ctd`,\n  `e`.`nombre_requisito`,\n  `e`.`area_responsable`,\n  `e`.`archivo`,\n  `e`.`version`,\n  `e`.`cargado_en`,\n  `e`.`hallazgos_abiertos`,\n  `e`.`estatus_efectivo`\nFROM `obed_farmaceutica`.`negocio`.`expediente_estado` AS `e`\nINNER JOIN `obed_farmaceutica`.`limpio`.`tramites` AS `t`\n  ON `e`.`tramite_id` = `t`.`tramite_id`\nWHERE `e`.`tramite_id` = 'TR-2026-022'\n  AND `t`.`producto` ILIKE '%losartán%'\n  AND `e`.`seccion_ctd` IS NOT NULL\n  AND `e`.`nombre_requisito` IS NOT NULL\n  AND (\n    `e`.`estatus_efectivo` ILIKE '%falt%'\n    OR `e`.`hallazgos_abiertos` > 0\n    OR `e`.`archivo` IS NULL\n  )\nORDER BY `e`.`seccion_ctd`, `e`.`nombre_requisito`"
+  ],
+  "tokens": 1835,
+  "respuesta": "Al expediente **TR‑2026‑022** de Losartán le falta el documento **1.6 Plan de manejo de riesgos (PMR)** del área de Farmacovigilancia (registro sin archivo – estatus “Faltante”).  \n\n*Fuente: tabla `expediente_estado` (consulta SQL mostrada).​",
+  "error": null
+ },
+ {
+  "pregunta": "¿Qué dice la NOM-073 sobre los estudios de estabilidad acelerada?",
+  "esperado": [
+   "NOM-073",
+   "acelerada"
+  ],
+  "correcta": true,
+  "segundos": 12.0,
+  "pasos": [
+   "Buscó en las normas: «NOM-073 estudios de estabilidad acelerada»"
+  ],
+  "fuentes": [
+   "NOM-073-SSA1-2015 7.4",
+   "NOM-073-SSA1-2015 7.5.1.2",
+   "NOM-073-SSA1-2015 4.1.10",
+   "NOM-073-SSA1-2015 8.4",
+   "NOM-073-SSA1-2015 8.5.1.2",
+   "NOM-073-SSA1-2015 7.5.1.2.6"
+  ],
+  "sql": [],
+  "tokens": 2792,
+  "respuesta": "La **NOM‑073‑SSA1‑2015** establece lo siguiente sobre los estudios de estabilidad acelerada:\n\n* **Definición (cláusula 4.1.10)** – Son aquellos diseñados bajo condiciones extremas de almacenamiento para acelerar la degradación química, biológica o los cambios físicos del fármaco, medicamento o remedio herbolario【\"NOM-073-SSA1-2015 4.1.10\"】.  \n\n* **Datos a presentar**  \n  * Para **medicamento nuevo** (cláusula 7.4) se deben someter los datos obtenidos del estudio de estabilidad acelerada, de acuerdo con lo indicado en el punto 7.5, junto con al menos 6 meses de datos de estabilidad a largo plazo al momento de solicitar el registro【\"NOM-073-SSA1-2015 7.4\"】.  \n  * Para **medicamento conocido o genérico** (cláusula 8.4) se deben presentar los datos del estudio de estabilidad acelerada conforme al punto 8.5, y al menos 3 meses de datos de estabilidad a largo plazo al solicitar el registro o la clave alfanumérica【\"NOM-073-SSA1-2015 8.4\"】.  \n\n* **Cambios significativos (cláusula 7.5.1.2 y 8.5.1.2)** – Se consideran cambios significativos durante la estabilidad acelerada cuando, entre otros, no se cumplan las especificaciones de apariencia o propiedades físicas del producto【\"NOM-073-SSA1-2015 7.5.1.2\"】.  \n\nEn síntesis, la Norma define la estabilidad acelerada, exige la presentación de sus datos (con un mínimo de información de estabilidad a largo plazo) y establece qué variaciones se consideran significativas para evaluar la calidad del producto.",
+  "error": null
+ },
+ {
+  "pregunta": "¿Qué leyenda de farmacovigilancia debe llevar la etiqueta según la NOM-072?",
+  "esperado": [
+   "NOM-072",
+   "6.1.6"
+  ],
+  "correcta": true,
+  "segundos": 11.3,
+  "pasos": [
+   "Buscó en las normas: «NOM-072 leyenda farmacovigilancia etiqueta»"
+  ],
+  "fuentes": [
+   "NOM-072-SSA1-2012 6.1.6.2",
+   "PROY-NOM-072-SSA1-2025 5.12",
+   "NOM-072-SSA1-2012 6.1",
+   "NOM-072-SSA1-2012 6.1.6",
+   "PROY-NOM-072-SSA1-2025 5.33.2.1.7",
+   "PROY-NOM-072-SSA1-2025 5.33"
+  ],
+  "sql": [],
+  "tokens": 2360,
+  "respuesta": "Según la NOM‑072‑SSA1‑2012, en la sección 6.1.6.2 de la norma la etiqueta debe incluir la siguiente leyenda de farmacovigilancia:\n\n**“Reporte las sospechas de reacción adversa al correo: farmacovigilancia@cofepris.gob.mx”**【NOM-072-SSA1-2012, numeral 6.1.6.2】.",
+  "error": null
+ },
+ {
+  "pregunta": "¿Cuál es el precio de venta al público de la metformina?",
+  "esperado": [
+   "NO_INVENTA"
+  ],
+  "correcta": true,
+  "segundos": 1.2,
+  "pasos": [],
+  "fuentes": [],
+  "sql": [],
+  "tokens": 572,
+  "respuesta": "Lo siento, pero la información sobre el precio de venta al público de la metformina no está disponible en las bases de datos a las que tengo acceso. No puedo proporcionar ese dato.",
+  "error": null
+ }
+]

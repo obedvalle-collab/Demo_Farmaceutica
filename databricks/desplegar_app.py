@@ -15,8 +15,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 for _p in ("app/comun", "compartido"):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / _p))
 import fase2_normas as F  # noqa: E402
-from databricks.sdk.service.apps import App, AppDeployment, AppResource, AppResourceSqlWarehouse, \
-    AppResourceSqlWarehouseSqlWarehousePermission  # noqa: E402
+from databricks.sdk.service.apps import App, AppDeployment, AppResource, AppResourceGenieSpace, \
+    AppResourceGenieSpaceGenieSpacePermission, AppResourceSqlWarehouse, AppResourceSqlWarehouseSqlWarehousePermission  # noqa: E402
 from databricks.sdk.service.workspace import ImportFormat  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parents[1]
