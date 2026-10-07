@@ -8,19 +8,21 @@ Panel del dictaminador (/dictaminador): quien presenta la demo emite prevencione
 
 Uso: python -m uvicorn portal_simulado.app:app --port 8765   (desde la raíz del proyecto)
 """
+import base64
 import hashlib
-import os
 import secrets
 import sqlite3
-from datetime import datetime
+import sys
+from datetime import date, datetime
 from pathlib import Path
 
 from fastapi import FastAPI, File, Form, Request, UploadFile
-from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 AQUI = Path(__file__).resolve().parent
+sys.path.insert(0, str(AQUI))
 DATOS = AQUI / "datos"
 ARCHIVOS = DATOS / "archivos"
 DB = DATOS / "portal.db"
@@ -39,6 +41,8 @@ def _env():
 
 
 ENV = _env()
+# Fecha "de hoy" de la demo (la misma que usa la capa de negocio) para fechar oficios y avisos
+FECHA_DEMO = date.fromisoformat(ENV.get("PORTAL_FECHA_DEMO", "2026-10-06"))
 MODULOS = [("m1", "Módulo 1 · Información administrativa y regional"), ("m2", "Módulo 2 · Resúmenes"),
            ("m3", "Módulo 3 · Calidad"), ("m4", "Módulo 4 · Estudios no clínicos"), ("m5", "Módulo 5 · Estudios clínicos")]
 HOMOCLAVES = [("COFEPRIS-04-004-B", "Registro sanitario – medicamento genérico (nacional)"),
@@ -76,6 +80,11 @@ with db() as c:
 
 def ahora():
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+def ahora_demo():
+    """Fecha de la demo con la hora real (para que los plazos cuadren con la capa de negocio)."""
+    return f"{FECHA_DEMO.isoformat()} {datetime.now():%H:%M:%S}"
 
 
 def rol(request):
@@ -262,27 +271,57 @@ def dictaminador(request: Request):
     with db() as c:
         sols = c.execute("SELECT * FROM solicitudes WHERE folio IS NOT NULL ORDER BY id DESC").fetchall()
         ns = c.execute("SELECT * FROM notificaciones ORDER BY id DESC").fetchall()
-    return vista(request, "dictaminador.html", solicitudes=sols, notificaciones=ns)
+    import oficio_pdf
+    return vista(request, "dictaminador.html", solicitudes=sols, notificaciones=ns, catalogo=oficio_pdf.catalogo())
 
 
 @app.post("/dictaminador/prevenir/{sid}")
-async def prevenir(request: Request, sid: int, numero_oficio: str = Form(...), texto: str = Form(""),
-                   plazo: int = Form(10), oficio: UploadFile = File(None)):
+async def prevenir(request: Request, sid: int):
     if (r := exige(request, "dictaminador")):
         return r
-    ruta = ""
-    if oficio is not None and oficio.filename:
-        destino = ARCHIVOS / f"oficio_{sid}_{Path(oficio.filename).name}"
-        destino.write_bytes(await oficio.read())
-        ruta = str(destino)
+    import oficio_pdf
+    form = await request.form()
+    indices = [int(v) for v in form.getlist("obs")]
+    plazo = int(form.get("plazo") or 10)
+    if not indices:
+        return RedirectResponse("/dictaminador", 303)
     with db() as c:
         s = c.execute("SELECT * FROM solicitudes WHERE id = ?", (sid,)).fetchone()
+        n = c.execute("SELECT COUNT(*) FROM notificaciones").fetchone()[0] + 1
+    numero = f"CAS/DERS/{7000 + n}/{FECHA_DEMO.year}"
+    ruta = ARCHIVOS / f"oficio_{numero.replace('/', '-')}.pdf"
+    obs = oficio_pdf.generar(ruta, dict(s), numero, indices, plazo, FECHA_DEMO)
+    with db() as c:
         c.execute("""INSERT INTO notificaciones (solicitud_id, folio, tipo, numero_oficio, texto, plazo_dias_habiles,
                      ruta_oficio, emitida, aviso_correo) VALUES (?,?,?,?,?,?,?,?,?)""",
-                  (sid, s["folio"], "Prevención", numero_oficio, texto, plazo, ruta, ahora(), ahora()))
+                  (sid, s["folio"], "Prevención", numero, f"{len(obs)} observaciones", plazo, str(ruta), ahora_demo(), ahora_demo()))
         c.execute("UPDATE solicitudes SET estatus = 'Prevenida' WHERE id = ?", (sid,))
         c.execute("INSERT INTO correos_salientes (para, asunto, cuerpo, creado) VALUES (?,?,?,?)",
-                  (ENV.get("CORREO_ALERTAS", ""), f"Aviso de disponibilidad – folio {s['folio']}",
-                   f"Se encuentra disponible un acto administrativo relacionado con su solicitud {s['folio']}. "
-                   f"Ingrese al portal para consultarlo. Cuenta con 5 días hábiles para abrirlo.", ahora()))
+                  ("regulatorio@altamira-lab.example", f"Aviso de disponibilidad de acto administrativo – Folio {s['folio']}",
+                   f"Se informa que se encuentra disponible en el portal un acto administrativo relacionado con su solicitud "
+                   f"con folio {s['folio']} (homoclave {s['homoclave']}). Cuenta con cinco días hábiles para consultarlo; "
+                   "de no hacerlo, se notificará por estrados electrónicos.\n\nEste es un mensaje automático del portal simulado.",
+                   ahora_demo()))
     return RedirectResponse("/dictaminador", 303)
+
+
+# ------------------------------------------------------------------------------------------ buzón simulado
+def _autorizado(request):
+    """El buzón de la empresa se consulta con el usuario y contraseña del portal (autenticación básica)."""
+    try:
+        tipo, valor = request.headers.get("authorization", "").split(" ", 1)
+        usuario, clave = base64.b64decode(valor).decode().split(":", 1)
+        return tipo.lower() == "basic" and usuario == ENV.get("PORTAL_USUARIO") and clave == ENV.get("PORTAL_PASSWORD")
+    except Exception:
+        return False
+
+
+@app.get("/api/buzon")
+def buzon(request: Request, desde: int = 0):
+    """Buzón simulado de regulatorio@altamira-lab.example: los correos que 'COFEPRIS' envía a la empresa."""
+    if not _autorizado(request):
+        return JSONResponse({"error": "no autorizado"}, status_code=401)
+    with db() as c:
+        filas = c.execute("SELECT * FROM correos_salientes WHERE id > ? ORDER BY id", (desde,)).fetchall()
+    return [dict(id=f["id"], de="notificaciones@portal-simulado.example", para=f["para"], asunto=f["asunto"],
+                 cuerpo=f["cuerpo"], fecha=f["creado"]) for f in filas]

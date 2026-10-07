@@ -46,6 +46,12 @@ def permisos(sp):
                    f"GRANT READ VOLUME, WRITE VOLUME ON VOLUME {cat}.app.capturas TO {q}"]
     for s in sentencias:
         F.sql(s)
+    # permiso para disparar el job de correos de alertas (Fase 6)
+    from databricks.sdk.service.jobs import JobAccessControlRequest, JobPermissionLevel
+    job = next((j for j in w.jobs.list(name="obed_farma_alertas_correo")), None)
+    if job:
+        w.jobs.update_permissions(str(job.job_id), access_control_list=[JobAccessControlRequest(
+            service_principal_name=sp, permission_level=JobPermissionLevel.CAN_MANAGE_RUN)])
 
 
 def desplegar():
@@ -57,6 +63,9 @@ def desplegar():
                                    resources=[AppResource(name="sql-warehouse", sql_warehouse=AppResourceSqlWarehouse(
                                        id=F.WAREHOUSE, permission=AppResourceSqlWarehouseSqlWarehousePermission.CAN_USE))]))
     app = w.apps.get(NOMBRE)
+    if app.compute_status and app.compute_status.state.value != "ACTIVE":
+        print("Encendiendo la app…")
+        w.apps.start_and_wait(NOMBRE)
     permisos(app.service_principal_client_id)
     ruta = subir_codigo()
     print("Desplegando…")

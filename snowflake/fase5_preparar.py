@@ -87,6 +87,15 @@ def estado(cur):
         print("   ", r)
 
 
+def correcciones_cargadas(cur):
+    """Atajo de demo: registra las 9 correcciones (ya analizadas por la IA) como versión 2, sin reprocesarlas."""
+    filas = [(r["tramite_id"], r["requisito_id"], r["archivo"].removeprefix("pdf/"))
+             for r in csv.DictReader(open(PDF / "INDICE.csv", encoding="utf-8")) if r["origen"] == "Corrección (v2)"]
+    cur.executemany(f"""INSERT INTO {BD}.APP.CARGAS (tramite_id, requisito_id, archivo, version, cargado_en, cargado_por, origen)
+                        VALUES (%s, %s, %s, 2, CURRENT_TIMESTAMP(), 'demo', 'Bandeja de carga')""", filas)
+    print(f"  {len(filas)} correcciones registradas")
+
+
 def main():
     accion = sys.argv[1] if len(sys.argv) > 1 else "estado"
     con = B.conectar(); cur = con.cursor()
@@ -94,7 +103,8 @@ def main():
         {"preparar": lambda: (preparar(cur), reiniciar(cur), estado(cur)),
          "reiniciar": lambda: (reiniciar(cur), estado(cur)),
          "correcciones": lambda: (correcciones(cur), estado(cur)),
-         "estado": lambda: estado(cur)}[accion]()
+         "estado": lambda: estado(cur),
+         "correcciones_cargadas": lambda: (correcciones_cargadas(cur), estado(cur))}[accion]()
     finally:
         try:
             cur.execute("ALTER WAREHOUSE FARMA_WH SUSPEND")

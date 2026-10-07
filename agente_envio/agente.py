@@ -102,7 +102,9 @@ Reglas: nunca pulses 'Firmar y enviar' sin CONFIRMADO; no escribas contraseñas 
 
 
 def enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=print):
-    cliente = anthropic.Anthropic(api_key=env["ANTHROPIC_API_KEY"])
+    # las llaves de usuario (sk-ant-usr…) no están ligadas a un workspace: hay que indicarlo en cada llamada
+    encabezados = {"anthropic-workspace-id": env["ANTHROPIC_WORKSPACE_ID"]} if env.get("ANTHROPIC_WORKSPACE_ID") else None
+    cliente = anthropic.Anthropic(api_key=env["ANTHROPIC_API_KEY"], default_headers=encabezados)
     page.goto(env["PORTAL_URL"])
     t0 = time.time()
     tarea = (f"Presenta esta solicitud. Trámite (homoclave): {solicitud['homoclave']}. Denominación: {solicitud['denominacion']}. "

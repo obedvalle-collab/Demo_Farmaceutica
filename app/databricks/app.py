@@ -13,7 +13,7 @@ import streamlit as st  # noqa: E402
 from databricks.sdk import WorkspaceClient  # noqa: E402
 
 from datos_databricks import DatosDatabricks  # noqa: E402
-from vista_expediente import pagina  # noqa: E402
+from principal import principal  # noqa: E402
 
 WAREHOUSE_LOCAL = "f0765c244dca9b5a"
 
@@ -29,4 +29,4 @@ def cliente():
 
 usuario = st.context.headers.get("X-Forwarded-Email", "demo") if hasattr(st, "context") else "demo"
 datos = DatosDatabricks(cliente(), os.environ.get("DATABRICKS_WAREHOUSE_ID", WAREHOUSE_LOCAL))
-pagina(datos, "Databricks · Databricks Apps", usuario or "demo")
+principal(datos, "Databricks · Databricks Apps", usuario or "demo")

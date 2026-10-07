@@ -9,16 +9,20 @@ Uso (desde la raíz del proyecto, con el portal simulado encendido):
     python agente_envio/robot.py --plataforma snowflake --una-vez
 """
 import argparse
+import re
 import sys
 import tempfile
 import time
 from datetime import datetime
 from pathlib import Path
 
+import requests
 from playwright.sync_api import sync_playwright
 
 AQUI = Path(__file__).resolve().parent
 sys.path.insert(0, str(AQUI))
+for _p in ("app/comun", "compartido"):
+    sys.path.insert(0, str(AQUI.parent / _p))
 import agente  # noqa: E402
 import paquete  # noqa: E402
 from cola import ColaDatabricks, ColaSnowflake  # noqa: E402
@@ -90,6 +94,75 @@ def atender(cola, envio, env, modo, navegador):
         cola.actualizar(eid, estatus="Error", error=str(e)[:2000])
 
 
+# ------------------------------------------------------------------------------------------ Fase 6
+def datos_de(cola):
+    """Objeto con la lógica del ciclo de prevenciones (compartida) para la plataforma de la cola."""
+    if cola.nombre == "Snowflake":
+        from snowflake.snowpark import Session
+        from datos_snowflake import DatosSnowflake
+        return DatosSnowflake(Session.builder.config("connection_name", "obed_farma").create())
+    from datos_databricks import DatosDatabricks
+    return DatosDatabricks(cola.w, cola.WAREHOUSE)
+
+
+def vigilar_buzon(env, ciclos, visto):
+    """Vigía: lee el buzón simulado de la empresa y registra los avisos de COFEPRIS en cada plataforma."""
+    try:
+        r = requests.get(f"{env['PORTAL_URL']}/api/buzon", params={"desde": visto["id"]},
+                         auth=(env["PORTAL_USUARIO"], env["PORTAL_PASSWORD"]), timeout=10)
+        correos = r.json() if r.ok else []
+    except requests.RequestException:
+        return
+    for correo in correos:
+        visto["id"] = max(visto["id"], correo["id"])
+        for cola, d in ciclos:
+            if correo["id"] <= visto.get(cola.nombre, 0):
+                continue
+            aviso = d.registrar_aviso(correo)
+            visto[cola.nombre] = correo["id"]
+            if aviso:
+                log(f"{cola.nombre}: aviso de COFEPRIS · folio {aviso['folio']} → {aviso['tramite_id']} · abrir antes del {aviso['fecha_limite_apertura']}")
+                log(f"  alertas por correo enviadas: {d.enviar_correos()}")
+
+
+def abrir_oficio(env, navegador, folio):
+    """Entra al portal, abre la notificación del folio (genera el acuse) y descarga el oficio."""
+    contexto = navegador.new_context(accept_downloads=True, locale="es-MX")
+    page = contexto.new_page()
+    page.goto(env["PORTAL_URL"])
+    page.fill("#usuario", env["PORTAL_USUARIO"]); page.fill("#contrasena", env["PORTAL_PASSWORD"]); page.click("#btn-entrar")
+    page.goto(f"{env['PORTAL_URL']}/notificaciones")
+    fila = page.locator("tr", has_text=folio).first
+    if fila.locator("button", has_text="Abrir").count():
+        fila.locator("button", has_text="Abrir").click()
+        fila = page.locator("tr", has_text=folio).first
+    acuse = re.search(r"ACN-[0-9A-F]+", fila.inner_text())
+    with page.expect_download() as d:
+        fila.locator("a", has_text="Descargar oficio").click()
+    descarga = d.value
+    contenido = Path(descarga.path()).read_bytes()
+    nombre = descarga.suggested_filename
+    contexto.close()
+    return nombre, contenido, acuse.group(0) if acuse else ""
+
+
+def atender_acciones(env, navegador, ciclos):
+    for cola, d in ciclos:
+        for a in d.acciones_pendientes():
+            log(f"{cola.nombre}: abrir oficio del folio {a['folio']}")
+            d.actualizar_accion(a["accion_id"], "En curso")
+            try:
+                nombre, contenido, acuse = abrir_oficio(env, navegador, a["folio"])
+                log(f"  oficio descargado ({nombre}, acuse {acuse}); analizando con IA…")
+                r = d.registrar_oficio(a["aviso_id"], nombre, contenido, acuse)
+                d.actualizar_accion(a["accion_id"], "Completada", f"{r['observaciones']} observaciones · vence {r['fecha_limite']}")
+                log(f"  ✓ {r['observaciones']} observaciones · plazo {r['plazo']} días hábiles · vence {r['fecha_limite']}")
+                log(f"  alertas por correo enviadas: {d.enviar_correos()}")
+            except Exception as e:
+                log(f"  ✗ {e}")
+                d.actualizar_accion(a["accion_id"], "Error", str(e))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--plataforma", choices=["ambas", "snowflake", "databricks"], default="ambas")
@@ -101,7 +174,10 @@ def main():
     modo = a.modo if a.modo != "auto" else ("computer_use" if env.get("ANTHROPIC_API_KEY") else "guion")
     colas = ([ColaSnowflake()] if a.plataforma in ("ambas", "snowflake") else []) + \
             ([ColaDatabricks()] if a.plataforma in ("ambas", "databricks") else [])
-    log(f"Robot de envío en modo {modo} · atendiendo: {', '.join(c.nombre for c in colas)}")
+    ciclos = [(c, datos_de(c)) for c in colas]
+    visto = {"id": min(d.ultimo_correo() for _, d in ciclos)}
+    visto.update({c.nombre: d.ultimo_correo() for c, d in ciclos})
+    log(f"Robot de envío y vigía en modo {modo} · atendiendo: {', '.join(c.nombre for c in colas)} · buzón desde el correo {visto['id']}")
     with sync_playwright() as p:
         navegador = p.chromium.launch(headless=not a.ver)
         try:
@@ -109,6 +185,8 @@ def main():
                 for c in colas:
                     for envio in c.pendientes():
                         atender(c, envio, env, modo, navegador)
+                vigilar_buzon(env, ciclos, visto)
+                atender_acciones(env, navegador, ciclos)
                 if a.una_vez:
                     break
                 time.sleep(5)

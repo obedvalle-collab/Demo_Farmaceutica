@@ -8,7 +8,7 @@ for p in (AQUI, AQUI.parent / "comun", AQUI.parents[1] / "compartido"):
         sys.path.insert(0, str(p))
 
 from datos_snowflake import DatosSnowflake  # noqa: E402
-from vista_expediente import pagina  # noqa: E402
+from principal import principal  # noqa: E402
 
 
 def sesion():
@@ -28,4 +28,4 @@ try:
     usuario = s.sql("SELECT CURRENT_USER()").collect()[0][0]
 except Exception:
     usuario = "demo"
-pagina(DatosSnowflake(s), "Snowflake · Streamlit in Snowflake", usuario)
+principal(DatosSnowflake(s), "Snowflake · Streamlit in Snowflake", usuario)

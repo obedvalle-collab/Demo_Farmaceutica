@@ -86,13 +86,23 @@ def estado():
         print("   ", r)
 
 
+def correcciones_cargadas():
+    """Atajo de demo: registra las 9 correcciones (ya analizadas por la IA) como versión 2, sin reprocesarlas."""
+    filas = [(r["tramite_id"], r["requisito_id"], r["archivo"].removeprefix("pdf/"))
+             for r in csv.DictReader(open(PDF / "INDICE.csv", encoding="utf-8")) if r["origen"] == "Corrección (v2)"]
+    valores = ",".join(f"('{t}', '{q}', '{a}', 2, current_timestamp(), 'demo', 'Bandeja de carga')" for t, q, a in filas)
+    F.sql(f"INSERT INTO {CAT}.app.cargas VALUES {valores}")
+    print(f"  {len(filas)} correcciones registradas")
+
+
 def main():
     accion = sys.argv[1] if len(sys.argv) > 1 else "estado"
     try:
         {"preparar": lambda: (preparar(), reiniciar(), estado()),
          "reiniciar": lambda: (reiniciar(), estado()),
          "correcciones": lambda: (correcciones(), estado()),
-         "estado": estado}[accion]()
+         "estado": estado,
+         "correcciones_cargadas": lambda: (correcciones_cargadas(), estado())}[accion]()
     finally:
         F.w.warehouses.stop(F.WAREHOUSE)
 

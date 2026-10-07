@@ -5,6 +5,7 @@ import os
 import time
 import uuid
 
+from ciclo_prevencion import CicloPrevencion
 from extraccion import INSTRUCCION, MAX_CARACTERES, esquema
 
 CAT = "obed_farmaceutica"
@@ -19,9 +20,52 @@ DDL = ("STRUCT<tipo_documento: STRING, producto: STRING, emisor: STRING, fabrica
        "resumen: STRING>")
 
 
-class DatosDatabricks:
+NOMBRE_JOB_ALERTAS = "obed_farma_alertas_correo"
+
+
+class DatosDatabricks(CicloPrevencion):
+    L, N, A = f"{CAT}.limpio", f"{CAT}.negocio", f"{CAT}.app"
+    MODELO = MODELO
+
     def __init__(self, w, warehouse_id):
         self.w, self.wh = w, warehouse_id
+
+    # --------------------------------------------------------------------------------- piezas del ciclo de prevención
+    def q(self, sql, params=None):
+        return self._q(sql, params)
+
+    def subir_archivo(self, contenido, ruta):
+        self.w.files.upload(f"{VOL}/{ruta}", io.BytesIO(contenido), overwrite=True)
+
+    def leer_pdf(self, ruta):
+        r = self._q(f"""SELECT array_join(transform(filter(cast(r:document:elements AS ARRAY<VARIANT>),
+                            e -> cast(e:type AS STRING) <> 'page_number'), e -> cast(e:content AS STRING)), '
+
+') AS t
+                        FROM (SELECT ai_parse_document(content, map('version', '2.0')) AS r FROM READ_FILES('{VOL}/{ruta}', format => 'binaryFile'))""")
+        return r[0]["t"] or ""
+
+    def ia_json(self, prompt, esquema_dict):
+        fmt = json.dumps({"type": "json_schema", "json_schema": {"name": "salida", "schema": esquema_dict, "strict": True}}, ensure_ascii=False)
+        r = self._q("SELECT ai_query(:m, :p, responseFormat => :f) AS r", {"m": MODELO, "p": prompt, "f": fmt})[0]["r"]
+        return json.loads(r)
+
+    def ia_texto(self, prompt):
+        return self._q("SELECT ai_query(:m, :p) AS r", {"m": MODELO, "p": prompt})[0]["r"]
+
+    def enviar_correos(self):
+        """Correo nativo de Databricks: un job ejecuta una alerta SQL que avisa por correo cuando hay alertas pendientes."""
+        pendientes = int(self._q(f"SELECT COUNT(*) AS n FROM {self.A}.alertas WHERE enviada_en IS NULL")[0]["n"])
+        if not pendientes:
+            return 0
+        job = next((j for j in self.w.jobs.list(name=NOMBRE_JOB_ALERTAS)), None)
+        if not job:
+            raise RuntimeError("Falta configurar la alerta de correo (databricks/fase6_preparar.py)")
+        run = self.w.jobs.run_now_and_wait(job.job_id)
+        estado = run.state.result_state.value if run.state and run.state.result_state else "?"
+        canal = f"Databricks SQL Alert (job {job.job_id}, {estado})"
+        self._q(f"UPDATE {self.A}.alertas SET enviada_en = current_timestamp(), canal = :c WHERE enviada_en IS NULL", {"c": canal})
+        return pendientes
 
     def _q(self, sql, params=None):
         from databricks.sdk.service.sql import StatementParameterListItem as P, StatementState

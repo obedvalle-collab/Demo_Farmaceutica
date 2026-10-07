@@ -151,7 +151,6 @@ def _envio(datos, tramite, c, usuario):
 
 
 def pagina(datos, plataforma, usuario="demo"):
-    st.set_page_config(page_title="Expediente CTD · Laboratorios Altamira", page_icon="📁", layout="wide")
     _estilo()
     st.title("📁 Expediente CTD")
     st.caption(f"Laboratorios Altamira (ficticio) · Plataforma: **{plataforma}** · Fecha de la demo: 06/10/2026")

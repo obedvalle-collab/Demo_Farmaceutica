@@ -3,15 +3,68 @@ import io
 import json
 import uuid
 
+import re
+
+from ciclo_prevencion import CicloPrevencion
 from extraccion import INSTRUCCION, MAX_CARACTERES, esquema_json
 
 BD = "OBED_FARMACEUTICA"
 MODELO = "claude-sonnet-4-5"
 
 
-class DatosSnowflake:
+class DatosSnowflake(CicloPrevencion):
+    L, N, A = f"{BD}.LIMPIO", f"{BD}.NEGOCIO", f"{BD}.APP"
+    MODELO = MODELO
+
     def __init__(self, session):
         self.s = session
+
+    # --------------------------------------------------------------------------------- piezas del ciclo de prevención
+    def q(self, sql, params=None):
+        """SQL con parámetros :nombre (se convierten a ? de Snowpark); devuelve dicts con claves en minúsculas."""
+        valores = []
+        if params:
+            def sustituir(m):
+                valores.append(params[m.group(1)])
+                return "?"
+            sql = re.sub(r"(?<![:\w]):([a-zA-Z_]\w*)", sustituir, sql)
+        return [{k.lower(): v for k, v in r.as_dict().items()} for r in self.s.sql(sql, params=valores).collect()]
+
+    def subir_archivo(self, contenido, ruta):
+        self.s.file.put_stream(io.BytesIO(contenido), f"@{BD}.CRUDO.EXPEDIENTES/{ruta}", auto_compress=False, overwrite=True)
+        self.s.sql(f"ALTER STAGE {BD}.CRUDO.EXPEDIENTES REFRESH").collect()
+
+    def leer_pdf(self, ruta):
+        r = self.s.sql(f"""SELECT ARRAY_TO_STRING(TRANSFORM(r:pages, p -> p:content::STRING), '
+
+') AS t
+            FROM (SELECT AI_PARSE_DOCUMENT(TO_FILE('@{BD}.CRUDO.EXPEDIENTES', ?), {{'mode': 'LAYOUT', 'page_split': true}}) AS r)""",
+                       params=[ruta]).collect()
+        return r[0]["T"] or ""
+
+    def ia_json(self, prompt, esquema_dict):
+        r = self.s.sql("SELECT AI_COMPLETE(model => ?, prompt => ?, response_format => {'type': 'json', 'schema': PARSE_JSON(?)}) AS r",
+                       params=[MODELO, prompt, json.dumps(esquema_dict, ensure_ascii=False)]).collect()[0]["R"]
+        d = json.loads(r) if isinstance(r, str) else r
+        return json.loads(d) if isinstance(d, str) else d
+
+    def ia_texto(self, prompt):
+        r = self.s.sql("SELECT AI_COMPLETE(?, ?) AS r", params=[MODELO, prompt]).collect()[0]["R"] or ""
+        return json.loads(r) if r.startswith('"') else r   # AI_COMPLETE devuelve el texto como cadena JSON
+
+    def enviar_correos(self):
+        """Correo nativo de Snowflake: SYSTEM$SEND_EMAIL con la integración FARMA_EMAIL (solo a usuarios verificados)."""
+        n = 0
+        for a in self.q(f"SELECT alerta_id, para, asunto, cuerpo FROM {self.A}.alertas WHERE enviada_en IS NULL ORDER BY creada_en"):
+            try:
+                self.s.sql("CALL SYSTEM$SEND_EMAIL('FARMA_EMAIL', ?, ?, ?, 'text/html')",
+                           params=[a["para"], a["asunto"], a["cuerpo"]]).collect()
+                self.q(f"UPDATE {self.A}.alertas SET enviada_en = CURRENT_TIMESTAMP(), canal = 'Snowflake SYSTEM$SEND_EMAIL' WHERE alerta_id = :i",
+                       {"i": a["alerta_id"]})
+                n += 1
+            except Exception as e:
+                self.q(f"UPDATE {self.A}.alertas SET error = :e WHERE alerta_id = :i", {"e": str(e)[:1000], "i": a["alerta_id"]})
+        return n
 
     def _q(self, sql, params=None):
         return [r.as_dict() for r in self.s.sql(sql, params=params or []).collect()]

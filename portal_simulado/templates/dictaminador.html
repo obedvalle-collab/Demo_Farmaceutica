@@ -8,18 +8,25 @@
     {% else %}<tr><td colspan="5" class="nota">Sin solicitudes.</td></tr>{% endfor %}
   </table>
 </div>
-{% for s in solicitudes %}
+{% for s in solicitudes %}{% if s.estatus == 'Enviada' %}
 <div class="tarjeta">
-  <h2>Emitir prevención · {{ s.folio }}</h2>
-  <form method="post" action="/dictaminador/prevenir/{{ s.id }}" enctype="multipart/form-data">
-    <label>Número de oficio</label><input type="text" name="numero_oficio" required>
-    <label>Plazo para desahogar (días hábiles)</label><input type="text" name="plazo" value="10">
-    <label>Oficio en PDF</label><input type="file" name="oficio" accept=".pdf">
-    <label>Resumen (opcional)</label><textarea name="texto" rows="2"></textarea>
-    <p><button type="submit">Emitir y enviar aviso por correo</button></p>
+  <h2>Emitir prevención · {{ s.folio }} · {{ s.denominacion }}</h2>
+  <p class="nota">Elige las observaciones (cláusulas reales de las NOM). Se genera el oficio en PDF y se envía el aviso al buzón de la empresa.</p>
+  <form method="post" action="/dictaminador/prevenir/{{ s.id }}">
+    <div style="max-height:320px;overflow:auto;border:1px solid #d9dee3;border-radius:5px;padding:6px 10px">
+    {% for o in catalogo %}
+      <label style="font-weight:400;display:flex;gap:8px;align-items:flex-start;margin:6px 0">
+        <input type="checkbox" name="obs" value="{{ o.i }}">
+        <span><b>{{ o.seccion }} · {{ o.cita }}</b> ({{ o.severidad }}) — {{ o.texto }}</span>
+      </label>
+    {% endfor %}
+    </div>
+    <label>Plazo para desahogar (días hábiles)</label>
+    <select name="plazo"><option>5</option><option selected>10</option><option>15</option><option>20</option></select>
+    <p><button type="submit">Emitir prevención y enviar aviso</button></p>
   </form>
 </div>
-{% endfor %}
+{% endif %}{% endfor %}
 <div class="tarjeta">
   <h1>Notificaciones emitidas</h1>
   <table>

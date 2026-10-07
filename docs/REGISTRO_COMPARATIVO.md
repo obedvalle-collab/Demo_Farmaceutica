@@ -39,6 +39,9 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-07 | 5 | Envío de punta a punta con robot en modo guion | Snowflake | | 40 s (folio DGP-2026-48810) | 0 (sin IA) | Botón → paquete 27 docs/5 módulos → portal → captura en la app → confirmación → folio. El robot mantiene encendido el warehouse mientras escucha la cola |
 | 2026-10-07 | 5 | Procesar 9 correcciones por la bandeja | Databricks | | 6.3 min | pendiente | gpt-oss ubicó mal el informe de estabilidad corregido (3.2.S.7 en vez de 3.2.P.8) → se agregó "Cambiar ubicación" en la bandeja; reubicado, el candado se abre |
 | 2026-10-07 | 5 | Envío de punta a punta con robot en modo guion | Databricks | | 59 s (folio DGP-2026-83739) | 0 (sin IA) | Mismo flujo que Snowflake; la app de Databricks tarda más en cada recarga (~10–20 s) |
+| 2026-10-07 | 6 | Ciclo de prevención completo (aviso → apertura → análisis IA → tareas → borrador → correos) | Snowflake | | 135 s (vigía detecta el aviso en 8 s) | pendiente | Claude Sonnet 4.5: 3/3 observaciones, borrador 4,701 caracteres. Correo con `SYSTEM$SEND_EMAIL` en una línea. `AI_COMPLETE` devuelve el texto entrecomillado (se decodifica) |
+| 2026-10-07 | 6 | Ciclo de prevención completo (aviso → apertura → análisis IA → tareas → borrador → correos) | Databricks | | 183 s | pendiente | gpt-oss-120b: 3/3 observaciones, borrador 2,804 caracteres. Sin correo en SQL: alerta SQL + job; el job no admite alertas v2 (se usó la API anterior) y la app necesita permiso sobre el job |
+| 2026-10-07 | 6 | Vista 5 publicada (mismo código) | Ambas | | SF 9.3 s · DB 18.8 s | – | Primera versión del borrador afirmaba correcciones inexistentes → instrucción endurecida con marcadores [PENDIENTE] |
 
 ## Notas por fase
 

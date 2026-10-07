@@ -63,12 +63,14 @@ Las decisiones importantes se anotan en `docs/DECISIONES.md`.
 - Portal COFEPRIS simulado.
 - Botón **Enviar** → el agente con computer use entra al portal con las credenciales de demo, sube el paquete y **se detiene antes del envío final**, mostrando al usuario la pantalla para que confirme. Tras confirmar: folio y acuse.
 - **Listo cuando:** un expediente completo se envía de punta a punta con una sola confirmación humana.
+- ✅ **Terminada en modo guion (2026-10-07):** envío probado en ambas (SF 40 s, DB 59 s). La prueba con computer use queda para el final (falta saldo en la API de Anthropic).
 
 ### Fase 6 — Prevenciones y alertas · Vista 5 ⭐
 - Detección: el "vigía" revisa por dónde avisa COFEPRIS (correo y/o portal; según lo que se confirme en Fase 0) y descarga el oficio.
 - La IA separa observaciones, las liga a documento y cláusula, crea tareas con cuenta regresiva y redacta la respuesta.
 - Alertas al personal **por correo** (y aviso dentro de la app), más recordatorios de plazo.
 - **Listo cuando:** el dictaminador simulado emite una prevención y, sin intervención, el responsable recibe el correo con observación, cláusula y fecha límite.
+- ✅ **Terminada (2026-10-07):** ciclo completo en ambas (SF 135 s, DB 183 s), 3/3 observaciones, correos enviados. Ver `docs/resultados/FASE6_RESULTADOS.md`.
 
 ### Fase 7 — Vistas restantes · Vistas 1, 4, 6, 8, 9, 10
 - Portafolio, pre-auditoría, versiones, asistente, analítica, gobierno y bitácora.
