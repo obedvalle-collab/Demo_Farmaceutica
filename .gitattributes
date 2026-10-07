@@ -1,0 +1,10 @@
+# Archivos binarios: Git no debe tocar sus bytes
+*.pdf binary
+*.png binary
+*.jpg binary
+*.p8 binary
+# Texto con fin de línea fijo
+*.csv text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.sql text eol=lf
