@@ -79,7 +79,9 @@ def _bandeja(datos, tramite):
     archivo = st.file_uploader("Documento PDF", type=["pdf"], key=f"subir_{tramite}")
     if archivo and st.button("Procesar documento", type="primary"):
         with st.spinner("Leyendo y revisando el documento (≈ 30–60 s)…"):
-            r = datos.cargar_documento(tramite, archivo.name, archivo.getvalue())
+            st.session_state[f"ultimo_{tramite}"] = datos.cargar_documento(tramite, archivo.name, archivo.getvalue())
+    r = st.session_state.get(f"ultimo_{tramite}")
+    if r:
         if r.get("error"):
             st.error(r["error"])
         else:
@@ -89,7 +91,16 @@ def _bandeja(datos, tramite):
                     st.markdown(f'<div class="hallazgo">{x}</div>', unsafe_allow_html=True)
             else:
                 st.info("Sin hallazgos: el documento cumple las reglas revisadas.")
-            st.button("Actualizar expediente")
+            # si la IA lo ubicó mal, la persona lo reubica
+            opciones = {f"{x['seccion_ctd']} · {x['nombre_requisito']}": x["requisito_id"] for x in datos.expediente(tramite)}
+            actual = next((k for k, v in opciones.items() if v == r["requisito_id"]), list(opciones)[0])
+            elegido = st.selectbox("¿Ubicación correcta?", list(opciones), index=list(opciones).index(actual), key=f"reubicar_{tramite}")
+            c1, c2 = st.columns(2)
+            if opciones[elegido] != r["requisito_id"] and c1.button("Cambiar ubicación"):
+                datos.reubicar(tramite, r["archivo"], opciones[elegido])
+                st.session_state.pop(f"ultimo_{tramite}", None); st.rerun()
+            if c2.button("Listo"):
+                st.session_state.pop(f"ultimo_{tramite}", None); st.rerun()
 
 
 def _envio(datos, tramite, c, usuario):

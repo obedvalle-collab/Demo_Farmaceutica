@@ -111,7 +111,11 @@ class DatosDatabricks:
                 {**a, "t": tramite, "q": r["req"]})
         hall = [h["hallazgo"] + (f" ({h['norma']} {h['clausula']})" if h["norma"] else "") for h in
                 self._q(f"SELECT hallazgo, norma, clausula FROM {CAT}.negocio.hallazgos_ia WHERE archivo = :a", a)]
-        return {"seccion_ctd": r["sec"], "tipo_documento": r["tipo"], "version": version, "hallazgos": hall}
+        return {"archivo": archivo, "requisito_id": r["req"], "seccion_ctd": r["sec"], "tipo_documento": r["tipo"], "version": version, "hallazgos": hall}
+
+    def reubicar(self, tramite, archivo, requisito_id):
+        self._q(f"""UPDATE {CAT}.app.cargas SET requisito_id = :q, origen = 'Bandeja (reubicado por usuario)'
+                    WHERE tramite_id = :t AND archivo = :a""", {"q": requisito_id, "t": tramite, "a": archivo})
 
     @staticmethod
     def _sql_aplanar():

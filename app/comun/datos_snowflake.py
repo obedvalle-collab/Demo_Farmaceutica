@@ -96,7 +96,11 @@ class DatosSnowflake:
                    params=[tramite, r["REQ"], archivo, version]).collect()
         hall = [h["HALLAZGO"] + (f" ({h['NORMA']} {h['CLAUSULA']})" if h["NORMA"] else "") for h in
                 self._q(f"SELECT hallazgo, norma, clausula FROM {BD}.NEGOCIO.HALLAZGOS_IA WHERE archivo = ?", [archivo])]
-        return {"seccion_ctd": r["SEC"], "tipo_documento": r["TIPO"], "version": version, "hallazgos": hall}
+        return {"archivo": archivo, "requisito_id": r["REQ"], "seccion_ctd": r["SEC"], "tipo_documento": r["TIPO"], "version": version, "hallazgos": hall}
+
+    def reubicar(self, tramite, archivo, requisito_id):
+        self.s.sql(f"""UPDATE {BD}.APP.CARGAS SET requisito_id = ?, origen = 'Bandeja (reubicado por usuario)'
+                       WHERE tramite_id = ? AND archivo = ?""", params=[requisito_id, tramite, archivo]).collect()
 
     @staticmethod
     def _sql_aplanar():

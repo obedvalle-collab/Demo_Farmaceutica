@@ -37,6 +37,8 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-07 | 5 | Publicar la app (mismo código Streamlit) | Snowflake | | 6 s | por uso (warehouse) | Streamlit in Snowflake, runtime de warehouse (el de contenedor pide compute pool) |
 | 2026-10-07 | 5 | Publicar la app (mismo código Streamlit) | Databricks | | 3.2 min | por hora encendida | Databricks Apps; requiere permisos explícitos para la identidad de servicio de la app; consultas más lentas (~40 s primera carga) |
 | 2026-10-07 | 5 | Envío de punta a punta con robot en modo guion | Snowflake | | 40 s (folio DGP-2026-48810) | 0 (sin IA) | Botón → paquete 27 docs/5 módulos → portal → captura en la app → confirmación → folio. El robot mantiene encendido el warehouse mientras escucha la cola |
+| 2026-10-07 | 5 | Procesar 9 correcciones por la bandeja | Databricks | | 6.3 min | pendiente | gpt-oss ubicó mal el informe de estabilidad corregido (3.2.S.7 en vez de 3.2.P.8) → se agregó "Cambiar ubicación" en la bandeja; reubicado, el candado se abre |
+| 2026-10-07 | 5 | Envío de punta a punta con robot en modo guion | Databricks | | 59 s (folio DGP-2026-83739) | 0 (sin IA) | Mismo flujo que Snowflake; la app de Databricks tarda más en cada recarga (~10–20 s) |
 
 ## Notas por fase
 
