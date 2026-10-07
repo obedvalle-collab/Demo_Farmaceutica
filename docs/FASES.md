@@ -45,6 +45,8 @@ Las decisiones importantes se anotan en `docs/DECISIONES.md`.
 ### Fase 2 — Normas · Vista 7
 - Cargar NOM, leerlas con IA, partirlas por cláusula, buscador semántico.
 - **Listo cuando:** se puede buscar "estabilidad acelerada" y aparecen las cláusulas correctas de la NOM-073 en ambas plataformas.
+- 🟡 **Casi terminada (2026-10-06):** buscador funcionando en ambas (12/12 Snowflake, 11/12 Databricks, solo vigentes). Ver `docs/resultados/FASE2_RESULTADOS.md`.
+  Pendiente: costo real y experimento de vectores precalculados en Databricks. El índice de Databricks se borró al cerrar la sesión (hay que recrearlo: `python databricks/fase2_normas.py indice`).
 
 ### Fase 3 — Capas de datos
 - Capa cruda → limpia → negocio (cobertura CTD, plazos en días hábiles, KPIs).

@@ -14,6 +14,12 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-06 | 0 | Repositorio GitHub | – | | – | 0 | Git no estaba instalado (se instaló con winget); el primer `push` necesita inicio de sesión interactivo en GitHub |
 | 2026-10-06 | 0 | Descarga de normas a `normas/` | – | | – | 0 | El enlace de "Reglamento de Insumos" en diputados.gob.mx era en realidad el de Investigación; el RIS vigente (reforma 24/04/2026) se tomó de gob.mx. Dos documentos solo existen como página del DOF (HTML) |
 | 2026-10-06 | 1 | Generador de datos ficticios (tablas + 54 PDF + hoja de respuestas) | Local (Python) | | generación completa ≈ 2 s | 0 | Independiente de plataforma. Se leyeron las NOM para citar cláusulas reales. Ajustes de maquetación de PDF (firmas y sellos que saltaban de página) |
+| 2026-10-06 | 2 | Leer ~1,000 páginas de normas con IA | Snowflake | | 13.7 min | pendiente | `AI_PARSE_DOCUMENT` LAYOUT; sin errores |
+| 2026-10-06 | 2 | Leer ~1,000 páginas de normas con IA | Databricks | | 24 min | pendiente | `ai_parse_document`; un documento superó los 5 min de espera del cliente (sí terminó en la plataforma) |
+| 2026-10-06 | 2 | Partición por cláusula (mismo código) | Snowflake | | 8 s | – | Función Python no admite parámetros opcionales → envoltorio |
+| 2026-10-06 | 2 | Partición por cláusula (mismo código) | Databricks | | 28 s | – | Función Python en Unity Catalog devolviendo JSON |
+| 2026-10-06 | 2 | Buscador semántico | Snowflake | | 4.3 min | pendiente | Cortex Search: 1 sentencia SQL, se puede pausar. Examen: 12/12 (solo vigentes) |
+| 2026-10-06 | 2 | Buscador semántico | Databricks | | 25 min endpoint + 56 min índice | pendiente | Vector Search: endpoint cobra mientras exista (se borra al terminar). Solo 1 modelo multilingüe. Examen: 11/12 (solo vigentes) |
 
 ## Notas por fase
 

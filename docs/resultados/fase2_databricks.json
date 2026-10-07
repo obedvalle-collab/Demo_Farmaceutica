@@ -1,0 +1,362 @@
+{
+  "todas_las_normas": {
+    "plataforma": "Databricks",
+    "fecha": "2026-10-06T22:04:01",
+    "acierto_clausula_top3": "9/12",
+    "acierto_norma_top3": "11/12",
+    "latencia_ms_mediana": 356,
+    "preguntas": [
+      {
+        "pregunta": "¿A qué temperatura y por cuánto tiempo se hace la estabilidad acelerada de un medicamento genérico?",
+        "esperada": "NOM-073-SSA1-2015 8.5.1",
+        "acierto_top3": false,
+        "norma_top3": true,
+        "posicion": null,
+        "latencia_ms": 1306,
+        "top3": [
+          "NOM-073-SSA1-2015 8.4.1",
+          "NOM-073-SSA1-2015 8.4",
+          "NOM-073-SSA1-2015 8.5.1.2"
+        ]
+      },
+      {
+        "pregunta": "¿Cuántos lotes necesito para el estudio de estabilidad de un genérico?",
+        "esperada": "NOM-073-SSA1-2015 8.1",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 1,
+        "latencia_ms": 354,
+        "top3": [
+          "NOM-073-SSA1-2015 8.1",
+          "NOM-073-SSA1-2015 5.1",
+          "NOM-073-SSA1-2015 7.1"
+        ]
+      },
+      {
+        "pregunta": "Leyenda obligatoria en la caja de un medicamento que solo se vende con receta",
+        "esperada": "NOM-072-SSA1-2012 6.1.4",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 3,
+        "latencia_ms": 313,
+        "top3": [
+          "RIS Art. 33",
+          "NOM-072-SSA1-2012 6.2.2.1",
+          "NOM-072-SSA1-2012 6.1.4"
+        ]
+      },
+      {
+        "pregunta": "Siglas que deben aparecer en el empaque de un biocomparable",
+        "esperada": "NOM-072-SSA1-2012 5.31.7",
+        "acierto_top3": false,
+        "norma_top3": true,
+        "posicion": 4,
+        "latencia_ms": 354,
+        "top3": [
+          "PROY-NOM-072-SSA1-2025 5.31.6.3",
+          "RIS Art. 24 Bis",
+          "NOM-072-SSA1-2012 5.31.7.3"
+        ]
+      },
+      {
+        "pregunta": "Leyenda para medicamentos de enfermedades crónicas sobre no vender por partes",
+        "esperada": "NOM-072-SSA1-2012 5.19",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 1,
+        "latencia_ms": 441,
+        "top3": [
+          "NOM-072-SSA1-2012 5.19",
+          "PROY-NOM-072-SSA1-2025 5.19",
+          "PROY-NOM-072-SSA1-2025 5.33.2.1.1"
+        ]
+      },
+      {
+        "pregunta": "Criterio estadístico del intervalo de confianza para declarar bioequivalencia",
+        "esperada": "NOM-177-SSA1-2013 9.6.4",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 2,
+        "latencia_ms": 356,
+        "top3": [
+          "PROY-NOM-177-SSA1-2025 10.7.4.2",
+          "NOM-177-SSA1-2013 9.6.4",
+          "PROY-NOM-177-SSA1-2025 10.11"
+        ]
+      },
+      {
+        "pregunta": "Valor mínimo del factor de similitud al comparar perfiles de disolución",
+        "esperada": "NOM-177-SSA1-2013 7.5.5",
+        "acierto_top3": false,
+        "norma_top3": false,
+        "posicion": null,
+        "latencia_ms": 341,
+        "top3": [
+          "PROY-NOM-177-SSA1-2025 7.5.5.4",
+          "PROY-NOM-177-SSA1-2025 7.5.5",
+          "PROY-NOM-177-SSA1-2025 7.5.5.5"
+        ]
+      },
+      {
+        "pregunta": "¿Qué debe incluir el plan de minimización de riesgos en farmacovigilancia?",
+        "esperada": "NOM-220-SSA1-2016 8.4.3.1.4",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 2,
+        "latencia_ms": 330,
+        "top3": [
+          "PROY-NOM-220-SSA1-2024 8.4.3.1.3",
+          "NOM-220-SSA1-2016 8.4.3.1.4",
+          "NOM-220-SSA1-2016 4.51"
+        ]
+      },
+      {
+        "pregunta": "¿Con cuántos lotes consecutivos se califica el proceso de fabricación?",
+        "esperada": "NOM-059-SSA1-2015 9.9.2.2.3",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 2,
+        "latencia_ms": 530,
+        "top3": [
+          "NOM-164-SSA1-2015 9.9.2.2.3",
+          "NOM-059-SSA1-2015 9.9.2.2.3",
+          "NOM-164-SSA1-2015 9.9.2.2.2.1"
+        ]
+      },
+      {
+        "pregunta": "Programa de auditorías internas para medicamentos biotecnológicos",
+        "esperada": "NOM-257-SSA1-2014 6.1.3",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 1,
+        "latencia_ms": 354,
+        "top3": [
+          "NOM-257-SSA1-2014 6.1.3",
+          "NOM-257-SSA1-2014 6.1.4",
+          "PROY-NOM-177-SSA1-2025 11.6.17.1"
+        ]
+      },
+      {
+        "pregunta": "Documentos que se presentan para obtener el registro sanitario de un medicamento alopático",
+        "esperada": "RIS Art. 167",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 3,
+        "latencia_ms": 434,
+        "top3": [
+          "RIS Art. 170",
+          "RIS Art. 167 Bis",
+          "RIS Art. 167"
+        ]
+      },
+      {
+        "pregunta": "¿Cuánto dura el registro sanitario de un medicamento y su prórroga?",
+        "esperada": "LGS Art. 376",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 3,
+        "latencia_ms": 382,
+        "top3": [
+          "RIS Art. 190 Bis 1",
+          "NOM-220-SSA1-2016 8.4.1.2",
+          "LGS Art. 376"
+        ]
+      }
+    ]
+  },
+  "solo_vigentes": {
+    "plataforma": "Databricks",
+    "fecha": "2026-10-06T22:04:07",
+    "acierto_clausula_top3": "11/12",
+    "acierto_norma_top3": "12/12",
+    "latencia_ms_mediana": 482,
+    "preguntas": [
+      {
+        "pregunta": "¿A qué temperatura y por cuánto tiempo se hace la estabilidad acelerada de un medicamento genérico?",
+        "esperada": "NOM-073-SSA1-2015 8.5.1",
+        "acierto_top3": false,
+        "norma_top3": true,
+        "posicion": null,
+        "latencia_ms": 1017,
+        "top3": [
+          "NOM-073-SSA1-2015 8.4.1",
+          "NOM-073-SSA1-2015 8.4",
+          "NOM-073-SSA1-2015 8.5.1.2"
+        ]
+      },
+      {
+        "pregunta": "¿Cuántos lotes necesito para el estudio de estabilidad de un genérico?",
+        "esperada": "NOM-073-SSA1-2015 8.1",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 1,
+        "latencia_ms": 482,
+        "top3": [
+          "NOM-073-SSA1-2015 8.1",
+          "NOM-073-SSA1-2015 5.1",
+          "NOM-073-SSA1-2015 7.1"
+        ]
+      },
+      {
+        "pregunta": "Leyenda obligatoria en la caja de un medicamento que solo se vende con receta",
+        "esperada": "NOM-072-SSA1-2012 6.1.4",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 3,
+        "latencia_ms": 368,
+        "top3": [
+          "RIS Art. 33",
+          "NOM-072-SSA1-2012 6.2.2.1",
+          "NOM-072-SSA1-2012 6.1.4"
+        ]
+      },
+      {
+        "pregunta": "Siglas que deben aparecer en el empaque de un biocomparable",
+        "esperada": "NOM-072-SSA1-2012 5.31.7",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 3,
+        "latencia_ms": 339,
+        "top3": [
+          "RIS Art. 24 Bis",
+          "NOM-072-SSA1-2012 5.31.7.3",
+          "NOM-072-SSA1-2012 5.31.7"
+        ]
+      },
+      {
+        "pregunta": "Leyenda para medicamentos de enfermedades crónicas sobre no vender por partes",
+        "esperada": "NOM-072-SSA1-2012 5.19",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 1,
+        "latencia_ms": 836,
+        "top3": [
+          "NOM-072-SSA1-2012 5.19",
+          "NOM-072-SSA1-2012 6.2.1.7",
+          "RIS Art. 33"
+        ]
+      },
+      {
+        "pregunta": "Criterio estadístico del intervalo de confianza para declarar bioequivalencia",
+        "esperada": "NOM-177-SSA1-2013 9.6.4",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 1,
+        "latencia_ms": 341,
+        "top3": [
+          "NOM-177-SSA1-2013 9.6.4",
+          "NOM-177-SSA1-2013 9.6.6",
+          "NOM-177-SSA1-2013 9.6.6.2"
+        ]
+      },
+      {
+        "pregunta": "Valor mínimo del factor de similitud al comparar perfiles de disolución",
+        "esperada": "NOM-177-SSA1-2013 7.5.5",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 1,
+        "latencia_ms": 336,
+        "top3": [
+          "NOM-177-SSA1-2013 7.5.5",
+          "NOM-177-SSA1-2013 7.5.6",
+          "NOM-177-SSA1-2013 E.9.2"
+        ]
+      },
+      {
+        "pregunta": "¿Qué debe incluir el plan de minimización de riesgos en farmacovigilancia?",
+        "esperada": "NOM-220-SSA1-2016 8.4.3.1.4",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 1,
+        "latencia_ms": 921,
+        "top3": [
+          "NOM-220-SSA1-2016 8.4.3.1.4",
+          "NOM-220-SSA1-2016 4.51",
+          "NOM-220-SSA1-2016 8.4.3.3.4"
+        ]
+      },
+      {
+        "pregunta": "¿Con cuántos lotes consecutivos se califica el proceso de fabricación?",
+        "esperada": "NOM-059-SSA1-2015 9.9.2.2.3",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 2,
+        "latencia_ms": 331,
+        "top3": [
+          "NOM-164-SSA1-2015 9.9.2.2.3",
+          "NOM-059-SSA1-2015 9.9.2.2.3",
+          "NOM-164-SSA1-2015 9.9.2.2.2.1"
+        ]
+      },
+      {
+        "pregunta": "Programa de auditorías internas para medicamentos biotecnológicos",
+        "esperada": "NOM-257-SSA1-2014 6.1.3",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 1,
+        "latencia_ms": 497,
+        "top3": [
+          "NOM-257-SSA1-2014 6.1.3",
+          "NOM-257-SSA1-2014 6.1.4",
+          "NOM-257-SSA1-2014 6.1.1"
+        ]
+      },
+      {
+        "pregunta": "Documentos que se presentan para obtener el registro sanitario de un medicamento alopático",
+        "esperada": "RIS Art. 167",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 3,
+        "latencia_ms": 499,
+        "top3": [
+          "RIS Art. 170",
+          "RIS Art. 167 Bis",
+          "RIS Art. 167"
+        ]
+      },
+      {
+        "pregunta": "¿Cuánto dura el registro sanitario de un medicamento y su prórroga?",
+        "esperada": "LGS Art. 376",
+        "acierto_top3": true,
+        "norma_top3": true,
+        "posicion": 3,
+        "latencia_ms": 346,
+        "top3": [
+          "RIS Art. 190 Bis 1",
+          "NOM-220-SSA1-2016 8.4.1.2",
+          "LGS Art. 376"
+        ]
+      }
+    ]
+  },
+  "tiempos_s": {
+    "1. Esquemas y volume": 3.23,
+    "2. Subir PDF al volume": 22.95,
+    "3a. segundos por documento": {
+      "ICH_M4_R4.pdf": 52.5,
+      "ICH_Q1A_R2.pdf": 119.3,
+      "LEY_GENERAL_DE_SALUD.pdf": 217.6,
+      "MOD-NOM-059-SSA1-2015_DOF-2025-03-19.pdf": 5.9,
+      "NOM-012-SSA3-2012.pdf": 7.0,
+      "NOM-059-SSA1-2015.pdf": 110.2,
+      "NOM-072-SSA1-2012.pdf": 36.9,
+      "NOM-073-SSA1-2015.pdf": 43.7,
+      "NOM-164-SSA1-2015.pdf": 86.2,
+      "NOM-177-SSA1-2013.pdf": 108.7,
+      "NOM-220-SSA1-2016.pdf": 16.6,
+      "NOM-257-SSA1-2014.pdf": 10.2,
+      "PROY-NOM-072-SSA1-2025.pdf": 17.5,
+      "PROY-NOM-177-SSA1-2025.pdf": 81.1,
+      "PROY-NOM-220-SSA1-2024_DOF-2024-07-25.pdf": 8.1,
+      "REGLAMENTO_INSUMOS_SALUD.pdf": 46.7,
+      "REGLAMENTO_INVESTIGACION_SALUD.pdf": "> 300 (el cliente dejó de esperar; la lectura terminó en la plataforma)"
+    },
+    "3. Lectura con IA (ai_parse_document)": 1442.16,
+    "4. Funciones de partición (mismo código que Snowflake)": 1.97,
+    "5. Capa limpia: cláusulas y fragmentos": 28.08,
+    "6a. endpoint listo tras (s)": 1499.0,
+    "6b. sincronización del índice (s)": 3378.1,
+    "6. Buscador (Vector Search, qwen3-embedding multilingüe)": 3381.05,
+    "7. Examen del buscador": 5.64
+  }
+}

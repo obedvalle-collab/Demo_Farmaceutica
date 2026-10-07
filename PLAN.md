@@ -1,6 +1,6 @@
 # Obed Farmacéutica — Plan del proyecto
 
-> Estado: **Fase 1 terminada** (2026-10-06). Fase 0: conexiones `obed_farma` y normas en `normas/`. Fase 1: datos de Laboratorios Altamira en `datos/` (ver `datos/README.md`). Siguiente: Fase 2 (normas en ambas plataformas).
+> Estado: **Fase 2 casi terminada** (2026-10-06). Buscador de normas funcionando en ambas plataformas (ver `docs/resultados/FASE2_RESULTADOS.md`). Pendiente: costo real y experimento de vectores en Databricks. Siguiente: Fase 3 (capas de datos).
 
 ## 1. Objetivo
 
