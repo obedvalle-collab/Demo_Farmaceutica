@@ -1,6 +1,6 @@
 # Obed Farmacéutica — Plan del proyecto
 
-> Estado: **Fase 3 terminada** (2026-10-07). Capas cruda, limpia y de negocio en ambas plataformas (ver `docs/resultados/`). Siguiente: Fase 4 (IA documental: bandeja de carga inteligente).
+> Estado: **Fase 4 terminada** (2026-10-07). Bandeja de carga inteligente en ambas plataformas (ver `docs/resultados/`). Siguiente: Fase 5 (expediente CTD y envío con un botón).
 
 ## 1. Objetivo
 

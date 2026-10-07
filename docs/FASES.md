@@ -56,6 +56,7 @@ Las decisiones importantes se anotan en `docs/DECISIONES.md`.
 ### Fase 4 — IA documental · Vista 3
 - Subir PDF → clasificar → asignar espacio CTD → extraer metadatos → validar contra la NOM.
 - **Listo cuando:** la IA detecta la mayoría de los defectos sembrados (se mide el porcentaje).
+- ✅ **Terminada (2026-10-07):** Snowflake 19/20 defectos, Databricks 16/20, ambas sin falsas alarmas. Ver `docs/resultados/FASE4_RESULTADOS.md`.
 
 ### Fase 5 — Expediente y envío con un botón · Vista 2
 - Árbol CTD, estatus por requisito, candado de "listo para envío".

@@ -29,6 +29,8 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-07 | 3 | Capa limpia + 98 controles de calidad | Snowflake | | 31 s | mínimo | 98/98 OK |
 | 2026-10-07 | 3 | Capa limpia + 98 controles de calidad | Databricks | | 67 s | mínimo | 98/98 OK |
 | 2026-10-07 | 3 | Capa de negocio (SQL compartido sin cambios) | Ambas | | 7.6 s / 12.9 s | mínimo | Las 8 vistas idénticas renglón por renglón. Consultas: SF 0.3–3.5 s, DB 1.1–5.1 s |
+| 2026-10-07 | 4 | Bandeja: leer + clasificar + extraer 54 PDF | Snowflake | | 15.5 min (24 s lectura + 11 s extracción por doc) | pendiente | Claude Sonnet 4.5. Clasificación 52/54, defectos 19/20, 0 falsas alarmas. Validador JSON rechazó 2 respuestas por acentos |
+| 2026-10-07 | 4 | Bandeja: leer + clasificar + extraer 54 PDF | Databricks | | 8.7 min (10 s lectura + 18 s extracción por doc) | pendiente | gpt-oss-120b. Clasificación 42/54, defectos 16/20, 0 falsas alarmas. Detecta firmas en escaneados. 1.ª corrida con encabezados filtrados: 9/20 |
 
 ## Notas por fase
 
