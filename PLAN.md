@@ -1,6 +1,6 @@
 # Obed Farmacéutica — Plan del proyecto
 
-> Estado: **Fase 0 – preparación** (plan acordado el 2026-10-06). No se ha creado nada en Snowflake ni en Databricks.
+> Estado: **Fase 0 terminada** (2026-10-06). Conexiones `obed_farma` listas en Snowflake y Databricks; normas en `normas/`. Siguiente: Fase 1 (datos ficticios).
 
 ## 1. Objetivo
 
@@ -106,8 +106,8 @@ App (Streamlit en Snowflake / Databricks Apps) + bitácora y permisos
 ## 8. Pendientes inmediatos
 
 1. ~~Aprobar el plan de fases~~ → en paralelo, fase por fase (`docs/FASES.md`).
-2. Investigar cómo notifica COFEPRIS las prevenciones y cómo se accede a DIGIPRiS.
-3. Confirmar la versión vigente de cada NOM en el DOF y descargarlas a `normas/`.
-4. Confirmar los plazos legales (resolución y desahogo de prevención) por tipo de trámite.
-5. Crear la conexión propia en `~/.snowflake/connections.toml` y el perfil de Databricks.
-6. (Opcional) Crear el repositorio en GitHub.
+2. ~~Investigar notificaciones y acceso a DIGIPRiS~~ → `docs/INVESTIGACION_FASE0.md`.
+3. ~~Confirmar NOM vigentes y descargarlas~~ → `normas/README.md`.
+4. ~~Confirmar plazos legales~~ → `docs/INVESTIGACION_FASE0.md` (el plazo de prevención lo fija cada oficio).
+5. ~~Conexiones~~ → Snowflake `obed_farma` (llave RSA) y Databricks perfil `obed_farma`.
+6. ~~Repositorio~~ → https://github.com/obedvalle-collab/Demo_Farmaceutica
