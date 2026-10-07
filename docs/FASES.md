@@ -40,6 +40,7 @@ Las decisiones importantes se anotan en `docs/DECISIONES.md`.
 - Tablas: productos, trámites, requisitos CTD, documentos/versiones, prevenciones/observaciones, respuestas/tareas, calendario hábil, usuarios/roles.
 - PDF ficticios con defectos sembrados a propósito y oficios de prevención activos.
 - **Listo cuando:** `datos/salida/` tiene el paquete completo y una lista de los defectos sembrados (para medir si la IA los detecta).
+- ✅ **Terminada el 2026-10-06:** 14 tablas (160 trámites, 1,474 documentos, 349 observaciones), 54 PDF (7 escaneados) y 20 defectos sembrados en `datos/salida/defectos_sembrados.csv`.
 
 ### Fase 2 — Normas · Vista 7
 - Cargar NOM, leerlas con IA, partirlas por cláusula, buscador semántico.

@@ -13,6 +13,7 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-06 | 0 | Conexión local `obed_farma` (llave RSA) + prueba | Snowflake | | conexión 4.8 s · consulta 0.21 s · Cortex COMPLETE 3.9 s | mínimo | Funciona con rol `FARMA_BUILDER`, warehouse `FARMA_WH`; Cortex responde |
 | 2026-10-06 | 0 | Repositorio GitHub | – | | – | 0 | Git no estaba instalado (se instaló con winget); el primer `push` necesita inicio de sesión interactivo en GitHub |
 | 2026-10-06 | 0 | Descarga de normas a `normas/` | – | | – | 0 | El enlace de "Reglamento de Insumos" en diputados.gob.mx era en realidad el de Investigación; el RIS vigente (reforma 24/04/2026) se tomó de gob.mx. Dos documentos solo existen como página del DOF (HTML) |
+| 2026-10-06 | 1 | Generador de datos ficticios (tablas + 54 PDF + hoja de respuestas) | Local (Python) | | generación completa ≈ 2 s | 0 | Independiente de plataforma. Se leyeron las NOM para citar cláusulas reales. Ajustes de maquetación de PDF (firmas y sellos que saltaban de página) |
 
 ## Notas por fase
 

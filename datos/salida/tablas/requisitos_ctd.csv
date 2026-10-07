@@ -1,0 +1,109 @@
+plantilla_id,tipo_tramite,familia,requisito_id,modulo,seccion_ctd,nombre,norma,clausula,fundamento,area_responsable,formato_requerido,obligatorio
+REG_GEN-R001,Registro genérico,Registro nuevo,R001,M1,1.1,Formato de solicitud firmado,,,RIS art. 167; LFPA art. 15,Asuntos Regulatorios,PDF,True
+REG_GEN-R002,Registro genérico,Registro nuevo,R002,M1,1.2,Comprobante de pago de derechos,,,Ley Federal de Derechos art. 195-A,Asuntos Regulatorios,PDF,True
+REG_GEN-R003,Registro genérico,Registro nuevo,R003,M1,1.3.1,Licencia sanitaria del establecimiento fabricante,,,LGS art. 198,Asuntos Regulatorios,PDF,True
+REG_GEN-R004,Registro genérico,Registro nuevo,R004,M1,1.3.2,Instrumento que acredita la representación legal,,,LFPA art. 19,Asuntos Regulatorios,PDF,True
+REG_GEN-R005,Registro genérico,Registro nuevo,R005,M1,1.4.1,Proyecto de etiqueta del envase primario,NOM-072-SSA1-2012,5.24,RIS art. 167 fr. III,Asuntos Regulatorios,PDF,True
+REG_GEN-R006,Registro genérico,Registro nuevo,R006,M1,1.4.1,Proyecto de etiqueta del envase secundario,NOM-072-SSA1-2012,5.21; 6.1,RIS art. 167 fr. III,Asuntos Regulatorios,PDF,True
+REG_GEN-R007,Registro genérico,Registro nuevo,R007,M1,1.4.2,Información para prescribir amplia (IPPA),,,RIS art. 167 fr. II,Asuntos Regulatorios,Word editable,True
+REG_GEN-R008,Registro genérico,Registro nuevo,R008,M1,1.4.2,Información para prescribir reducida (IPPR),,,RIS art. 167 fr. II,Asuntos Regulatorios,Word editable,True
+REG_GEN-R009,Registro genérico,Registro nuevo,R009,M1,1.5.1,Documento IMPI de titularidad de patentes o licencia de explotación,,,RIS art. 167 fr. I Bis (reforma DOF 24/04/2026),Asuntos Regulatorios,PDF,True
+REG_GEN-R010,Registro genérico,Registro nuevo,R010,M1,1.6,Plan de manejo de riesgos (PMR),NOM-220-SSA1-2016,8.4.1; 8.4.3,NOM-220-SSA1-2016,Farmacovigilancia,PDF,True
+REG_GEN-R011,Registro genérico,Registro nuevo,R011,M1,1.7.1,Certificado de BPF del medicamento,NOM-059-SSA1-2015,,RIS art. 167 fr. VI,Calidad,PDF,True
+REG_GEN-R012,Registro genérico,Registro nuevo,R012,M1,1.7.2,Certificado de BPF del fármaco,NOM-164-SSA1-2015,,RIS art. 167 fr. VI,Calidad,PDF,True
+REG_GEN-R020,Registro genérico,Registro nuevo,R020,M2,2.3,Resumen global de calidad,,,ICH M4(R4),CMC,PDF,True
+REG_GEN-R030,Registro genérico,Registro nuevo,R030,M3,3.2.S.1,Información general del fármaco,,,ICH M4(R4); RIS art. 167 fr. I a,CMC,PDF,True
+REG_GEN-R031,Registro genérico,Registro nuevo,R031,M3,3.2.S.2,Fabricación del fármaco,NOM-164-SSA1-2015,10,RIS art. 167 fr. VI,CMC,PDF,True
+REG_GEN-R032,Registro genérico,Registro nuevo,R032,M3,3.2.S.4,Certificado de análisis del fármaco,NOM-164-SSA1-2015,11,RIS art. 167 fr. I a,Calidad,PDF,True
+REG_GEN-R033,Registro genérico,Registro nuevo,R033,M3,3.2.S.7,Estabilidad del fármaco,NOM-073-SSA1-2015,6,RIS art. 167 fr. I b,CMC,PDF,True
+REG_GEN-R034,Registro genérico,Registro nuevo,R034,M3,3.2.P.1,Descripción y composición del medicamento,,,ICH M4(R4),CMC,PDF,True
+REG_GEN-R035,Registro genérico,Registro nuevo,R035,M3,3.2.P.3.5,Validación del proceso de fabricación,NOM-059-SSA1-2015,9.9.2.2.3,NOM-059-SSA1-2015,Calidad,PDF,True
+REG_GEN-R036,Registro genérico,Registro nuevo,R036,M3,3.2.P.3.6,Validación de limpieza,NOM-059-SSA1-2015,9.11,NOM-059-SSA1-2015,Calidad,PDF,True
+REG_GEN-R037,Registro genérico,Registro nuevo,R037,M3,3.2.P.5,Certificado de análisis del lote del medicamento,NOM-059-SSA1-2015,5.5.1; 12,NOM-059-SSA1-2015,Calidad,PDF,True
+REG_GEN-R038,Registro genérico,Registro nuevo,R038,M3,3.2.P.5.3,Validación de métodos analíticos,NOM-059-SSA1-2015,9.12,NOM-059-SSA1-2015,Calidad,PDF,True
+REG_GEN-R039,Registro genérico,Registro nuevo,R039,M3,3.2.P.7,Sistema contenedor-cierre,NOM-073-SSA1-2015,8.2,NOM-073-SSA1-2015,CMC,PDF,True
+REG_GEN-R040,Registro genérico,Registro nuevo,R040,M3,3.2.P.8,Estudio de estabilidad del medicamento,NOM-073-SSA1-2015,8.1; 8.4; 8.5.1; 10.19,RIS art. 167 fr. I b,CMC,PDF,True
+REG_GEN-R060,Registro genérico,Registro nuevo,R060,M5,5.3.1.2,Informe del estudio de bioequivalencia,NOM-177-SSA1-2013,8.5.2; 9.6.4,RIS art. 167 fr. V,Clínico,PDF,True
+REG_GEN-R061,Registro genérico,Registro nuevo,R061,M5,5.3.1.3,Perfiles de disolución comparativos,NOM-177-SSA1-2013,7.5.5,RIS art. 167 fr. V,CMC,PDF,True
+REG_GEN-R062,Registro genérico,Registro nuevo,R062,M5,5.3.1.4,Autorización vigente del Tercero Autorizado,NOM-177-SSA1-2013,4.97; 8.11.8,NOM-177-SSA1-2013,Clínico,PDF,True
+REG_BIO-R001,Registro biocomparable,Registro nuevo,R001,M1,1.1,Formato de solicitud firmado,,,RIS art. 167; LFPA art. 15,Asuntos Regulatorios,PDF,True
+REG_BIO-R002,Registro biocomparable,Registro nuevo,R002,M1,1.2,Comprobante de pago de derechos,,,Ley Federal de Derechos art. 195-A,Asuntos Regulatorios,PDF,True
+REG_BIO-R003,Registro biocomparable,Registro nuevo,R003,M1,1.3.1,Licencia sanitaria del establecimiento fabricante,,,LGS art. 198,Asuntos Regulatorios,PDF,True
+REG_BIO-R004,Registro biocomparable,Registro nuevo,R004,M1,1.3.2,Instrumento que acredita la representación legal,,,LFPA art. 19,Asuntos Regulatorios,PDF,True
+REG_BIO-R005,Registro biocomparable,Registro nuevo,R005,M1,1.4.1,Proyecto de etiqueta del envase primario,NOM-072-SSA1-2012,5.24,RIS art. 167 fr. III,Asuntos Regulatorios,PDF,True
+REG_BIO-R006,Registro biocomparable,Registro nuevo,R006,M1,1.4.1,Proyecto de etiqueta del envase secundario,NOM-072-SSA1-2012,5.21; 6.1,RIS art. 167 fr. III,Asuntos Regulatorios,PDF,True
+REG_BIO-R007,Registro biocomparable,Registro nuevo,R007,M1,1.4.2,Información para prescribir amplia (IPPA),,,RIS art. 167 fr. II,Asuntos Regulatorios,Word editable,True
+REG_BIO-R008,Registro biocomparable,Registro nuevo,R008,M1,1.4.2,Información para prescribir reducida (IPPR),,,RIS art. 167 fr. II,Asuntos Regulatorios,Word editable,True
+REG_BIO-R010,Registro biocomparable,Registro nuevo,R010,M1,1.6,Plan de manejo de riesgos (PMR),NOM-220-SSA1-2016,8.4.1; 8.4.3,NOM-220-SSA1-2016,Farmacovigilancia,PDF,True
+REG_BIO-R011,Registro biocomparable,Registro nuevo,R011,M1,1.7.1,Certificado de BPF del medicamento,NOM-059-SSA1-2015,,RIS art. 167 fr. VI,Calidad,PDF,True
+REG_BIO-R014,Registro biocomparable,Registro nuevo,R014,M1,1.9,Informe periódico de seguridad,NOM-220-SSA1-2016,8.2,NOM-220-SSA1-2016,Farmacovigilancia,PDF,False
+REG_BIO-R020,Registro biocomparable,Registro nuevo,R020,M2,2.3,Resumen global de calidad,,,ICH M4(R4),CMC,PDF,True
+REG_BIO-R021,Registro biocomparable,Registro nuevo,R021,M2,2.4,Resumen no clínico,,,ICH M4(R4),Clínico,PDF,True
+REG_BIO-R022,Registro biocomparable,Registro nuevo,R022,M2,2.5,Resumen clínico,,,ICH M4(R4),Clínico,PDF,True
+REG_BIO-R030,Registro biocomparable,Registro nuevo,R030,M3,3.2.S.1,Información general del fármaco,,,ICH M4(R4); RIS art. 167 fr. I a,CMC,PDF,True
+REG_BIO-R031,Registro biocomparable,Registro nuevo,R031,M3,3.2.S.2,Fabricación del fármaco,NOM-164-SSA1-2015,10,RIS art. 167 fr. VI,CMC,PDF,True
+REG_BIO-R032,Registro biocomparable,Registro nuevo,R032,M3,3.2.S.4,Certificado de análisis del fármaco,NOM-164-SSA1-2015,11,RIS art. 167 fr. I a,Calidad,PDF,True
+REG_BIO-R034,Registro biocomparable,Registro nuevo,R034,M3,3.2.P.1,Descripción y composición del medicamento,,,ICH M4(R4),CMC,PDF,True
+REG_BIO-R035,Registro biocomparable,Registro nuevo,R035,M3,3.2.P.3.5,Validación del proceso de fabricación,NOM-059-SSA1-2015,9.9.2.2.3,NOM-059-SSA1-2015,Calidad,PDF,True
+REG_BIO-R036,Registro biocomparable,Registro nuevo,R036,M3,3.2.P.3.6,Validación de limpieza,NOM-059-SSA1-2015,9.11,NOM-059-SSA1-2015,Calidad,PDF,True
+REG_BIO-R037,Registro biocomparable,Registro nuevo,R037,M3,3.2.P.5,Certificado de análisis del lote del medicamento,NOM-059-SSA1-2015,5.5.1; 12,NOM-059-SSA1-2015,Calidad,PDF,True
+REG_BIO-R038,Registro biocomparable,Registro nuevo,R038,M3,3.2.P.5.3,Validación de métodos analíticos,NOM-059-SSA1-2015,9.12,NOM-059-SSA1-2015,Calidad,PDF,True
+REG_BIO-R039,Registro biocomparable,Registro nuevo,R039,M3,3.2.P.7,Sistema contenedor-cierre,NOM-073-SSA1-2015,8.2,NOM-073-SSA1-2015,CMC,PDF,True
+REG_BIO-R040,Registro biocomparable,Registro nuevo,R040,M3,3.2.P.8,Estudio de estabilidad del medicamento,NOM-073-SSA1-2015,8.1; 8.4; 8.5.1; 10.19,RIS art. 167 fr. I b,CMC,PDF,True
+REG_BIO-R041,Registro biocomparable,Registro nuevo,R041,M3,3.2.R.1,Programa de aseguramiento de calidad del producto biotecnológico,NOM-257-SSA1-2014,6.1,NOM-257-SSA1-2014,Calidad,PDF,True
+REG_BIO-R042,Registro biocomparable,Registro nuevo,R042,M3,3.2.R.2,Caracterización fisicoquímica y biológica comparativa,NOM-257-SSA1-2014,10.1,RIS art. 177,CMC,PDF,True
+REG_BIO-R050,Registro biocomparable,Registro nuevo,R050,M4,4.2,Estudios no clínicos (farmacología y toxicología),,,ICH M4(R4),Clínico,PDF,True
+REG_BIO-R063,Registro biocomparable,Registro nuevo,R063,M5,5.3.5.1,Estudio clínico de biocomparabilidad,NOM-257-SSA1-2014,10.1,RIS art. 177,Clínico,PDF,True
+REG_BIO-R065,Registro biocomparable,Registro nuevo,R065,M5,5.3.5.3,Autorización del protocolo y dictamen del comité de ética,NOM-012-SSA3-2012,5.3; 6.1,Reglamento LGS en materia de Investigación,Clínico,PDF,True
+REG_BIO-R066,Registro biocomparable,Registro nuevo,R066,M5,5.4,Opinión del Comité de Moléculas Nuevas / SEPB,NOM-257-SSA1-2014,5.1.2; 5.1.3,RIS art. 166-III,Asuntos Regulatorios,PDF,True
+REG_NUEVA-R001,Registro molécula nueva,Registro nuevo,R001,M1,1.1,Formato de solicitud firmado,,,RIS art. 167; LFPA art. 15,Asuntos Regulatorios,PDF,True
+REG_NUEVA-R002,Registro molécula nueva,Registro nuevo,R002,M1,1.2,Comprobante de pago de derechos,,,Ley Federal de Derechos art. 195-A,Asuntos Regulatorios,PDF,True
+REG_NUEVA-R003,Registro molécula nueva,Registro nuevo,R003,M1,1.3.1,Licencia sanitaria del establecimiento fabricante,,,LGS art. 198,Asuntos Regulatorios,PDF,True
+REG_NUEVA-R004,Registro molécula nueva,Registro nuevo,R004,M1,1.3.2,Instrumento que acredita la representación legal,,,LFPA art. 19,Asuntos Regulatorios,PDF,True
+REG_NUEVA-R005,Registro molécula nueva,Registro nuevo,R005,M1,1.4.1,Proyecto de etiqueta del envase primario,NOM-072-SSA1-2012,5.24,RIS art. 167 fr. III,Asuntos Regulatorios,PDF,True
+REG_NUEVA-R006,Registro molécula nueva,Registro nuevo,R006,M1,1.4.1,Proyecto de etiqueta del envase secundario,NOM-072-SSA1-2012,5.21; 6.1,RIS art. 167 fr. III,Asuntos Regulatorios,PDF,True
+REG_NUEVA-R007,Registro molécula nueva,Registro nuevo,R007,M1,1.4.2,Información para prescribir amplia (IPPA),,,RIS art. 167 fr. II,Asuntos Regulatorios,Word editable,True
+REG_NUEVA-R008,Registro molécula nueva,Registro nuevo,R008,M1,1.4.2,Información para prescribir reducida (IPPR),,,RIS art. 167 fr. II,Asuntos Regulatorios,Word editable,True
+REG_NUEVA-R009,Registro molécula nueva,Registro nuevo,R009,M1,1.5.1,Documento IMPI de titularidad de patentes o licencia de explotación,,,RIS art. 167 fr. I Bis (reforma DOF 24/04/2026),Asuntos Regulatorios,PDF,True
+REG_NUEVA-R010,Registro molécula nueva,Registro nuevo,R010,M1,1.6,Plan de manejo de riesgos (PMR),NOM-220-SSA1-2016,8.4.1; 8.4.3,NOM-220-SSA1-2016,Farmacovigilancia,PDF,True
+REG_NUEVA-R011,Registro molécula nueva,Registro nuevo,R011,M1,1.7.1,Certificado de BPF del medicamento,NOM-059-SSA1-2015,,RIS art. 167 fr. VI,Calidad,PDF,True
+REG_NUEVA-R012,Registro molécula nueva,Registro nuevo,R012,M1,1.7.2,Certificado de BPF del fármaco,NOM-164-SSA1-2015,,RIS art. 167 fr. VI,Calidad,PDF,True
+REG_NUEVA-R020,Registro molécula nueva,Registro nuevo,R020,M2,2.3,Resumen global de calidad,,,ICH M4(R4),CMC,PDF,True
+REG_NUEVA-R021,Registro molécula nueva,Registro nuevo,R021,M2,2.4,Resumen no clínico,,,ICH M4(R4),Clínico,PDF,True
+REG_NUEVA-R022,Registro molécula nueva,Registro nuevo,R022,M2,2.5,Resumen clínico,,,ICH M4(R4),Clínico,PDF,True
+REG_NUEVA-R030,Registro molécula nueva,Registro nuevo,R030,M3,3.2.S.1,Información general del fármaco,,,ICH M4(R4); RIS art. 167 fr. I a,CMC,PDF,True
+REG_NUEVA-R031,Registro molécula nueva,Registro nuevo,R031,M3,3.2.S.2,Fabricación del fármaco,NOM-164-SSA1-2015,10,RIS art. 167 fr. VI,CMC,PDF,True
+REG_NUEVA-R032,Registro molécula nueva,Registro nuevo,R032,M3,3.2.S.4,Certificado de análisis del fármaco,NOM-164-SSA1-2015,11,RIS art. 167 fr. I a,Calidad,PDF,True
+REG_NUEVA-R033,Registro molécula nueva,Registro nuevo,R033,M3,3.2.S.7,Estabilidad del fármaco,NOM-073-SSA1-2015,6,RIS art. 167 fr. I b,CMC,PDF,True
+REG_NUEVA-R034,Registro molécula nueva,Registro nuevo,R034,M3,3.2.P.1,Descripción y composición del medicamento,,,ICH M4(R4),CMC,PDF,True
+REG_NUEVA-R035,Registro molécula nueva,Registro nuevo,R035,M3,3.2.P.3.5,Validación del proceso de fabricación,NOM-059-SSA1-2015,9.9.2.2.3,NOM-059-SSA1-2015,Calidad,PDF,True
+REG_NUEVA-R037,Registro molécula nueva,Registro nuevo,R037,M3,3.2.P.5,Certificado de análisis del lote del medicamento,NOM-059-SSA1-2015,5.5.1; 12,NOM-059-SSA1-2015,Calidad,PDF,True
+REG_NUEVA-R038,Registro molécula nueva,Registro nuevo,R038,M3,3.2.P.5.3,Validación de métodos analíticos,NOM-059-SSA1-2015,9.12,NOM-059-SSA1-2015,Calidad,PDF,True
+REG_NUEVA-R039,Registro molécula nueva,Registro nuevo,R039,M3,3.2.P.7,Sistema contenedor-cierre,NOM-073-SSA1-2015,8.2,NOM-073-SSA1-2015,CMC,PDF,True
+REG_NUEVA-R040,Registro molécula nueva,Registro nuevo,R040,M3,3.2.P.8,Estudio de estabilidad del medicamento,NOM-073-SSA1-2015,8.1; 8.4; 8.5.1; 10.19,RIS art. 167 fr. I b,CMC,PDF,True
+REG_NUEVA-R050,Registro molécula nueva,Registro nuevo,R050,M4,4.2,Estudios no clínicos (farmacología y toxicología),,,ICH M4(R4),Clínico,PDF,True
+REG_NUEVA-R064,Registro molécula nueva,Registro nuevo,R064,M5,5.3.5.2,Estudios clínicos de eficacia y seguridad (fase III),NOM-012-SSA3-2012,6.2,RIS art. 167 fr. I c,Clínico,PDF,True
+REG_NUEVA-R065,Registro molécula nueva,Registro nuevo,R065,M5,5.3.5.3,Autorización del protocolo y dictamen del comité de ética,NOM-012-SSA3-2012,5.3; 6.1,Reglamento LGS en materia de Investigación,Clínico,PDF,True
+REG_NUEVA-R066,Registro molécula nueva,Registro nuevo,R066,M5,5.4,Opinión del Comité de Moléculas Nuevas / SEPB,NOM-257-SSA1-2014,5.1.2; 5.1.3,RIS art. 166-III,Asuntos Regulatorios,PDF,True
+PRORROGA-R001,Prórroga,Prórroga,R001,M1,1.1,Formato de solicitud firmado,,,RIS art. 167; LFPA art. 15,Asuntos Regulatorios,PDF,True
+PRORROGA-R002,Prórroga,Prórroga,R002,M1,1.2,Comprobante de pago de derechos,,,Ley Federal de Derechos art. 195-A,Asuntos Regulatorios,PDF,True
+PRORROGA-R004,Prórroga,Prórroga,R004,M1,1.3.2,Instrumento que acredita la representación legal,,,LFPA art. 19,Asuntos Regulatorios,PDF,True
+PRORROGA-R005,Prórroga,Prórroga,R005,M1,1.4.1,Proyecto de etiqueta del envase primario,NOM-072-SSA1-2012,5.24,RIS art. 167 fr. III,Asuntos Regulatorios,PDF,True
+PRORROGA-R006,Prórroga,Prórroga,R006,M1,1.4.1,Proyecto de etiqueta del envase secundario,NOM-072-SSA1-2012,5.21; 6.1,RIS art. 167 fr. III,Asuntos Regulatorios,PDF,True
+PRORROGA-R010,Prórroga,Prórroga,R010,M1,1.6,Plan de manejo de riesgos (PMR),NOM-220-SSA1-2016,8.4.1; 8.4.3,NOM-220-SSA1-2016,Farmacovigilancia,PDF,True
+PRORROGA-R011,Prórroga,Prórroga,R011,M1,1.7.1,Certificado de BPF del medicamento,NOM-059-SSA1-2015,,RIS art. 167 fr. VI,Calidad,PDF,True
+PRORROGA-R012,Prórroga,Prórroga,R012,M1,1.7.2,Certificado de BPF del fármaco,NOM-164-SSA1-2015,,RIS art. 167 fr. VI,Calidad,PDF,True
+PRORROGA-R013,Prórroga,Prórroga,R013,M1,1.8,Registro sanitario vigente y modificaciones autorizadas,,,RIS art. 190 Bis 7,Asuntos Regulatorios,PDF,True
+PRORROGA-R014,Prórroga,Prórroga,R014,M1,1.9,Informe periódico de seguridad,NOM-220-SSA1-2016,8.2,NOM-220-SSA1-2016,Farmacovigilancia,PDF,True
+PRORROGA-R037,Prórroga,Prórroga,R037,M3,3.2.P.5,Certificado de análisis del lote del medicamento,NOM-059-SSA1-2015,5.5.1; 12,NOM-059-SSA1-2015,Calidad,PDF,True
+MOD_SIN-R001,Modificación,Modificación,R001,M1,1.1,Formato de solicitud firmado,,,RIS art. 167; LFPA art. 15,Asuntos Regulatorios,PDF,True
+MOD_SIN-R002,Modificación,Modificación,R002,M1,1.2,Comprobante de pago de derechos,,,Ley Federal de Derechos art. 195-A,Asuntos Regulatorios,PDF,True
+MOD_SIN-R005,Modificación,Modificación,R005,M1,1.4.1,Proyecto de etiqueta del envase primario,NOM-072-SSA1-2012,5.24,RIS art. 167 fr. III,Asuntos Regulatorios,PDF,True
+MOD_SIN-R006,Modificación,Modificación,R006,M1,1.4.1,Proyecto de etiqueta del envase secundario,NOM-072-SSA1-2012,5.21; 6.1,RIS art. 167 fr. III,Asuntos Regulatorios,PDF,True
+MOD_SIN-R015,Modificación,Modificación,R015,M1,1.10,Justificación técnica de la modificación,,,Acuerdo DOF 13/02/2017,Asuntos Regulatorios,PDF,True
+MOD_SIN-R032,Modificación,Modificación,R032,M3,3.2.S.4,Certificado de análisis del fármaco,NOM-164-SSA1-2015,11,RIS art. 167 fr. I a,Calidad,PDF,True
+MOD_SIN-R035,Modificación,Modificación,R035,M3,3.2.P.3.5,Validación del proceso de fabricación,NOM-059-SSA1-2015,9.9.2.2.3,NOM-059-SSA1-2015,Calidad,PDF,True
+MOD_SIN-R038,Modificación,Modificación,R038,M3,3.2.P.5.3,Validación de métodos analíticos,NOM-059-SSA1-2015,9.12,NOM-059-SSA1-2015,Calidad,PDF,True
+MOD_SIN-R039,Modificación,Modificación,R039,M3,3.2.P.7,Sistema contenedor-cierre,NOM-073-SSA1-2015,8.2,NOM-073-SSA1-2015,CMC,PDF,True
+MOD_SIN-R040,Modificación,Modificación,R040,M3,3.2.P.8,Estudio de estabilidad del medicamento,NOM-073-SSA1-2015,8.1; 8.4; 8.5.1; 10.19,RIS art. 167 fr. I b,CMC,PDF,True
+MOD_SIN-R061,Modificación,Modificación,R061,M5,5.3.1.3,Perfiles de disolución comparativos,NOM-177-SSA1-2013,7.5.5,RIS art. 167 fr. V,CMC,PDF,True

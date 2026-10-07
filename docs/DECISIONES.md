@@ -15,6 +15,11 @@
 | 2026-10-06 | Databricks: warehouse propio `farma_wh` (serverless 2X-Small, auto-stop 5 min); catálogo creado por SQL | El CLI no crea catálogos con Default Storage |
 | 2026-10-06 | Snowflake: monitor de gasto `FARMA_MONITOR` de 20 créditos/mes | Evitar sorpresas de costo |
 
+| 2026-10-06 | Farmacéutica ficticia: **Laboratorios Altamira, S.A. de C.V.** (no se encontró empresa real con ese nombre) | Aprobado por Obed |
+| 2026-10-06 | PDF con apariencia real (membretes, sellos, firmas, QR, escaneados) | "Mientras mejor impresión dé al cliente, mejor" |
+| 2026-10-06 | Documentos de autoridad simulados con marca de agua "SIMULADO", sin escudos ni logotipos oficiales y con funcionarios ficticios | Evitar que un documento pueda confundirse con uno oficial real |
+| 2026-10-06 | Los datos se generan una vez con semilla fija (`datos/generador/main.py`) y se cargan igual en ambas plataformas | Comparación justa |
+
 ## Resuelto en Fase 0
 
 Las preguntas sobre notificaciones de COFEPRIS, acceso a DIGIPRiS y dónde corre el agente quedaron respondidas en `docs/INVESTIGACION_FASE0.md`. Siguen sin confirmar: términos de uso de DIGIPRiS sobre automatización y el texto exacto del correo de aviso.

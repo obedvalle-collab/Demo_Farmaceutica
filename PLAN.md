@@ -1,6 +1,6 @@
 # Obed Farmacéutica — Plan del proyecto
 
-> Estado: **Fase 0 terminada** (2026-10-06). Conexiones `obed_farma` listas en Snowflake y Databricks; normas en `normas/`. Siguiente: Fase 1 (datos ficticios).
+> Estado: **Fase 1 terminada** (2026-10-06). Fase 0: conexiones `obed_farma` y normas en `normas/`. Fase 1: datos de Laboratorios Altamira en `datos/` (ver `datos/README.md`). Siguiente: Fase 2 (normas en ambas plataformas).
 
 ## 1. Objetivo
 

@@ -1,0 +1,67 @@
+"""Datos técnicos ficticios por producto, usados para llenar los PDF."""
+
+PERFILES = {
+    "P09": dict(
+        sal="Fosfato de sitagliptina monohidratado", cantidad_sal="128.50 mg", equivalente="100 mg de sitagliptina",
+        unidad="tableta", via="Oral", clase="Inhibidor de la dipeptidil peptidasa-4 (DPP-4)",
+        indicacion="Coadyuvante de la dieta y el ejercicio para mejorar el control glucémico en pacientes adultos con diabetes mellitus tipo 2.",
+        excipientes=["Celulosa microcristalina", "Fosfato dibásico de calcio anhidro", "Croscarmelosa sódica",
+                     "Estearato de magnesio", "Estearil fumarato de sodio",
+                     "Recubrimiento: alcohol polivinílico, dióxido de titanio, macrogol 3350, talco, óxido de hierro rojo y amarillo"],
+        conservacion="Consérvese a no más de 30 °C. Consérvese la caja bien cerrada.",
+        apariencia="Tableta redonda, biconvexa, de color beige, recubierta, con la inscripción \"A100\" en una cara.",
+        empaque="Blíster de PVC/PCTFE-aluminio", caducidad_meses=24, tamano_lote="150,000 tabletas",
+        disolucion_q="Q = 80% a los 30 min (pH 6.8, aparato 2, 50 rpm)", valoracion="95.0 – 105.0%",
+        contraindicaciones="Hipersensibilidad a la sitagliptina o a cualquiera de los excipientes. No debe usarse en diabetes tipo 1 ni en cetoacidosis diabética.",
+        adversas="Infección de vías respiratorias altas, nasofaringitis, cefalea; casos poco frecuentes de pancreatitis aguda y reacciones de hipersensibilidad.",
+        dosis_texto="100 mg una vez al día, con o sin alimentos. Ajustar la dosis en insuficiencia renal moderada a grave.",
+        pk=dict(cmax=(950.4, 921.7), abc=(8710.2, 8655.9), tmax="1.0 – 4.0 h", t12="12.4 h"),
+    ),
+    "P08": dict(
+        sal="Rosuvastatina cálcica", cantidad_sal="10.40 mg", equivalente="10 mg de rosuvastatina",
+        unidad="tableta", via="Oral", clase="Inhibidor de la HMG-CoA reductasa",
+        indicacion="Tratamiento de la hipercolesterolemia primaria y la dislipidemia mixta como complemento de la dieta.",
+        excipientes=["Lactosa monohidratada", "Celulosa microcristalina", "Fosfato tricálcico", "Crospovidona",
+                     "Estearato de magnesio", "Recubrimiento: hipromelosa, dióxido de titanio, triacetina, óxido de hierro rojo"],
+        conservacion="Consérvese a no más de 30 °C. Protéjase de la luz.",
+        apariencia="Tableta redonda, recubierta, de color rosa, con la inscripción \"R10\".",
+        empaque="Blíster de aluminio-aluminio", caducidad_meses=24, tamano_lote="200,000 tabletas",
+        disolucion_q="Q = 75% a los 30 min (pH 6.6, aparato 2, 50 rpm)", valoracion="95.0 – 105.0%",
+        contraindicaciones="Enfermedad hepática activa, embarazo y lactancia, miopatía, uso concomitante de ciclosporina.",
+        adversas="Mialgias, cefalea, mareo, estreñimiento, náuseas, elevación de transaminasas.",
+        dosis_texto="5 a 40 mg una vez al día según la respuesta y el riesgo cardiovascular.",
+        pk=dict(cmax=(6.42, 6.18), abc=(58.7, 57.9), tmax="3.0 – 5.0 h", t12="19.2 h"),
+    ),
+    "P10": dict(
+        sal="Adalimumab", cantidad_sal="40 mg", equivalente="40 mg de adalimumab", unidad="jeringa prellenada",
+        via="Subcutánea", clase="Anticuerpo monoclonal anti-TNF-α (biotecnológico biocomparable)",
+        indicacion="Artritis reumatoide, artritis psoriásica, espondilitis anquilosante, enfermedad de Crohn, colitis ulcerosa y psoriasis en placas, conforme a las indicaciones autorizadas al medicamento de referencia.",
+        excipientes=["Manitol", "Polisorbato 80", "Agua para uso inyectable"],
+        conservacion="Consérvese en refrigeración entre 2 °C y 8 °C. No se congele. Protéjase de la luz.",
+        apariencia="Solución transparente a ligeramente opalescente, incolora a ligeramente amarilla.",
+        empaque="Jeringa prellenada de vidrio tipo I con aguja 29G y protector", caducidad_meses=24,
+        tamano_lote="12,000 jeringas", disolucion_q="No aplica", valoracion="Potencia biológica 80 – 125% del estándar",
+        contraindicaciones="Tuberculosis activa u otras infecciones graves; insuficiencia cardiaca moderada a grave.",
+        adversas="Reacciones en el sitio de inyección, infecciones de vías respiratorias, cefalea, exantema.",
+        dosis_texto="40 mg por vía subcutánea cada 14 días, según la indicación.",
+        pk=dict(cmax=(4.71, 4.63), abc=(2398.0, 2412.5), tmax="120 – 168 h", t12="14 días"),
+    ),
+    "P03": dict(
+        sal="Losartán potásico", cantidad_sal="50 mg", equivalente="50 mg de losartán potásico", unidad="tableta",
+        via="Oral", clase="Antagonista de los receptores de angiotensina II",
+        indicacion="Tratamiento de la hipertensión arterial.",
+        excipientes=["Celulosa microcristalina", "Lactosa monohidratada", "Almidón pregelatinizado",
+                     "Estearato de magnesio", "Recubrimiento: hipromelosa, dióxido de titanio"],
+        conservacion="Consérvese a no más de 30 °C.",
+        apariencia="Tableta ovalada, recubierta, de color blanco, ranurada.",
+        empaque="Blíster de PVC/PVDC-aluminio", caducidad_meses=36, tamano_lote="300,000 tabletas",
+        disolucion_q="Q = 75% a los 30 min (agua, aparato 2, 50 rpm)", valoracion="95.0 – 105.0%",
+        contraindicaciones="Hipersensibilidad al losartán; embarazo (segundo y tercer trimestre).",
+        adversas="Mareo, hipotensión ortostática, hiperpotasemia.",
+        dosis_texto="50 mg una vez al día.", pk=dict(cmax=(412.3, 405.8), abc=(895.4, 902.1), tmax="1 h", t12="2 h"),
+    ),
+}
+
+
+def perfil(producto_id):
+    return PERFILES.get(producto_id, PERFILES["P03"])

@@ -1,0 +1,8 @@
+clave,homoclave,nombre,familia,plazo_resolucion_dias,tipo_plazo,fundamento
+REG_GEN,COFEPRIS-04-004-B,Registro sanitario de medicamento alopático genérico (fabricación nacional),Registro nuevo,180,naturales,RIS art. 166-I
+REG_BIO,COFEPRIS-04-004-G,Registro sanitario de medicamento biotecnológico biocomparable (fabricación nacional),Registro nuevo,180,naturales,"RIS arts. 166, 177"
+REG_NUEVA,COFEPRIS-04-004-A,Registro sanitario de medicamento alopático molécula nueva (fabricación nacional),Registro nuevo,180,naturales,RIS art. 166-III
+MOD_SIN,COFEPRIS-04-015-A,Modificación a las condiciones del registro sanitario sin cambio de proceso,Modificación,30,hábiles,Acuerdo DOF 13/02/2017
+MOD_CON,COFEPRIS-04-016-A,Modificación a las condiciones del registro sanitario con cambio de proceso,Modificación,45,hábiles,Acuerdo DOF 13/02/2017
+MOD_SITIO,COFEPRIS-04-014-A,Modificación por cambio de sitio de fabricación,Modificación,45,hábiles,Acuerdo DOF 13/02/2017
+PRORROGA,COFEPRIS-04-023-A,Prórroga del registro sanitario de medicamento alopático o biotecnológico,Prórroga,120,naturales,RIS art. 190 Bis 6

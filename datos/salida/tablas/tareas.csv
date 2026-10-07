@@ -1,0 +1,348 @@
+tarea_id,observacion_id,tramite_id,descripcion,responsable_id,area,fecha_asignacion,fecha_compromiso,fecha_cierre,estatus
+TA00001,OB00001,TR-2023-001,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2023-08-16,2023-09-01,2023-08-25,Cerrada
+TA00002,OB00002,TR-2023-001,Atender observación 2: corregir estudio de estabilidad del medicamento,U09,CMC,2023-08-16,2023-09-04,2023-09-01,Cerrada
+TA00003,OB00003,TR-2023-001,Atender observación 3: corregir proyecto de etiqueta del envase primario,U04,Asuntos Regulatorios,2023-08-16,2023-08-31,2023-08-21,Cerrada
+TA00004,OB00004,TR-2023-001,Atender observación 4: corregir validación del proceso de fabricación,U06,Calidad,2023-08-16,2023-09-01,2023-09-04,Cerrada
+TA00005,OB00005,TR-2023-002,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2023-12-04,2023-12-13,2023-12-08,Cerrada
+TA00006,OB00006,TR-2023-002,Atender observación 2: corregir perfiles de disolución comparativos,U10,CMC,2023-12-04,2023-12-14,2023-12-05,Cerrada
+TA00007,OB00007,TR-2023-002,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2023-12-04,2023-12-13,2023-12-08,Cerrada
+TA00008,OB00008,TR-2023-002,Atender observación 4: corregir proyecto de etiqueta del envase primario,U04,Asuntos Regulatorios,2023-12-04,2023-12-14,2023-12-08,Cerrada
+TA00009,OB00009,TR-2023-002,Atender observación 5: corregir estudio de estabilidad del medicamento,U09,CMC,2023-12-04,2023-12-14,2023-12-05,Cerrada
+TA00010,OB00010,TR-2023-002,Atender observación 6: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2023-12-04,2023-12-15,2023-12-07,Cerrada
+TA00011,OB00011,TR-2023-002,Atender observación 7: corregir estudio de estabilidad del medicamento,U10,CMC,2023-12-04,2023-12-15,2023-12-08,Cerrada
+TA00012,OB00012,TR-2023-004,Atender observación 1: corregir perfiles de disolución comparativos,U10,CMC,2023-11-09,2023-11-21,2023-11-16,Cerrada
+TA00013,OB00013,TR-2023-004,Atender observación 2: corregir proyecto de etiqueta del envase primario,U05,Asuntos Regulatorios,2023-11-09,2023-11-22,2023-11-17,Cerrada
+TA00014,OB00014,TR-2023-004,Atender observación 3: corregir proyecto de etiqueta del envase primario,U05,Asuntos Regulatorios,2023-11-09,2023-11-22,2023-11-16,Cerrada
+TA00015,OB00015,TR-2023-005,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2024-01-03,2024-01-15,2024-01-11,Cerrada
+TA00016,OB00016,TR-2023-005,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2024-01-03,2024-01-12,2024-01-05,Cerrada
+TA00017,OB00017,TR-2023-005,Atender observación 3: corregir instrumento que acredita la representación legal,U03,Asuntos Regulatorios,2024-01-03,2024-01-11,2024-01-11,Cerrada
+TA00018,OB00018,TR-2023-005,Atender observación 4: corregir comprobante de pago de derechos,U04,Asuntos Regulatorios,2024-01-03,2024-01-11,2024-01-11,Cerrada
+TA00019,OB00019,TR-2023-005,Atender observación 5: corregir información para prescribir amplia (ippa),U05,Asuntos Regulatorios,2024-01-03,2024-01-15,2024-01-11,Cerrada
+TA00020,OB00020,TR-2023-007,Atender observación 1: corregir validación del proceso de fabricación,U06,Calidad,2024-01-10,2024-01-19,2024-01-22,Cerrada
+TA00021,OB00021,TR-2023-007,Atender observación 2: corregir sistema contenedor-cierre,U09,CMC,2024-01-10,2024-01-18,2024-01-18,Cerrada
+TA00022,OB00022,TR-2023-007,Atender observación 3: corregir proyecto de etiqueta del envase primario,U02,Asuntos Regulatorios,2024-01-10,2024-01-19,2024-01-22,Cerrada
+TA00023,OB00023,TR-2023-007,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2024-01-10,2024-01-22,2024-01-17,Cerrada
+TA00024,OB00024,TR-2023-008,Atender observación 1: corregir perfiles de disolución comparativos,U10,CMC,2024-01-09,2024-01-25,2024-01-15,Cerrada
+TA00025,OB00025,TR-2023-008,Atender observación 2: corregir justificación técnica de la modificación,U05,Asuntos Regulatorios,2024-01-09,2024-01-25,2024-01-11,Cerrada
+TA00026,OB00026,TR-2023-008,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2024-01-09,2024-01-26,2024-01-24,Cerrada
+TA00027,OB00027,TR-2023-008,Atender observación 4: corregir validación de métodos analíticos,U14,Calidad,2024-01-09,2024-01-24,2024-01-17,Cerrada
+TA00028,OB00028,TR-2023-008,Atender observación 5: corregir comprobante de pago de derechos,U04,Asuntos Regulatorios,2024-01-09,2024-01-24,2024-01-11,Cerrada
+TA00029,OB00029,TR-2023-008,Atender observación 6: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2024-01-09,2024-01-25,2024-01-15,Cerrada
+TA00030,OB00030,TR-2023-008,Atender observación 7: corregir validación del proceso de fabricación,U06,Calidad,2024-01-09,2024-01-25,2024-01-23,Cerrada
+TA00031,OB00031,TR-2024-006,Atender observación 1: corregir estudio de estabilidad del medicamento,U09,CMC,2024-01-23,2024-02-15,2024-01-26,Cerrada
+TA00032,OB00032,TR-2024-006,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2024-01-23,2024-02-19,2024-02-13,Cerrada
+TA00033,OB00033,TR-2024-006,Atender observación 3: corregir validación del proceso de fabricación,U14,Calidad,2024-01-23,2024-02-19,2024-02-13,Cerrada
+TA00034,OB00034,TR-2024-007,Atender observación 1: corregir proyecto de etiqueta del envase primario,U05,Asuntos Regulatorios,2024-01-30,2024-02-15,,Vencida
+TA00035,OB00035,TR-2024-007,Atender observación 2: corregir estudio de estabilidad del medicamento,U10,CMC,2024-01-30,2024-02-15,,Vencida
+TA00036,OB00036,TR-2024-007,Atender observación 3: corregir estudio de estabilidad del medicamento,U09,CMC,2024-01-30,2024-02-15,,Vencida
+TA00037,OB00037,TR-2024-007,Atender observación 4: corregir justificación técnica de la modificación,U05,Asuntos Regulatorios,2024-01-30,2024-02-16,,Vencida
+TA00038,OB00038,TR-2024-007,Atender observación 5: corregir proyecto de etiqueta del envase primario,U04,Asuntos Regulatorios,2024-01-30,2024-02-15,,Vencida
+TA00039,OB00039,TR-2024-007,Atender observación 6: corregir estudio de estabilidad del medicamento,U10,CMC,2024-01-30,2024-02-16,,Vencida
+TA00040,OB00040,TR-2024-008,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2024-02-26,2024-03-14,,Vencida
+TA00041,OB00041,TR-2024-008,Atender observación 2: corregir documento impi de titularidad de patentes o licencia de explotación,U04,Asuntos Regulatorios,2024-02-26,2024-03-14,,Vencida
+TA00042,OB00042,TR-2024-009,Atender observación 1: corregir proyecto de etiqueta del envase primario,U03,Asuntos Regulatorios,2024-02-20,2024-03-01,2024-02-27,Cerrada
+TA00043,OB00043,TR-2024-009,Atender observación 2: corregir validación de métodos analíticos,U14,Calidad,2024-02-20,2024-03-01,2024-02-23,Cerrada
+TA00044,OB00044,TR-2024-009,Atender observación 3: corregir justificación técnica de la modificación,U02,Asuntos Regulatorios,2024-02-20,2024-03-01,2024-02-21,Cerrada
+TA00045,OB00045,TR-2024-009,Atender observación 4: corregir proyecto de etiqueta del envase primario,U03,Asuntos Regulatorios,2024-02-20,2024-02-28,2024-02-27,Cerrada
+TA00046,OB00046,TR-2024-010,Atender observación 1: corregir certificado de bpf del fármaco,U07,Calidad,2024-05-02,2024-05-03,2024-05-03,Cerrada
+TA00047,OB00047,TR-2024-010,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2024-05-02,2024-05-03,2024-05-08,Cerrada
+TA00048,OB00048,TR-2024-010,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2024-05-02,2024-05-06,2024-05-08,Cerrada
+TA00049,OB00049,TR-2024-010,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2024-05-02,2024-05-07,2024-05-08,Cerrada
+TA00050,OB00050,TR-2024-010,Atender observación 5: corregir estudio de estabilidad del medicamento,U10,CMC,2024-05-02,2024-05-07,2024-05-08,Cerrada
+TA00051,OB00051,TR-2024-010,Atender observación 6: corregir proyecto de etiqueta del envase primario,U05,Asuntos Regulatorios,2024-05-02,2024-05-07,2024-05-08,Cerrada
+TA00052,OB00052,TR-2024-010,Atender observación 7: corregir estudio de estabilidad del medicamento,U09,CMC,2024-05-02,2024-05-07,2024-05-08,Cerrada
+TA00053,OB00053,TR-2024-011,Atender observación 1: corregir estudio de estabilidad del medicamento,U09,CMC,2024-03-15,2024-04-08,2024-04-03,Cerrada
+TA00054,OB00054,TR-2024-011,Atender observación 2: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2024-03-15,2024-04-05,2024-04-09,Cerrada
+TA00055,OB00055,TR-2024-011,Atender observación 3: corregir estudio de estabilidad del medicamento,U09,CMC,2024-03-15,2024-04-08,2024-04-02,Cerrada
+TA00056,OB00056,TR-2024-011,Atender observación 4: corregir estudio de estabilidad del medicamento,U09,CMC,2024-03-15,2024-04-04,2024-03-22,Cerrada
+TA00057,OB00057,TR-2024-011,Atender observación 5: corregir proyecto de etiqueta del envase primario,U04,Asuntos Regulatorios,2024-03-15,2024-04-08,2024-04-02,Cerrada
+TA00058,OB00058,TR-2024-013,Atender observación 1: corregir proyecto de etiqueta del envase primario,U02,Asuntos Regulatorios,2024-04-09,2024-05-03,2024-04-30,Cerrada
+TA00059,OB00059,TR-2024-013,Atender observación 2: corregir justificación técnica de la modificación,U05,Asuntos Regulatorios,2024-04-09,2024-05-03,2024-04-30,Cerrada
+TA00060,OB00060,TR-2024-013,Atender observación 3: corregir estudio de estabilidad del medicamento,U10,CMC,2024-04-09,2024-05-03,2024-04-30,Cerrada
+TA00061,OB00061,TR-2024-013,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2024-04-09,2024-05-06,2024-04-16,Cerrada
+TA00062,OB00062,TR-2024-014,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2024-06-13,2024-07-08,2024-06-25,Cerrada
+TA00063,OB00063,TR-2024-014,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2024-06-13,2024-07-09,2024-07-03,Cerrada
+TA00064,OB00064,TR-2024-014,Atender observación 3: corregir estudio de estabilidad del medicamento,U09,CMC,2024-06-13,2024-07-09,2024-06-21,Cerrada
+TA00065,OB00065,TR-2024-014,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2024-06-13,2024-07-05,2024-07-04,Cerrada
+TA00066,OB00066,TR-2024-014,Atender observación 5: corregir autorización vigente del tercero autorizado,U12,Clínico,2024-06-13,2024-07-09,2024-06-14,Cerrada
+TA00067,OB00067,TR-2024-014,Atender observación 6: corregir certificado de bpf del fármaco,U08,Calidad,2024-06-13,2024-07-08,2024-07-08,Cerrada
+TA00068,OB00068,TR-2024-016,Atender observación 1: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2024-05-14,2024-05-31,2024-05-21,Cerrada
+TA00069,OB00069,TR-2024-016,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2024-05-14,2024-05-29,2024-05-22,Cerrada
+TA00070,OB00070,TR-2024-016,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2024-05-14,2024-05-31,2024-05-16,Cerrada
+TA00071,OB00071,TR-2024-017,Atender observación 1: corregir validación de métodos analíticos,U06,Calidad,2024-05-17,2024-06-10,2024-05-29,Cerrada
+TA00072,OB00072,TR-2024-017,Atender observación 2: corregir estudio de estabilidad del medicamento,U09,CMC,2024-05-17,2024-06-12,2024-05-24,Cerrada
+TA00073,OB00073,TR-2024-017,Atender observación 3: corregir estudio de estabilidad del medicamento,U10,CMC,2024-05-17,2024-06-11,2024-06-04,Cerrada
+TA00074,OB00074,TR-2024-017,Atender observación 4: corregir estudio de estabilidad del medicamento,U09,CMC,2024-05-17,2024-06-11,2024-06-06,Cerrada
+TA00075,OB00075,TR-2024-017,Atender observación 5: corregir estudio de estabilidad del medicamento,U10,CMC,2024-05-17,2024-06-11,2024-06-03,Cerrada
+TA00076,OB00076,TR-2024-018,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2024-05-29,2024-05-31,2024-05-30,Cerrada
+TA00077,OB00077,TR-2024-018,Atender observación 2: corregir proyecto de etiqueta del envase primario,U03,Asuntos Regulatorios,2024-05-29,2024-05-31,2024-05-30,Cerrada
+TA00078,OB00078,TR-2024-018,Atender observación 3: corregir proyecto de etiqueta del envase primario,U05,Asuntos Regulatorios,2024-05-29,2024-06-03,2024-05-30,Cerrada
+TA00079,OB00079,TR-2024-018,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2024-05-29,2024-05-31,2024-05-30,Cerrada
+TA00080,OB00080,TR-2024-018,Atender observación 5: corregir validación de métodos analíticos,U08,Calidad,2024-05-29,2024-06-03,2024-05-30,Cerrada
+TA00081,OB00081,TR-2024-018,Atender observación 6: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2024-05-29,2024-05-31,2024-05-30,Cerrada
+TA00082,OB00082,TR-2024-020,Atender observación 1: corregir proyecto de etiqueta del envase primario,U03,Asuntos Regulatorios,2024-07-31,2024-08-08,2024-08-05,Cerrada
+TA00083,OB00083,TR-2024-020,Atender observación 2: corregir autorización vigente del tercero autorizado,U11,Clínico,2024-07-31,2024-08-08,2024-08-09,Cerrada
+TA00084,OB00084,TR-2024-020,Atender observación 3: corregir informe del estudio de bioequivalencia,U11,Clínico,2024-07-31,2024-08-08,2024-08-09,Cerrada
+TA00085,OB00085,TR-2024-020,Atender observación 4: corregir certificado de bpf del medicamento,U06,Calidad,2024-07-31,2024-08-12,2024-08-02,Cerrada
+TA00086,OB00086,TR-2024-020,Atender observación 5: corregir comprobante de pago de derechos,U02,Asuntos Regulatorios,2024-07-31,2024-08-08,2024-08-05,Cerrada
+TA00087,OB00087,TR-2024-021,Atender observación 1: corregir justificación técnica de la modificación,U02,Asuntos Regulatorios,2024-06-17,2024-07-10,2024-07-04,Cerrada
+TA00088,OB00088,TR-2024-021,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2024-06-17,2024-07-11,2024-07-01,Cerrada
+TA00089,OB00089,TR-2024-021,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2024-06-17,2024-07-09,2024-06-20,Cerrada
+TA00090,OB00090,TR-2024-021,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2024-06-17,2024-07-11,2024-07-04,Cerrada
+TA00091,OB00091,TR-2024-021,Atender observación 5: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2024-06-17,2024-07-11,2024-06-21,Cerrada
+TA00092,OB00092,TR-2024-022,Atender observación 1: corregir certificado de análisis del fármaco,U08,Calidad,2024-06-18,2024-07-12,2024-07-02,Cerrada
+TA00093,OB00093,TR-2024-022,Atender observación 2: corregir estudio de estabilidad del medicamento,U09,CMC,2024-06-18,2024-07-10,2024-07-12,Cerrada
+TA00094,OB00094,TR-2024-022,Atender observación 3: corregir comprobante de pago de derechos,U05,Asuntos Regulatorios,2024-06-18,2024-07-11,2024-06-24,Cerrada
+TA00095,OB00095,TR-2024-022,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2024-06-18,2024-07-10,2024-06-25,Cerrada
+TA00096,OB00096,TR-2024-022,Atender observación 5: corregir justificación técnica de la modificación,U02,Asuntos Regulatorios,2024-06-18,2024-07-10,2024-06-24,Cerrada
+TA00097,OB00097,TR-2024-024,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2024-08-14,2024-08-29,2024-08-26,Cerrada
+TA00098,OB00098,TR-2024-024,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2024-08-14,2024-08-29,2024-08-26,Cerrada
+TA00099,OB00099,TR-2024-024,Atender observación 3: corregir proyecto de etiqueta del envase primario,U02,Asuntos Regulatorios,2024-08-14,2024-08-30,2024-08-26,Cerrada
+TA00100,OB00100,TR-2024-024,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2024-08-14,2024-08-29,2024-08-20,Cerrada
+TA00101,OB00101,TR-2024-024,Atender observación 5: corregir comprobante de pago de derechos,U02,Asuntos Regulatorios,2024-08-14,2024-08-30,2024-08-26,Cerrada
+TA00102,OB00102,TR-2024-026,Atender observación 1: corregir estudio de estabilidad del medicamento,U10,CMC,2024-08-20,2024-08-28,2024-08-21,Cerrada
+TA00103,OB00103,TR-2024-026,Atender observación 2: corregir comprobante de pago de derechos,U05,Asuntos Regulatorios,2024-08-20,2024-08-30,2024-08-27,Cerrada
+TA00104,OB00104,TR-2024-027,Atender observación 1: corregir comprobante de pago de derechos,U03,Asuntos Regulatorios,2024-08-21,2024-08-29,2024-09-03,Cerrada
+TA00105,OB00105,TR-2024-027,Atender observación 2: corregir validación de métodos analíticos,U08,Calidad,2024-08-21,2024-09-02,2024-09-03,Cerrada
+TA00106,OB00106,TR-2024-027,Atender observación 3: corregir estudio de estabilidad del medicamento,U10,CMC,2024-08-21,2024-08-29,2024-08-28,Cerrada
+TA00107,OB00107,TR-2024-027,Atender observación 4: corregir justificación técnica de la modificación,U04,Asuntos Regulatorios,2024-08-21,2024-08-29,2024-08-29,Cerrada
+TA00108,OB00108,TR-2024-027,Atender observación 5: corregir certificado de análisis del fármaco,U07,Calidad,2024-08-21,2024-09-02,2024-09-02,Cerrada
+TA00109,OB00109,TR-2024-027,Atender observación 6: corregir perfiles de disolución comparativos,U10,CMC,2024-08-21,2024-08-30,2024-08-26,Cerrada
+TA00110,OB00110,TR-2024-027,Atender observación 7: corregir estudio de estabilidad del medicamento,U09,CMC,2024-08-21,2024-08-29,2024-08-30,Cerrada
+TA00111,OB00111,TR-2024-029,Atender observación 1: corregir validación del proceso de fabricación,U06,Calidad,2024-09-11,2024-10-02,2024-09-26,Cerrada
+TA00112,OB00112,TR-2024-029,Atender observación 2: corregir validación de métodos analíticos,U08,Calidad,2024-09-11,2024-09-27,2024-09-26,Cerrada
+TA00113,OB00113,TR-2024-031,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2024-11-01,2024-11-20,2024-11-13,Cerrada
+TA00114,OB00114,TR-2024-031,Atender observación 2: corregir documento impi de titularidad de patentes o licencia de explotación,U02,Asuntos Regulatorios,2024-11-01,2024-11-21,2024-11-22,Cerrada
+TA00115,OB00115,TR-2024-031,Atender observación 3: corregir plan de manejo de riesgos (pmr),U13,Farmacovigilancia,2024-11-01,2024-11-21,2024-11-22,Cerrada
+TA00116,OB00116,TR-2024-031,Atender observación 4: corregir estudio de estabilidad del medicamento,U09,CMC,2024-11-01,2024-11-20,2024-11-13,Cerrada
+TA00117,OB00117,TR-2024-032,Atender observación 1: corregir comprobante de pago de derechos,U03,Asuntos Regulatorios,2024-09-24,2024-10-03,2024-09-25,Cerrada
+TA00118,OB00118,TR-2024-033,Atender observación 1: corregir validación del proceso de fabricación,U07,Calidad,2024-09-24,2024-10-17,2024-10-16,Cerrada
+TA00119,OB00119,TR-2024-033,Atender observación 2: corregir proyecto de etiqueta del envase primario,U04,Asuntos Regulatorios,2024-09-24,2024-10-21,2024-10-09,Cerrada
+TA00120,OB00120,TR-2024-033,Atender observación 3: corregir justificación técnica de la modificación,U05,Asuntos Regulatorios,2024-09-24,2024-10-21,2024-09-26,Cerrada
+TA00121,OB00121,TR-2024-033,Atender observación 4: corregir proyecto de etiqueta del envase primario,U03,Asuntos Regulatorios,2024-09-24,2024-10-18,2024-10-14,Cerrada
+TA00122,OB00122,TR-2024-033,Atender observación 5: corregir comprobante de pago de derechos,U03,Asuntos Regulatorios,2024-09-24,2024-10-17,2024-10-16,Cerrada
+TA00123,OB00123,TR-2024-034,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2024-09-20,2024-10-08,2024-09-30,Cerrada
+TA00124,OB00124,TR-2024-034,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2024-09-20,2024-10-10,2024-10-07,Cerrada
+TA00125,OB00125,TR-2024-035,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2024-10-09,2024-10-28,2024-10-10,Cerrada
+TA00126,OB00126,TR-2024-035,Atender observación 2: corregir perfiles de disolución comparativos,U09,CMC,2024-10-09,2024-10-25,2024-10-18,Cerrada
+TA00127,OB00127,TR-2024-035,Atender observación 3: corregir validación de métodos analíticos,U06,Calidad,2024-10-09,2024-10-25,2024-10-11,Cerrada
+TA00128,OB00128,TR-2024-035,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2024-10-09,2024-10-24,2024-10-21,Cerrada
+TA00129,OB00129,TR-2024-036,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2024-10-09,2024-10-17,,Vencida
+TA00130,OB00130,TR-2024-036,Atender observación 2: corregir validación de métodos analíticos,U14,Calidad,2024-10-09,2024-10-17,,Vencida
+TA00131,OB00131,TR-2024-036,Atender observación 3: corregir estudio de estabilidad del medicamento,U10,CMC,2024-10-09,2024-10-17,,Vencida
+TA00132,OB00132,TR-2024-036,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2024-10-09,2024-10-18,,Vencida
+TA00133,OB00133,TR-2024-038,Atender observación 1: corregir estudio de estabilidad del medicamento,U09,CMC,2025-01-08,2025-01-17,2025-01-17,Cerrada
+TA00134,OB00134,TR-2024-038,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2025-01-08,2025-01-16,2025-01-13,Cerrada
+TA00135,OB00135,TR-2024-038,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2025-01-08,2025-01-16,2025-01-21,Cerrada
+TA00136,OB00136,TR-2024-038,Atender observación 4: corregir certificado de bpf del fármaco,U06,Calidad,2025-01-08,2025-01-20,2025-01-17,Cerrada
+TA00137,OB00137,TR-2024-038,Atender observación 5: corregir perfiles de disolución comparativos,U09,CMC,2025-01-08,2025-01-17,2025-01-09,Cerrada
+TA00138,OB00138,TR-2024-040,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2025-01-07,2025-01-10,2025-01-07,Cerrada
+TA00139,OB00139,TR-2024-040,Atender observación 2: corregir justificación técnica de la modificación,U04,Asuntos Regulatorios,2025-01-07,2025-01-09,2025-01-07,Cerrada
+TA00140,OB00140,TR-2024-041,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2025-01-06,2025-01-14,2025-01-07,Cerrada
+TA00141,OB00141,TR-2024-041,Atender observación 2: corregir estudio de estabilidad del medicamento,U10,CMC,2025-01-06,2025-01-14,2025-01-14,Cerrada
+TA00142,OB00142,TR-2024-041,Atender observación 3: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2025-01-06,2025-01-16,2025-01-14,Cerrada
+TA00143,OB00143,TR-2024-041,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2025-01-06,2025-01-16,2025-01-08,Cerrada
+TA00144,OB00144,TR-2024-041,Atender observación 5: corregir estudio de estabilidad del medicamento,U10,CMC,2025-01-06,2025-01-16,2025-01-14,Cerrada
+TA00145,OB00145,TR-2024-041,Atender observación 6: corregir estudio de estabilidad del medicamento,U09,CMC,2025-01-06,2025-01-16,2025-01-14,Cerrada
+TA00146,OB00146,TR-2024-041,Atender observación 7: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2025-01-06,2025-01-15,2025-01-07,Cerrada
+TA00147,OB00147,TR-2025-001,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2025-01-14,2025-01-22,2025-01-24,Cerrada
+TA00148,OB00148,TR-2025-001,Atender observación 2: corregir estudio de estabilidad del medicamento,U09,CMC,2025-01-14,2025-01-24,2025-01-24,Cerrada
+TA00149,OB00149,TR-2025-001,Atender observación 3: corregir estudio de estabilidad del medicamento,U10,CMC,2025-01-14,2025-01-24,2025-01-17,Cerrada
+TA00150,OB00150,TR-2025-003,Atender observación 1: corregir validación de métodos analíticos,U08,Calidad,2025-01-15,2025-01-23,2025-01-22,Cerrada
+TA00151,OB00151,TR-2025-003,Atender observación 2: corregir comprobante de pago de derechos,U02,Asuntos Regulatorios,2025-01-15,2025-01-27,2025-01-24,Cerrada
+TA00152,OB00152,TR-2025-003,Atender observación 3: corregir certificado de análisis del fármaco,U14,Calidad,2025-01-15,2025-01-23,2025-01-22,Cerrada
+TA00153,OB00153,TR-2025-003,Atender observación 4: corregir perfiles de disolución comparativos,U09,CMC,2025-01-15,2025-01-27,2025-01-16,Cerrada
+TA00154,OB00154,TR-2025-003,Atender observación 5: corregir validación del proceso de fabricación,U07,Calidad,2025-01-15,2025-01-23,2025-01-17,Cerrada
+TA00155,OB00155,TR-2025-003,Atender observación 6: corregir justificación técnica de la modificación,U04,Asuntos Regulatorios,2025-01-15,2025-01-23,2025-01-24,Cerrada
+TA00156,OB00156,TR-2025-004,Atender observación 1: corregir comprobante de pago de derechos,U04,Asuntos Regulatorios,2025-01-22,2025-02-17,2025-02-14,Cerrada
+TA00157,OB00157,TR-2025-004,Atender observación 2: corregir proyecto de etiqueta del envase primario,U05,Asuntos Regulatorios,2025-01-22,2025-02-18,2025-01-27,Cerrada
+TA00158,OB00158,TR-2025-004,Atender observación 3: corregir validación de métodos analíticos,U07,Calidad,2025-01-22,2025-02-18,2025-01-28,Cerrada
+TA00159,OB00159,TR-2025-004,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2025-01-22,2025-02-18,2025-02-05,Cerrada
+TA00160,OB00160,TR-2025-004,Atender observación 5: corregir justificación técnica de la modificación,U02,Asuntos Regulatorios,2025-01-22,2025-02-18,2025-02-04,Cerrada
+TA00161,OB00161,TR-2025-004,Atender observación 6: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2025-01-22,2025-02-14,2025-02-07,Cerrada
+TA00162,OB00162,TR-2025-004,Atender observación 7: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2025-01-22,2025-02-18,2025-02-12,Cerrada
+TA00163,OB00163,TR-2025-005,Atender observación 1: corregir justificación técnica de la modificación,U02,Asuntos Regulatorios,2025-01-21,2025-02-13,2025-02-14,Cerrada
+TA00164,OB00164,TR-2025-005,Atender observación 2: corregir sistema contenedor-cierre,U10,CMC,2025-01-21,2025-02-14,2025-02-05,Cerrada
+TA00165,OB00165,TR-2025-006,Atender observación 1: corregir proyecto de etiqueta del envase primario,U03,Asuntos Regulatorios,2025-03-21,2025-04-08,,Vencida
+TA00166,OB00166,TR-2025-006,Atender observación 2: corregir estudio de estabilidad del medicamento,U10,CMC,2025-03-21,2025-04-09,,Vencida
+TA00167,OB00167,TR-2025-006,Atender observación 3: corregir comprobante de pago de derechos,U02,Asuntos Regulatorios,2025-03-21,2025-04-09,,Vencida
+TA00168,OB00168,TR-2025-006,Atender observación 4: corregir información para prescribir amplia (ippa),U03,Asuntos Regulatorios,2025-03-21,2025-04-08,,Vencida
+TA00169,OB00169,TR-2025-006,Atender observación 5: corregir plan de manejo de riesgos (pmr),U13,Farmacovigilancia,2025-03-21,2025-04-08,,Vencida
+TA00170,OB00170,TR-2025-006,Atender observación 6: corregir validación de métodos analíticos,U07,Calidad,2025-03-21,2025-04-09,,Vencida
+TA00171,OB00171,TR-2025-008,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2025-01-31,2025-02-27,2025-02-14,Cerrada
+TA00172,OB00172,TR-2025-009,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2025-02-13,2025-02-24,2025-02-18,Cerrada
+TA00173,OB00173,TR-2025-009,Atender observación 2: corregir justificación técnica de la modificación,U02,Asuntos Regulatorios,2025-02-13,2025-02-25,2025-02-18,Cerrada
+TA00174,OB00174,TR-2025-009,Atender observación 3: corregir proyecto de etiqueta del envase primario,U03,Asuntos Regulatorios,2025-02-13,2025-02-21,2025-02-17,Cerrada
+TA00175,OB00175,TR-2025-009,Atender observación 4: corregir perfiles de disolución comparativos,U10,CMC,2025-02-13,2025-02-21,2025-02-18,Cerrada
+TA00176,OB00176,TR-2025-009,Atender observación 5: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2025-02-13,2025-02-21,2025-02-18,Cerrada
+TA00177,OB00177,TR-2025-009,Atender observación 6: corregir sistema contenedor-cierre,U09,CMC,2025-02-13,2025-02-21,2025-02-18,Cerrada
+TA00178,OB00178,TR-2025-010,Atender observación 1: corregir justificación técnica de la modificación,U05,Asuntos Regulatorios,2025-02-20,2025-02-28,2025-02-25,Cerrada
+TA00179,OB00179,TR-2025-010,Atender observación 2: corregir validación del proceso de fabricación,U06,Calidad,2025-02-20,2025-03-04,2025-02-24,Cerrada
+TA00180,OB00180,TR-2025-010,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2025-02-20,2025-03-04,2025-02-24,Cerrada
+TA00181,OB00181,TR-2025-010,Atender observación 4: corregir comprobante de pago de derechos,U04,Asuntos Regulatorios,2025-02-20,2025-03-04,2025-02-25,Cerrada
+TA00182,OB00182,TR-2025-010,Atender observación 5: corregir certificado de análisis del fármaco,U08,Calidad,2025-02-20,2025-03-04,2025-02-25,Cerrada
+TA00183,OB00183,TR-2025-011,Atender observación 1: corregir comprobante de pago de derechos,U04,Asuntos Regulatorios,2025-02-24,2025-03-05,2025-02-28,Cerrada
+TA00184,OB00184,TR-2025-013,Atender observación 1: corregir sistema contenedor-cierre,U10,CMC,2025-03-14,2025-03-27,2025-03-24,Cerrada
+TA00185,OB00185,TR-2025-013,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2025-03-14,2025-03-27,2025-03-24,Cerrada
+TA00186,OB00186,TR-2025-013,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2025-03-14,2025-03-26,2025-03-24,Cerrada
+TA00187,OB00187,TR-2025-013,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2025-03-14,2025-03-26,2025-03-24,Cerrada
+TA00188,OB00188,TR-2025-014,Atender observación 1: corregir perfiles de disolución comparativos,U10,CMC,2025-03-12,2025-03-25,2025-03-18,Cerrada
+TA00189,OB00189,TR-2025-014,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2025-03-12,2025-03-21,2025-03-14,Cerrada
+TA00190,OB00190,TR-2025-014,Atender observación 3: corregir justificación técnica de la modificación,U04,Asuntos Regulatorios,2025-03-12,2025-03-21,2025-03-18,Cerrada
+TA00191,OB00191,TR-2025-014,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2025-03-12,2025-03-21,2025-03-18,Cerrada
+TA00192,OB00192,TR-2025-015,Atender observación 1: corregir certificado de análisis del fármaco,U08,Calidad,2025-05-15,2025-05-27,2025-05-23,Cerrada
+TA00193,OB00193,TR-2025-015,Atender observación 2: corregir certificado de análisis del lote del medicamento,U07,Calidad,2025-05-15,2025-05-23,2025-05-23,Cerrada
+TA00194,OB00194,TR-2025-015,Atender observación 3: corregir documento impi de titularidad de patentes o licencia de explotación,U05,Asuntos Regulatorios,2025-05-15,2025-05-23,2025-05-20,Cerrada
+TA00195,OB00195,TR-2025-019,Atender observación 1: corregir estudio de estabilidad del medicamento,U09,CMC,2025-03-28,2025-04-25,2025-04-15,Cerrada
+TA00196,OB00196,TR-2025-020,Atender observación 1: corregir certificado de análisis del lote del medicamento,U07,Calidad,2025-04-11,2025-05-05,2025-04-28,Cerrada
+TA00197,OB00197,TR-2025-020,Atender observación 2: corregir plan de manejo de riesgos (pmr),U13,Farmacovigilancia,2025-04-11,2025-04-30,2025-04-28,Cerrada
+TA00198,OB00198,TR-2025-022,Atender observación 1: corregir comprobante de pago de derechos,U02,Asuntos Regulatorios,2025-04-22,2025-05-15,2025-05-14,Cerrada
+TA00199,OB00199,TR-2025-022,Atender observación 2: corregir sistema contenedor-cierre,U10,CMC,2025-04-22,2025-05-16,2025-05-16,Cerrada
+TA00200,OB00200,TR-2025-024,Atender observación 1: corregir estudio de estabilidad del medicamento,U09,CMC,2025-05-07,2025-05-16,2025-05-19,Cerrada
+TA00201,OB00201,TR-2025-024,Atender observación 2: corregir estudio de estabilidad del medicamento,U10,CMC,2025-05-07,2025-05-16,2025-05-19,Cerrada
+TA00202,OB00202,TR-2025-024,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2025-05-07,2025-05-16,2025-05-08,Cerrada
+TA00203,OB00203,TR-2025-024,Atender observación 4: corregir estudio de estabilidad del medicamento,U09,CMC,2025-05-07,2025-05-15,2025-05-12,Cerrada
+TA00204,OB00204,TR-2025-024,Atender observación 5: corregir perfiles de disolución comparativos,U09,CMC,2025-05-07,2025-05-19,2025-05-09,Cerrada
+TA00205,OB00205,TR-2025-026,Atender observación 1: corregir estudio de estabilidad del medicamento,U09,CMC,2025-05-26,2025-06-19,2025-05-27,Cerrada
+TA00206,OB00206,TR-2025-026,Atender observación 2: corregir justificación técnica de la modificación,U02,Asuntos Regulatorios,2025-05-26,2025-06-17,2025-06-16,Cerrada
+TA00207,OB00207,TR-2025-026,Atender observación 3: corregir estudio de estabilidad del medicamento,U09,CMC,2025-05-26,2025-06-17,2025-06-05,Cerrada
+TA00208,OB00208,TR-2025-026,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2025-05-26,2025-06-19,2025-06-16,Cerrada
+TA00209,OB00209,TR-2025-026,Atender observación 5: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2025-05-26,2025-06-17,2025-06-04,Cerrada
+TA00210,OB00210,TR-2025-029,Atender observación 1: corregir justificación técnica de la modificación,U02,Asuntos Regulatorios,2025-05-29,2025-06-10,2025-06-06,Cerrada
+TA00211,OB00211,TR-2025-029,Atender observación 2: corregir certificado de análisis del fármaco,U06,Calidad,2025-05-29,2025-06-06,2025-06-06,Cerrada
+TA00212,OB00212,TR-2025-029,Atender observación 3: corregir estudio de estabilidad del medicamento,U10,CMC,2025-05-29,2025-06-06,2025-06-06,Cerrada
+TA00213,OB00213,TR-2025-029,Atender observación 4: corregir validación de métodos analíticos,U14,Calidad,2025-05-29,2025-06-10,2025-06-06,Cerrada
+TA00214,OB00214,TR-2025-034,Atender observación 1: corregir proyecto de etiqueta del envase primario,U02,Asuntos Regulatorios,2025-08-04,2025-08-05,,Vencida
+TA00215,OB00215,TR-2025-034,Atender observación 2: corregir comprobante de pago de derechos,U04,Asuntos Regulatorios,2025-08-04,2025-08-07,,Vencida
+TA00216,OB00216,TR-2025-034,Atender observación 3: corregir estudio de estabilidad del medicamento,U10,CMC,2025-08-04,2025-08-06,,Vencida
+TA00217,OB00217,TR-2025-038,Atender observación 1: corregir validación de métodos analíticos,U08,Calidad,2025-07-28,2025-08-05,2025-07-30,Cerrada
+TA00218,OB00218,TR-2025-038,Atender observación 2: corregir estudio de estabilidad del medicamento,U10,CMC,2025-07-28,2025-08-07,2025-07-29,Cerrada
+TA00219,OB00219,TR-2025-038,Atender observación 3: corregir justificación técnica de la modificación,U05,Asuntos Regulatorios,2025-07-28,2025-08-05,2025-08-04,Cerrada
+TA00220,OB00220,TR-2025-038,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2025-07-28,2025-08-05,2025-08-01,Cerrada
+TA00221,OB00221,TR-2025-038,Atender observación 5: corregir estudio de estabilidad del medicamento,U09,CMC,2025-07-28,2025-08-05,2025-07-29,Cerrada
+TA00222,OB00222,TR-2025-041,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2025-08-06,2025-08-15,2025-08-15,Cerrada
+TA00223,OB00223,TR-2025-041,Atender observación 2: corregir comprobante de pago de derechos,U04,Asuntos Regulatorios,2025-08-06,2025-08-18,2025-08-12,Cerrada
+TA00224,OB00224,TR-2025-041,Atender observación 3: corregir proyecto de etiqueta del envase primario,U04,Asuntos Regulatorios,2025-08-06,2025-08-18,2025-08-15,Cerrada
+TA00225,OB00225,TR-2025-041,Atender observación 4: corregir certificado de análisis del fármaco,U06,Calidad,2025-08-06,2025-08-15,2025-08-12,Cerrada
+TA00226,OB00226,TR-2025-042,Atender observación 1: corregir validación del proceso de fabricación,U07,Calidad,2025-08-14,2025-08-15,2025-08-15,Cerrada
+TA00227,OB00227,TR-2025-042,Atender observación 2: corregir estudio de estabilidad del medicamento,U10,CMC,2025-08-14,2025-08-18,2025-08-15,Cerrada
+TA00228,OB00228,TR-2025-042,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2025-08-14,2025-08-15,2025-08-15,Cerrada
+TA00229,OB00229,TR-2025-042,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2025-08-14,2025-08-15,2025-08-15,Cerrada
+TA00230,OB00230,TR-2025-044,Atender observación 1: corregir justificación técnica de la modificación,U05,Asuntos Regulatorios,2025-08-21,2025-09-02,2025-09-01,Cerrada
+TA00231,OB00231,TR-2025-044,Atender observación 2: corregir validación del proceso de fabricación,U06,Calidad,2025-08-21,2025-08-29,2025-08-29,Cerrada
+TA00232,OB00232,TR-2025-044,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2025-08-21,2025-09-02,2025-09-01,Cerrada
+TA00233,OB00233,TR-2025-044,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2025-08-21,2025-09-02,2025-08-25,Cerrada
+TA00234,OB00234,TR-2025-046,Atender observación 1: corregir estudio de estabilidad del medicamento,U09,CMC,2025-09-02,2025-09-18,2025-09-18,Cerrada
+TA00235,OB00235,TR-2025-049,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2025-10-15,2025-11-10,2025-10-27,Cerrada
+TA00236,OB00236,TR-2025-049,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2025-10-15,2025-11-06,2025-10-22,Cerrada
+TA00237,OB00237,TR-2025-049,Atender observación 3: corregir proyecto de etiqueta del envase primario,U04,Asuntos Regulatorios,2025-10-15,2025-11-07,2025-10-17,Cerrada
+TA00238,OB00238,TR-2025-049,Atender observación 4: corregir instrumento que acredita la representación legal,U02,Asuntos Regulatorios,2025-10-15,2025-11-06,2025-11-06,Cerrada
+TA00239,OB00239,TR-2025-050,Atender observación 1: corregir estudio de estabilidad del medicamento,U09,CMC,2025-09-25,2025-10-14,2025-09-26,Cerrada
+TA00240,OB00240,TR-2025-050,Atender observación 2: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2025-09-25,2025-10-14,2025-10-07,Cerrada
+TA00241,OB00241,TR-2025-050,Atender observación 3: corregir estudio de estabilidad del medicamento,U09,CMC,2025-09-25,2025-10-13,2025-10-07,Cerrada
+TA00242,OB00242,TR-2025-050,Atender observación 4: corregir estudio de estabilidad del medicamento,U09,CMC,2025-09-25,2025-10-14,2025-10-07,Cerrada
+TA00243,OB00243,TR-2025-050,Atender observación 5: corregir estudio de estabilidad del medicamento,U10,CMC,2025-09-25,2025-10-13,2025-10-07,Cerrada
+TA00244,OB00244,TR-2025-050,Atender observación 6: corregir perfiles de disolución comparativos,U10,CMC,2025-09-25,2025-10-14,2025-09-26,Cerrada
+TA00245,OB00245,TR-2025-052,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2025-09-24,2025-10-03,2025-09-25,Cerrada
+TA00246,OB00246,TR-2025-052,Atender observación 2: corregir proyecto de etiqueta del envase primario,U02,Asuntos Regulatorios,2025-09-24,2025-10-02,2025-09-26,Cerrada
+TA00247,OB00247,TR-2025-052,Atender observación 3: corregir validación de métodos analíticos,U14,Calidad,2025-09-24,2025-10-06,2025-09-29,Cerrada
+TA00248,OB00248,TR-2025-055,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2025-10-09,2025-10-24,2025-10-28,Cerrada
+TA00249,OB00249,TR-2025-055,Atender observación 2: corregir estudio de estabilidad del medicamento,U09,CMC,2025-10-09,2025-10-27,2025-10-17,Cerrada
+TA00250,OB00250,TR-2025-055,Atender observación 3: corregir proyecto de etiqueta del envase primario,U04,Asuntos Regulatorios,2025-10-09,2025-10-27,2025-10-16,Cerrada
+TA00251,OB00251,TR-2025-055,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2025-10-09,2025-10-28,2025-10-28,Cerrada
+TA00252,OB00252,TR-2025-057,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2025-10-20,2025-11-04,2025-11-04,Cerrada
+TA00253,OB00253,TR-2025-057,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2025-10-20,2025-11-04,2025-11-04,Cerrada
+TA00254,OB00254,TR-2025-057,Atender observación 3: corregir validación del proceso de fabricación,U06,Calidad,2025-10-20,2025-11-04,2025-11-04,Cerrada
+TA00255,OB00255,TR-2025-060,Atender observación 1: corregir estudio de estabilidad del medicamento,U10,CMC,2025-11-12,2025-11-13,2025-11-18,Cerrada
+TA00256,OB00256,TR-2025-060,Atender observación 2: corregir estudio de estabilidad del medicamento,U10,CMC,2025-11-12,2025-11-14,2025-11-18,Cerrada
+TA00257,OB00257,TR-2025-060,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2025-11-12,2025-11-14,2025-11-18,Cerrada
+TA00258,OB00258,TR-2025-060,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2025-11-12,2025-11-13,2025-11-18,Cerrada
+TA00259,OB00259,TR-2025-060,Atender observación 5: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2025-11-12,2025-11-18,2025-11-14,Cerrada
+TA00260,OB00260,TR-2025-060,Atender observación 6: corregir estudio de estabilidad del medicamento,U10,CMC,2025-11-12,2025-11-13,2025-11-14,Cerrada
+TA00261,OB00261,TR-2025-061,Atender observación 1: corregir comprobante de pago de derechos,U02,Asuntos Regulatorios,2025-12-04,2026-01-06,2025-12-05,Cerrada
+TA00262,OB00262,TR-2025-061,Atender observación 2: corregir validación del proceso de fabricación,U06,Calidad,2025-12-04,2026-01-08,2026-01-08,Cerrada
+TA00263,OB00263,TR-2025-061,Atender observación 3: corregir estudio de estabilidad del medicamento,U10,CMC,2025-12-04,2026-01-08,2026-01-08,Cerrada
+TA00264,OB00264,TR-2025-061,Atender observación 4: corregir estudio de estabilidad del medicamento,U09,CMC,2025-12-04,2026-01-08,2025-12-10,Cerrada
+TA00265,OB00265,TR-2025-062,Atender observación 1: corregir estudio de estabilidad del medicamento,U09,CMC,2025-12-03,2025-12-08,2025-12-09,Cerrada
+TA00266,OB00266,TR-2025-062,Atender observación 2: corregir perfiles de disolución comparativos,U09,CMC,2025-12-03,2025-12-08,2025-12-05,Cerrada
+TA00267,OB00267,TR-2025-062,Atender observación 3: corregir validación del proceso de fabricación,U08,Calidad,2025-12-03,2025-12-04,2025-12-04,Cerrada
+TA00268,OB00268,TR-2025-066,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2026-01-06,2026-01-22,2026-01-14,Cerrada
+TA00269,OB00269,TR-2025-066,Atender observación 2: corregir justificación técnica de la modificación,U04,Asuntos Regulatorios,2026-01-06,2026-01-22,2026-01-09,Cerrada
+TA00270,OB00270,TR-2025-066,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2026-01-06,2026-01-21,2026-01-15,Cerrada
+TA00271,OB00271,TR-2025-066,Atender observación 4: corregir certificado de análisis del fármaco,U06,Calidad,2026-01-06,2026-01-23,2026-01-09,Cerrada
+TA00272,OB00272,TR-2025-066,Atender observación 5: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2026-01-06,2026-01-22,2026-01-13,Cerrada
+TA00273,OB00273,TR-2025-066,Atender observación 6: corregir proyecto de etiqueta del envase primario,U05,Asuntos Regulatorios,2026-01-06,2026-01-22,2026-01-08,Cerrada
+TA00274,OB00274,TR-2026-001,Atender observación 1: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2026-01-12,2026-01-21,2026-01-19,Cerrada
+TA00275,OB00275,TR-2026-001,Atender observación 2: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2026-01-12,2026-01-21,2026-01-19,Cerrada
+TA00276,OB00276,TR-2026-001,Atender observación 3: corregir comprobante de pago de derechos,U02,Asuntos Regulatorios,2026-01-12,2026-01-20,2026-01-13,Cerrada
+TA00277,OB00277,TR-2026-001,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2026-01-12,2026-01-22,2026-01-13,Cerrada
+TA00278,OB00278,TR-2026-004,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2026-01-16,2026-02-10,2026-01-30,Cerrada
+TA00279,OB00279,TR-2026-004,Atender observación 2: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2026-01-16,2026-02-10,2026-02-10,Cerrada
+TA00280,OB00280,TR-2026-004,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2026-01-16,2026-02-12,2026-01-19,Cerrada
+TA00281,OB00281,TR-2026-004,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2026-01-16,2026-02-11,2026-02-04,Cerrada
+TA00282,OB00282,TR-2026-005,Atender observación 1: corregir validación de métodos analíticos,U07,Calidad,2026-01-20,2026-02-13,2026-01-27,Cerrada
+TA00283,OB00283,TR-2026-005,Atender observación 2: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2026-01-20,2026-02-12,2026-02-09,Cerrada
+TA00284,OB00284,TR-2026-005,Atender observación 3: corregir sistema contenedor-cierre,U09,CMC,2026-01-20,2026-02-16,2026-02-04,Cerrada
+TA00285,OB00285,TR-2026-006,Atender observación 1: corregir proyecto de etiqueta del envase primario,U05,Asuntos Regulatorios,2026-01-27,2026-02-06,2026-02-03,Cerrada
+TA00286,OB00286,TR-2026-006,Atender observación 2: corregir validación del proceso de fabricación,U06,Calidad,2026-01-27,2026-02-05,2026-02-06,Cerrada
+TA00287,OB00287,TR-2026-006,Atender observación 3: corregir perfiles de disolución comparativos,U09,CMC,2026-01-27,2026-02-05,2026-02-03,Cerrada
+TA00288,OB00288,TR-2026-006,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2026-01-27,2026-02-09,2026-02-10,Cerrada
+TA00289,OB00289,TR-2026-006,Atender observación 5: corregir estudio de estabilidad del medicamento,U09,CMC,2026-01-27,2026-02-05,2026-01-29,Cerrada
+TA00290,OB00290,TR-2026-007,Atender observación 1: corregir proyecto de etiqueta del envase primario,U05,Asuntos Regulatorios,2026-01-26,2026-02-04,2026-01-29,Cerrada
+TA00291,OB00291,TR-2026-007,Atender observación 2: corregir estudio de estabilidad del medicamento,U10,CMC,2026-01-26,2026-02-05,2026-01-28,Cerrada
+TA00292,OB00292,TR-2026-007,Atender observación 3: corregir justificación técnica de la modificación,U04,Asuntos Regulatorios,2026-01-26,2026-02-05,2026-01-29,Cerrada
+TA00293,OB00293,TR-2026-007,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2026-01-26,2026-02-04,2026-01-29,Cerrada
+TA00294,OB00294,TR-2026-007,Atender observación 5: corregir comprobante de pago de derechos,U04,Asuntos Regulatorios,2026-01-26,2026-02-04,2026-01-29,Cerrada
+TA00295,OB00295,TR-2026-007,Atender observación 6: corregir estudio de estabilidad del medicamento,U10,CMC,2026-01-26,2026-02-06,2026-01-27,Cerrada
+TA00296,OB00296,TR-2026-008,Atender observación 1: corregir certificado de análisis del fármaco,U07,Calidad,2026-03-04,2026-03-27,2026-03-13,Cerrada
+TA00297,OB00297,TR-2026-010,Atender observación 1: corregir perfiles de disolución comparativos,U09,CMC,2026-03-09,2026-03-10,2026-03-11,Cerrada
+TA00298,OB00298,TR-2026-010,Atender observación 2: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2026-03-09,2026-03-12,2026-03-13,Cerrada
+TA00299,OB00299,TR-2026-014,Atender observación 1: corregir validación del proceso de fabricación,U08,Calidad,2026-04-16,2026-04-20,2026-04-17,Cerrada
+TA00300,OB00300,TR-2026-016,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2026-05-08,2026-05-18,2026-05-14,Cerrada
+TA00301,OB00301,TR-2026-016,Atender observación 2: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2026-05-08,2026-05-19,2026-05-14,Cerrada
+TA00302,OB00302,TR-2026-016,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2026-05-08,2026-05-19,2026-05-14,Cerrada
+TA00303,OB00303,TR-2026-016,Atender observación 4: corregir validación del proceso de fabricación,U08,Calidad,2026-05-08,2026-05-18,2026-05-14,Cerrada
+TA00304,OB00304,TR-2026-016,Atender observación 5: corregir comprobante de pago de derechos,U05,Asuntos Regulatorios,2026-05-08,2026-05-20,2026-05-14,Cerrada
+TA00305,OB00305,TR-2026-016,Atender observación 6: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2026-05-08,2026-05-19,2026-05-14,Cerrada
+TA00306,OB00306,TR-2026-016,Atender observación 7: corregir perfiles de disolución comparativos,U09,CMC,2026-05-08,2026-05-18,2026-05-14,Cerrada
+TA00307,OB00307,TR-2026-017,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U02,Asuntos Regulatorios,2026-10-02,2026-10-13,,Pendiente
+TA00308,OB00308,TR-2026-017,Atender observación 2: corregir estudio de estabilidad del medicamento,U09,CMC,2026-10-02,2026-10-13,,En curso
+TA00309,OB00309,TR-2026-017,Atender observación 3: corregir perfiles de disolución comparativos,U10,CMC,2026-10-02,2026-10-14,,Pendiente
+TA00310,OB00310,TR-2026-018,Atender observación 1: corregir validación del proceso de fabricación,U06,Calidad,2026-06-17,2026-06-29,2026-06-25,Cerrada
+TA00311,OB00311,TR-2026-018,Atender observación 2: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2026-06-17,2026-06-25,2026-06-24,Cerrada
+TA00312,OB00312,TR-2026-018,Atender observación 3: corregir estudio de estabilidad del medicamento,U09,CMC,2026-06-17,2026-06-29,2026-06-18,Cerrada
+TA00313,OB00313,TR-2026-018,Atender observación 4: corregir estudio de estabilidad del medicamento,U09,CMC,2026-06-17,2026-06-25,2026-06-22,Cerrada
+TA00314,OB00314,TR-2026-018,Atender observación 5: corregir estudio de estabilidad del medicamento,U09,CMC,2026-06-17,2026-06-26,2026-06-22,Cerrada
+TA00315,OB00315,TR-2026-018,Atender observación 6: corregir estudio de estabilidad del medicamento,U09,CMC,2026-06-17,2026-06-26,2026-06-19,Cerrada
+TA00316,OB00316,TR-2026-018,Atender observación 7: corregir comprobante de pago de derechos,U02,Asuntos Regulatorios,2026-06-17,2026-06-26,2026-06-25,Cerrada
+TA00317,OB00317,TR-2026-020,Atender observación 1: corregir estudio de estabilidad del medicamento,U10,CMC,2026-06-19,2026-07-01,2026-06-26,Cerrada
+TA00318,OB00318,TR-2026-021,Atender observación 1: corregir estudio de estabilidad del medicamento,U09,CMC,2026-06-23,2026-07-01,2026-06-30,Cerrada
+TA00319,OB00319,TR-2026-021,Atender observación 2: corregir estudio de estabilidad del medicamento,U09,CMC,2026-06-23,2026-07-02,2026-07-03,Cerrada
+TA00320,OB00320,TR-2026-021,Atender observación 3: corregir proyecto de etiqueta del envase primario,U05,Asuntos Regulatorios,2026-06-23,2026-07-01,2026-06-25,Cerrada
+TA00321,OB00321,TR-2026-021,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2026-06-23,2026-07-02,2026-07-03,Cerrada
+TA00322,OB00324,TR-2026-025,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2026-09-30,2026-10-19,,Pendiente
+TA00323,OB00325,TR-2026-025,Atender observación 2: corregir estudio de estabilidad del medicamento,U09,CMC,2026-09-30,2026-10-15,,Pendiente
+TA00324,OB00326,TR-2026-025,Atender observación 3: corregir programa de aseguramiento de calidad del producto biotecnológico,U14,Calidad,2026-09-30,2026-10-19,,En curso
+TA00325,OB00327,TR-2026-025,Atender observación 4: corregir comprobante de pago de derechos,U05,Asuntos Regulatorios,2026-09-30,2026-10-19,,Pendiente
+TA00326,OB00328,TR-2026-025,Atender observación 5: corregir información para prescribir amplia (ippa),U04,Asuntos Regulatorios,2026-09-30,2026-10-15,,En curso
+TA00327,OB00329,TR-2026-026,Atender observación 1: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2026-07-01,2026-08-04,2026-07-02,Cerrada
+TA00328,OB00330,TR-2026-026,Atender observación 2: corregir validación del proceso de fabricación,U14,Calidad,2026-07-01,2026-08-04,2026-07-03,Cerrada
+TA00329,OB00331,TR-2026-026,Atender observación 3: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2026-07-01,2026-08-05,2026-08-03,Cerrada
+TA00330,OB00332,TR-2026-026,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2026-07-01,2026-08-06,2026-07-03,Cerrada
+TA00331,OB00333,TR-2026-027,Atender observación 1: corregir proyecto de etiqueta del envase primario,U02,Asuntos Regulatorios,2026-07-29,2026-08-17,2026-08-07,Cerrada
+TA00332,OB00334,TR-2026-027,Atender observación 2: corregir proyecto de etiqueta del envase primario,U04,Asuntos Regulatorios,2026-07-29,2026-08-14,2026-08-12,Cerrada
+TA00333,OB00335,TR-2026-027,Atender observación 3: corregir certificado de análisis del fármaco,U08,Calidad,2026-07-29,2026-08-13,2026-08-12,Cerrada
+TA00334,OB00336,TR-2026-027,Atender observación 4: corregir estudio de estabilidad del medicamento,U10,CMC,2026-07-29,2026-08-17,2026-08-12,Cerrada
+TA00335,OB00337,TR-2026-027,Atender observación 5: corregir justificación técnica de la modificación,U04,Asuntos Regulatorios,2026-07-29,2026-08-13,2026-08-03,Cerrada
+TA00336,OB00338,TR-2026-028,Atender observación 1: corregir estudio de estabilidad del medicamento,U10,CMC,2026-07-09,2026-07-13,2026-07-09,Cerrada
+TA00337,OB00339,TR-2026-028,Atender observación 2: corregir estudio de estabilidad del medicamento,U10,CMC,2026-07-09,2026-07-14,2026-07-09,Cerrada
+TA00338,OB00340,TR-2026-028,Atender observación 3: corregir justificación técnica de la modificación,U02,Asuntos Regulatorios,2026-07-09,2026-07-13,2026-07-09,Cerrada
+TA00339,OB00341,TR-2026-029,Atender observación 1: corregir perfiles de disolución comparativos,U10,CMC,2026-08-26,2026-09-22,2026-09-15,Cerrada
+TA00340,OB00342,TR-2026-029,Atender observación 2: corregir validación del proceso de fabricación,U07,Calidad,2026-08-26,2026-09-21,2026-08-27,Cerrada
+TA00341,OB00343,TR-2026-031,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U03,Asuntos Regulatorios,2026-07-29,2026-08-03,2026-07-31,Cerrada
+TA00342,OB00344,TR-2026-031,Atender observación 2: corregir estudio de estabilidad del medicamento,U10,CMC,2026-07-29,2026-07-31,2026-07-31,Cerrada
+TA00343,OB00345,TR-2026-031,Atender observación 3: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2026-07-29,2026-07-31,2026-07-31,Cerrada
+TA00344,OB00346,TR-2026-035,Atender observación 1: corregir proyecto de etiqueta del envase secundario,U05,Asuntos Regulatorios,2026-08-07,2026-08-25,,Vencida
+TA00345,OB00347,TR-2026-035,Atender observación 2: corregir perfiles de disolución comparativos,U09,CMC,2026-08-07,2026-08-24,,Vencida
+TA00346,OB00348,TR-2026-035,Atender observación 3: corregir justificación técnica de la modificación,U03,Asuntos Regulatorios,2026-08-07,2026-08-26,,Vencida
+TA00347,OB00349,TR-2026-035,Atender observación 4: corregir proyecto de etiqueta del envase secundario,U04,Asuntos Regulatorios,2026-08-07,2026-08-25,,Vencida

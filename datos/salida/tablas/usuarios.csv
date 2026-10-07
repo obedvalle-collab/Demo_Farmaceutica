@@ -1,0 +1,16 @@
+usuario_id,nombre,titulo,rol,area,correo,cedula_profesional,activo
+U01,Isabela Bonilla Llamas,Lic.,Director(a) de Asuntos Regulatorios,Dirección,isabela.bonilla@altamira-lab.example,,True
+U02,Samuel Segovia Estrada,Q.F.B.,Gerente de Asuntos Regulatorios,Asuntos Regulatorios,samuel.segovia@altamira-lab.example,12075345,True
+U03,Marisela Gonzales Soria,Q.F.B.,Especialista de Asuntos Regulatorios,Asuntos Regulatorios,marisela.gonzales@altamira-lab.example,10341084,True
+U04,Rosalia Sosa Tovar,Q.F.B.,Especialista de Asuntos Regulatorios,Asuntos Regulatorios,rosalia.sosa@altamira-lab.example,12827078,True
+U05,Antonio Cardenas Alba,Q.F.B.,Especialista de Asuntos Regulatorios,Asuntos Regulatorios,antonio.cardenas@altamira-lab.example,11202028,True
+U06,Modesto Carrión Blanco,Q.F.B.,Gerente de Aseguramiento de Calidad,Calidad,modesto.carrion@altamira-lab.example,13846881,True
+U07,Porfirio Riojas Velásquez,Q.F.B.,Analista de Calidad,Calidad,porfirio.riojas@altamira-lab.example,11210871,True
+U08,Elena Negrete Gamboa,Q.F.B.,Analista de Calidad,Calidad,elena.negrete@altamira-lab.example,12138359,True
+U09,Abraham Briones Dávila,Q.F.B.,Especialista CMC,CMC,abraham.briones@altamira-lab.example,10826870,True
+U10,Ivonne Cervantes Galindo,Q.F.B.,Especialista CMC,CMC,ivonne.cervantes@altamira-lab.example,13283976,True
+U11,Gonzalo de la Crúz Reyna,Dr(a).,Gerente Médico,Clínico,gonzalo.de_la_cruz@altamira-lab.example,12344776,True
+U12,Clemente Anaya Calderón,Dr(a).,Especialista Clínico,Clínico,clemente.anaya@altamira-lab.example,10978084,True
+U13,Elvira Barajas Elizondo,Lic.,Responsable de Farmacovigilancia,Farmacovigilancia,elvira.barajas@altamira-lab.example,,True
+U14,Ricardo Castañeda Ontiveros,Q.F.B.,Responsable Sanitario,Calidad,ricardo.castaneda@altamira-lab.example,12195810,True
+U15,Indira Gil Covarrubias,Lic.,Representante Legal,Dirección,indira.gil@altamira-lab.example,,True

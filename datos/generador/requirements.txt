@@ -1,0 +1,5 @@
+faker>=40
+reportlab>=4.2
+pymupdf>=1.24
+pillow>=10
+qrcode>=7
