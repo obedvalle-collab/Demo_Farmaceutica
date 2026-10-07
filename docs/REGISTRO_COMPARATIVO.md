@@ -10,6 +10,9 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-06 | 0 | Crear catálogo `obed_farmaceutica` | Databricks | | 3.8 s (SQL, incluye arranque serverless) | mínimo | `databricks catalogs create` falla con *Default Storage*; **solución:** `CREATE CATALOG` por SQL en un warehouse serverless propio (`farma_wh`, 2X-Small, auto-stop 5 min) |
 | 2026-10-06 | 0 | Rol, warehouse, base, monitor de gasto, integración de correo, llave RSA | Snowflake | | – | – | Requiere ACCOUNTADMIN → script `snowflake/sql/00_setup_accountadmin.sql` ejecutado por el usuario. La llave va en `RSA_PUBLIC_KEY_2` porque el espacio 1 está ocupado |
 
+| 2026-10-06 | 0 | Conexión local `obed_farma` (llave RSA) + prueba | Snowflake | | conexión 4.8 s · consulta 0.21 s · Cortex COMPLETE 3.9 s | mínimo | Funciona con rol `FARMA_BUILDER`, warehouse `FARMA_WH`; Cortex responde |
+| 2026-10-06 | 0 | Repositorio GitHub | – | | – | 0 | Git no estaba instalado (se instaló con winget); el primer `push` necesita inicio de sesión interactivo en GitHub |
+
 ## Notas por fase
 
 ### Fase 0
