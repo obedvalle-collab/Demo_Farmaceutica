@@ -56,6 +56,7 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-12 | 5 | Envío con **computer use** · intento 2 | Snowflake (cola) + local | | ≈ 90 s del agente (486 s incluida la espera de la confirmación humana) | **$1.15** (70 pasos) | ✅ Folio DGP-2026-37398. Contraseñas escritas por el robot sin que el modelo las vea; firma solo tras "Confirmar" en la app |
 | 2026-10-12 | 5 | Envíos 3 a 5 con computer use (ventana visible, transmisión en la app) | Snowflake (cola) + local | | 63–72 pasos; ≈ 90–115 s del agente | $1.11 · $1.0 (cancelado por tiempo de espera) · $1.23 | ✅ Folios DGP-2026-64369 y DGP-2026-49185. Se probó transmitir capturas a la app (1 por segundo); se decidió dejar solo la ventana de Chrome en vivo y en la app únicamente la imagen previa a la firma. Total del día con computer use ≈ $5.3 |
 | 2026-10-12 | 5 | Envío 6 con computer use (versión final: ventana visible + imagen previa a la firma en la app) | Snowflake (cola) + local | | 59 pasos | $0.96 | ✅ Folio DGP-2026-91009. Total del día con computer use ≈ $6.3 (6 envíos) |
+| 2026-10-12 | 5 | Envío 7 con computer use (pruebas del usuario) | Snowflake (cola) + local | | 63 pasos · 112 s | $1.10 | ✅ Folio DGP-2026-22878. Total del día ≈ $7.4 (7 envíos) |
 
 ## Notas por fase
 
