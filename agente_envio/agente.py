@@ -161,7 +161,38 @@ def enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=pri
     return resultado
 
 
+# Con la ventana visible (robot.py --ver) se dibuja un puntero rojo en cada clic para que una persona siga al agente.
+# Se quita antes de cada captura, así el modelo nunca lo ve.
+MOSTRAR_PUNTERO = False
+_JS_PUNTERO = """([x, y]) => {
+  let d = document.getElementById('__puntero_agente');
+  if (!d) { d = document.createElement('div'); d.id = '__puntero_agente';
+    d.style.cssText = 'position:fixed;z-index:2147483647;pointer-events:none;width:26px;height:26px;margin:-13px 0 0 -13px;' +
+      'border-radius:50%;border:3px solid #e0262b;background:rgba(224,38,43,.25);box-shadow:0 0 12px rgba(224,38,43,.8);' +
+      'transition:left .35s ease, top .35s ease;';
+    document.body.appendChild(d); }
+  d.style.left = x + 'px'; d.style.top = y + 'px';
+}"""
+
+
+def _puntero(page, pos):
+    if MOSTRAR_PUNTERO and pos:
+        try:
+            page.evaluate(_JS_PUNTERO, list(pos)); time.sleep(0.4)
+        except Exception:
+            pass
+
+
+def _sin_puntero(page):
+    if MOSTRAR_PUNTERO:
+        try:
+            page.evaluate("() => document.getElementById('__puntero_agente')?.remove()")
+        except Exception:
+            pass
+
+
 def _png(page):
+    _sin_puntero(page)
     return [{"type": "image", "source": {"type": "base64", "media_type": "image/png",
                                          "data": base64.b64encode(page.screenshot()).decode()}}]
 
@@ -171,11 +202,13 @@ def _ejecutar(page, nombre, x, env, zips, confirmar):
     if nombre == "screenshot":
         return _png(page)
     if nombre == "zoom":
+        _sin_puntero(page)
         x0, y0, x1, y1 = x["region"]
         return [{"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": base64.b64encode(
             page.screenshot(clip={"x": x0, "y": y0, "width": max(1, x1 - x0), "height": max(1, y1 - y0)})).decode()}}]
     if nombre in ("left_click", "right_click", "middle_click", "double_click", "triple_click"):
         if x.get("coordinate"):
+            _puntero(page, x["coordinate"])
             m.move(*x["coordinate"])
         boton = {"right_click": "right", "middle_click": "middle"}.get(nombre, "left")
         veces = {"double_click": 2, "triple_click": 3}.get(nombre, 1)
@@ -229,6 +262,7 @@ def _ejecutar(page, nombre, x, env, zips, confirmar):
         page.set_input_files(f"#archivo-{x['modulo']}", str(zips[x["modulo"]]))
         return f"Archivo {zips[x['modulo']].name} adjuntado al selector del módulo {x['modulo']}. Ahora pulsa 'Cargar'."
     if nombre == "solicitar_confirmacion":
+        _sin_puntero(page)
         return confirmar(page.screenshot(), x["resumen"])
     if nombre == "reportar_resultado":
         return Resultado(exito=bool(x["exito"]), folio=x.get("folio", ""), nota=x.get("nota", ""))

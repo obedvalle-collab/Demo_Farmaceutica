@@ -180,6 +180,7 @@ def main():
     log(f"Robot de envío y vigía en modo {modo} · atendiendo: {', '.join(c.nombre for c in colas)} · buzón desde el correo {visto['id']}")
     with sync_playwright() as p:
         navegador = p.chromium.launch(headless=not a.ver)
+        agente.MOSTRAR_PUNTERO = a.ver
         try:
             while True:
                 for c in colas:
