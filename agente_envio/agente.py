@@ -16,7 +16,7 @@ import anthropic
 
 MODELO = "claude-opus-5-5"
 ANCHO, ALTO = 1280, 800
-MAX_PASOS = 60
+MAX_PASOS = 100   # la carga del formulario toma ~60 pasos; después de confirmar faltan ~5
 PRECIO = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0)}   # USD por millón de tokens (entrada, salida)
 
 TECLAS = {"return": "Enter", "enter": "Enter", "tab": "Tab", "escape": "Escape", "esc": "Escape", "backspace": "Backspace",

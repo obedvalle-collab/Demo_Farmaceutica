@@ -52,6 +52,8 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-07 | 7 | Asistente: espacio Genie + agente en código | Databricks | | crear 4 s; 6/8, mediana 20.4 s por pregunta | pendiente | Agent Bricks Supervisor marcado como legado → agente propio (~80 líneas) con gpt-oss + Genie + Vector Search. Genie con identidad de servicio se cobra desde la 1.ª consulta |
 | 2026-10-07 | 7 | Gobierno: bitácora única, ALCOA+ y auditoría nativa | Ambas | | SF 11–13 s · DB ≈ 15 s (auditoría) | mínimo | ALCOA+ idéntico (331 aprobaciones sin segregación de funciones). Auditoría: ACCOUNT_USAGE vs tablas de sistema de Unity Catalog |
 | 2026-10-12 | 7 | Recrear buscador de normas (borrado entre sesiones) | Databricks | | 51 min en total (casi todo es la sincronización del índice) | ≈ $0.28/h mientras exista | Mismo resultado: 11/12 solo vigentes, mediana 0.4 s. En Snowflake el equivalente es pausar/reanudar (segundos) |
+| 2026-10-12 | 5 | Envío con **computer use** (Claude Opus 5.5) · intento 1 | Snowflake (cola) + local | | ≈ 70 s hasta la confirmación | $0.79 | Llenó la solicitud y cargó los 5 módulos en 59 pasos, pero la confirmación era el paso 60 = tope → se canceló y se subió el tope a 100. Advirtió por su cuenta solicitudes previas con la misma referencia en el portal |
+| 2026-10-12 | 5 | Envío con **computer use** · intento 2 | Snowflake (cola) + local | | ≈ 90 s del agente (486 s incluida la espera de la confirmación humana) | **$1.15** (70 pasos) | ✅ Folio DGP-2026-37398. Contraseñas escritas por el robot sin que el modelo las vea; firma solo tras "Confirmar" en la app |
 
 ## Notas por fase
 
