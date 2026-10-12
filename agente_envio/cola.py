@@ -58,6 +58,17 @@ class ColaSnowflake:
         self.con.cursor().execute(f"PUT 'file://{tmp.as_posix()}' @{self.BD}.APP.CAPTURAS AUTO_COMPRESS = FALSE OVERWRITE = TRUE")
         return nombre
 
+    def vivo(self, envio_id, paso, accion, imagen):
+        """Último cuadro de la transmisión en vivo (JPEG en base64): una fila por envío que se va reemplazando."""
+        self.con.cursor().execute(f"""MERGE INTO {self.BD}.APP.ENVIO_VIVO t
+            USING (SELECT %s AS envio_id, %s::INT AS paso, %s AS accion, %s AS imagen) s ON t.envio_id = s.envio_id
+            WHEN MATCHED THEN UPDATE SET paso = s.paso, accion = s.accion, imagen = s.imagen, actualizado_en = CURRENT_TIMESTAMP()
+            WHEN NOT MATCHED THEN INSERT (envio_id, paso, accion, imagen, actualizado_en)
+                 VALUES (s.envio_id, s.paso, s.accion, s.imagen, CURRENT_TIMESTAMP())""", (envio_id, paso, accion, imagen))
+
+    def cerrar_conexion(self):
+        self.con.close()
+
     def cerrar(self):
         try:
             self.con.cursor().execute("ALTER WAREHOUSE FARMA_WH SUSPEND")
@@ -135,3 +146,14 @@ class ColaDatabricks:
             self.w.warehouses.stop(self.WAREHOUSE)
         except Exception:
             pass
+
+    def vivo(self, envio_id, paso, accion, imagen):
+        self._q(f"""MERGE INTO {self.CAT}.app.envio_vivo t
+            USING (SELECT :e AS envio_id, CAST(:p AS INT) AS paso, :a AS accion, :i AS imagen) s ON t.envio_id = s.envio_id
+            WHEN MATCHED THEN UPDATE SET paso = s.paso, accion = s.accion, imagen = s.imagen, actualizado_en = current_timestamp()
+            WHEN NOT MATCHED THEN INSERT (envio_id, paso, accion, imagen, actualizado_en)
+                 VALUES (s.envio_id, s.paso, s.accion, s.imagen, current_timestamp())""",
+                {"e": envio_id, "p": paso, "a": accion, "i": imagen})
+
+    def cerrar_conexion(self):
+        pass

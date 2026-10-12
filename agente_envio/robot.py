@@ -9,6 +9,9 @@ Uso (desde la raíz del proyecto, con el portal simulado encendido):
     python agente_envio/robot.py --plataforma snowflake --una-vez
 """
 import argparse
+import base64
+import io
+import threading
 import re
 import sys
 import tempfile
@@ -43,6 +46,49 @@ def log(msg):
     print(f"[{datetime.now():%H:%M:%S}] {msg}", flush=True)
 
 
+class Transmision(threading.Thread):
+    """Sube a la plataforma el último cuadro de la pantalla del agente (≈ 1 por segundo) para verlo en vivo en la app.
+    Corre en su propio hilo y con su propia conexión para no frenar al agente; si se acumulan cuadros, solo sube el último."""
+
+    def __init__(self, clase_cola, envio_id):
+        super().__init__(daemon=True)
+        self.clase_cola, self.envio_id = clase_cola, envio_id
+        self.cuadro, self.listo, self.fin = None, threading.Event(), threading.Event()
+
+    def poner(self, paso, accion, png):
+        self.cuadro = (paso, accion, png)
+        self.listo.set()
+
+    def run(self):
+        cola = self.clase_cola()
+        try:
+            while not (self.fin.is_set() and not self.listo.is_set()):
+                if not self.listo.wait(0.5):
+                    continue
+                self.listo.clear()
+                paso, accion, png = self.cuadro
+                try:
+                    cola.vivo(self.envio_id, paso, accion, _comprimir(png))
+                except Exception as e:
+                    log(f"  (transmisión: {str(e)[:120]})")
+                time.sleep(0.8)
+        finally:
+            cola.cerrar_conexion()
+
+    def parar(self):
+        self.fin.set()
+        self.join(timeout=15)
+
+
+def _comprimir(png, ancho=960, calidad=60):
+    from PIL import Image
+    im = Image.open(io.BytesIO(png)).convert("RGB")
+    im = im.resize((ancho, round(im.height * ancho / im.width)))
+    buf = io.BytesIO()
+    im.save(buf, "JPEG", quality=calidad, optimize=True)
+    return base64.b64encode(buf.getvalue()).decode()
+
+
 def atender(cola, envio, env, modo, navegador):
     eid, tramite = envio["envio_id"], envio["tramite_id"]
     if not cola.tomar(eid):
@@ -72,9 +118,19 @@ def atender(cola, envio, env, modo, navegador):
 
         contexto = navegador.new_context(viewport={"width": agente.ANCHO, "height": agente.ALTO}, locale="es-MX")
         page = contexto.new_page()
+        trans = Transmision(type(cola), eid)
+        trans.start()
+
+        def en_vivo(pg, paso, accion):
+            trans.poner(paso, accion, pg.screenshot())
+
         if modo == "computer_use":
-            r = agente.enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=log)
+            try:
+                r = agente.enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=log, en_vivo=en_vivo)
+            finally:
+                trans.parar()
         else:
+            trans.parar()   # el modo guion no transmite
             r = agente.enviar_con_guion(page, env, solicitud, zips, confirmar)
         contexto.close()
         if r.get("exito"):

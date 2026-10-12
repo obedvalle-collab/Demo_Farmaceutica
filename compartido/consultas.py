@@ -114,3 +114,8 @@ class Consultas:
 
     def usuarios(self):
         return self.q(f"SELECT usuario_id, titulo, nombre, rol, area, activo FROM {self.L}.usuarios ORDER BY area, rol")
+
+    # ------------------------------------------------------------------------------- transmisión en vivo del agente (Vista 2)
+    def envio_vivo(self, envio_id):
+        r = self.q(f"SELECT paso, accion, imagen, actualizado_en FROM {self.A}.envio_vivo WHERE envio_id = :e", {"e": envio_id})
+        return r[0] if r else None

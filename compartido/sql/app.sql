@@ -15,6 +15,10 @@ CREATE TABLE IF NOT EXISTS {A}.envios (
     cadena_acuse STRING, enviado_en TIMESTAMP, modo STRING, pasos INT, segundos DOUBLE, costo_usd DOUBLE,
     error STRING, actualizado_en TIMESTAMP);
 
+-- Transmisión en vivo del agente: último cuadro de la pantalla del portal (JPEG en base64) por envío
+CREATE TABLE IF NOT EXISTS {A}.envio_vivo (
+    envio_id STRING, paso INT, accion STRING, imagen STRING, actualizado_en TIMESTAMP);
+
 -- Documento vigente por requisito y su estado efectivo (hallazgos de la IA sobre la última versión)
 CREATE OR REPLACE VIEW {N}.expediente_estado AS
 WITH vig AS (

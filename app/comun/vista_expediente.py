@@ -2,6 +2,8 @@
 
 `datos` es un objeto con la misma interfaz en ambas plataformas (ver datos_snowflake.py / datos_databricks.py).
 """
+import base64
+
 import streamlit as st
 
 MODULOS = {"M1": "Módulo 1 · Administrativo y regional", "M2": "Módulo 2 · Resúmenes", "M3": "Módulo 3 · Calidad",
@@ -103,6 +105,26 @@ def _bandeja(datos, tramite):
                 st.session_state.pop(f"ultimo_{tramite}", None); st.rerun()
 
 
+def _cuadro(vivo):
+    return base64.b64decode(vivo["imagen"]) if vivo and vivo.get("imagen") else None
+
+
+@st.fragment(run_every=1.5)
+def _en_vivo(datos, tramite, envio_id, estatus):
+    """Transmisión en vivo: la pantalla del portal tal como la ve el agente, con su paso actual.
+    Se refresca sola y recarga la vista cuando cambia el estado (p. ej. cuando pide confirmación)."""
+    nuevo = datos.ultimo_envio(tramite)
+    if nuevo and nuevo["estatus"] != estatus:
+        st.rerun()
+    vivo = datos.envio_vivo(envio_id)
+    img = _cuadro(vivo)
+    if img:
+        st.markdown(f"**🔴 En vivo · paso {vivo['paso']}:** {vivo['accion']}")
+        st.image(img, use_container_width=True)
+    else:
+        st.caption("Esperando la primera imagen del agente…")
+
+
 def _envio(datos, tramite, c, usuario):
     st.markdown("#### 📤 Envío a COFEPRIS (portal simulado)")
     env = datos.ultimo_envio(tramite)
@@ -125,10 +147,8 @@ def _envio(datos, tramite, c, usuario):
     if env["estatus"] == "Error":
         st.error(f"El robot reportó un error: {env['error']}")
     if env["estatus"] == "Esperando confirmación":
-        st.warning("El agente llenó la solicitud y está detenido antes de **Firmar y enviar**. Revisa lo que ve:")
-        img = datos.captura(env["captura"]) if env["captura"] else None
-        if img:
-            st.image(img, caption="Pantalla del portal vista por el agente", use_container_width=True)
+        st.warning("El agente llenó la solicitud y está detenido antes de **Firmar y enviar**. "
+                   "Revisa abajo la pantalla del portal y confirma.")
         if env["resumen_agente"]:
             st.info(env["resumen_agente"])
         a, b = st.columns(2)
@@ -140,14 +160,29 @@ def _envio(datos, tramite, c, usuario):
         st.success("Solicitud enviada y recibida en el portal.")
         st.markdown(f'<div class="folio">{env["folio"]}</div>', unsafe_allow_html=True)
         st.caption(f"Enviado: {env['enviado_en']} · Cadena de verificación: {env['cadena_acuse']}")
-        img = datos.captura(env["captura"]) if env["captura"] else None
+        img = _cuadro(datos.envio_vivo(env["envio_id"])) or (datos.captura(env["captura"]) if env["captura"] else None)
         if img:
             with st.expander("Ver acuse en el portal"):
                 st.image(img, use_container_width=True)
     else:
-        st.info(f"Estado: **{env['estatus']}**. El robot de envío está trabajando…")
+        st.info(f"Estado: **{env['estatus']}**. El agente está trabajando en el portal: míralo en vivo abajo ⬇️")
     if st.button("🔄 Actualizar estado"):
         st.rerun()
+    return env
+
+
+def _pantalla_agente(datos, tramite, env):
+    """Debajo del expediente, a todo lo ancho: lo que ve el agente en el portal (en vivo o la pantalla a confirmar)."""
+    if not env or env["estatus"] in ("Cancelado", "Error", "Enviado"):
+        return
+    st.divider()
+    st.markdown("### 🖥️ El agente en el portal")
+    if env["estatus"] == "Esperando confirmación":
+        img = _cuadro(datos.envio_vivo(env["envio_id"])) or (datos.captura(env["captura"]) if env["captura"] else None)
+        if img:
+            st.image(img, caption="Pantalla del portal antes de firmar", use_container_width=True)
+    else:
+        _en_vivo(datos, tramite, env["envio_id"], env["estatus"])
 
 
 def pagina(datos, plataforma, usuario="demo"):
@@ -167,6 +202,7 @@ def pagina(datos, plataforma, usuario="demo"):
     with izq:
         _arbol(datos, tramite)
     with der:
-        _envio(datos, tramite, c, usuario)
+        env = _envio(datos, tramite, c, usuario)
         st.divider()
         _bandeja(datos, tramite)
+    _pantalla_agente(datos, tramite, env)
