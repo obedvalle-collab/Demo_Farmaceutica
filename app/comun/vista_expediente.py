@@ -109,20 +109,13 @@ def _cuadro(vivo):
     return base64.b64decode(vivo["imagen"]) if vivo and vivo.get("imagen") else None
 
 
-@st.fragment(run_every=1.5)
-def _en_vivo(datos, tramite, envio_id, estatus):
-    """Transmisión en vivo: la pantalla del portal tal como la ve el agente, con su paso actual.
-    Se refresca sola y recarga la vista cuando cambia el estado (p. ej. cuando pide confirmación)."""
+@st.fragment(run_every=3)
+def _vigilar_envio(datos, tramite, estatus):
+    """Mientras el robot trabaja, revisa el estado cada 3 s y recarga la vista cuando cambia
+    (por ejemplo, cuando el agente se detiene a pedir confirmación)."""
     nuevo = datos.ultimo_envio(tramite)
     if nuevo and nuevo["estatus"] != estatus:
         st.rerun()
-    vivo = datos.envio_vivo(envio_id)
-    img = _cuadro(vivo)
-    if img:
-        st.markdown(f"**🔴 En vivo · paso {vivo['paso']}:** {vivo['accion']}")
-        st.image(img, use_container_width=True)
-    else:
-        st.caption("Esperando la primera imagen del agente…")
 
 
 def _envio(datos, tramite, c, usuario):
@@ -165,24 +158,23 @@ def _envio(datos, tramite, c, usuario):
             with st.expander("Ver acuse en el portal"):
                 st.image(img, use_container_width=True)
     else:
-        st.info(f"Estado: **{env['estatus']}**. El agente está trabajando en el portal: míralo en vivo abajo ⬇️")
+        st.info(f"Estado: **{env['estatus']}**. El agente está trabajando en el portal (míralo en la ventana del navegador); "
+                "esta sección se actualiza sola.")
+        _vigilar_envio(datos, tramite, env["estatus"])
     if st.button("🔄 Actualizar estado"):
         st.rerun()
     return env
 
 
 def _pantalla_agente(datos, tramite, env):
-    """Debajo del expediente, a todo lo ancho: lo que ve el agente en el portal (en vivo o la pantalla a confirmar)."""
-    if not env or env["estatus"] in ("Cancelado", "Error", "Enviado"):
+    """Debajo del expediente, a todo lo ancho: la pantalla del portal que la persona debe revisar antes de confirmar."""
+    if not env or env["estatus"] != "Esperando confirmación":
         return
     st.divider()
-    st.markdown("### 🖥️ El agente en el portal")
-    if env["estatus"] == "Esperando confirmación":
-        img = _cuadro(datos.envio_vivo(env["envio_id"])) or (datos.captura(env["captura"]) if env["captura"] else None)
-        if img:
-            st.image(img, caption="Pantalla del portal antes de firmar", use_container_width=True)
-    else:
-        _en_vivo(datos, tramite, env["envio_id"], env["estatus"])
+    st.markdown("### 🖥️ Pantalla del portal antes de firmar")
+    img = _cuadro(datos.envio_vivo(env["envio_id"])) or (datos.captura(env["captura"]) if env["captura"] else None)
+    if img:
+        st.image(img, use_container_width=True)
 
 
 def pagina(datos, plataforma, usuario="demo"):

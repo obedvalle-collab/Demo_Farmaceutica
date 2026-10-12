@@ -54,6 +54,7 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-12 | 7 | Recrear buscador de normas (borrado entre sesiones) | Databricks | | 51 min en total (casi todo es la sincronización del índice) | ≈ $0.28/h mientras exista | Mismo resultado: 11/12 solo vigentes, mediana 0.4 s. En Snowflake el equivalente es pausar/reanudar (segundos) |
 | 2026-10-12 | 5 | Envío con **computer use** (Claude Opus 5.5) · intento 1 | Snowflake (cola) + local | | ≈ 70 s hasta la confirmación | $0.79 | Llenó la solicitud y cargó los 5 módulos en 59 pasos, pero la confirmación era el paso 60 = tope → se canceló y se subió el tope a 100. Advirtió por su cuenta solicitudes previas con la misma referencia en el portal |
 | 2026-10-12 | 5 | Envío con **computer use** · intento 2 | Snowflake (cola) + local | | ≈ 90 s del agente (486 s incluida la espera de la confirmación humana) | **$1.15** (70 pasos) | ✅ Folio DGP-2026-37398. Contraseñas escritas por el robot sin que el modelo las vea; firma solo tras "Confirmar" en la app |
+| 2026-10-12 | 5 | Envíos 3 a 5 con computer use (ventana visible, transmisión en la app) | Snowflake (cola) + local | | 63–72 pasos; ≈ 90–115 s del agente | $1.11 · $1.0 (cancelado por tiempo de espera) · $1.23 | ✅ Folios DGP-2026-64369 y DGP-2026-49185. Se probó transmitir capturas a la app (1 por segundo); se decidió dejar solo la ventana de Chrome en vivo y en la app únicamente la imagen previa a la firma. Total del día con computer use ≈ $5.3 |
 
 ## Notas por fase
 

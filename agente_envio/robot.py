@@ -4,14 +4,13 @@ Por cada solicitud: arma el paquete CTD, abre el navegador, el agente llena el p
 plataforma y espera la confirmación de la persona en la app; al confirmar, firma, envía y registra folio y acuse.
 
 Uso (desde la raíz del proyecto, con el portal simulado encendido):
-    python agente_envio/robot.py                    # atiende ambas plataformas, modo automático
+    python agente_envio/robot.py                    # atiende ambas plataformas, modo automático, con ventana visible
     python agente_envio/robot.py --modo guion       # respaldo sin IA
     python agente_envio/robot.py --plataforma snowflake --una-vez
 """
 import argparse
 import base64
 import io
-import threading
 import re
 import sys
 import tempfile
@@ -46,40 +45,6 @@ def log(msg):
     print(f"[{datetime.now():%H:%M:%S}] {msg}", flush=True)
 
 
-class Transmision(threading.Thread):
-    """Sube a la plataforma el último cuadro de la pantalla del agente (≈ 1 por segundo) para verlo en vivo en la app.
-    Corre en su propio hilo y con su propia conexión para no frenar al agente; si se acumulan cuadros, solo sube el último."""
-
-    def __init__(self, clase_cola, envio_id):
-        super().__init__(daemon=True)
-        self.clase_cola, self.envio_id = clase_cola, envio_id
-        self.cuadro, self.listo, self.fin = None, threading.Event(), threading.Event()
-
-    def poner(self, paso, accion, png):
-        self.cuadro = (paso, accion, png)
-        self.listo.set()
-
-    def run(self):
-        cola = self.clase_cola()
-        try:
-            while not (self.fin.is_set() and not self.listo.is_set()):
-                if not self.listo.wait(0.5):
-                    continue
-                self.listo.clear()
-                paso, accion, png = self.cuadro
-                try:
-                    cola.vivo(self.envio_id, paso, accion, _comprimir(png))
-                except Exception as e:
-                    log(f"  (transmisión: {str(e)[:120]})")
-                time.sleep(0.8)
-        finally:
-            cola.cerrar_conexion()
-
-    def parar(self):
-        self.fin.set()
-        self.join(timeout=15)
-
-
 def _comprimir(png, ancho=960, calidad=60):
     from PIL import Image
     im = Image.open(io.BytesIO(png)).convert("RGB")
@@ -101,6 +66,7 @@ def atender(cola, envio, env, modo, navegador):
         solicitud = cola.datos_tramite(tramite)
 
         def confirmar(png, resumen):
+            cola.vivo(eid, 0, "Pantalla antes de firmar", _comprimir(png, ancho=1280, calidad=75))
             ruta = cola.subir_captura(png, f"{eid}_confirmacion.png")
             cola.actualizar(eid, estatus="Esperando confirmación", captura=ruta, resumen_agente=resumen[:2000])
             log("  esperando confirmación en la app…")
@@ -118,22 +84,13 @@ def atender(cola, envio, env, modo, navegador):
 
         contexto = navegador.new_context(viewport={"width": agente.ANCHO, "height": agente.ALTO}, locale="es-MX")
         page = contexto.new_page()
-        trans = Transmision(type(cola), eid)
-        trans.start()
-
-        def en_vivo(pg, paso, accion):
-            trans.poner(paso, accion, pg.screenshot())
-
         if modo == "computer_use":
-            try:
-                r = agente.enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=log, en_vivo=en_vivo)
-            finally:
-                trans.parar()
+            r = agente.enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=log)
         else:
-            trans.parar()   # el modo guion no transmite
             r = agente.enviar_con_guion(page, env, solicitud, zips, confirmar)
         contexto.close()
         if r.get("exito"):
+            cola.vivo(eid, 1, "Acuse", _comprimir(r["acuse"], ancho=1280, calidad=75))
             ruta = cola.subir_captura(r["acuse"], f"{eid}_acuse.png")
             cola.actualizar(eid, estatus="Enviado", folio=r.get("folio", ""), cadena_acuse=r.get("cadena", ""),
                             enviado_en=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), captura=ruta, modo=modo,
@@ -224,7 +181,8 @@ def main():
     ap.add_argument("--plataforma", choices=["ambas", "snowflake", "databricks"], default="ambas")
     ap.add_argument("--modo", choices=["auto", "computer_use", "guion"], default="auto")
     ap.add_argument("--una-vez", action="store_true", help="atiende lo pendiente y termina")
-    ap.add_argument("--ver", action="store_true", help="muestra la ventana del navegador")
+    ap.add_argument("--sin-ventana", action="store_true",
+                    help="no muestra la ventana del navegador (por defecto se ve en vivo lo que hace el agente)")
     a = ap.parse_args()
     env = leer_env()
     modo = a.modo if a.modo != "auto" else ("computer_use" if env.get("ANTHROPIC_API_KEY") else "guion")
@@ -235,8 +193,7 @@ def main():
     visto.update({c.nombre: d.ultimo_correo() for c, d in ciclos})
     log(f"Robot de envío y vigía en modo {modo} · atendiendo: {', '.join(c.nombre for c in colas)} · buzón desde el correo {visto['id']}")
     with sync_playwright() as p:
-        navegador = p.chromium.launch(headless=not a.ver)
-        agente.MOSTRAR_PUNTERO = a.ver
+        navegador = p.chromium.launch(headless=a.sin_ventana)
         try:
             while True:
                 for c in colas:

@@ -101,20 +101,7 @@ Pasos:
 Reglas: nunca pulses 'Firmar y enviar' sin CONFIRMADO; no escribas contraseñas con la acción 'type'; no salgas del portal; si algo falla, reintenta una vez y si no, reporta el problema. Trabaja con pocas capturas: toma una después de cada cambio de página."""
 
 
-def describir(nombre, x):
-    """Texto corto en español de lo que hace el agente en cada paso (para la transmisión en vivo)."""
-    if nombre == "escribir_credencial":
-        return {"usuario_portal": "Escribe el usuario del portal", "contrasena_portal": "Escribe la contraseña (oculta)",
-                "contrasena_efirma": "Escribe la contraseña de la e.firma (oculta)"}.get(x.get("credencial"), "Escribe una credencial")
-    return {"screenshot": "Observa la pantalla", "left_click": "Clic", "double_click": "Doble clic", "triple_click": "Triple clic",
-            "type": f"Escribe «{str(x.get('text', ''))[:40]}»", "key": f"Tecla {x.get('text', '')}", "scroll": "Desplaza la página",
-            "wait": "Espera a que cargue", "zoom": "Acerca la vista", "mouse_move": "Mueve el puntero",
-            "adjuntar_modulo": f"Adjunta el módulo {str(x.get('modulo', '')).upper()}",
-            "solicitar_confirmacion": "Se detiene antes de firmar y pide tu confirmación",
-            "reportar_resultado": "Lee el acuse y reporta el resultado"}.get(nombre, nombre)
-
-
-def enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=print, en_vivo=None):
+def enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=print):
     # las llaves de usuario (sk-ant-usr…) no están ligadas a un workspace: hay que indicarlo en cada llamada
     encabezados = {"anthropic-workspace-id": env["ANTHROPIC_WORKSPACE_ID"]} if env.get("ANTHROPIC_WORKSPACE_ID") else None
     cliente = anthropic.Anthropic(api_key=env["ANTHROPIC_API_KEY"], default_headers=encabezados)
@@ -152,11 +139,7 @@ def enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=pri
                 resultados.append({**base, "is_error": True, "content": "Not executed: an earlier computer action in this turn failed."})
                 continue
             try:
-                if en_vivo and b.name == "solicitar_confirmacion":
-                    en_vivo(page, pasos, describir(b.name, b.input))
                 contenido = _ejecutar(page, b.name, b.input, env, zips, confirmar)
-                if en_vivo and b.name != "solicitar_confirmacion":
-                    en_vivo(page, pasos, describir(b.name, b.input))
                 registrar(f"    paso {pasos}: {b.name} {json.dumps(b.input, ensure_ascii=False)[:90] if b.name != 'escribir_credencial' else b.input}")
                 if isinstance(contenido, Resultado):
                     resultado = contenido
@@ -178,9 +161,9 @@ def enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=pri
     return resultado
 
 
-# Se dibuja un puntero rojo en cada clic para que una persona siga al agente (ventana visible o transmisión en la app).
+# Se dibuja un puntero rojo en cada clic para que una persona siga al agente en la ventana visible.
 # Se quita antes de cada captura, así el modelo nunca lo ve.
-MOSTRAR_PUNTERO = True   # siempre: sirve para la ventana visible y para la transmisión en la app
+MOSTRAR_PUNTERO = True
 _JS_PUNTERO = """([x, y]) => {
   let d = document.getElementById('__puntero_agente');
   if (!d) { d = document.createElement('div'); d.id = '__puntero_agente';
