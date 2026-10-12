@@ -51,7 +51,7 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-07 | 7 | Asistente: vista semántica + Cortex Agent | Snowflake | | crear 5 s; mediana 19.6 s por pregunta | pendiente (47–88 mil tokens/pregunta) | 8/8 al primer intento. Desde SiS (warehouse) no se puede usar la API REST de agentes → función SQL `DATA_AGENT_RUN` |
 | 2026-10-07 | 7 | Asistente: espacio Genie + agente en código | Databricks | | crear 4 s; 6/8, mediana 20.4 s por pregunta | pendiente | Agent Bricks Supervisor marcado como legado → agente propio (~80 líneas) con gpt-oss + Genie + Vector Search. Genie con identidad de servicio se cobra desde la 1.ª consulta |
 | 2026-10-07 | 7 | Gobierno: bitácora única, ALCOA+ y auditoría nativa | Ambas | | SF 11–13 s · DB ≈ 15 s (auditoría) | mínimo | ALCOA+ idéntico (331 aprobaciones sin segregación de funciones). Auditoría: ACCOUNT_USAGE vs tablas de sistema de Unity Catalog |
-| 2026-10-12 | 7 | Recrear buscador de normas (borrado entre sesiones) | Databricks | | 51 min en total (sincronización 52 min de espera incluida) | ≈ $0.28/h mientras exista | Mismo resultado: 11/12 solo vigentes, mediana 0.4 s. En Snowflake el equivalente es pausar/reanudar (segundos) |
+| 2026-10-12 | 7 | Recrear buscador de normas (borrado entre sesiones) | Databricks | | 51 min en total (casi todo es la sincronización del índice) | ≈ $0.28/h mientras exista | Mismo resultado: 11/12 solo vigentes, mediana 0.4 s. En Snowflake el equivalente es pausar/reanudar (segundos) |
 
 ## Notas por fase
 
