@@ -58,6 +58,7 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-12 | 5 | Envío 6 con computer use (versión final: ventana visible + imagen previa a la firma en la app) | Snowflake (cola) + local | | 59 pasos | $0.96 | ✅ Folio DGP-2026-91009. Total del día con computer use ≈ $6.3 (6 envíos) |
 | 2026-10-12 | 5 | Envío 7 con computer use (pruebas del usuario) | Snowflake (cola) + local | | 63 pasos · 112 s | $1.10 | ✅ Folio DGP-2026-22878. Total del día ≈ $7.4 (7 envíos) |
 | 2026-10-13 | 5–6 | Presentación con la app de Snowflake (flujo completo) | Snowflake + local | | envío 63 pasos · 166 s; aviso detectado en ≈ 80 s; oficio analizado en 53 s | $1.09 (computer use) | ✅ Folio DGP-2026-50324 → prevención con 4 observaciones (15 días hábiles) → alertas por correo |
+| 2026-10-13 | 8 | Costos medidos de todo el proyecto (ACCOUNT_USAGE / system.billing) | Ambas | | – | SF 14.2 créditos ≈ $43 · DB ≈ $55 (lista) | DB: $26.9 del buscador encendido sin uso 8–11 oct. SF: se excluyen 0.39 créditos de pruebas ajenas a la demo con el mismo rol. Computer use: 9 envíos ≈ $9.5. Horas del comparativo: estimadas |
 
 ## Notas por fase
 

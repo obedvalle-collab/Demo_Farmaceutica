@@ -1,0 +1,318 @@
+<title>Snowflake vs Databricks: gestor regulatorio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: informe de una columna; cada comparación es una tabla Snowflake | Databricks; barras CSS a escala para horas y costos. */
+:root {
+  --bg: #f5f6f8;
+  --papel: #ffffff;
+  --tinta: #17202b;
+  --suave: #566371;
+  --linea: #dde2e8;
+  --sf: #1f7fc4;
+  --sf-claro: #e4f1fb;
+  --db: #c4472b;
+  --db-claro: #fbebe6;
+  --comun: #6b7a89;
+  --bien: #1e6b42;
+  --ojo: #9a6412;
+  --codigo-bg: #eef1f4;
+  --f-texto: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f141a; --papel: #161d25; --tinta: #e5eaef; --suave: #9ba8b5; --linea: #2a3440;
+    --sf: #5fb0ec; --sf-claro: #16283a; --db: #f08066; --db-claro: #34201b; --comun: #8d9aa7;
+    --bien: #6cc795; --ojo: #e0b25c; --codigo-bg: #1d2630; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f141a; --papel: #161d25; --tinta: #e5eaef; --suave: #9ba8b5; --linea: #2a3440;
+  --sf: #5fb0ec; --sf-claro: #16283a; --db: #f08066; --db-claro: #34201b; --comun: #8d9aa7;
+  --bien: #6cc795; --ojo: #e0b25c; --codigo-bg: #1d2630; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--tinta); font-family: var(--f-texto); font-size: 16px; line-height: 1.55; }
+.pagina { max-width: 940px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; display: grid; gap: 44px; }
+h1, h2, h3 { margin: 0; line-height: 1.2; text-wrap: balance; }
+h1 { font-size: clamp(28px, 4vw, 38px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 23px; font-weight: 700; }
+h3 { font-size: 17px; font-weight: 700; }
+p { margin: 0; }
+.mono, code { font-family: var(--f-mono); font-size: 0.88em; }
+code { background: var(--codigo-bg); padding: 1px 5px; border-radius: 4px; }
+.suave { color: var(--suave); }
+.chica { font-size: 14px; }
+.etiqueta { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--suave); }
+.sf { color: var(--sf); } .db { color: var(--db); }
+
+header { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 2px solid var(--tinta); }
+header .bajada { color: var(--suave); max-width: 66ch; }
+.marcas { display: flex; gap: 8px; flex-wrap: wrap; }
+.marcas span { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--papel); border: 1px solid var(--linea); color: var(--suave); }
+
+section { display: grid; gap: 18px; }
+.intro { color: var(--suave); max-width: 70ch; }
+
+.cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.cifra { background: var(--papel); border: 1px solid var(--linea); border-radius: 8px; padding: 14px 16px; display: grid; gap: 6px; min-width: 0; }
+.cifra .par { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+.cifra .par b { font-size: 24px; font-weight: 800; }
+.cifra .par small { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; }
+
+ul.puntos { margin: 0; padding-left: 20px; display: grid; gap: 7px; }
+
+.tabla { overflow-x: auto; background: var(--papel); border: 1px solid var(--linea); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 9px 12px; border-top: 1px solid var(--linea); vertical-align: top; }
+thead th { border-top: 0; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--suave); font-weight: 600; white-space: nowrap; }
+td.n, th.n { text-align: right; white-space: nowrap; }
+tr.total td { font-weight: 700; border-top: 2px solid var(--tinta); }
+td .gana { font-weight: 700; }
+th.sfc { color: var(--sf); } th.dbc { color: var(--db); }
+
+.barras { display: grid; gap: 10px; background: var(--papel); border: 1px solid var(--linea); border-radius: 8px; padding: 16px; }
+.fila { display: grid; grid-template-columns: 150px 1fr; gap: 12px; align-items: center; }
+.fila .nom { font-size: 14px; }
+.pista { display: flex; height: 18px; border-radius: 3px; overflow: hidden; background: var(--codigo-bg); }
+.pista i { display: block; height: 100%; }
+.i-sf { background: var(--sf); } .i-db { background: var(--db); } .i-co { background: var(--comun); }
+.leyenda { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--suave); }
+.leyenda i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; }
+
+.dos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.lado { background: var(--papel); border: 1px solid var(--linea); border-radius: 8px; padding: 16px 18px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.lado.sfb { border-top: 4px solid var(--sf); } .lado.dbb { border-top: 4px solid var(--db); }
+
+.nota { font-size: 14px; padding: 12px 14px; border-radius: 6px; background: var(--papel); border: 1px solid var(--linea); border-left: 3px solid var(--ojo); }
+
+footer { color: var(--suave); font-size: 13px; border-top: 1px solid var(--linea); padding-top: 16px; display: grid; gap: 6px; }
+
+@media (max-width: 680px) {
+  .dos { grid-template-columns: 1fr; }
+  .fila { grid-template-columns: 1fr; gap: 4px; }
+}
+</style>
+
+<div class="pagina">
+
+<header>
+  <div class="marcas"><span>Demo Obed Farmacéutica · Data IQ</span><span>06 – 13 de octubre de 2026</span><span>Fase 8 · cierre</span></div>
+  <h1>Snowflake vs Databricks: gestor regulatorio</h1>
+  <p class="bajada">Resultado de construir el mismo gestor de expedientes ante COFEPRIS (10 vistas, IA documental, envío con un agente y ciclo de prevenciones) en las dos plataformas, en paralelo y con el mismo código donde fue posible. No busca decidir cuál es mejor, sino a qué cliente conviene ofrecer cada una.</p>
+</header>
+
+<section>
+  <h2>Resumen</h2>
+  <div class="cifras">
+    <div class="cifra"><span class="etiqueta">Horas estimadas de construcción</span>
+      <div class="par"><span class="sf"><b>181</b> <small>SNOWFLAKE</small></span><span class="db"><b>200</b> <small>DATABRICKS</small></span></div>
+      <span class="suave chica">Para un solo proyecto en una plataforma (incluye 140 h de trabajo común).</span></div>
+    <div class="cifra"><span class="etiqueta">Costo medido de la plataforma</span>
+      <div class="par"><span class="sf"><b>$43</b> <small>14.2 CRÉDITOS</small></span><span class="db"><b>$55</b> <small>LISTA</small></span></div>
+      <span class="suave chica">Databricks baja a $28 sin los 4 días que el buscador quedó encendido.</span></div>
+    <div class="cifra"><span class="etiqueta">Pruebas de calidad de la IA ganadas</span>
+      <div class="par"><span class="sf"><b>7</b> <small>DE 8</small></span><span class="db"><b>0</b> <small>DE 8</small></span></div>
+      <span class="suave chica">1 empate. Databricks ganó en velocidad (bandeja y buscador). Snowflake usa Claude; el workspace de Databricks no lo tiene.</span></div>
+  </div>
+  <ul class="puntos">
+    <li><b>Snowflake fue más rápido de construir y dio mejor calidad de IA.</b> Casi todo se resuelve con SQL, la app se publica en segundos y el agente nativo respondió bien al primer intento.</li>
+    <li><b>Databricks es más barato y más rápido leyendo documentos en volumen</b>, y da más libertad (modelos abiertos, apps con cualquier Python, linaje en Unity Catalog), pero pide más ingeniería: permisos de la app, correo con alertas y jobs, y un agente escrito a mano.</li>
+    <li><b>El costo de Databricks lo dominó el buscador semántico:</b> cobra cada hora que existe y tarda de 50 a 80 minutos en recrearse. En Snowflake se pausa y reanuda en segundos.</li>
+    <li><b>El agente de envío (computer use) es independiente de la plataforma:</b> ≈ $1 USD por trámite enviado, sobre la API de Anthropic.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Qué se construyó</h2>
+  <p class="intro">Mismo alcance en las dos plataformas: datos ficticios de Laboratorios Altamira, las NOM reales del DOF y una app de 10 vistas con el mismo código de pantalla (Streamlit). Cada plataforma solo aporta sus piezas nativas.</p>
+  <div class="tabla"><table>
+    <thead><tr><th>Pieza</th><th class="sfc">Snowflake</th><th class="dbc">Databricks</th></tr></thead>
+    <tbody>
+      <tr><td>Leer PDF con IA</td><td>AI_PARSE_DOCUMENT (+ OCR)</td><td>ai_parse_document</td></tr>
+      <tr><td>Modelo de lenguaje</td><td>AI_COMPLETE · Claude Sonnet 4.5</td><td>ai_query · gpt-oss-120b (no hay Claude)</td></tr>
+      <tr><td>Buscador de normas</td><td>Cortex Search</td><td>Vector Search</td></tr>
+      <tr><td>Asistente con citas</td><td>Vista semántica + Cortex Agent</td><td>Genie + agente en código</td></tr>
+      <tr><td>Correo de alertas</td><td>SYSTEM$SEND_EMAIL</td><td>Alerta SQL ejecutada por un job</td></tr>
+      <tr><td>App</td><td>Streamlit in Snowflake</td><td>Databricks Apps</td></tr>
+      <tr><td>Auditoría</td><td>ACCOUNT_USAGE</td><td>Tablas de sistema de Unity Catalog</td></tr>
+      <tr><td>Común a ambas</td><td colspan="2">Generador de datos, portal COFEPRIS simulado, robot con computer use (Claude Opus 5.5), reglas de revisión, lógica de prevenciones, pre-auditoría y pantallas</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Horas estimadas por fase</h2>
+  <p class="nota"><b>Estas horas son estimadas, no medidas.</b> El proyecto se construyó con un asistente de IA, así que el tiempo real no sirve de referencia. Son una estimación de cuánto le tomaría a un consultor senior construir lo mismo sin asistente, según la complejidad de cada pieza y los tropiezos registrados en cada plataforma. El trabajo común (pantallas, portal, robot, reglas) se cuenta una vez.</p>
+  <div class="tabla"><table>
+    <thead><tr><th>Fase</th><th class="n sfc">Snowflake</th><th class="n dbc">Databricks</th><th class="n">Común</th><th>Qué explica la diferencia</th></tr></thead>
+    <tbody>
+      <tr><td>0 · Preparación</td><td class="n">3</td><td class="n">2.5</td><td class="n">8</td><td>Snowflake: script de administrador, llave RSA, integración de correo. Databricks: el catálogo falló por CLI y se creó por SQL.</td></tr>
+      <tr><td>1 · Datos ficticios</td><td class="n">—</td><td class="n">—</td><td class="n">16</td><td>Independiente de la plataforma: 14 tablas, 54 PDF con 20 defectos sembrados.</td></tr>
+      <tr><td>2 · Normas y buscador</td><td class="n">6</td><td class="n">10</td><td class="n">8</td><td>Cortex Search es una sentencia. Vector Search: endpoint, índice, esperas de más de una hora y tiempos de espera del SDK.</td></tr>
+      <tr><td>3 · Capas de datos</td><td class="n">5</td><td class="n">6</td><td class="n">8</td><td>SQL de negocio idéntico; carga y tipos algo más laboriosos en Databricks.</td></tr>
+      <tr><td>4 · Bandeja inteligente</td><td class="n">7</td><td class="n">9</td><td class="n">12</td><td>Snowflake: OCR para firmas en imágenes y validador JSON con acentos. Databricks: filtrar encabezados le quitaba títulos clave y hubo que ajustar la extracción.</td></tr>
+      <tr><td>5 · Expediente y envío</td><td class="n">6</td><td class="n">9</td><td class="n">38</td><td>Databricks Apps pide permisos explícitos para su identidad y su despliegue es más lento. Común: portal (12 h), robot con computer use (16 h), pantallas (10 h).</td></tr>
+      <tr><td>6 · Prevenciones y alertas</td><td class="n">4</td><td class="n">7</td><td class="n">14</td><td>Correo: una función SQL contra alerta SQL + job + permisos.</td></tr>
+      <tr><td>7 · Vistas restantes</td><td class="n">10</td><td class="n">16</td><td class="n">30</td><td>Cortex Agent salió en 2 sentencias. En Databricks se escribió un agente propio, se recreó el buscador y se tipó todo lo que llega como texto.</td></tr>
+      <tr><td>8 · Cierre comparativo</td><td class="n">—</td><td class="n">—</td><td class="n">6</td><td></td></tr>
+      <tr class="total"><td>Total</td><td class="n">41</td><td class="n">59.5</td><td class="n">140</td><td>Un solo proyecto: Snowflake ≈ 181 h · Databricks ≈ 200 h. Las dos en paralelo: ≈ 241 h.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="barras" role="img" aria-label="Horas estimadas por plataforma: Snowflake 181, Databricks 200, de las cuales 140 son trabajo común">
+    <div class="leyenda"><span><i class="i-co"></i>Trabajo común</span><span><i class="i-sf"></i>Propio de Snowflake</span><span><i class="i-db"></i>Propio de Databricks</span></div>
+    <div class="fila"><span class="nom">Snowflake · 181 h</span><div class="pista"><i class="i-co" style="width:70%"></i><i class="i-sf" style="width:20.5%"></i></div></div>
+    <div class="fila"><span class="nom">Databricks · 200 h</span><div class="pista"><i class="i-co" style="width:70%"></i><i class="i-db" style="width:29.75%"></i></div></div>
+  </div>
+  <p class="suave chica">Aparte de estas horas, la plataforma tuvo esperas sin trabajo humano: en Databricks, la creación del buscador sumó ≈ 3.5 h a lo largo del proyecto (endpoint e índice, 4 veces). En Snowflake las esperas fueron de segundos.</p>
+</section>
+
+<section>
+  <h2>Costos medidos</h2>
+  <p class="intro">Medidos en los registros de consumo de cada plataforma (Snowflake ACCOUNT_USAGE; Databricks system.billing), filtrados a los objetos de esta demo. Snowflake se convierte a USD a ≈ $3 por crédito; Databricks, a precio de lista.</p>
+  <div class="dos">
+    <div class="tabla"><table>
+      <thead><tr><th class="sfc">Snowflake</th><th class="n">Créditos</th><th class="n">USD</th></tr></thead>
+      <tbody>
+        <tr><td>Cómputo SQL (FARMA_WH, incluye app y robot)</td><td class="n">7.15</td><td class="n">21.5</td></tr>
+        <tr><td>Lectura de PDF (≈ 1,200 páginas)</td><td class="n">4.21</td><td class="n">12.6</td></tr>
+        <tr><td>Modelo de lenguaje (Claude)</td><td class="n">1.97</td><td class="n">5.9</td></tr>
+        <tr><td>Asistente (Cortex Agent)</td><td class="n">0.70</td><td class="n">2.1</td></tr>
+        <tr><td>Buscador (vectores + servicio)</td><td class="n">0.17</td><td class="n">0.5</td></tr>
+        <tr class="total"><td>Total</td><td class="n">14.2</td><td class="n">≈ 43</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tabla"><table>
+      <thead><tr><th class="dbc">Databricks</th><th class="n">USD</th></tr></thead>
+      <tbody>
+        <tr><td>Buscador: 4 días encendido sin uso (8–11 oct)</td><td class="n">26.9</td></tr>
+        <tr><td>Buscador: creación, sincronización y uso</td><td class="n">12.4</td></tr>
+        <tr><td>Cómputo SQL (farma_wh)</td><td class="n">9.9</td></tr>
+        <tr><td>Lectura de PDF y modelo de lenguaje</td><td class="n">5.8</td></tr>
+        <tr><td>App (horas encendida)</td><td class="n">0.5</td></tr>
+        <tr class="total"><td>Total</td><td class="n">≈ 55</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="tabla"><table>
+    <thead><tr><th>Dónde se nota la diferencia</th><th class="sfc">Snowflake</th><th class="dbc">Databricks</th></tr></thead>
+    <tbody>
+      <tr><td>Leer ~1,000 páginas de normas</td><td>$11.5 · 13.7 min</td><td><span class="gana">$2.6</span> · 24 min</td></tr>
+      <tr><td>Buscador encendido sin uso</td><td><span class="gana">≈ $0.01 al día</span>; se pausa en segundos</td><td>≈ $6.7 al día; apagarlo es borrarlo y recrearlo tarda 50–80 min</td></tr>
+      <tr><td>App publicada</td><td><span class="gana">Cobra solo cuando se consulta</span></td><td>Cobra por hora encendida</td></tr>
+      <tr><td>Cada pregunta al asistente</td><td>≈ $0.15 (47–88 mil tokens)</td><td>Menos tokens del orquestador, más consultas de Genie</td></tr>
+    </tbody>
+  </table></div>
+  <p class="suave chica"><b>Agente de envío (computer use, API de Anthropic, igual en ambas):</b> 9 envíos de prueba por ≈ $9.5, ≈ $1.05 por trámite (59 a 72 pasos). <b>No se contaron</b> 0.39 créditos de Snowflake de pruebas ajenas a la demo con el mismo rol (modelos que la app no usa y pruebas "bench" del 12–13/10). El monitor de gasto de Snowflake solo vigila el warehouse, no la IA.</p>
+</section>
+
+<section>
+  <h2>Calidad y velocidad de la IA</h2>
+  <p class="intro">Mismas instrucciones, mismos documentos y mismo examen en las dos plataformas; cambia el modelo y las piezas nativas.</p>
+  <div class="tabla"><table>
+    <thead><tr><th>Prueba</th><th class="sfc">Snowflake</th><th class="dbc">Databricks</th></tr></thead>
+    <tbody>
+      <tr><td>Buscador de normas (12 preguntas, cláusula exacta)</td><td><span class="gana">12/12</span> · 0.6–1 s</td><td>11/12 · <span class="gana">0.4 s</span></td></tr>
+      <tr><td>Bandeja: documentos bien clasificados (54)</td><td><span class="gana">52/54</span></td><td>42/54</td></tr>
+      <tr><td>Bandeja: defectos sembrados detectados (20), sin falsas alarmas</td><td><span class="gana">19/20</span> · 15.5 min</td><td>16/20 · <span class="gana">8.7 min</span></td></tr>
+      <tr><td>Oficio de prevención: observaciones separadas</td><td>3/3 · 135 s</td><td>3/3 · 183 s</td></tr>
+      <tr><td>Versiones: correcciones reales / prueba de control</td><td><span class="gana">8/8 · 8/8</span></td><td>8/8 · 7/8</td></tr>
+      <tr><td>Pre-auditoría: prevenciones reales anticipadas (10)</td><td><span class="gana">10/10</span> (7 con numeral exacto)</td><td>7/10 (6 con numeral exacto)</td></tr>
+      <tr><td>Asistente: 8 preguntas con respuesta conocida</td><td><span class="gana">8/8</span> · 19.6 s</td><td>6/8 · 20.4 s</td></tr>
+      <tr><td>Borrador de respuesta a la prevención</td><td><span class="gana">Más completo y formal</span></td><td>Más breve</td></tr>
+    </tbody>
+  </table></div>
+  <p class="suave chica">La diferencia de calidad viene sobre todo del modelo disponible: Snowflake ofrece Claude dentro de la plataforma y este workspace de Databricks no. Databricks también tuvo un error de su lector de PDF ("Albamira" por "Altamira") que provocó una falsa alarma.</p>
+</section>
+
+<section>
+  <h2>Cómo fue construir en cada una</h2>
+  <div class="dos">
+    <div class="lado sfb">
+      <h3 class="sf">Snowflake</h3>
+      <span class="etiqueta">Fortalezas</span>
+      <ul class="puntos">
+        <li>Todo es SQL: buscador, agente, correo y vista semántica son una sentencia cada uno.</li>
+        <li>Claude dentro de la plataforma: mejor extracción, juicio y redacción.</li>
+        <li>La app se publica en 6–20 s y solo cobra cuando se usa.</li>
+        <li>Buscador y warehouse se pausan y reanudan en segundos.</li>
+      </ul>
+      <span class="etiqueta">Tropiezos</span>
+      <ul class="puntos">
+        <li>La configuración inicial pide ACCOUNTADMIN.</li>
+        <li>El modo JSON de la IA rechazó valores con acentos y, con instrucciones largas, devolvió vacío sin error.</li>
+        <li>La app (runtime de warehouse) no puede llamar la API REST de agentes ni incrustar sitios externos.</li>
+        <li>Leer PDF cuesta ≈ 4 veces más que en Databricks.</li>
+      </ul>
+    </div>
+    <div class="lado dbb">
+      <h3 class="db">Databricks</h3>
+      <span class="etiqueta">Fortalezas</span>
+      <ul class="puntos">
+        <li>Lectura y extracción de documentos más baratas y rápidas en volumen.</li>
+        <li>Libertad: modelos abiertos, apps con cualquier librería de Python, agentes a la medida.</li>
+        <li>Linaje y auditoría ricos en Unity Catalog.</li>
+        <li>Genie arma consultas sobre las tablas sin escribir un modelo semántico en SQL.</li>
+      </ul>
+      <span class="etiqueta">Tropiezos</span>
+      <ul class="puntos">
+        <li>No hay Claude en el workspace: calidad menor en clasificación, pre-auditoría y asistente.</li>
+        <li>Vector Search cobra por hora y se recrea en 50–80 min.</li>
+        <li>La app necesita permisos explícitos en catálogo, volúmenes, job y Genie; su despliegue tarda 2–3 min.</li>
+        <li>Correo sin función SQL (alerta + job); el agente nativo (Agent Bricks) aparece como oferta legada.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>A qué cliente ofrecer cada una</h2>
+  <div class="dos">
+    <div class="lado sfb">
+      <h3 class="sf">Ofrecer Snowflake cuando…</h3>
+      <ul class="puntos">
+        <li>Sus datos ya viven en Snowflake o el área usuaria es de negocio (Asuntos Regulatorios, Calidad) con equipo de TI pequeño.</li>
+        <li>Importa más la calidad de la IA y salir rápido que el costo por página.</li>
+        <li>Busca poco mantenimiento: apps y buscadores que se apagan solos.</li>
+        <li>El volumen de documentos es moderado: cientos o pocos miles de páginas al mes.</li>
+      </ul>
+    </div>
+    <div class="lado dbb">
+      <h3 class="db">Ofrecer Databricks cuando…</h3>
+      <ul class="puntos">
+        <li>Ya tiene un lakehouse en Databricks y un equipo de ingeniería de datos o ML.</li>
+        <li>Procesa grandes volúmenes de documentos y el costo por página pesa.</li>
+        <li>Quiere modelos abiertos o propios, agentes a la medida o apps con lógica compleja.</li>
+        <li>Puede operar recursos encendidos (buscador, app) o justificar su costo fijo.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Para llevarlo a producción</h2>
+  <ul class="puntos">
+    <li><b>Robot de envío:</b> hoy corre en una laptop. En producción iría en la nube: contenedores de Snowflake (Snowpark Container Services) o un job o servicio en Databricks, con su propio navegador y la pantalla visible para el usuario.</li>
+    <li><b>Portal:</b> el simulado se sustituye por DIGIPRiS. El agente ya trabaja como lo haría una persona, sin depender de una API de COFEPRIS.</li>
+    <li><b>Prevenciones en el expediente:</b> marcar los requisitos observados por COFEPRIS y habilitar "Responder prevención" para cerrar el ciclo.</li>
+    <li><b>Costos fijos:</b> en Databricks, decidir si el buscador vive encendido (≈ $200 al mes) o se agenda; en Snowflake, ampliar el monitor de gasto para cubrir la IA.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Pendientes y limitaciones</h2>
+  <ul class="puntos">
+    <li>El envío con computer use se probó desde la cola de Snowflake (9 envíos); desde la cola de Databricks solo en modo guion.</li>
+    <li>La app publicada de Databricks no se revisó por completo con el usuario (Biblioteca, Asistente y Auditoría).</li>
+    <li>Las horas son estimadas. Las latencias y los costos son medidos y corresponden a datos ficticios de una sola empresa.</li>
+  </ul>
+</section>
+
+<footer>
+  <span>Fuentes: <span class="mono">docs/REGISTRO_COMPARATIVO.md</span> y <span class="mono">docs/resultados/</span> (fases 2 a 7), registros de consumo de ambas plataformas consultados el 13/10/2026.</span>
+  <span>Laboratorios Altamira y todos sus datos son ficticios; las normas son reales (DOF). El portal COFEPRIS es una simulación.</span>
+</footer>
+
+</div>

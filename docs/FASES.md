@@ -78,3 +78,4 @@ Las decisiones importantes se anotan en `docs/DECISIONES.md`.
 
 ### Fase 8 — Cierre comparativo
 - Consolidar horas, costos, latencias y tropiezos; fortalezas de cada plataforma y a qué perfil de cliente ofrecerla.
+- ✅ **Terminada (2026-10-13):** `docs/comparativo_final.html`. Horas estimadas (no medidas); costos medidos en ACCOUNT_USAGE y system.billing: Snowflake ≈ 14.2 créditos (≈ $43), Databricks ≈ $55 (≈ $27 por el buscador encendido 4 días).

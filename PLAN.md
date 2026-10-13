@@ -1,6 +1,6 @@
 # Obed Farmacéutica — Plan del proyecto
 
-> Estado: **Fase 7 terminada** (2026-10-07). Las 10 vistas en ambas plataformas (ver `docs/resultados/FASE7_RESULTADOS.md`). Pendiente al final: computer use, horas trabajadas y costos. Siguiente: Fase 8 (cierre comparativo).
+> Estado: **Proyecto terminado** (2026-10-13). Las 8 fases completas; comparativo final en `docs/comparativo_final.html`, guía de uso en `docs/guia_app.html`. Pendiente opcional: envío con computer use desde la cola de Databricks.
 
 ## 1. Objetivo
 
