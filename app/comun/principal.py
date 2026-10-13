@@ -22,5 +22,13 @@ VISTAS = {"📊 Portafolio": vista_portafolio, "📁 Expediente CTD": vista_expe
 def principal(datos, plataforma, usuario="demo"):
     st.set_page_config(page_title="Laboratorios Altamira · Regulatorio", page_icon="📁", layout="wide")
     vista = st.sidebar.radio("Vista", list(VISTAS), key="vista")
+    with st.sidebar.popover("🔄 Reiniciar demo"):
+        st.write("Borra envíos, prevenciones, alertas, pre-auditorías y evaluaciones, y regresa el expediente a su versión "
+                 "inicial (con hallazgos). El portal simulado se reinicia aparte con `python reiniciar_demo.py portal`.")
+        if st.button("Sí, reiniciar", type="primary"):
+            datos.reiniciar_demo()
+            st.cache_data.clear()
+            st.session_state.clear()
+            st.rerun()
     st.sidebar.divider()
     VISTAS[vista].pagina(datos, plataforma, usuario)

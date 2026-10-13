@@ -119,3 +119,13 @@ class Consultas:
     def envio_vivo(self, envio_id):
         r = self.q(f"SELECT paso, accion, imagen, actualizado_en FROM {self.A}.envio_vivo WHERE envio_id = :e", {"e": envio_id})
         return r[0] if r else None
+
+    # ------------------------------------------------------------------------------- reinicio de la demo
+    def reiniciar_demo(self):
+        """Deja la demo en cero en esta plataforma: solo el expediente inicial (v1, con sus hallazgos y el faltante),
+        sin envíos, prevenciones, alertas, pre-auditorías ni evaluaciones de versiones. El portal local se reinicia
+        aparte (reiniciar_demo.py)."""
+        for t in ["envios", "envio_vivo", "avisos", "acciones", "oficios", "observaciones_oficio", "tareas_oficio",
+                  "borradores", "alertas", "preauditorias", "comparaciones"]:
+            self.q(f"DELETE FROM {self.A}.{t}")
+        self.q(f"DELETE FROM {self.A}.cargas WHERE origen <> 'Expediente inicial'")
