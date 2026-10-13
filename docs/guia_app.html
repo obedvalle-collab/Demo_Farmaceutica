@@ -1,0 +1,292 @@
+<title>Guía de la app regulatoria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una columna de lectura; índice de vistas en rejilla; cada vista es una ficha con "qué hace / cómo se usa". */
+:root {
+  --bg: #f6f7f8;
+  --papel: #ffffff;
+  --tinta: #16212e;
+  --suave: #556270;
+  --linea: #dde2e7;
+  --marino: #12355b;
+  --marino-claro: #e7eef6;
+  --verde: #1e6b42;
+  --ambar: #9a6412;
+  --rojo: #b3261e;
+  --codigo-bg: #eef1f4;
+  --f-texto: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f151c; --papel: #161e27; --tinta: #e6ebf0; --suave: #9aa8b6; --linea: #2a3542;
+    --marino: #8cb4e2; --marino-claro: #1c2a3a; --verde: #6cc795; --ambar: #e0b25c; --rojo: #f08a82;
+    --codigo-bg: #1d2731; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f151c; --papel: #161e27; --tinta: #e6ebf0; --suave: #9aa8b6; --linea: #2a3542;
+  --marino: #8cb4e2; --marino-claro: #1c2a3a; --verde: #6cc795; --ambar: #e0b25c; --rojo: #f08a82;
+  --codigo-bg: #1d2731; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--tinta); font-family: var(--f-texto); font-size: 16px; line-height: 1.55; }
+.pagina { max-width: 880px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; display: grid; gap: 40px; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: clamp(28px, 4vw, 38px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 700; }
+h3 { font-size: 18px; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--marino); }
+code, .mono { font-family: var(--f-mono); font-size: 0.88em; }
+code { background: var(--codigo-bg); padding: 1px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+.etiqueta { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--suave); }
+
+header { display: grid; gap: 12px; padding-bottom: 28px; border-bottom: 2px solid var(--marino); }
+header .bajada { color: var(--suave); max-width: 62ch; }
+.sello { display: inline-flex; gap: 8px; flex-wrap: wrap; }
+.sello span { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--marino-claro); color: var(--marino); }
+
+section { display: grid; gap: 16px; }
+.intro { color: var(--suave); max-width: 66ch; }
+
+.accesos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.acceso { background: var(--papel); border: 1px solid var(--linea); border-radius: 8px; padding: 14px 16px; display: grid; gap: 4px; min-width: 0; }
+.acceso b { font-size: 15px; }
+.acceso span { color: var(--suave); font-size: 14px; }
+
+ul.puntos { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+
+ol.recorrido { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: paso; background: var(--papel); border: 1px solid var(--linea); border-radius: 8px; }
+ol.recorrido li { counter-increment: paso; display: grid; grid-template-columns: 36px 1fr; gap: 12px; padding: 12px 16px; border-top: 1px solid var(--linea); }
+ol.recorrido li:first-child { border-top: 0; }
+ol.recorrido li::before { content: counter(paso); font-family: var(--f-mono); font-weight: 500; color: var(--marino); font-size: 15px; padding-top: 1px; }
+ol.recorrido li div { min-width: 0; }
+ol.recorrido .donde { color: var(--suave); font-size: 14px; }
+
+.indice { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; }
+.indice a { display: flex; gap: 10px; align-items: baseline; padding: 8px 12px; border-radius: 6px; text-decoration: none; color: var(--tinta); background: var(--papel); border: 1px solid var(--linea); }
+.indice a:hover, .indice a:focus-visible { border-color: var(--marino); outline: none; }
+.indice .n { font-family: var(--f-mono); color: var(--marino); font-size: 13px; min-width: 22px; }
+
+.vista { background: var(--papel); border: 1px solid var(--linea); border-radius: 8px; padding: 20px; display: grid; gap: 12px; scroll-margin-top: 16px; }
+.vista .cabeza { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.vista .num { font-family: var(--f-mono); color: var(--marino); font-size: 14px; }
+.vista .que { color: var(--suave); }
+.vista .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.vista .cols > div { min-width: 0; display: grid; gap: 6px; align-content: start; }
+.nota { font-size: 14px; padding: 10px 12px; border-radius: 6px; background: var(--marino-claro); color: var(--tinta); }
+.nota.aviso { border-left: 3px solid var(--ambar); }
+
+.semaforo { display: inline-flex; gap: 10px; flex-wrap: wrap; font-size: 14px; }
+.semaforo i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: baseline; }
+
+.tabla { overflow-x: auto; background: var(--papel); border: 1px solid var(--linea); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 10px 14px; border-top: 1px solid var(--linea); vertical-align: top; }
+th { border-top: 0; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--suave); font-weight: 600; }
+
+footer { color: var(--suave); font-size: 13px; border-top: 1px solid var(--linea); padding-top: 16px; }
+
+@media (max-width: 640px) {
+  .vista .cols { grid-template-columns: 1fr; }
+  .pagina { padding-block: 24px 48px; }
+}
+</style>
+
+<div class="pagina">
+
+<header>
+  <div class="sello"><span>Laboratorios Altamira · ficticio</span><span>Snowflake y Databricks</span><span>Fecha de la demo: 06/10/2026</span></div>
+  <h1>Guía de la app regulatoria</h1>
+  <p class="bajada">Cómo navegar el gestor de expedientes ante COFEPRIS: qué hace cada vista, qué botones tiene y en qué orden mostrarla a un cliente. La app es la misma en Snowflake y en Databricks; solo cambia la plataforma que hace el trabajo de IA.</p>
+</header>
+
+<section>
+  <h2>Antes de empezar</h2>
+  <div class="accesos">
+    <div class="acceso"><b>App en Snowflake</b><span>Snowsight → Projects → Streamlit → <span class="mono">EXPEDIENTE_CTD</span></span></div>
+    <div class="acceso"><b>App en Databricks</b><span>Compute → Apps → <span class="mono">obed-farma-ctd</span> (hay que encenderla; cobra por hora)</span></div>
+    <div class="acceso"><b>App local</b><span><span class="mono">http://127.0.0.1:8501</span> (para las pruebas con el robot)</span></div>
+  </div>
+  <ul class="puntos">
+    <li><b>Menú lateral:</b> elige la vista. Debajo está <b>🔄 Reiniciar demo</b>, que regresa todo al punto de partida (pide confirmación).</li>
+    <li><b>Selector de trámite:</b> aparece en el menú lateral dentro de <i>Expediente CTD</i>. El trámite de la demo es <b>Sitagliptina 100 mg · TR-2026-032</b>.</li>
+    <li><b>Punto de partida:</b> el expediente está al 96% (26/27). Solo falta corregir la etiqueta del envase secundario, sección 1.4.1.</li>
+    <li><b>Semáforo de plazos</b> en todas las vistas (días hábiles):
+      <span class="semaforo"><span><i style="background:var(--verde)"></i>Verde: más de 5</span><span><i style="background:var(--ambar)"></i>Amarillo: 5 o menos</span><span><i style="background:var(--rojo)"></i>Rojo: 2 o menos</span></span>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>Recorrido para una demo (≈ 15 min)</h2>
+  <p class="intro">Cuenta la historia completa de un trámite: ver el panorama, corregir, revisar, enviar con un clic y reaccionar cuando COFEPRIS observa algo.</p>
+  <ol class="recorrido">
+    <li><div><b>Panorama.</b> Muestra las tarjetas, los trámites en rojo y los registros por renovar. <span class="donde">· Portafolio</span></div></li>
+    <li><div><b>El expediente bloqueado.</b> Abre la sitagliptina: candado cerrado, 1 documento con hallazgos (etiqueta 1.4.1). <span class="donde">· Expediente CTD</span></div></li>
+    <li><div><b>Simulador COFEPRIS.</b> Ejecuta la pre-auditoría y enseña las prevenciones probables, con norma y numeral. <span class="donde">· Pre-auditoría</span></div></li>
+    <li><div><b>Corregir.</b> Sube a la bandeja <code>TR-2026-032_1.4.1_proyecto_de_etiqueta_del_envase_secundario_v2.pdf</code> (carpeta <code>datos/salida/pdf/TR-2026-032_sitagliptina/correcciones/</code>). La IA lo lee y lo valida; el candado pasa a 27/27. <span class="donde">· Expediente CTD</span></div></li>
+    <li><div><b>¿Quedó bien corregido?</b> Elige la etiqueta y pulsa <i>Evaluar con IA</i>. <span class="donde">· Versiones</span></div></li>
+    <li><div><b>Enviar con un botón.</b> <i>🚀 Enviar a COFEPRIS</i>: se abre una ventana de Chrome donde el agente llena el portal solo. Al llegar a la firma, la app muestra la pantalla y tú confirmas. Aparece el folio. <span class="donde">· Expediente CTD</span></div></li>
+    <li><div><b>COFEPRIS observa.</b> En el portal, como dictaminador, emite una prevención. Llega el correo de alerta y la prevención aparece en la app; ábrela y muestra observaciones, tareas y el borrador de respuesta. <span class="donde">· Ciclo de prevenciones</span></div></li>
+    <li><div><b>Preguntar.</b> Busca en las normas y haz preguntas en lenguaje natural. <span class="donde">· Biblioteca normativa · Asistente</span></div></li>
+    <li><div><b>Todo queda registrado.</b> Filtra la bitácora por <code>TR-2026-032</code>: cada paso, humano, robot o IA. <span class="donde">· Gobierno y bitácora</span></div></li>
+    <li><div><b>Dejar lista la siguiente demo.</b> <i>🔄 Reiniciar demo</i> y, en la terminal, <code>python reiniciar_demo.py portal</code>.</div></li>
+  </ol>
+</section>
+
+<section>
+  <h2>Las vistas</h2>
+  <nav class="indice" aria-label="Índice de vistas">
+    <a href="#v1"><span class="n">01</span>Portafolio</a>
+    <a href="#v2"><span class="n">02</span>Expediente CTD</a>
+    <a href="#v3"><span class="n">03</span>Bandeja de carga</a>
+    <a href="#v4"><span class="n">04</span>Pre-auditoría</a>
+    <a href="#v5"><span class="n">05</span>Ciclo de prevenciones</a>
+    <a href="#v6"><span class="n">06</span>Versiones</a>
+    <a href="#v7"><span class="n">07</span>Biblioteca normativa</a>
+    <a href="#v8"><span class="n">08</span>Asistente</a>
+    <a href="#v9"><span class="n">09</span>Analítica</a>
+    <a href="#v10"><span class="n">10</span>Gobierno y bitácora</a>
+  </nav>
+
+  <article class="vista" id="v1">
+    <div class="cabeza"><span class="num">01</span><h3>📊 Portafolio</h3></div>
+    <p class="que">El tablero ejecutivo: cómo van todos los trámites activos en una sola pantalla.</p>
+    <div class="cols">
+      <div><span class="etiqueta">Qué muestra</span>
+        <ul class="puntos"><li>Trámites activos, en COFEPRIS, prevenciones abiertas y registros por renovar.</li><li>Tabla de trámites con semáforo, etapa, avance del expediente y días hábiles restantes.</li><li>Gráficas por etapa y días en COFEPRIS.</li><li>Vigencia de registros sanitarios (5 años; la prórroga se pide 150 días antes).</li></ul></div>
+      <div><span class="etiqueta">Cómo se usa</span>
+        <ul class="puntos"><li>Empieza por los trámites en rojo: salen arriba.</li><li>Pasa el cursor sobre las gráficas para ver el detalle.</li><li><i>🔄 Actualizar</i> recarga los datos.</li></ul></div>
+    </div>
+  </article>
+
+  <article class="vista" id="v2">
+    <div class="cabeza"><span class="num">02</span><h3>📁 Expediente CTD</h3></div>
+    <p class="que">El expediente del trámite, organizado en los módulos M1 a M5 del formato CTD, y el envío a COFEPRIS.</p>
+    <div class="cols">
+      <div><span class="etiqueta">Qué muestra</span>
+        <ul class="puntos"><li>Cobertura, documentos validados, con hallazgos y faltantes.</li><li>El <b>candado</b>: Bloqueado o Listo para envío.</li><li>Pestañas M1–M5; cada requisito con su documento, versión y estado (✅ ⚠️ ❌).</li><li>Al abrir un requisito: los hallazgos con la norma y el numeral que incumple.</li></ul></div>
+      <div><span class="etiqueta">Envío con un botón</span>
+        <ul class="puntos"><li><i>🚀 Enviar a COFEPRIS</i> solo se activa con el candado abierto.</li><li>Se abre una ventana de Chrome: el agente entra al portal, llena la solicitud y carga los 5 módulos. Un círculo rojo marca cada clic.</li><li>Antes de firmar, la app muestra la pantalla del portal: <i>✅ Confirmar envío</i> o <i>✖ Cancelar</i>. Tienes 15 minutos.</li><li>Al terminar: folio en verde y <i>Ver acuse en el portal</i>.</li></ul></div>
+    </div>
+    <p class="nota aviso">El envío necesita el robot y el portal encendidos en la computadora (ver "Detrás de la app").</p>
+  </article>
+
+  <article class="vista" id="v3">
+    <div class="cabeza"><span class="num">03</span><h3>📥 Bandeja de carga inteligente</h3></div>
+    <p class="que">Vive dentro de Expediente CTD, columna derecha. Subes un PDF y la IA hace el trabajo de un analista.</p>
+    <div class="cols">
+      <div><span class="etiqueta">Qué hace la IA</span>
+        <ul class="puntos"><li>Lee el PDF, incluso escaneado.</li><li>Lo clasifica y lo coloca en su sección del CTD.</li><li>Extrae datos clave: fechas, lotes, firmas, leyendas, resultados.</li><li>Lo revisa contra 18 reglas basadas en las NOM y cita el numeral.</li></ul></div>
+      <div><span class="etiqueta">Cómo se usa</span>
+        <ul class="puntos"><li>Arrastra el PDF o pulsa <i>Browse files</i>. Tarda de 30 s a 2 min.</li><li>Si la IA lo puso en el lugar equivocado: <i>¿Ubicación correcta?</i> → <i>Cambiar ubicación</i>.</li><li>Cada documento nuevo queda como versión siguiente y el candado se recalcula solo.</li></ul></div>
+    </div>
+  </article>
+
+  <article class="vista" id="v4">
+    <div class="cabeza"><span class="num">04</span><h3>🕵️ Pre-auditoría</h3></div>
+    <p class="que">La IA actúa como dictaminador de COFEPRIS y predice qué observarían antes de enviar.</p>
+    <div class="cols">
+      <div><span class="etiqueta">Qué muestra</span>
+        <ul class="puntos"><li><b>Riesgo de prevención</b>: Alto, Medio o Bajo, con un resumen para dirección.</li><li>Prevenciones probables, cada una con probabilidad, norma y numeral, el porqué y qué corregir.</li></ul></div>
+      <div><span class="etiqueta">Cómo se usa</span>
+        <ul class="puntos"><li>Elige el trámite y pulsa <i>🕵️ Ejecutar pre-auditoría</i> (30–60 s).</li><li>Combina el expediente, los hallazgos y el historial de trámites parecidos.</li><li>El resultado se guarda; <i>Ejecutar de nuevo</i> para repetirla después de corregir.</li></ul></div>
+    </div>
+  </article>
+
+  <article class="vista" id="v5">
+    <div class="cabeza"><span class="num">05</span><h3>⏱️ Ciclo de prevenciones</h3></div>
+    <p class="que">Qué pasa cuando COFEPRIS emite un oficio de prevención: aviso, plazos, tareas y respuesta.</p>
+    <div class="cols">
+      <div><span class="etiqueta">Qué hace sola</span>
+        <ul class="puntos"><li>Un vigía detecta el aviso de COFEPRIS en segundos y manda un correo de alerta.</li><li>Al abrir el oficio, la IA separa las observaciones, las liga al documento y al texto exacto de la NOM y calcula la fecha límite en días hábiles.</li><li>Crea tareas por área y redacta el borrador del escrito de respuesta.</li></ul></div>
+      <div><span class="etiqueta">Cómo se usa</span>
+        <ul class="puntos"><li><i>📂 Abrir oficio en el portal</i>: al abrirlo empieza a correr el plazo, por eso lo decide una persona.</li><li>Pestañas <b>Observaciones</b>, <b>Tareas</b> (botón <i>Cerrar</i>) y <b>Borrador</b> (editar, <i>💾 Guardar</i>, <i>⬇️ Descargar</i>).</li><li><i>Revisar plazos y enviar recordatorios</i> manda correo cuando quedan 3 días hábiles o menos.</li></ul></div>
+    </div>
+    <p class="nota">Para generar una prevención de prueba: portal <span class="mono">http://127.0.0.1:8765/dictaminador</span> (contraseña del dictaminador en el archivo <span class="mono">.env</span>), elige las observaciones y el plazo, y emite.</p>
+  </article>
+
+  <article class="vista" id="v6">
+    <div class="cabeza"><span class="num">06</span><h3>🔀 Versiones</h3></div>
+    <p class="que">Compara la versión anterior de un documento con la corregida y dice si la corrección atiende lo observado.</p>
+    <div class="cols">
+      <div><span class="etiqueta">Qué muestra</span>
+        <ul class="puntos"><li>Lado a lado: hallazgos de la versión anterior y de la corregida.</li><li>Datos que cambiaron y diferencias de texto línea por línea.</li><li>Veredicto de la IA: <b>Atiende</b>, <b>Parcial</b> o <b>No atiende</b>, con evidencia y riesgos nuevos.</li></ul></div>
+      <div><span class="etiqueta">Cómo se usa</span>
+        <ul class="puntos"><li>Elige el documento corregido en la lista.</li><li><i>🤖 Evaluar con IA</i> (≈ 10 s). El resultado se guarda.</li></ul></div>
+    </div>
+  </article>
+
+  <article class="vista" id="v7">
+    <div class="cabeza"><span class="num">07</span><h3>📚 Biblioteca normativa</h3></div>
+    <p class="que">Las NOM, leyes y guías reales del DOF, partidas en más de 10 mil cláusulas, con buscador por significado.</p>
+    <div class="cols">
+      <div><span class="etiqueta">Qué muestra</span>
+        <ul class="puntos"><li>Cláusulas que responden a tu búsqueda, con norma y numeral.</li><li>Al abrir una: texto completo, subnumerales y, si existe, el mismo numeral en el proyecto de norma (PROY-NOM).</li><li>A la derecha: normas cargadas y proyectos en consulta.</li></ul></div>
+      <div><span class="etiqueta">Cómo se usa</span>
+        <ul class="puntos"><li>Escribe un tema, por ejemplo "estabilidad acelerada", o pulsa un ejemplo.</li><li>Desactiva <i>Solo normas vigentes</i> para incluir proyectos.</li><li>Filtra por una norma específica.</li></ul></div>
+    </div>
+    <p class="nota aviso">Necesita el buscador encendido. En Databricks tarda unos 50 minutos en prepararse; pídelo con anticipación.</p>
+  </article>
+
+  <article class="vista" id="v8">
+    <div class="cabeza"><span class="num">08</span><h3>💬 Asistente</h3></div>
+    <p class="que">Chat que responde sobre trámites, plazos y normas con datos reales. Siempre cita la fuente y no inventa.</p>
+    <div class="cols">
+      <div><span class="etiqueta">Qué puedes preguntar</span>
+        <ul class="puntos"><li>"¿Qué registros sanitarios hay que renovar?"</li><li>"¿Qué le falta al expediente del losartán?"</li><li>"¿Qué dice la NOM-073 sobre estabilidad acelerada?"</li></ul></div>
+      <div><span class="etiqueta">Cómo se usa</span>
+        <ul class="puntos"><li>Pulsa una pregunta de ejemplo o escribe abajo (≈ 20 s por respuesta).</li><li>Muestra tablas, fuentes y <i>Cómo lo resolvió</i>: los pasos y el SQL que escribió.</li><li>Recuerda la conversación; <i>🧹 Nueva conversación</i> la reinicia.</li></ul></div>
+    </div>
+  </article>
+
+  <article class="vista" id="v9">
+    <div class="cabeza"><span class="num">09</span><h3>📈 Analítica</h3></div>
+    <p class="que">Indicadores para mejorar el proceso, con el historial 2023–2026.</p>
+    <div class="cols">
+      <div><span class="etiqueta">Qué muestra</span>
+        <ul class="puntos"><li>Trámites concluidos, aprobación al primer intento, ciclo promedio y observaciones históricas.</li><li>Qué normas y secciones del CTD generan más prevenciones.</li></ul></div>
+      <div><span class="etiqueta">Pestañas</span>
+        <ul class="puntos"><li><b>Prevenciones por norma</b>: cláusulas más observadas.</li><li><b>Desempeño por año</b>: aprobación al primer intento y tiempo de ciclo.</li><li><b>Cuellos de botella por área</b>: tareas cerradas, abiertas y vencidas.</li></ul></div>
+    </div>
+  </article>
+
+  <article class="vista" id="v10">
+    <div class="cabeza"><span class="num">10</span><h3>🛡️ Gobierno y bitácora</h3></div>
+    <p class="que">Trazabilidad, integridad de datos y permisos, lo que pide una auditoría.</p>
+    <div class="cols">
+      <div><span class="etiqueta">Pestañas</span>
+        <ul class="puntos"><li><b>Bitácora</b>: quién hizo qué y cuándo (personas, robot e IA). Filtros por origen y trámite; <i>⬇️ Exportar CSV</i>.</li><li><b>Integridad (ALCOA+)</b>: controles automáticos de integridad de datos.</li></ul></div>
+      <div><span class="etiqueta">&nbsp;</span>
+        <ul class="puntos"><li><b>Roles y permisos</b>: qué puede hacer cada puesto y el personal.</li><li><b>Auditoría de la plataforma</b>: permisos reales, consultas recientes y tablas más leídas, según el registro propio de Snowflake o Databricks.</li></ul></div>
+    </div>
+  </article>
+</section>
+
+<section>
+  <h2>Detrás de la app</h2>
+  <p class="intro">Piezas que corren en la computadora para la demo. Para encender o apagar todo basta con pedirlo: "prende todo" o "apaga todo".</p>
+  <div class="tabla">
+    <table>
+      <thead><tr><th>Pieza</th><th>Para qué sirve</th><th>Dirección o comando</th></tr></thead>
+      <tbody>
+        <tr><td><b>Portal COFEPRIS simulado</b></td><td>Donde el agente presenta la solicitud; incluye el panel del dictaminador</td><td><span class="mono">http://127.0.0.1:8765</span></td></tr>
+        <tr><td><b>Robot de envío</b></td><td>Atiende el botón Enviar, abre la ventana de Chrome y vigila el buzón de avisos</td><td><code>python agente_envio/robot.py --plataforma snowflake --modo computer_use</code></td></tr>
+        <tr><td><b>Reiniciar todo</b></td><td>Regresa Snowflake, Databricks y el portal al punto de partida</td><td><code>python reiniciar_demo.py</code></td></tr>
+        <tr><td><b>Ir directo al envío</b></td><td>Igual que el anterior, pero con la etiqueta ya corregida y el candado abierto</td><td><code>python reiniciar_demo.py --listo</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="puntos">
+    <li>Cada envío con el agente cuesta alrededor de <b>$1 USD</b> en la API de Anthropic.</li>
+    <li>Lo que cobra por estar encendido (app de Databricks, buscador de Databricks) se apaga al terminar cada sesión.</li>
+  </ul>
+</section>
+
+<footer>Demo Obed Farmacéutica · Data IQ. Laboratorios Altamira y todos sus datos son ficticios; las normas son reales (DOF). El portal es una simulación y no está conectado a COFEPRIS.</footer>
+
+</div>
