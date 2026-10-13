@@ -21,6 +21,8 @@ F = B.F
 CAT = B.CAT
 PDF = RAIZ / "datos" / "salida" / "pdf"
 TRAMITE_DEMO = "TR-2026-032"
+# Punto cero de la demo: 8 de las 9 correcciones ya registradas ("Corrección previa"); la de la etiqueta se sube en vivo
+CORRECCION_EN_VIVO = "TR-2026-032_1.4.1_proyecto_de_etiqueta_del_envase_secundario_v2.pdf"
 
 
 def sql_app():
@@ -34,7 +36,7 @@ def preparar():
     F.sql(f"CREATE VOLUME IF NOT EXISTS {CAT}.app.capturas COMMENT 'Capturas de pantalla del agente de envío'")
     for s in sql_app():
         F.sql(s)
-    for p in sorted((PDF / "TR-2026-032_sitagliptina" / "correcciones").glob("*.pdf")):
+    for p in sorted((PDF / "TR-2026-032_sitagliptina" / "correcciones").rglob("*.pdf")):
         with open(p, "rb") as fh:
             F.w.files.upload(f"{B.VOL}/TR-2026-032_sitagliptina/correcciones/{p.name}", fh, overwrite=True)
     print("  esquema app, vistas, volume de capturas y correcciones listas")
@@ -48,7 +50,15 @@ def reiniciar():
              if r["requisito_id"] and r["origen"] == "Expediente de la empresa"]
     valores = ",".join(f"('{t}', '{q}', '{a}', 1, TIMESTAMP'2026-09-30 10:00:00', 'demo', 'Expediente inicial')" for t, q, a in filas)
     F.sql(f"INSERT INTO {CAT}.app.cargas VALUES {valores}")
-    print(f"  demo reiniciada: {len(filas)} documentos v1, sin envíos")
+    previas = [(t, q, a) for t, q, a in _correcciones() if not a.endswith(CORRECCION_EN_VIVO)]
+    valores = ",".join(f"('{t}', '{q}', '{a}', 2, TIMESTAMP'2026-10-05 12:00:00', 'demo', 'Corrección previa')" for t, q, a in previas)
+    F.sql(f"INSERT INTO {CAT}.app.cargas VALUES {valores}")
+    print(f"  demo reiniciada: {len(filas)} documentos v1 + {len(previas)} correcciones previas; falta subir {CORRECCION_EN_VIVO}")
+
+
+def _correcciones():
+    return [(r["tramite_id"], r["requisito_id"], r["archivo"].removeprefix("pdf/"))
+            for r in csv.DictReader(open(PDF / "INDICE.csv", encoding="utf-8")) if r["origen"] == "Corrección (v2)"]
 
 
 def cargar_documento(archivo, cargado_por="demo"):
@@ -71,7 +81,7 @@ def cargar_documento(archivo, cargado_por="demo"):
 
 def correcciones():
     t = time.time()
-    for p in sorted((PDF / "TR-2026-032_sitagliptina" / "correcciones").glob("*.pdf")):
+    for p in sorted((PDF / "TR-2026-032_sitagliptina" / "correcciones").rglob("*.pdf")):
         print("  ", cargar_documento(f"TR-2026-032_sitagliptina/correcciones/{p.name}"))
     print(f"  {round(time.time() - t, 1)} s")
 
@@ -87,9 +97,8 @@ def estado():
 
 
 def correcciones_cargadas():
-    """Atajo de demo: registra las 9 correcciones (ya analizadas por la IA) como versión 2, sin reprocesarlas."""
-    filas = [(r["tramite_id"], r["requisito_id"], r["archivo"].removeprefix("pdf/"))
-             for r in csv.DictReader(open(PDF / "INDICE.csv", encoding="utf-8")) if r["origen"] == "Corrección (v2)"]
+    """Atajo de demo: registra la corrección que se sube en vivo (ya analizada por la IA), sin pasar por la bandeja."""
+    filas = [f for f in _correcciones() if f[2].endswith(CORRECCION_EN_VIVO)]
     valores = ",".join(f"('{t}', '{q}', '{a}', 2, current_timestamp(), 'demo', 'Bandeja de carga')" for t, q, a in filas)
     F.sql(f"INSERT INTO {CAT}.app.cargas VALUES {valores}")
     print(f"  {len(filas)} correcciones registradas")

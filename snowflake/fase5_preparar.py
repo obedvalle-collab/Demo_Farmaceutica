@@ -19,6 +19,8 @@ import fase4_bandeja as B  # noqa: E402
 BD = B.BD
 PDF = RAIZ / "datos" / "salida" / "pdf"
 TRAMITE_DEMO = "TR-2026-032"
+# Punto cero de la demo: 8 de las 9 correcciones ya registradas ("Corrección previa"); la de la etiqueta se sube en vivo
+CORRECCION_EN_VIVO = "TR-2026-032_1.4.1_proyecto_de_etiqueta_del_envase_secundario_v2.pdf"
 
 
 def sql_app():
@@ -33,7 +35,7 @@ def preparar(cur):
                     ENCRYPTION = (TYPE = 'SNOWFLAKE_SSE') COMMENT = 'Capturas de pantalla del agente de envío'""")
     for s in sql_app():
         cur.execute(s)
-    for p in sorted((PDF / "TR-2026-032_sitagliptina" / "correcciones").glob("*.pdf")):
+    for p in sorted((PDF / "TR-2026-032_sitagliptina" / "correcciones").rglob("*.pdf")):
         cur.execute(f"PUT 'file://{p.as_posix()}' @{BD}.CRUDO.EXPEDIENTES/TR-2026-032_sitagliptina/correcciones/ "
                     "AUTO_COMPRESS = FALSE OVERWRITE = TRUE")
     cur.execute(f"ALTER STAGE {BD}.CRUDO.EXPEDIENTES REFRESH")
@@ -49,7 +51,15 @@ def reiniciar(cur):
             filas.append((r["tramite_id"], r["requisito_id"], r["archivo"].removeprefix("pdf/"), 1, "Expediente inicial"))
     cur.executemany(f"""INSERT INTO {BD}.APP.CARGAS (tramite_id, requisito_id, archivo, version, cargado_en, cargado_por, origen)
                         VALUES (%s, %s, %s, %s, '2026-09-30 10:00:00', 'demo', %s)""", filas)
-    print(f"  demo reiniciada: {len(filas)} documentos v1, sin envíos")
+    previas = [(t, q, a) for t, q, a in _correcciones() if not a.endswith(CORRECCION_EN_VIVO)]
+    cur.executemany(f"""INSERT INTO {BD}.APP.CARGAS (tramite_id, requisito_id, archivo, version, cargado_en, cargado_por, origen)
+                        VALUES (%s, %s, %s, 2, '2026-10-05 12:00:00', 'demo', 'Corrección previa')""", previas)
+    print(f"  demo reiniciada: {len(filas)} documentos v1 + {len(previas)} correcciones previas; falta subir {CORRECCION_EN_VIVO}")
+
+
+def _correcciones():
+    return [(r["tramite_id"], r["requisito_id"], r["archivo"].removeprefix("pdf/"))
+            for r in csv.DictReader(open(PDF / "INDICE.csv", encoding="utf-8")) if r["origen"] == "Corrección (v2)"]
 
 
 def cargar_documento(cur, archivo, cargado_por="demo"):
@@ -72,7 +82,7 @@ def cargar_documento(cur, archivo, cargado_por="demo"):
 
 def correcciones(cur):
     t = time.time()
-    for p in sorted((PDF / "TR-2026-032_sitagliptina" / "correcciones").glob("*.pdf")):
+    for p in sorted((PDF / "TR-2026-032_sitagliptina" / "correcciones").rglob("*.pdf")):
         print("  ", cargar_documento(cur, f"TR-2026-032_sitagliptina/correcciones/{p.name}"))
     print(f"  {round(time.time() - t, 1)} s")
 
@@ -88,9 +98,8 @@ def estado(cur):
 
 
 def correcciones_cargadas(cur):
-    """Atajo de demo: registra las 9 correcciones (ya analizadas por la IA) como versión 2, sin reprocesarlas."""
-    filas = [(r["tramite_id"], r["requisito_id"], r["archivo"].removeprefix("pdf/"))
-             for r in csv.DictReader(open(PDF / "INDICE.csv", encoding="utf-8")) if r["origen"] == "Corrección (v2)"]
+    """Atajo de demo: registra la corrección que se sube en vivo (ya analizada por la IA), sin pasar por la bandeja."""
+    filas = [f for f in _correcciones() if f[2].endswith(CORRECCION_EN_VIVO)]
     cur.executemany(f"""INSERT INTO {BD}.APP.CARGAS (tramite_id, requisito_id, archivo, version, cargado_en, cargado_por, origen)
                         VALUES (%s, %s, %s, 2, CURRENT_TIMESTAMP(), 'demo', 'Bandeja de carga')""", filas)
     print(f"  {len(filas)} correcciones registradas")

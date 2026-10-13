@@ -122,10 +122,10 @@ class Consultas:
 
     # ------------------------------------------------------------------------------- reinicio de la demo
     def reiniciar_demo(self):
-        """Deja la demo en cero en esta plataforma: solo el expediente inicial (v1, con sus hallazgos y el faltante),
-        sin envíos, prevenciones, alertas, pre-auditorías ni evaluaciones de versiones. El portal local se reinicia
+        """Deja la demo en su punto cero en esta plataforma: expediente inicial + 8 correcciones previas (falta subir la
+        etiqueta del envase secundario por la bandeja), sin envíos, prevenciones, alertas, pre-auditorías ni evaluaciones de versiones. El portal local se reinicia
         aparte (reiniciar_demo.py)."""
         for t in ["envios", "envio_vivo", "avisos", "acciones", "oficios", "observaciones_oficio", "tareas_oficio",
                   "borradores", "alertas", "preauditorias", "comparaciones"]:
             self.q(f"DELETE FROM {self.A}.{t}")
-        self.q(f"DELETE FROM {self.A}.cargas WHERE origen <> 'Expediente inicial'")
+        self.q(f"DELETE FROM {self.A}.cargas WHERE origen NOT IN ('Expediente inicial', 'Corrección previa')")

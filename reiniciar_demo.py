@@ -3,10 +3,11 @@
 Uso:
     python reiniciar_demo.py                 # todo
     python reiniciar_demo.py snowflake       # solo una parte (snowflake | databricks | portal)
-    python reiniciar_demo.py --listo         # además deja las 9 correcciones cargadas (candado abierto, listo para enviar)
+    python reiniciar_demo.py --listo         # además registra la etiqueta corregida (candado abierto, listo para enviar)
 
-En cero significa: expediente inicial de la sitagliptina (8 documentos con hallazgos y 1 faltante), sin envíos,
-prevenciones, alertas, pre-auditorías ni evaluaciones de versiones; el portal sin solicitudes, avisos ni correos.
+Punto cero: expediente de la sitagliptina con 8 de las 9 correcciones ya registradas; solo falta subir por la bandeja la
+etiqueta del envase secundario (datos/salida/pdf/TR-2026-032_sitagliptina/correcciones/). Sin envíos, prevenciones, alertas,
+pre-auditorías ni evaluaciones de versiones; el portal sin solicitudes, avisos ni correos.
 """
 import sqlite3
 import subprocess
@@ -18,7 +19,14 @@ for p in ("app/comun", "compartido", "databricks"):
     sys.path.insert(0, str(RAIZ / p))
 
 
+def _cargas(plataforma):
+    """Rehace app.cargas: expediente inicial + correcciones previas (fase5_preparar.py reiniciar)."""
+    subprocess.run([sys.executable, str(RAIZ / plataforma / "fase5_preparar.py"), "reiniciar"], check=True,
+                   stdout=subprocess.DEVNULL)
+
+
 def snowflake():
+    _cargas("snowflake")
     from snowflake.snowpark import Session
     from datos_snowflake import DatosSnowflake
     s = Session.builder.config("connection_name", "obed_farma").create()
@@ -34,6 +42,7 @@ def snowflake():
 
 
 def databricks():
+    _cargas("databricks")
     import fase2_normas as F
     from datos_databricks import DatosDatabricks
     try:
