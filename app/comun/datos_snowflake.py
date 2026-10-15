@@ -14,6 +14,10 @@ from extraccion import INSTRUCCION, MAX_CARACTERES, esquema_json
 
 BD = "OBED_FARMACEUTICA"
 MODELO = "claude-sonnet-4-5"
+# Modelo por tarea (medido el 15/10/2026, docs/resultados/optimizacion_modelos.json): donde un modelo más rápido
+# mantuvo la calidad. Extracción de la bandeja, versiones, oficio y asistente se quedan con MODELO (más precisos).
+MODELOS_TAREA = {"preauditoria": "claude-haiku-4-5",   # 3-4x más rápido; 9/10 vs 10/10 en el examen
+                 "borrador": "claude-sonnet-4-6"}       # ~40% más rápido, redacción equivalente
 
 
 class DatosSnowflake(CicloPrevencion, Consultas, Versiones, PreAuditoria):
@@ -46,9 +50,12 @@ class DatosSnowflake(CicloPrevencion, Consultas, Versiones, PreAuditoria):
                        params=[ruta]).collect()
         return r[0]["T"] or ""
 
-    def ia_json(self, prompt, esquema_dict):
+    def modelo_para(self, tarea=None):
+        return MODELOS_TAREA.get(tarea, MODELO)
+
+    def ia_json(self, prompt, esquema_dict, tarea=None):
         r = self.s.sql("SELECT AI_COMPLETE(model => ?, prompt => ?, response_format => {'type': 'json', 'schema': PARSE_JSON(?)}) AS r",
-                       params=[MODELO, prompt, json.dumps(esquema_dict, ensure_ascii=False)]).collect()[0]["R"]
+                       params=[self.modelo_para(tarea), prompt, json.dumps(esquema_dict, ensure_ascii=False)]).collect()[0]["R"]
         if r is None:
             # con instrucciones largas y salida grande, el modo JSON con esquema a veces devuelve NULL:
             # se repite en texto libre pidiendo el mismo esquema y se lee el JSON de la respuesta
@@ -58,8 +65,8 @@ class DatosSnowflake(CicloPrevencion, Consultas, Versiones, PreAuditoria):
         d = json.loads(r) if isinstance(r, str) else r
         return json.loads(d) if isinstance(d, str) else d
 
-    def ia_texto(self, prompt):
-        r = self.s.sql("SELECT AI_COMPLETE(?, ?) AS r", params=[MODELO, prompt]).collect()[0]["R"] or ""
+    def ia_texto(self, prompt, tarea=None):
+        r = self.s.sql("SELECT AI_COMPLETE(?, ?) AS r", params=[self.modelo_para(tarea), prompt]).collect()[0]["R"] or ""
         return json.loads(r) if r.startswith('"') else r   # AI_COMPLETE devuelve el texto como cadena JSON
 
     def enviar_correos(self):

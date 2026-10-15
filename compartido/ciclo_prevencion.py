@@ -4,8 +4,8 @@ Cada plataforma implementa solo cinco piezas (ver app/comun/datos_*.py):
     q(sql, params)            ejecutar SQL con parámetros :nombre y devolver filas como dict (claves en minúsculas)
     subir_archivo(bytes, ruta) guardar un archivo en su almacenamiento (stage / volume)
     leer_pdf(ruta)            texto del PDF leído con su IA de documentos
-    ia_json(prompt, esquema)  respuesta estructurada de su modelo de lenguaje
-    ia_texto(prompt)          texto libre de su modelo de lenguaje
+    ia_json(prompt, esquema, tarea)  respuesta estructurada de su modelo de lenguaje (tarea elige el modelo)
+    ia_texto(prompt, tarea)          texto libre de su modelo de lenguaje
     enviar_correos()          mandar las alertas pendientes por el mecanismo nativo de la plataforma
 """
 import json
@@ -145,10 +145,10 @@ class CicloPrevencion:
         tramite = self._tramite(of["tramite_id"])
         oficio_info = {"numero_oficio": datos.get("numero_oficio"), "folio": of["folio"], "plazo_dias_habiles": plazo,
                        "fecha_limite": limite}
-        borrador = self.ia_texto(O.contexto_borrador(oficio_info, tramite, obs_detalle))
+        borrador = self.ia_texto(O.contexto_borrador(oficio_info, tramite, obs_detalle), tarea="borrador")
         self.q(f"DELETE FROM {self.A}.borradores WHERE oficio_id = :o", {"o": oficio_id})
         self.q(f"INSERT INTO {self.A}.borradores VALUES (:o, :t, :tx, :m, CURRENT_TIMESTAMP())",
-               {"o": oficio_id, "t": of["tramite_id"], "tx": borrador, "m": self.MODELO})
+               {"o": oficio_id, "t": of["tramite_id"], "tx": borrador, "m": self.modelo_para("borrador")})
         asunto, cuerpo = O.alerta_oficio({**oficio_info, "numero_oficio": datos.get("numero_oficio")}, tramite,
                                          len(obs_detalle), ", ".join(sorted(areas)))
         self._alerta("Oficio analizado", of["tramite_id"], oficio_id, asunto, cuerpo)

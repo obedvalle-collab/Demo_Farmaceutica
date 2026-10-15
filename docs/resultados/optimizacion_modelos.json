@@ -1,0 +1,34 @@
+{
+ "lectura_LAYOUT": 7.3,
+ "lectura_OCR": 1.0,
+ "claude-haiku-4-5": {
+  "extraccion_s": 6.5,
+  "extraccion": {
+   "tipo_documento": "Proyecto de etiqueta del envase secundario",
+   "leyenda_receta_medica": true,
+   "leyenda_farmacovigilancia": true,
+   "leyenda_venta_fraccionada": true
+  },
+  "preauditoria_s": 23.9,
+  "preauditoria_aciertos": "3/3 sección · 3/3 numeral · 10 pred.",
+  "version_s": 10.1,
+  "version": "Si",
+  "borrador_s": 7.1,
+  "borrador_chars": 2363
+ },
+ "claude-sonnet-5": {
+  "extraccion_s": 9.8,
+  "extraccion": {
+   "tipo_documento": "Proyecto de etiqueta del envase secundario",
+   "leyenda_receta_medica": true,
+   "leyenda_farmacovigilancia": true,
+   "leyenda_venta_fraccionada": true
+  },
+  "preauditoria_s": 31.1,
+  "preauditoria_aciertos": "3/3 sección · 3/3 numeral · 10 pred.",
+  "version_s": 11.8,
+  "version": "Parcial",
+  "borrador_s": 14.9,
+  "borrador_chars": 2938
+ }
+}

@@ -123,13 +123,14 @@ class PreAuditoria:
     def preauditar(self, tramite, usuario="demo", version_maxima=None, guardar=True):
         ctx = self.contexto_preauditoria(tramite, version_maxima)
         t = time.time()
-        r = self.ia_json(INSTRUCCION_PREAUDITORIA + json.dumps(ctx, ensure_ascii=False, default=str), ESQUEMA_PREAUDITORIA)
+        r = self.ia_json(INSTRUCCION_PREAUDITORIA + json.dumps(ctx, ensure_ascii=False, default=str), ESQUEMA_PREAUDITORIA,
+                         tarea="preauditoria")
         seg = round(time.time() - t, 1)
         if guardar:
             self.q(f"""INSERT INTO {self.A}.preauditorias (preauditoria_id, tramite_id, modelo, riesgo, resultado, segundos,
                                                             generado_en, generado_por)
                        VALUES (:i, :t, :m, :r, :j, :s, CURRENT_TIMESTAMP(), :u)""",
-                   {"i": str(uuid.uuid4()), "t": tramite, "m": self.MODELO, "r": r["riesgo"],
+                   {"i": str(uuid.uuid4()), "t": tramite, "m": self.modelo_para("preauditoria"), "r": r["riesgo"],
                     "j": json.dumps(r, ensure_ascii=False), "s": seg, "u": usuario})
         return r, seg
 

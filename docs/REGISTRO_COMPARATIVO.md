@@ -59,6 +59,7 @@ Una fila por tarea y plataforma. Las horas son de trabajo efectivo; el costo, en
 | 2026-10-12 | 5 | Envío 7 con computer use (pruebas del usuario) | Snowflake (cola) + local | | 63 pasos · 112 s | $1.10 | ✅ Folio DGP-2026-22878. Total del día ≈ $7.4 (7 envíos) |
 | 2026-10-13 | 5–6 | Presentación con la app de Snowflake (flujo completo) | Snowflake + local | | envío 63 pasos · 166 s; aviso detectado en ≈ 80 s; oficio analizado en 53 s | $1.09 (computer use) | ✅ Folio DGP-2026-50324 → prevención con 4 observaciones (15 días hábiles) → alertas por correo |
 | 2026-10-13 | 8 | Costos medidos de todo el proyecto (ACCOUNT_USAGE / system.billing) | Ambas | | – | SF 14.2 créditos ≈ $43 · DB ≈ $55 (lista) | DB: $26.9 del buscador encendido sin uso 8–11 oct. SF: se excluyen 0.39 créditos de pruebas ajenas a la demo con el mismo rol. Computer use: 9 envíos ≈ $9.5. Horas del comparativo: estimadas |
+| 2026-10-15 | – | Optimización de velocidad de la IA (modelo por tarea) | Snowflake | | pre-auditoría 60–90 s → 22 s · borrador 20 s → 12 s | mínimo | Haiku 4.5 en pre-auditoría y Sonnet 4.6 en borrador; bandeja, versiones y asistente sin cambio porque los modelos rápidos perdían precisión. Ver `docs/resultados/OPTIMIZACION_IA.md` |
 
 ## Notas por fase
 

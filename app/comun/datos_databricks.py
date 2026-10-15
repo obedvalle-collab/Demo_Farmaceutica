@@ -49,12 +49,15 @@ class DatosDatabricks(CicloPrevencion, Consultas, Versiones, PreAuditoria):
                         FROM (SELECT ai_parse_document(content, map('version', '2.0')) AS r FROM READ_FILES('{VOL}/{ruta}', format => 'binaryFile'))""")
         return r[0]["t"] or ""
 
-    def ia_json(self, prompt, esquema_dict):
+    def modelo_para(self, tarea=None):
+        return MODELO   # el workspace solo tiene gpt-oss-120b con buena calidad; no hay modelo más rápido equivalente
+
+    def ia_json(self, prompt, esquema_dict, tarea=None):
         fmt = json.dumps({"type": "json_schema", "json_schema": {"name": "salida", "schema": esquema_dict, "strict": True}}, ensure_ascii=False)
         r = self._q("SELECT ai_query(:m, :p, responseFormat => :f) AS r", {"m": MODELO, "p": prompt, "f": fmt})[0]["r"]
         return json.loads(r)
 
-    def ia_texto(self, prompt):
+    def ia_texto(self, prompt, tarea=None):
         return self._q("SELECT ai_query(:m, :p) AS r", {"m": MODELO, "p": prompt})[0]["r"]
 
     def enviar_correos(self):
