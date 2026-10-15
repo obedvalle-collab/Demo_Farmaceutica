@@ -90,6 +90,11 @@ class CicloPrevencion:
         return self.q(f"""SELECT x.accion_id, x.tramite_id, x.aviso_id, a.folio FROM {self.A}.acciones x
                           JOIN {self.A}.avisos a ON a.aviso_id = x.aviso_id WHERE x.estatus = 'Solicitada'""")
 
+    def ordenes_robot(self):
+        """Órdenes para el robot que no son de un aviso (por ahora: reiniciar el portal simulado)."""
+        return self.q(f"""SELECT accion_id, tipo FROM {self.A}.acciones
+                          WHERE estatus = 'Solicitada' AND tipo = 'reiniciar_portal'""")
+
     def actualizar_accion(self, accion_id, estatus, resultado=""):
         self.q(f"UPDATE {self.A}.acciones SET estatus = :e, resultado = :r, actualizado_en = CURRENT_TIMESTAMP() WHERE accion_id = :i",
                {"e": estatus, "r": resultado[:2000], "i": accion_id})

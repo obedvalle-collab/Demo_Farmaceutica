@@ -24,7 +24,7 @@ def principal(datos, plataforma, usuario="demo"):
     vista = st.sidebar.radio("Vista", list(VISTAS), key="vista")
     with st.sidebar.popover("🔄 Reiniciar demo"):
         st.write("Borra envíos, prevenciones, alertas, pre-auditorías y evaluaciones, y regresa el expediente a su versión "
-                 "inicial (con hallazgos). El portal simulado se reinicia aparte con `python reiniciar_demo.py portal`.")
+                 "inicial. El robot vacía también el portal simulado en cuanto ve la orden (debe estar encendido).")
         if st.button("Sí, reiniciar", type="primary"):
             datos.reiniciar_demo()
             st.cache_data.clear()

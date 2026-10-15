@@ -60,9 +60,13 @@ def atender(cola, envio, env, modo, navegador):
         return
     log(f"{cola.nombre}: envío {eid[:8]} del trámite {tramite} ({modo})")
     try:
+        # la ventana del agente se abre ya; el paquete se arma en paralelo y solo se espera al adjuntar el primer módulo
+        contexto = navegador.new_context(viewport={"width": agente.ANCHO, "height": agente.ALTO}, locale="es-MX")
+        page = contexto.new_page()
+        page.goto(env["PORTAL_URL"])
+        page.bring_to_front()
         carpeta = Path(tempfile.gettempdir()) / "claude" / "paquetes" / eid
-        zips, n = paquete.armar(cola, tramite, carpeta)
-        log(f"  paquete armado: {n} documentos en 5 módulos")
+        zips = paquete.PaqueteDiferido(type(cola), tramite, carpeta, registrar=log)
         solicitud = cola.datos_tramite(tramite)
 
         def confirmar(png, resumen):
@@ -82,8 +86,6 @@ def atender(cola, envio, env, modo, navegador):
             cola.actualizar(eid, estatus="Cancelado", error="Tiempo de espera de confirmación agotado")
             return "CANCELADO"
 
-        contexto = navegador.new_context(viewport={"width": agente.ANCHO, "height": agente.ALTO}, locale="es-MX")
-        page = contexto.new_page()
         if modo == "computer_use":
             r = agente.enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=log)
         else:
@@ -159,6 +161,25 @@ def abrir_oficio(env, navegador, folio):
     return nombre, contenido, acuse.group(0) if acuse else ""
 
 
+def reiniciar_portal():
+    """Vacía el portal simulado (solicitudes, archivos, avisos y correos). Lo pide el botón 'Reiniciar demo' de la app."""
+    import sqlite3
+    db = AQUI.parent / "portal_simulado" / "datos" / "portal.db"
+    if db.exists():
+        with sqlite3.connect(db) as c:
+            for tabla in ["archivos", "notificaciones", "correos_salientes", "solicitudes"]:
+                c.execute(f"DELETE FROM {tabla}")
+
+
+def atender_ordenes(ciclos):
+    for cola, d in ciclos:
+        for o in d.ordenes_robot():
+            if o["tipo"] == "reiniciar_portal":
+                reiniciar_portal()
+                d.actualizar_accion(o["accion_id"], "Completada", "Portal simulado en cero")
+                log(f"{cola.nombre}: demo reiniciada desde la app · portal simulado en cero")
+
+
 def atender_acciones(env, navegador, ciclos):
     for cola, d in ciclos:
         for a in d.acciones_pendientes():
@@ -196,6 +217,7 @@ def main():
         navegador = p.chromium.launch(headless=a.sin_ventana)
         try:
             while True:
+                atender_ordenes(ciclos)
                 for c in colas:
                     for envio in c.pendientes():
                         atender(c, envio, env, modo, navegador)
@@ -203,7 +225,7 @@ def main():
                 atender_acciones(env, navegador, ciclos)
                 if a.una_vez:
                     break
-                time.sleep(5)
+                time.sleep(2)
         except KeyboardInterrupt:
             log("Robot detenido")
         finally:
