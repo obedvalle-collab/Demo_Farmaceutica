@@ -66,6 +66,8 @@ def cargar_documento(cur, archivo, cargado_por="demo"):
     """Lo que hace la bandeja al subir un documento: leer, extraer, ubicar en el CTD según la IA y registrar la carga."""
     B.procesar_documento(archivo)
     B.aplanar(cur)
+    cur.execute(f"DELETE FROM {BD}.NEGOCIO.HALLAZGOS_IA WHERE archivo = %s", (archivo,))
+    cur.execute(f"INSERT INTO {BD}.NEGOCIO.HALLAZGOS_IA SELECT * FROM {BD}.NEGOCIO.HALLAZGOS_IA_CALCULO WHERE archivo = %s", (archivo,))
     r = cur.execute(f"""SELECT x.tramite_id, MIN(q.requisito_id), x.tipo_documento
         FROM {BD}.LIMPIO.DOCUMENTOS_EXTRAIDOS x
         LEFT JOIN {BD}.LIMPIO.REQUISITOS_CTD q ON q.nombre = x.tipo_documento

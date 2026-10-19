@@ -121,6 +121,13 @@ class Consultas:
         r = self.q(f"SELECT paso, accion, imagen, actualizado_en FROM {self.A}.envio_vivo WHERE envio_id = :e", {"e": envio_id})
         return r[0] if r else None
 
+    # ------------------------------------------------------------------------------- hallazgos guardados
+    def refrescar_hallazgos(self, archivo):
+        """Recalcula con las 18 reglas solo los hallazgos de un documento recién procesado (la tabla evita que la app
+        recalcule todas las reglas en cada lectura)."""
+        self.q(f"DELETE FROM {self.N}.hallazgos_ia WHERE archivo = :a", {"a": archivo})
+        self.q(f"INSERT INTO {self.N}.hallazgos_ia SELECT * FROM {self.N}.hallazgos_ia_calculo WHERE archivo = :a", {"a": archivo})
+
     # ------------------------------------------------------------------------------- reinicio de la demo
     def reiniciar_demo(self):
         """Deja la demo en su punto cero en esta plataforma: expediente inicial + 8 correcciones previas (falta subir la

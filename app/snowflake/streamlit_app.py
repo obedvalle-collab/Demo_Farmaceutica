@@ -28,4 +28,8 @@ try:
     usuario = s.sql("SELECT CURRENT_USER()").collect()[0][0]
 except Exception:
     usuario = "demo"
-principal(DatosSnowflake(s), "Snowflake · Streamlit in Snowflake", usuario)
+import streamlit as st  # noqa: E402
+
+datos = DatosSnowflake(s)
+datos.memo = st.session_state.setdefault("memoria_datos", {})   # lecturas reutilizables entre clics (compartido/memoria.py)
+principal(datos, "Snowflake · Streamlit in Snowflake", usuario)

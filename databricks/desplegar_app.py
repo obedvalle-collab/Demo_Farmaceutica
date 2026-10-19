@@ -43,6 +43,7 @@ def permisos(sp):
     sentencias += [f"GRANT USE SCHEMA, SELECT ON SCHEMA {cat}.ia TO {q}",   # índice de Vector Search (Vista 7)
                    f"GRANT MODIFY ON SCHEMA {cat}.app TO {q}",
                    f"GRANT MODIFY ON TABLE {cat}.crudo.expedientes_parseados TO {q}",
+                   f"GRANT MODIFY ON TABLE {cat}.negocio.hallazgos_ia TO {q}",
                    f"GRANT MODIFY ON TABLE {cat}.limpio.documentos_extraidos_json TO {q}",
                    f"GRANT MODIFY ON TABLE {cat}.limpio.documentos_extraidos TO {q}",
                    f"GRANT READ VOLUME, WRITE VOLUME ON VOLUME {cat}.crudo.expedientes TO {q}",

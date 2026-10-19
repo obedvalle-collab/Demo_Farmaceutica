@@ -115,6 +115,7 @@ def _vigilar_envio(datos, tramite, estatus):
     (por ejemplo, cuando el agente se detiene a pedir confirmación)."""
     nuevo = datos.ultimo_envio(tramite)
     if nuevo and nuevo["estatus"] != estatus:
+        datos.vaciar_memoria()   # el candado y el expediente cambian con el estado del envío
         st.rerun()
 
 
@@ -162,7 +163,7 @@ def _envio(datos, tramite, c, usuario):
                 "esta sección se actualiza sola.")
         _vigilar_envio(datos, tramite, env["estatus"])
     if st.button("🔄 Actualizar estado"):
-        st.rerun()
+        datos.vaciar_memoria(); st.rerun()
     return env
 
 

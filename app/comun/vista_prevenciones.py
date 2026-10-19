@@ -93,4 +93,4 @@ def pagina(datos, plataforma, usuario="demo"):
                 n = datos.generar_recordatorios()
                 st.success(f"{n} recordatorio(s) nuevos · {datos.enviar_correos()} correo(s) enviados")
     if st.button("🔄 Actualizar"):
-        st.rerun()
+        datos.vaciar_memoria(); st.rerun()

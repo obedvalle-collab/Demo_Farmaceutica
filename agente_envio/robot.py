@@ -54,16 +54,31 @@ def _comprimir(png, ancho=960, calidad=60):
     return base64.b64encode(buf.getvalue()).decode()
 
 
-def atender(cola, envio, env, modo, navegador):
+def abrir_sesion_portal(navegador, env):
+    """Ventana del portal abierta desde que arranca el robot y con la sesión de la empresa iniciada: el agente empieza
+    a trabajar en cuanto llega un envío, sin abrir navegador ni iniciar sesión."""
+    contexto = navegador.new_context(viewport={"width": agente.ANCHO, "height": agente.ALTO}, locale="es-MX")
+    page = contexto.new_page()
+    page.goto(env["PORTAL_URL"])
+    if page.locator("#usuario").count():
+        page.fill("#usuario", env["PORTAL_USUARIO"]); page.fill("#contrasena", env["PORTAL_PASSWORD"])
+        page.click("#btn-entrar")
+    return page
+
+
+def atender(cola, envio, env, modo, navegador, pagina_lista=None):
     eid, tramite = envio["envio_id"], envio["tramite_id"]
     if not cola.tomar(eid):
         return
     log(f"{cola.nombre}: envío {eid[:8]} del trámite {tramite} ({modo})")
     try:
         # la ventana del agente se abre ya; el paquete se arma en paralelo y solo se espera al adjuntar el primer módulo
-        contexto = navegador.new_context(viewport={"width": agente.ANCHO, "height": agente.ALTO}, locale="es-MX")
-        page = contexto.new_page()
-        page.goto(env["PORTAL_URL"])
+        if modo == "computer_use" and pagina_lista is not None:
+            contexto, page = None, pagina_lista          # ventana ya abierta y con sesión iniciada
+        else:
+            contexto = navegador.new_context(viewport={"width": agente.ANCHO, "height": agente.ALTO}, locale="es-MX")
+            page = contexto.new_page()
+            page.goto(env["PORTAL_URL"])
         page.bring_to_front()
         carpeta = Path(tempfile.gettempdir()) / "claude" / "paquetes" / eid
         zips = paquete.PaqueteDiferido(type(cola), tramite, carpeta, registrar=log)
@@ -90,7 +105,10 @@ def atender(cola, envio, env, modo, navegador):
             r = agente.enviar_con_computer_use(page, env, solicitud, zips, confirmar, registrar=log)
         else:
             r = agente.enviar_con_guion(page, env, solicitud, zips, confirmar)
-        contexto.close()
+        if contexto:
+            contexto.close()
+        else:
+            page.goto(env["PORTAL_URL"])                  # la ventana queda lista para el siguiente envío
         if r.get("exito"):
             cola.vivo(eid, 1, "Acuse", _comprimir(r["acuse"], ancho=1280, calidad=75))
             ruta = cola.subir_captura(r["acuse"], f"{eid}_acuse.png")
@@ -215,12 +233,19 @@ def main():
     log(f"Robot de envío y vigía en modo {modo} · atendiendo: {', '.join(c.nombre for c in colas)} · buzón desde el correo {visto['id']}")
     with sync_playwright() as p:
         navegador = p.chromium.launch(headless=a.sin_ventana)
+        pagina_lista = None
+        if modo == "computer_use":
+            try:
+                pagina_lista = abrir_sesion_portal(navegador, env)
+                log("  ventana del portal lista, con sesión iniciada")
+            except Exception as e:
+                log(f"  (no se pudo preparar la sesión del portal: {str(e)[:120]}; el agente iniciará sesión)")
         try:
             while True:
                 atender_ordenes(ciclos)
                 for c in colas:
                     for envio in c.pendientes():
-                        atender(c, envio, env, modo, navegador)
+                        atender(c, envio, env, modo, navegador, pagina_lista)
                 vigilar_buzon(env, ciclos, visto)
                 atender_acciones(env, navegador, ciclos)
                 if a.una_vez:

@@ -2,8 +2,10 @@
 -- Reglas de revisión de la bandeja de carga (misma lógica en Snowflake y Databricks).
 -- Entrada: {L}.documentos_extraidos (datos que extrajo la IA de cada PDF). Salida: {N}.hallazgos_ia.
 -- La IA solo extrae datos; estas reglas deciden y citan la norma. Marcadores: {L} limpio, {N} negocio.
+-- La vista hallazgos_ia_calculo tiene las reglas; la tabla hallazgos_ia guarda el resultado para que la app lo lea al
+-- instante. Al subir un documento se recalcula solo ese documento (Consultas.refrescar_hallazgos).
 -- =====================================================================================================
-CREATE OR REPLACE VIEW {N}.hallazgos_ia AS
+CREATE OR REPLACE VIEW {N}.hallazgos_ia_calculo AS
 WITH req AS (
     SELECT nombre, MIN(requisito_id) AS requisito_id, MIN(seccion_ctd) AS seccion_ctd
     FROM {L}.requisitos_ctd GROUP BY nombre),
@@ -110,4 +112,6 @@ SELECT doc.tramite_id, '', doc.nombre_requisito, doc.requisito_id, doc.seccion_c
 FROM {L}.documentos doc
 JOIN (SELECT requisito_id, MIN(norma) AS norma, MIN(clausula) AS clausula, MIN(fundamento) AS fundamento
       FROM {L}.requisitos_ctd GROUP BY requisito_id) r ON r.requisito_id = doc.requisito_id
-WHERE doc.estatus = 'Faltante' AND doc.tramite_id IN (SELECT DISTINCT tramite_id FROM {L}.documentos_extraidos)
+WHERE doc.estatus = 'Faltante' AND doc.tramite_id IN (SELECT DISTINCT tramite_id FROM {L}.documentos_extraidos);
+
+CREATE OR REPLACE TABLE {N}.hallazgos_ia AS SELECT * FROM {N}.hallazgos_ia_calculo;

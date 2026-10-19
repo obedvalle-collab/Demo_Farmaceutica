@@ -65,6 +65,8 @@ def cargar_documento(archivo, cargado_por="demo"):
     B.procesar_documento(archivo)
     B.aplanar()
     a = [Param(name="a", value=archivo)]
+    F.sql(f"DELETE FROM {CAT}.negocio.hallazgos_ia WHERE archivo = :a", a)
+    F.sql(f"INSERT INTO {CAT}.negocio.hallazgos_ia SELECT * FROM {CAT}.negocio.hallazgos_ia_calculo WHERE archivo = :a", a)
     r = F.sql(f"""SELECT x.tramite_id, MIN(q.requisito_id), x.tipo_documento FROM {CAT}.limpio.documentos_extraidos x
                   LEFT JOIN {CAT}.limpio.requisitos_ctd q ON q.nombre = x.tipo_documento
                   WHERE x.archivo = :a GROUP BY x.tramite_id, x.tipo_documento""", a)

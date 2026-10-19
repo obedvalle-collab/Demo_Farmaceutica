@@ -120,7 +120,10 @@ def exportar(consulta, nombre):
 
 def reglas_y_evaluacion():
     texto = (RAIZ / "compartido" / "sql" / "hallazgos.sql").read_text(encoding="utf-8")
-    F.sql(re.sub(r"--[^\n]*", "", texto).replace("{L}", f"{CAT}.limpio").replace("{N}", f"{CAT}.negocio"))
+    sql = re.sub(r"--[^\n]*", "", texto).replace("{L}", f"{CAT}.limpio").replace("{N}", f"{CAT}.negocio")
+    for s in re.split(r";\s*\n", sql + "\n"):   # hay ";" dentro de textos de hallazgos
+        if s.strip():
+            F.sql(s)
     SALIDA.mkdir(parents=True, exist_ok=True)
     hallazgos = exportar(f"SELECT * FROM {CAT}.negocio.hallazgos_ia", "hallazgos_ia")
     extraidos = exportar(f"SELECT * FROM {CAT}.limpio.documentos_extraidos", "documentos_extraidos")

@@ -1,6 +1,8 @@
 -- =====================================================================================================
 -- Capa de NEGOCIO (misma lógica en Snowflake y Databricks). Marcadores: {L} = esquema limpio, {N} = negocio.
 -- SQL estándar portable: CASE, DATEDIFF(day, a, b), YEAR, funciones de ventana. Sin funciones propietarias.
+-- Son TABLAS calculadas una vez (no vistas): dependen solo de la capa limpia, que no cambia durante la demo, y así la
+-- app no recalcula los joins en cada lectura. Si cambian los datos de origen, se vuelve a ejecutar este archivo.
 -- =====================================================================================================
 
 -- Parámetros de la demo: "hoy" fijo y umbrales del semáforo (días hábiles restantes)
@@ -8,13 +10,13 @@ CREATE OR REPLACE TABLE {N}.parametros AS
 SELECT CAST('2026-10-06' AS DATE) AS fecha_demo, 5 AS umbral_amarillo, 2 AS umbral_rojo;
 
 -- Índice acumulado de días hábiles: días hábiles en (a, b] = indice(b) - indice(a)
-CREATE OR REPLACE VIEW {N}.calendario_indice AS
+CREATE OR REPLACE TABLE {N}.calendario_indice AS
 SELECT fecha, es_habil, motivo_inhabil,
        SUM(CASE WHEN es_habil THEN 1 ELSE 0 END) OVER (ORDER BY fecha ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS indice_habil
 FROM {L}.calendario_habil;
 
 -- Cobertura del expediente CTD y candado de "listo para envío"
-CREATE OR REPLACE VIEW {N}.cobertura_ctd AS
+CREATE OR REPLACE TABLE {N}.cobertura_ctd AS
 SELECT t.tramite_id, t.producto, t.tipo_tramite, t.etapa, t.estatus AS estatus_tramite, t.es_activo,
        COUNT(*) AS requisitos,
        SUM(CASE WHEN d.estatus IN ('Aprobado', 'Enviado') THEN 1 ELSE 0 END) AS completos,
@@ -30,7 +32,7 @@ FROM {L}.tramites t
 JOIN {L}.documentos d ON d.tramite_id = t.tramite_id
 GROUP BY t.tramite_id, t.producto, t.tipo_tramite, t.etapa, t.estatus, t.es_activo, t.fecha_ingreso;
 
-CREATE OR REPLACE VIEW {N}.cobertura_ctd_modulo AS
+CREATE OR REPLACE TABLE {N}.cobertura_ctd_modulo AS
 SELECT tramite_id, modulo, COUNT(*) AS requisitos,
        SUM(CASE WHEN estatus IN ('Aprobado', 'Enviado') THEN 1 ELSE 0 END) AS completos,
        SUM(CASE WHEN estatus = 'Faltante' THEN 1 ELSE 0 END) AS faltantes,
@@ -39,7 +41,7 @@ FROM {L}.documentos
 GROUP BY tramite_id, modulo;
 
 -- Plazos de prevenciones con semáforo en días hábiles
-CREATE OR REPLACE VIEW {N}.plazos_prevenciones AS
+CREATE OR REPLACE TABLE {N}.plazos_prevenciones AS
 WITH base AS (
     SELECT pr.prevencion_id, pr.tramite_id, t.producto, t.tipo_tramite, pr.numero_oficio, pr.tipo, pr.estatus,
            pr.num_observaciones, pr.fecha_emision, pr.fecha_apertura, pr.fecha_limite_apertura,
@@ -82,7 +84,7 @@ LEFT JOIN obs o ON o.prevencion_id = d.prevencion_id
 LEFT JOIN tar ta ON ta.prevencion_id = d.prevencion_id;
 
 -- Vigencia de registros sanitarios y prórrogas (5 años de registro; pedir prórroga 150 días naturales antes)
-CREATE OR REPLACE VIEW {N}.registros_vigencia AS
+CREATE OR REPLACE TABLE {N}.registros_vigencia AS
 WITH base AS (
     SELECT pr.producto_id, pr.denominacion_generica || ' ' || pr.concentracion AS producto, pr.registro_sanitario,
            pr.fecha_registro, pr.fecha_vencimiento_registro, pr.fecha_limite_solicitar_prorroga,
@@ -107,7 +109,7 @@ SELECT b.*,
 FROM base b;
 
 -- Portafolio de trámites activos (tablero ejecutivo)
-CREATE OR REPLACE VIEW {N}.portafolio AS
+CREATE OR REPLACE TABLE {N}.portafolio AS
 SELECT t.tramite_id, t.producto_id, t.producto, t.homoclave, t.tipo_tramite, t.familia, t.descripcion, t.etapa,
        t.estatus, t.fecha_inicio_integracion, t.fecha_ingreso, t.fecha_objetivo_envio,
        CASE WHEN t.fecha_ingreso IS NOT NULL THEN DATEDIFF(day, t.fecha_ingreso, par.fecha_demo) END AS dias_en_cofepris,
@@ -123,7 +125,7 @@ LEFT JOIN (SELECT * FROM {N}.plazos_prevenciones WHERE semaforo <> 'Cerrada') pp
 WHERE t.es_activo;
 
 -- Indicadores: observaciones más frecuentes por norma y cláusula
-CREATE OR REPLACE VIEW {N}.kpi_observaciones_norma AS
+CREATE OR REPLACE TABLE {N}.kpi_observaciones_norma AS
 SELECT COALESCE(norma, 'Administrativa') AS norma, COALESCE(clausula, '—') AS clausula, seccion_ctd, area_responsable,
        COUNT(*) AS observaciones, COUNT(DISTINCT tramite_id) AS tramites_afectados,
        ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 1) AS pct_del_total
@@ -131,7 +133,7 @@ FROM {L}.observaciones
 GROUP BY COALESCE(norma, 'Administrativa'), COALESCE(clausula, '—'), seccion_ctd, area_responsable;
 
 -- Indicadores: desempeño por año de ingreso y familia de trámite (trámites concluidos)
-CREATE OR REPLACE VIEW {N}.kpi_desempeno AS
+CREATE OR REPLACE TABLE {N}.kpi_desempeno AS
 SELECT YEAR(fecha_ingreso) AS anio, familia,
        COUNT(*) AS concluidos,
        SUM(CASE WHEN resultado = 'Aprobado' THEN 1 ELSE 0 END) AS aprobados,
@@ -145,7 +147,7 @@ WHERE NOT es_activo
 GROUP BY YEAR(fecha_ingreso), familia;
 
 -- Indicadores: atención de tareas por área (cuellos de botella)
-CREATE OR REPLACE VIEW {N}.kpi_areas AS
+CREATE OR REPLACE TABLE {N}.kpi_areas AS
 SELECT ta.area, COUNT(*) AS tareas,
        SUM(CASE WHEN ta.estatus = 'Cerrada' THEN 1 ELSE 0 END) AS cerradas,
        SUM(CASE WHEN ta.estatus = 'Vencida' THEN 1 ELSE 0 END) AS vencidas,

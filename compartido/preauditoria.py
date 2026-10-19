@@ -112,11 +112,14 @@ class PreAuditoria:
             h["frecuencia"] = f"{h.pop('tramites')} de {total} trámites parecidos"
         citas = {(h["norma"], h["clausula"]) for h in hall + historial if h["norma"] and h["clausula"]}
         clausulas = []
-        for norma, numeral in sorted(citas):
-            c = self.q(f"SELECT texto FROM {self.L}.normas_clausulas WHERE norma = :n AND numeral = :u",
-                       {"n": norma, "u": numeral})
-            if c:
-                clausulas.append({"norma": norma, "numeral": numeral, "texto": (c[0]["texto"] or "")[:700]})
+        if citas:   # una sola consulta para todas las cláusulas citadas (antes, una por cláusula)
+            citas = sorted(citas)
+            cond = " OR ".join(f"(norma = :n{i} AND numeral = :u{i})" for i in range(len(citas)))
+            params = {**{f"n{i}": n for i, (n, _) in enumerate(citas)}, **{f"u{i}": u for i, (_, u) in enumerate(citas)}}
+            textos = {(c["norma"], c["numeral"]): c["texto"] for c in
+                      self.q(f"SELECT norma, numeral, MIN(texto) AS texto FROM {self.L}.normas_clausulas WHERE {cond} "
+                             f"GROUP BY norma, numeral", params)}
+            clausulas = [{"norma": n, "numeral": u, "texto": (textos[(n, u)] or "")[:700]} for n, u in citas if (n, u) in textos]
         return {"tramite": t, "expediente": expediente, "hallazgos_automaticos": hall, "historial": historial,
                 "clausulas": clausulas}
 

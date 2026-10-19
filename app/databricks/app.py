@@ -29,4 +29,5 @@ def cliente():
 
 usuario = st.context.headers.get("X-Forwarded-Email", "demo") if hasattr(st, "context") else "demo"
 datos = DatosDatabricks(cliente(), os.environ.get("DATABRICKS_WAREHOUSE_ID", WAREHOUSE_LOCAL))
+datos.memo = st.session_state.setdefault("memoria_datos", {})   # lecturas reutilizables entre clics (compartido/memoria.py)
 principal(datos, "Databricks · Databricks Apps", usuario or "demo")

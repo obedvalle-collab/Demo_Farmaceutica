@@ -7,6 +7,7 @@ import uuid
 
 from ciclo_prevencion import CicloPrevencion
 from consultas import Consultas
+from memoria import Memoria
 from preauditoria import PreAuditoria
 from versiones import Versiones
 from extraccion import INSTRUCCION, MAX_CARACTERES, esquema
@@ -27,7 +28,7 @@ NOMBRE_JOB_ALERTAS = "obed_farma_alertas_correo"
 TITULO_GENIE = "obed_farma · datos regulatorios"
 
 
-class DatosDatabricks(CicloPrevencion, Consultas, Versiones, PreAuditoria):
+class DatosDatabricks(Memoria, CicloPrevencion, Consultas, Versiones, PreAuditoria):
     L, N, A = f"{CAT}.limpio", f"{CAT}.negocio", f"{CAT}.app"
     MODELO = MODELO
 
@@ -39,6 +40,7 @@ class DatosDatabricks(CicloPrevencion, Consultas, Versiones, PreAuditoria):
         return self._q(sql, params)
 
     def subir_archivo(self, contenido, ruta):
+        self.vaciar_memoria()
         self.w.files.upload(f"{VOL}/{ruta}", io.BytesIO(contenido), overwrite=True)
 
     def leer_pdf(self, ruta):
@@ -181,6 +183,9 @@ class DatosDatabricks(CicloPrevencion, Consultas, Versiones, PreAuditoria):
         return salida
 
     def _q(self, sql, params=None):
+        return self._con_memoria(sql, params or {}, lambda: self._ejecutar(sql, params))
+
+    def _ejecutar(self, sql, params=None):
         from databricks.sdk.service.sql import StatementParameterListItem as P, StatementState
         ps = [P(name=k, value=None if v is None else str(v)) for k, v in (params or {}).items()]
         r = self.w.statement_execution.execute_statement(statement=sql, warehouse_id=self.wh, wait_timeout="50s", parameters=ps)
@@ -257,6 +262,7 @@ class DatosDatabricks(CicloPrevencion, Consultas, Versiones, PreAuditoria):
                 {**a, "m": MODELO, "i": INSTRUCCION, "f": formato})
         self._q(f"DELETE FROM {CAT}.limpio.documentos_extraidos WHERE archivo = :a", a)
         self._q(self._sql_aplanar(), a)
+        self.refrescar_hallazgos(archivo)
         r = self._q(f"""SELECT MIN(q.requisito_id) AS req, MIN(q.seccion_ctd) AS sec, MIN(x.tipo_documento) AS tipo
                         FROM {CAT}.limpio.documentos_extraidos x LEFT JOIN {CAT}.limpio.requisitos_ctd q ON q.nombre = x.tipo_documento
                         WHERE x.archivo = :a""", a)[0]

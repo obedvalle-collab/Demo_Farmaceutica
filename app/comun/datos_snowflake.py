@@ -8,6 +8,7 @@ import re
 
 from ciclo_prevencion import CicloPrevencion
 from consultas import Consultas
+from memoria import Memoria
 from preauditoria import PreAuditoria
 from versiones import Versiones
 from extraccion import INSTRUCCION, MAX_CARACTERES, esquema_json
@@ -20,7 +21,7 @@ MODELOS_TAREA = {"preauditoria": "claude-haiku-4-5",   # 3-4x más rápido; 9/10
                  "borrador": "claude-sonnet-4-6"}       # ~40% más rápido, redacción equivalente
 
 
-class DatosSnowflake(CicloPrevencion, Consultas, Versiones, PreAuditoria):
+class DatosSnowflake(Memoria, CicloPrevencion, Consultas, Versiones, PreAuditoria):
     L, N, A = f"{BD}.LIMPIO", f"{BD}.NEGOCIO", f"{BD}.APP"
     MODELO = MODELO
 
@@ -36,9 +37,11 @@ class DatosSnowflake(CicloPrevencion, Consultas, Versiones, PreAuditoria):
                 valores.append(params[m.group(1)])
                 return "?"
             sql = re.sub(r"(?<![:\w]):([a-zA-Z_]\w*)", sustituir, sql)
-        return [{k.lower(): v for k, v in r.as_dict().items()} for r in self.s.sql(sql, params=valores).collect()]
+        return self._con_memoria(sql, valores, lambda: [{k.lower(): v for k, v in r.as_dict().items()}
+                                                         for r in self.s.sql(sql, params=valores).collect()])
 
     def subir_archivo(self, contenido, ruta):
+        self.vaciar_memoria()
         self.s.file.put_stream(io.BytesIO(contenido), f"@{BD}.CRUDO.EXPEDIENTES/{ruta}", auto_compress=False, overwrite=True)
         self.s.sql(f"ALTER STAGE {BD}.CRUDO.EXPEDIENTES REFRESH").collect()
 
@@ -71,6 +74,7 @@ class DatosSnowflake(CicloPrevencion, Consultas, Versiones, PreAuditoria):
 
     def enviar_correos(self):
         """Correo nativo de Snowflake: SYSTEM$SEND_EMAIL con la integración FARMA_EMAIL (solo a usuarios verificados)."""
+        self.vaciar_memoria()
         n = 0
         for a in self.q(f"SELECT alerta_id, para, asunto, cuerpo FROM {self.A}.alertas WHERE enviada_en IS NULL ORDER BY creada_en"):
             try:
@@ -151,7 +155,7 @@ class DatosSnowflake(CicloPrevencion, Consultas, Versiones, PreAuditoria):
         return salida
 
     def _q(self, sql, params=None):
-        return [r.as_dict() for r in self.s.sql(sql, params=params or []).collect()]
+        return self._con_memoria(sql, params or [], lambda: [r.as_dict() for r in self.s.sql(sql, params=params or []).collect()])
 
     @staticmethod
     def _min(filas):
@@ -185,21 +189,25 @@ class DatosSnowflake(CicloPrevencion, Consultas, Versiones, PreAuditoria):
 
     # --------------------------------------------------------------------------------- envío
     def solicitar_envio(self, tramite, usuario):
+        self.vaciar_memoria()
         self.s.sql(f"""INSERT INTO {BD}.APP.ENVIOS (envio_id, tramite_id, estatus, solicitado_por, solicitado_en, actualizado_en)
                        SELECT ?, ?, 'Solicitado', ?, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()""",
                    params=[str(uuid.uuid4()), tramite, usuario]).collect()
 
     def confirmar_envio(self, envio_id, usuario):
+        self.vaciar_memoria()
         self.s.sql(f"""UPDATE {BD}.APP.ENVIOS SET estatus = 'Confirmado', confirmado_por = ?, confirmado_en = CURRENT_TIMESTAMP(),
                        actualizado_en = CURRENT_TIMESTAMP() WHERE envio_id = ? AND estatus = 'Esperando confirmación'""",
                    params=[usuario, envio_id]).collect()
 
     def cancelar_envio(self, envio_id, usuario):
+        self.vaciar_memoria()
         self.s.sql(f"""UPDATE {BD}.APP.ENVIOS SET estatus = 'Cancelado', confirmado_por = ?, actualizado_en = CURRENT_TIMESTAMP()
                        WHERE envio_id = ?""", params=[usuario, envio_id]).collect()
 
     # --------------------------------------------------------------------------------- bandeja
     def cargar_documento(self, tramite, nombre, contenido):
+        self.vaciar_memoria()
         carpeta = self._q(f"SELECT SPLIT_PART(MIN(archivo), '/', 1) AS c FROM {BD}.APP.CARGAS WHERE tramite_id = ?", [tramite])[0]["C"]
         archivo = f"{carpeta}/cargas/{nombre}"
         self.s.file.put_stream(io.BytesIO(contenido), f"@{BD}.CRUDO.EXPEDIENTES/{archivo}", auto_compress=False, overwrite=True)
@@ -222,6 +230,7 @@ class DatosSnowflake(CicloPrevencion, Consultas, Versiones, PreAuditoria):
                    params=[MODELO, MODELO, INSTRUCCION, esquema_json(), archivo]).collect()
         self.s.sql(f"DELETE FROM {BD}.LIMPIO.DOCUMENTOS_EXTRAIDOS WHERE archivo = ?", params=[archivo]).collect()
         self.s.sql(self._sql_aplanar(), params=[archivo]).collect()
+        self.refrescar_hallazgos(archivo)
         r = self._q(f"""SELECT MIN(q.requisito_id) AS req, MIN(q.seccion_ctd) AS sec, MIN(x.tipo_documento) AS tipo
                         FROM {BD}.LIMPIO.DOCUMENTOS_EXTRAIDOS x LEFT JOIN {BD}.LIMPIO.REQUISITOS_CTD q ON q.nombre = x.tipo_documento
                         WHERE x.archivo = ?""", [archivo])[0]
@@ -236,6 +245,7 @@ class DatosSnowflake(CicloPrevencion, Consultas, Versiones, PreAuditoria):
         return {"archivo": archivo, "requisito_id": r["REQ"], "seccion_ctd": r["SEC"], "tipo_documento": r["TIPO"], "version": version, "hallazgos": hall}
 
     def reubicar(self, tramite, archivo, requisito_id):
+        self.vaciar_memoria()
         self.s.sql(f"""UPDATE {BD}.APP.CARGAS SET requisito_id = ?, origen = 'Bandeja (reubicado por usuario)'
                        WHERE tramite_id = ? AND archivo = ?""", params=[requisito_id, tramite, archivo]).collect()
 

@@ -26,7 +26,7 @@ def empaquetar():
         for a in (APP / "comun").glob("*.py"):
             if not a.name.startswith("datos_") or a.name == f"datos_{plataforma}.py":
                 shutil.copy(a, destino / a.name)
-        for a in ["extraccion.py", "ciclo_prevencion.py", "oficio.py", "consultas.py", "versiones.py", "preauditoria.py", "asistente.py", "modelo_semantico.py"]:
+        for a in ["extraccion.py", "ciclo_prevencion.py", "oficio.py", "consultas.py", "versiones.py", "preauditoria.py", "asistente.py", "modelo_semantico.py", "memoria.py"]:
             shutil.copy(RAIZ / "compartido" / a, destino / a)
         (destino / "tipos_documento.json").write_text(json.dumps(tipos, ensure_ascii=False), encoding="utf-8")
         print(plataforma, sorted(p.name for p in destino.iterdir()))

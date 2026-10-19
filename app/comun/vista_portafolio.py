@@ -73,4 +73,4 @@ def pagina(datos, plataforma, usuario="demo"):
                                 "dias_para_limite_prorroga": st.column_config.NumberColumn("Días restantes"),
                                 "estatus_vigencia": "Estatus", "prorroga_en_tramite": "Trámite de prórroga"})
     if st.button("🔄 Actualizar", key="act_portafolio"):
-        _cargar.clear(); st.rerun()
+        datos.vaciar_memoria(); _cargar.clear(); st.rerun()

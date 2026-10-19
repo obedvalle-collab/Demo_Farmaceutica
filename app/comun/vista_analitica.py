@@ -82,4 +82,4 @@ def pagina(datos, plataforma, usuario="demo"):
                                     "abiertas": "Abiertas", "dias_habiles_promedio_atencion": "Días hábiles promedio",
                                     "pct_cerradas_a_tiempo": st.column_config.NumberColumn("% a tiempo", format="%.1f%%")})
     if st.button("🔄 Actualizar", key="act_analitica"):
-        _cargar.clear(); st.rerun()
+        datos.vaciar_memoria(); _cargar.clear(); st.rerun()

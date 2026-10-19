@@ -109,7 +109,9 @@ def reglas_y_evaluacion(cur):
     texto = (RAIZ / "compartido" / "sql" / "hallazgos.sql").read_text(encoding="utf-8")
     import re
     sql = re.sub(r"--[^\n]*", "", texto).replace("{L}", f"{BD}.LIMPIO").replace("{N}", f"{BD}.NEGOCIO")
-    cur.execute(sql)
+    for s in re.split(r";\s*\n", sql + "\n"):   # hay ";" dentro de textos de hallazgos
+        if s.strip():
+            cur.execute(s)
     SALIDA.mkdir(parents=True, exist_ok=True)
     resultados = {}
     for nombre, consulta in [("hallazgos_ia", f"SELECT * FROM {BD}.NEGOCIO.HALLAZGOS_IA"),
