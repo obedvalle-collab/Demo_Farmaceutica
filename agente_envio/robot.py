@@ -66,15 +66,18 @@ def abrir_sesion_portal(navegador, env):
     return page
 
 
-def atender(cola, envio, env, modo, navegador, pagina_lista=None):
+def atender(cola, envio, env, modo, navegador, sesion=None):
     eid, tramite = envio["envio_id"], envio["tramite_id"]
     if not cola.tomar(eid):
         return
     log(f"{cola.nombre}: envío {eid[:8]} del trámite {tramite} ({modo})")
     try:
         # la ventana del agente se abre ya; el paquete se arma en paralelo y solo se espera al adjuntar el primer módulo
-        if modo == "computer_use" and pagina_lista is not None:
-            contexto, page = None, pagina_lista          # ventana ya abierta y con sesión iniciada
+        if modo == "computer_use" and sesion is not None:
+            if sesion.get("pagina") is None or sesion["pagina"].is_closed():   # la persona cerró la ventana: se abre otra
+                sesion["pagina"] = abrir_sesion_portal(navegador, env)
+                log("  ventana del portal reabierta, con sesión iniciada")
+            contexto, page = None, sesion["pagina"]       # ventana ya abierta y con sesión iniciada
         else:
             contexto = navegador.new_context(viewport={"width": agente.ANCHO, "height": agente.ALTO}, locale="es-MX")
             page = contexto.new_page()
@@ -236,10 +239,10 @@ def main():
     log(f"Robot de envío y vigía en modo {modo} ({agente.MODELO if modo == 'computer_use' else 'sin IA'}) · atendiendo: {', '.join(c.nombre for c in colas)} · buzón desde el correo {visto['id']}")
     with sync_playwright() as p:
         navegador = p.chromium.launch(headless=a.sin_ventana)
-        pagina_lista = None
-        if modo == "computer_use":
+        sesion = {"pagina": None} if modo == "computer_use" else None
+        if sesion is not None:
             try:
-                pagina_lista = abrir_sesion_portal(navegador, env)
+                sesion["pagina"] = abrir_sesion_portal(navegador, env)
                 log("  ventana del portal lista, con sesión iniciada")
             except Exception as e:
                 log(f"  (no se pudo preparar la sesión del portal: {str(e)[:120]}; el agente iniciará sesión)")
@@ -248,7 +251,7 @@ def main():
                 atender_ordenes(ciclos)
                 for c in colas:
                     for envio in c.pendientes():
-                        atender(c, envio, env, modo, navegador, pagina_lista)
+                        atender(c, envio, env, modo, navegador, sesion)
                 vigilar_buzon(env, ciclos, visto)
                 atender_acciones(env, navegador, ciclos)
                 if a.una_vez:
