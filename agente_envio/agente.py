@@ -14,7 +14,7 @@ import time
 
 import anthropic
 
-MODELO = "claude-opus-5-5"
+MODELO = "claude-sonnet-5-5"   # 19/10: mismo envío en 90 s y $0.44 vs Opus 5.5 131 s y $1.57 (robot.py --modelo para cambiarlo)
 ANCHO, ALTO = 1280, 800
 MAX_PASOS = 100   # la carga del formulario toma ~60 pasos; después de confirmar faltan ~5
 PRECIO = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0)}   # USD por millón de tokens (entrada, salida)

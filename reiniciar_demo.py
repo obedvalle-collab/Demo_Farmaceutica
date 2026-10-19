@@ -1,7 +1,7 @@
 """Deja toda la demo en cero: Snowflake, Databricks y el portal simulado local.
 
 Uso:
-    python reiniciar_demo.py                 # todo
+    python reiniciar_demo.py                 # Snowflake y el portal (Databricks: python reiniciar_demo.py databricks)
     python reiniciar_demo.py snowflake       # solo una parte (snowflake | databricks | portal)
     python reiniciar_demo.py --listo         # además registra la etiqueta corregida (candado abierto, listo para enviar)
 
@@ -70,7 +70,7 @@ def listo():
 
 if __name__ == "__main__":
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
-    PARTES = args or ["snowflake", "databricks", "portal"]
+    PARTES = args or ["snowflake", "portal"]   # Databricks solo si se pide: python reiniciar_demo.py databricks
     for parte in PARTES:
         {"snowflake": snowflake, "databricks": databricks, "portal": portal}[parte]()
     if "--listo" in sys.argv:

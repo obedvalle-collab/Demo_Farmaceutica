@@ -220,17 +220,20 @@ def main():
     ap.add_argument("--plataforma", choices=["ambas", "snowflake", "databricks"], default="ambas")
     ap.add_argument("--modo", choices=["auto", "computer_use", "guion"], default="auto")
     ap.add_argument("--una-vez", action="store_true", help="atiende lo pendiente y termina")
+    ap.add_argument("--modelo", default=None, help="modelo del agente (por defecto el de agente.MODELO)")
     ap.add_argument("--sin-ventana", action="store_true",
                     help="no muestra la ventana del navegador (por defecto se ve en vivo lo que hace el agente)")
     a = ap.parse_args()
     env = leer_env()
+    if a.modelo:
+        agente.MODELO = a.modelo
     modo = a.modo if a.modo != "auto" else ("computer_use" if env.get("ANTHROPIC_API_KEY") else "guion")
     colas = ([ColaSnowflake()] if a.plataforma in ("ambas", "snowflake") else []) + \
             ([ColaDatabricks()] if a.plataforma in ("ambas", "databricks") else [])
     ciclos = [(c, datos_de(c)) for c in colas]
     visto = {"id": min(d.ultimo_correo() for _, d in ciclos)}
     visto.update({c.nombre: d.ultimo_correo() for c, d in ciclos})
-    log(f"Robot de envío y vigía en modo {modo} · atendiendo: {', '.join(c.nombre for c in colas)} · buzón desde el correo {visto['id']}")
+    log(f"Robot de envío y vigía en modo {modo} ({agente.MODELO if modo == 'computer_use' else 'sin IA'}) · atendiendo: {', '.join(c.nombre for c in colas)} · buzón desde el correo {visto['id']}")
     with sync_playwright() as p:
         navegador = p.chromium.launch(headless=a.sin_ventana)
         pagina_lista = None
