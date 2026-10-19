@@ -45,7 +45,7 @@ def procesar_documento(archivo):
     try:
         t = time.time()
         cur.execute(f"DELETE FROM {BD}.CRUDO.EXPEDIENTES_PARSEADOS WHERE archivo = %s", (archivo,))
-        cur.execute(f"""INSERT INTO {BD}.CRUDO.EXPEDIENTES_PARSEADOS
+        cur.execute(f"""INSERT INTO {BD}.CRUDO.EXPEDIENTES_PARSEADOS (archivo, tramite_id, paginas, texto, segundos, procesado_en)
             SELECT %s, SUBSTR(%s, 1, 11), r:metadata:pageCount::INT,
                    ARRAY_TO_STRING(TRANSFORM(r:pages, p -> p:content::STRING), '\n\n'), NULL, CURRENT_TIMESTAMP()
             FROM (SELECT AI_PARSE_DOCUMENT(TO_FILE('@{BD}.CRUDO.EXPEDIENTES', %s), {{'mode': 'LAYOUT', 'page_split': true}}) AS r)""",

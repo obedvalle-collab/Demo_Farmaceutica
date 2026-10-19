@@ -134,7 +134,7 @@ class Consultas:
         etiqueta del envase secundario por la bandeja), sin envíos, prevenciones, alertas, pre-auditorías ni evaluaciones de versiones. El portal (en la laptop) lo vacía
         el robot al ver la orden 'reiniciar_portal'."""
         for t in ["envios", "envio_vivo", "avisos", "acciones", "oficios", "observaciones_oficio", "tareas_oficio",
-                  "borradores", "alertas", "preauditorias", "comparaciones"]:
+                  "borradores", "alertas", "preauditorias", "comparaciones", "trabajos"]:
             self.q(f"DELETE FROM {self.A}.{t}")
         self.q(f"DELETE FROM {self.A}.cargas WHERE origen NOT IN ('Expediente inicial', 'Corrección previa')")
         # el portal vive en la laptop: se deja la orden y el robot lo vacía en cuanto la ve

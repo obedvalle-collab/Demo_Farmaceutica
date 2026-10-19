@@ -3,8 +3,11 @@
 `datos` es un objeto con la misma interfaz en ambas plataformas (ver datos_snowflake.py / datos_databricks.py).
 """
 import base64
+import hashlib
 
 import streamlit as st
+
+from ui import trabajos_en_curso
 
 MODULOS = {"M1": "Módulo 1 · Administrativo y regional", "M2": "Módulo 2 · Resúmenes", "M3": "Módulo 3 · Calidad",
            "M4": "Módulo 4 · No clínico", "M5": "Módulo 5 · Clínico"}
@@ -75,13 +78,26 @@ def _arbol(datos, tramite):
                         st.success("Revisado por la IA contra la NOM: sin hallazgos.")
 
 
-def _bandeja(datos, tramite):
+def _bandeja(datos, tramite, usuario="demo"):
     st.markdown("#### 📥 Bandeja de carga inteligente")
-    st.caption("Sube un PDF: la IA lo lee, lo ubica en el CTD, extrae sus datos y lo revisa contra la NOM.")
+    st.caption("Sube un PDF: la IA lo lee, lo ubica en el CTD, extrae sus datos y lo revisa contra la NOM. "
+               "Trabaja en segundo plano: puedes seguir navegando mientras tanto.")
     archivo = st.file_uploader("Documento PDF", type=["pdf"], key=f"subir_{tramite}")
     if archivo and st.button("Procesar documento", type="primary"):
-        with st.spinner("Leyendo y revisando el documento (≈ 30–60 s)…"):
-            st.session_state[f"ultimo_{tramite}"] = datos.cargar_documento(tramite, archivo.name, archivo.getvalue())
+        with st.spinner("Subiendo el documento…"):
+            ruta = datos.subir_documento(tramite, archivo.name, archivo.getvalue())
+            huella = hashlib.sha256(archivo.getvalue()).hexdigest()   # si ya se procesó un archivo idéntico, se reutiliza
+            st.session_state[f"trabajo_{tramite}"] = datos.lanzar_trabajo("procesar_documento", tramite,
+                                                                          {"archivo": ruta, "sha256": huella}, usuario)
+        st.session_state.pop(f"ultimo_{tramite}", None)
+        st.rerun()
+    tid = st.session_state.get(f"trabajo_{tramite}")
+    if tid:
+        t = datos.trabajo(tid)
+        if t and t["estatus"] in ("Listo", "Error"):
+            st.session_state[f"ultimo_{tramite}"] = t["resultado"] if t["estatus"] == "Listo" else {"error": t["error"]}
+            st.session_state.pop(f"trabajo_{tramite}", None)
+    trabajos_en_curso(datos, tramite)
     r = st.session_state.get(f"ultimo_{tramite}")
     if r:
         if r.get("error"):
@@ -197,5 +213,5 @@ def pagina(datos, plataforma, usuario="demo"):
     with der:
         env = _envio(datos, tramite, c, usuario)
         st.divider()
-        _bandeja(datos, tramite)
+        _bandeja(datos, tramite, usuario)
     _pantalla_agente(datos, tramite, env)

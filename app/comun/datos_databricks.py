@@ -7,6 +7,7 @@ import uuid
 
 from ciclo_prevencion import CicloPrevencion
 from consultas import Consultas
+from trabajos import Trabajos
 from memoria import Memoria
 from preauditoria import PreAuditoria
 from versiones import Versiones
@@ -28,7 +29,7 @@ NOMBRE_JOB_ALERTAS = "obed_farma_alertas_correo"
 TITULO_GENIE = "obed_farma · datos regulatorios"
 
 
-class DatosDatabricks(Memoria, CicloPrevencion, Consultas, Versiones, PreAuditoria):
+class DatosDatabricks(Memoria, Trabajos, CicloPrevencion, Consultas, Versiones, PreAuditoria):
     L, N, A = f"{CAT}.limpio", f"{CAT}.negocio", f"{CAT}.app"
     MODELO = MODELO
 
@@ -240,9 +241,22 @@ class DatosDatabricks(Memoria, CicloPrevencion, Consultas, Versiones, PreAuditor
 
     # --------------------------------------------------------------------------------- bandeja
     def cargar_documento(self, tramite, nombre, contenido):
+        return self.procesar_documento(tramite, self.subir_documento(tramite, nombre, contenido))
+
+    def subir_documento(self, tramite, nombre, contenido):
+        self.vaciar_memoria()
         carpeta = self._q(f"SELECT split(MIN(archivo), '/')[0] AS c FROM {CAT}.app.cargas WHERE tramite_id = :t", {"t": tramite})[0]["c"]
         archivo = f"{carpeta}/cargas/{nombre}"
         self.w.files.upload(f"{VOL}/{archivo}", io.BytesIO(contenido), overwrite=True)
+        return archivo
+
+    def lanzar_trabajo(self, tipo, tramite, parametros=None, usuario="demo"):
+        """En Databricks el trabajo se ejecuta aquí mismo, esperando (no se implementó la ejecución en segundo plano)."""
+        tid = self.crear_trabajo(tipo, tramite, parametros, usuario)
+        self.ejecutar_trabajo(tid)
+        return tid
+
+    def procesar_documento(self, tramite, archivo, avance=lambda paso: None, sha256=None):
         a = {"a": archivo}
         self._q(f"DELETE FROM {CAT}.crudo.expedientes_parseados WHERE archivo = :a", a)
         self._q(f"""INSERT INTO {CAT}.crudo.expedientes_parseados

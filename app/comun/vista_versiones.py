@@ -1,7 +1,7 @@
 """Vista 6 · Control de versiones y comparación (código compartido por Snowflake y Databricks)."""
 import streamlit as st
 
-from ui import encabezado
+from ui import encabezado, trabajos_en_curso
 
 VEREDICTO = {"Atiende": ("✅", "#1e6b42"), "Parcial": ("🟡", "#b7791f"), "No atiende": ("❌", "#c0392b")}
 ATENDIDA = {"Si": "✅ Sí", "Parcial": "🟡 Parcial", "No": "❌ No"}
@@ -71,7 +71,7 @@ def pagina(datos, plataforma, usuario="demo"):
     if ev:
         _evaluacion(ev["resultado"], ev["modelo"], ev["segundos"])
         st.caption(f"Evaluado el {str(ev['generado_en'])[:16]}")
-    if st.button("🤖 Evaluar con IA" if not ev else "🔁 Volver a evaluar", type="primary" if not ev else "secondary"):
-        with st.spinner("La IA está comparando ambas versiones contra las observaciones…"):
-            r, seg = datos.evaluar_correccion(par, det)
+    activos = [a for a in trabajos_en_curso(datos, par["tramite_id"], "evaluar_version")]
+    if not activos and st.button("🤖 Evaluar con IA" if not ev else "🔁 Volver a evaluar", type="primary" if not ev else "secondary"):
+        datos.lanzar_trabajo("evaluar_version", par["tramite_id"], {"archivo": par["archivo_nuevo"]}, usuario)
         st.rerun()

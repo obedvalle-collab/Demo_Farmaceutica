@@ -15,6 +15,11 @@ CREATE TABLE IF NOT EXISTS {A}.envios (
     cadena_acuse STRING, enviado_en TIMESTAMP, modo STRING, pasos INT, segundos DOUBLE, costo_usd DOUBLE,
     error STRING, actualizado_en TIMESTAMP);
 
+-- Trabajos de IA en segundo plano (compartido/trabajos.py): la app los lanza y la plataforma los ejecuta
+CREATE TABLE IF NOT EXISTS {A}.trabajos (
+    trabajo_id STRING, tipo STRING, tramite_id STRING, parametros STRING, estatus STRING, paso STRING, resultado STRING,
+    error STRING, solicitado_por STRING, creado_en TIMESTAMP, actualizado_en TIMESTAMP);
+
 -- Transmisión en vivo del agente: último cuadro de la pantalla del portal (JPEG en base64) por envío
 CREATE TABLE IF NOT EXISTS {A}.envio_vivo (
     envio_id STRING, paso INT, accion STRING, imagen STRING, actualizado_en TIMESTAMP);

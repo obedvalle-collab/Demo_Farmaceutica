@@ -11,7 +11,8 @@ Si memo es None (robot, scripts) no se guarda nada.
 import time
 
 TTL = 120
-VOLATILES = ("envio", "aviso", "accion", "oficio", "tarea", "borrador", "alerta", "prevenciones_en_curso")
+VOLATILES = ("envio", "aviso", "accion", "oficio", "tarea", "borrador", "alerta", "prevenciones_en_curso",
+             "trabajo", "preauditoria", "comparacion")   # trabajo: escritos por los trabajos en segundo plano
 SIN_MEMORIA = ("ai_complete", "ai_parse", "ai_query", "ai_parse_document", "cortex", "data_agent_run", "search_preview")
 
 

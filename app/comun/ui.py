@@ -47,3 +47,26 @@ def tarjeta(col, titulo, valor, detalle="", color="#12355B"):
         <div style="font-size:12px;color:#5f6b76">{titulo}</div>
         <div style="font-size:26px;font-weight:700;color:{color}">{valor}</div>
         <div style="font-size:12px;color:#5f6b76">{detalle}</div></div>""", unsafe_allow_html=True)
+
+
+NOMBRE_TRABAJO = {"procesar_documento": "📥 Documento de la bandeja", "evaluar_version": "🔀 Evaluación de la versión",
+                  "preauditoria": "🕵️ Pre-auditoría"}
+
+
+@st.fragment(run_every=2)
+def seguir_trabajos(datos, tramite, iniciales, tipo=None):
+    """Muestra el avance de los trabajos de IA en segundo plano y recarga la vista en cuanto alguno termina.
+    Se llama solo cuando hay trabajos activos (iniciales = sus IDs al dibujar la página)."""
+    activos = datos.trabajos_activos(tramite, tipo)
+    if tuple(a["trabajo_id"] for a in activos) != tuple(iniciales):
+        datos.vaciar_memoria()   # el trabajo escribió hallazgos, cargas o resultados: leer fresco
+        st.rerun()
+    for a in activos:
+        st.info(f"⏳ **{NOMBRE_TRABAJO.get(a['tipo'], a['tipo'])}** · {a['paso']}… (en segundo plano; puedes seguir navegando)")
+
+
+def trabajos_en_curso(datos, tramite, tipo=None):
+    activos = datos.trabajos_activos(tramite, tipo)
+    if activos:
+        seguir_trabajos(datos, tramite, tuple(a["trabajo_id"] for a in activos), tipo)
+    return activos

@@ -15,7 +15,7 @@ import extraccion  # noqa: E402
 
 def empaquetar():
     tipos = extraccion.tipos_documento()
-    for plataforma, archivos in {"snowflake": ["streamlit_app.py", "environment.yml"],
+    for plataforma, archivos in {"snowflake": ["streamlit_app.py", "environment.yml", "trabajos_sf.py"],
                                  "databricks": ["app.py", "app.yaml", "requirements.txt"]}.items():
         destino = APP / "_paquete" / plataforma
         shutil.rmtree(destino, ignore_errors=True)
@@ -26,7 +26,7 @@ def empaquetar():
         for a in (APP / "comun").glob("*.py"):
             if not a.name.startswith("datos_") or a.name == f"datos_{plataforma}.py":
                 shutil.copy(a, destino / a.name)
-        for a in ["extraccion.py", "ciclo_prevencion.py", "oficio.py", "consultas.py", "versiones.py", "preauditoria.py", "asistente.py", "modelo_semantico.py", "memoria.py"]:
+        for a in ["extraccion.py", "ciclo_prevencion.py", "oficio.py", "consultas.py", "versiones.py", "preauditoria.py", "asistente.py", "modelo_semantico.py", "memoria.py", "trabajos.py"]:
             shutil.copy(RAIZ / "compartido" / a, destino / a)
         (destino / "tipos_documento.json").write_text(json.dumps(tipos, ensure_ascii=False), encoding="utf-8")
         print(plataforma, sorted(p.name for p in destino.iterdir()))

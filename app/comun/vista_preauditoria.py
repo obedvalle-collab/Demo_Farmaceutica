@@ -1,7 +1,7 @@
 """Vista 4 · Pre-auditoría ("simulador COFEPRIS") (código compartido por Snowflake y Databricks)."""
 import streamlit as st
 
-from ui import SEMAFORO, encabezado
+from ui import SEMAFORO, encabezado, trabajos_en_curso
 
 RIESGO = {"Alto": SEMAFORO["Rojo"], "Medio": SEMAFORO["Amarillo"], "Bajo": SEMAFORO["Verde"]}
 PROB = {"Alta": "🔴 Alta", "Media": "🟡 Media", "Baja": "🟢 Baja"}
@@ -37,10 +37,13 @@ def pagina(datos, plataforma, usuario="demo"):
     c[1].metric("Con hallazgos", t["con_hallazgos"])
     c[2].metric("Faltantes", t["faltantes"])
     previa = datos.ultima_preauditoria(t["tramite_id"])
-    if st.button("🕵️ Ejecutar pre-auditoría" if not previa else "🔁 Ejecutar de nuevo", type="primary" if not previa else "secondary"):
-        with st.spinner("El dictaminador virtual está revisando el expediente (≈ 20–60 s)…"):
-            datos.preauditar(t["tramite_id"], usuario)
+    activos = trabajos_en_curso(datos, t["tramite_id"], "preauditoria")
+    if not activos and st.button("🕵️ Ejecutar pre-auditoría" if not previa else "🔁 Ejecutar de nuevo",
+                                 type="primary" if not previa else "secondary"):
+        datos.lanzar_trabajo("preauditoria", t["tramite_id"], {}, usuario)
         st.rerun()
+    if activos and previa:
+        st.caption("Mientras termina, se muestra la pre-auditoría anterior.")
     if previa:
         _resultado(previa)
     else:

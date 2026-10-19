@@ -8,6 +8,7 @@ import re
 
 from ciclo_prevencion import CicloPrevencion
 from consultas import Consultas
+from trabajos import Trabajos
 from memoria import Memoria
 from preauditoria import PreAuditoria
 from versiones import Versiones
@@ -21,7 +22,7 @@ MODELOS_TAREA = {"preauditoria": "claude-haiku-4-5",   # 3-4x más rápido; 9/10
                  "borrador": "claude-sonnet-4-6"}       # ~40% más rápido, redacción equivalente
 
 
-class DatosSnowflake(Memoria, CicloPrevencion, Consultas, Versiones, PreAuditoria):
+class DatosSnowflake(Memoria, Trabajos, CicloPrevencion, Consultas, Versiones, PreAuditoria):
     L, N, A = f"{BD}.LIMPIO", f"{BD}.NEGOCIO", f"{BD}.APP"
     MODELO = MODELO
 
@@ -207,13 +208,53 @@ class DatosSnowflake(Memoria, CicloPrevencion, Consultas, Versiones, PreAuditori
 
     # --------------------------------------------------------------------------------- bandeja
     def cargar_documento(self, tramite, nombre, contenido):
+        """Carga completa esperando el resultado (scripts). La app usa subir_documento + lanzar_trabajo."""
+        import hashlib
+        return self.procesar_documento(tramite, self.subir_documento(tramite, nombre, contenido),
+                                       sha256=hashlib.sha256(contenido).hexdigest())
+
+    def subir_documento(self, tramite, nombre, contenido):
         self.vaciar_memoria()
         carpeta = self._q(f"SELECT SPLIT_PART(MIN(archivo), '/', 1) AS c FROM {BD}.APP.CARGAS WHERE tramite_id = ?", [tramite])[0]["C"]
         archivo = f"{carpeta}/cargas/{nombre}"
         self.s.file.put_stream(io.BytesIO(contenido), f"@{BD}.CRUDO.EXPEDIENTES/{archivo}", auto_compress=False, overwrite=True)
         self.s.sql(f"ALTER STAGE {BD}.CRUDO.EXPEDIENTES REFRESH").collect()
+        return archivo
+
+    def lanzar_trabajo(self, tipo, tramite, parametros=None, usuario="demo"):
+        """Registra el trabajo y lo pone a correr en Snowflake sin esperar el resultado, por dos vías:
+        1) la tarea APP.TAREA_TRABAJOS, que sigue aunque se cierre la app (requiere EXECUTE TASK en la cuenta);
+        2) una llamada asíncrona desde esta sesión (inmediata; se cancela si la sesión se cierra).
+        Si ambas lo ven, solo una lo ejecuta (Trabajos._reclamar)."""
+        tid = self.crear_trabajo(tipo, tramite, parametros, usuario)
+        try:
+            self.s.sql(f"EXECUTE TASK {BD}.APP.TAREA_TRABAJOS").collect()
+        except Exception:
+            pass
+        self.s.sql(f"CALL {BD}.APP.PROCESAR_COLA()").collect_nowait()
+        return tid
+
+    def procesar_documento(self, tramite, archivo, avance=lambda paso: None, sha256=None):
+        """Lee, clasifica, extrae y revisa un PDF. Si ya se había procesado un archivo idéntico (misma huella SHA-256),
+        reutiliza su lectura y su extracción en lugar de volver a llamar a la IA (mismo archivo, mismo resultado)."""
+        self.vaciar_memoria()
         self.s.sql(f"DELETE FROM {BD}.CRUDO.EXPEDIENTES_PARSEADOS WHERE archivo = ?", params=[archivo]).collect()
-        self.s.sql(f"""INSERT INTO {BD}.CRUDO.EXPEDIENTES_PARSEADOS
+        previo = self._q(f"""SELECT p.archivo FROM {BD}.CRUDO.EXPEDIENTES_PARSEADOS p
+                             JOIN {BD}.LIMPIO.DOCUMENTOS_EXTRAIDOS_JSON j ON j.archivo = p.archivo AND j.modelo = ?
+                             WHERE p.sha256 = ? AND p.archivo <> ? AND j.respuesta IS NOT NULL LIMIT 1""",
+                         [MODELO, sha256, archivo]) if sha256 else []
+        if previo:
+            avance("Documento ya conocido: reutilizando su lectura")
+            self.s.sql(f"""INSERT INTO {BD}.CRUDO.EXPEDIENTES_PARSEADOS (archivo, tramite_id, paginas, texto, segundos, procesado_en, sha256)
+                SELECT ?, ?, paginas, texto, 0, CURRENT_TIMESTAMP(), sha256 FROM {BD}.CRUDO.EXPEDIENTES_PARSEADOS WHERE archivo = ?""",
+                       params=[archivo, tramite, previo[0]["ARCHIVO"]]).collect()
+            self.s.sql(f"DELETE FROM {BD}.LIMPIO.DOCUMENTOS_EXTRAIDOS_JSON WHERE archivo = ?", params=[archivo]).collect()
+            self.s.sql(f"""INSERT INTO {BD}.LIMPIO.DOCUMENTOS_EXTRAIDOS_JSON
+                SELECT ?, ?, modelo, respuesta, 0, CURRENT_TIMESTAMP() FROM {BD}.LIMPIO.DOCUMENTOS_EXTRAIDOS_JSON WHERE archivo = ?""",
+                       params=[archivo, tramite, previo[0]["ARCHIVO"]]).collect()
+            return self._registrar_documento(tramite, archivo, avance)
+        avance("Leyendo el PDF")
+        self.s.sql(f"""INSERT INTO {BD}.CRUDO.EXPEDIENTES_PARSEADOS (archivo, tramite_id, paginas, texto, segundos, procesado_en)
             SELECT ?, ?, r:metadata:pageCount::INT, ARRAY_TO_STRING(TRANSFORM(r:pages, p -> p:content::STRING), '\\n\\n'),
                    NULL, CURRENT_TIMESTAMP()
             FROM (SELECT AI_PARSE_DOCUMENT(TO_FILE('@{BD}.CRUDO.EXPEDIENTES', ?), {{'mode': 'LAYOUT', 'page_split': true}}) AS r)""",
@@ -222,12 +263,19 @@ class DatosSnowflake(Memoria, CicloPrevencion, Consultas, Versiones, PreAuditori
             SET texto = texto || '\\n\\n[Texto OCR complementario]\\n' ||
                 AI_PARSE_DOCUMENT(TO_FILE('@{BD}.CRUDO.EXPEDIENTES', ?), {{'mode': 'OCR'}}):content::STRING
             WHERE archivo = ? AND texto LIKE '%![img-%'""", params=[archivo, archivo]).collect()
+        if sha256:
+            self.s.sql(f"UPDATE {BD}.CRUDO.EXPEDIENTES_PARSEADOS SET sha256 = ? WHERE archivo = ?", params=[sha256, archivo]).collect()
+        avance("Clasificando y extrayendo datos")
         self.s.sql(f"DELETE FROM {BD}.LIMPIO.DOCUMENTOS_EXTRAIDOS_JSON WHERE archivo = ?", params=[archivo]).collect()
         self.s.sql(f"""INSERT INTO {BD}.LIMPIO.DOCUMENTOS_EXTRAIDOS_JSON
             SELECT archivo, tramite_id, ?, TRY_PARSE_JSON(AI_COMPLETE(model => ?, prompt => ? || LEFT(texto, {MAX_CARACTERES}),
                    response_format => {{'type': 'json', 'schema': PARSE_JSON(?)}})::STRING), NULL, CURRENT_TIMESTAMP()
             FROM {BD}.CRUDO.EXPEDIENTES_PARSEADOS WHERE archivo = ?""",
                    params=[MODELO, MODELO, INSTRUCCION, esquema_json(), archivo]).collect()
+        return self._registrar_documento(tramite, archivo, avance)
+
+    def _registrar_documento(self, tramite, archivo, avance):
+        avance("Revisando contra la NOM")
         self.s.sql(f"DELETE FROM {BD}.LIMPIO.DOCUMENTOS_EXTRAIDOS WHERE archivo = ?", params=[archivo]).collect()
         self.s.sql(self._sql_aplanar(), params=[archivo]).collect()
         self.refrescar_hallazgos(archivo)
@@ -236,6 +284,7 @@ class DatosSnowflake(Memoria, CicloPrevencion, Consultas, Versiones, PreAuditori
                         WHERE x.archivo = ?""", [archivo])[0]
         if not r["REQ"]:
             return {"error": f"La IA no pudo ubicar el documento en el CTD (tipo detectado: {r['TIPO'] or 'ninguno'})."}
+        avance("Registrando en el expediente")
         version = self._q(f"SELECT COALESCE(MAX(version), 0) + 1 AS v FROM {BD}.APP.CARGAS WHERE tramite_id = ? AND requisito_id = ?",
                           [tramite, r["REQ"]])[0]["V"]
         self.s.sql(f"INSERT INTO {BD}.APP.CARGAS SELECT ?, ?, ?, ?, CURRENT_TIMESTAMP(), 'app', 'Bandeja de carga'",
